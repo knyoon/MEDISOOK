@@ -15,7 +15,6 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    // 아아 김나윤 입니다.
-    // nayoon branch로 push가 되나 test
+    // 아아 영빈 입니다.
 
 </androidx.constraintlayout.widget.ConstraintLayout>
