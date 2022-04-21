@@ -10,18 +10,18 @@
     <TextView
         android:id="@+id/medisook"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="66dp"
         android:layout_gravity="center_horizontal"
-        android:gravity="center_vertical"
-        android:text="MEDISOOK"
-        android:textSize="20dp"
         android:layout_weight="1"
         android:fontFamily="@font/noto_black"
+        android:gravity="center_vertical"
+        android:text="MEDISOOK"
         android:textColor="#445E86"
+        android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <View
         android:layout_width="wrap_content"
@@ -30,63 +30,71 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="94dp"
         android:layout_weight="2"
         android:gravity="center"
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_marginLeft="15dp"
-            android:layout_width="150dp"
-            android:layout_height="80dp"
+            android:layout_width="102dp"
+            android:layout_height="58dp"
+            android:layout_marginLeft="43dp"
             android:src="@drawable/drung_sampleimage" />
 
         <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="43dp"
+            android:orientation="vertical">
+
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/noto_medium"
+                android:layout_height="30dp"
                 android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/noto_medium"
                 android:text="덱시부펜연질켑슐(덱시부프로펜)"
-                android:textColor="#445E86"/>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+                android:textColor="#445E86"
+                android:textSize="15dp" />
 
-        <ImageButton
-            android:layout_width="78dp"
-            android:layout_height="38dp"
-            android:adjustViewBounds="true"
-            android:scaleType="fitCenter"
-            android:background= "@color/white"
-            android:src="@drawable/save_button" />
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-        <ImageButton
-            android:layout_width="78dp"
-            android:layout_height="38dp"
-            android:adjustViewBounds="true"
-            android:scaleType="fitCenter"
-            android:background= "@color/white"
-            android:src="@drawable/record_button"
-            />
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:orientation="horizontal">
 
-</LinearLayout>
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <ImageButton
+                    android:layout_width="73dp"
+                    android:layout_height="23dp"
+                    android:adjustViewBounds="true"
+                    android:background="@color/white"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/save_button" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <ImageButton
+                    android:layout_width="73dp"
+                    android:layout_height="23dp"
+                    android:adjustViewBounds="true"
+                    android:background="@color/white"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/record_button" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+        </LinearLayout>
     </LinearLayout>
 
     <View
@@ -96,7 +104,7 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="115dp"
         android:layout_weight="2"
         android:gravity="center"
         android:orientation="horizontal">
@@ -109,20 +117,88 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:src="@drawable/star_red" />
+            <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/resize_redstar" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/noto_bold"
+                    android:text="2"
+                    android:textColor="#F65E5D"
+                    android:textSize="15dp" />
+            </FrameLayout>
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_height="28dp"
                 android:fontFamily="@font/noto_medium"
-                android:text="병용금기"
-                android:textColor="#445E86" />
+                android:text="노약자주의"
+                android:textColor="#445E86"
+                android:textSize="12dp" />
+
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <!--        <Button-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:background="#00000000"-->
+        <!--            android:drawableTop="@drawable/resize_yellowstar"-->
+        <!--            android:fontFamily="@font/noto_medium"-->
+        <!--            android:text="복약주의"-->
+        <!--            android:textColor="#445E86" />-->
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/resize_yellowstar" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/noto_bold"
+                    android:text="2"
+                    android:textColor="#FFBC47"
+                    android:textSize="15dp" />
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:fontFamily="@font/noto_medium"
+                android:text="노약자주의"
+                android:textColor="#445E86"
+                android:textSize="12dp" />
+
         </LinearLayout>
 
         <View
@@ -133,44 +209,37 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:src="@drawable/star_yellow" />
+            <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/resize_greenstar" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/noto_bold"
+                    android:text="2"
+                    android:textColor="#5FA976"
+                    android:textSize="15dp" />
+            </FrameLayout>
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_height="28dp"
                 android:fontFamily="@font/noto_medium"
-                android:text="복약주의"
-                android:textColor="#445E86" />
-        </LinearLayout>
+                android:text="노약자주의"
+                android:textColor="#445E86"
+                android:textSize="12dp" />
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:src="@drawable/star_green" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:fontFamily="@font/noto_medium"
-                android:text="기타성분"
-                android:textColor="#445E86" />
         </LinearLayout>
 
         <View
@@ -184,9 +253,10 @@
         android:layout_height="2dp"
         android:background="#445E86" />
 
+
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="426dp"
         android:layout_weight="22"
         android:text="상단바: 페이지 내용 : 하단 바 = 1 : 30 : 1.  이 부분에 페이지 내용이 들어간다." />
 
@@ -209,6 +279,7 @@
             android:background="#00FFFFFF"
             android:scaleType="centerCrop"
             android:src="@drawable/logo_tab" />
+
 
         <View
             android:layout_width="0dp"
