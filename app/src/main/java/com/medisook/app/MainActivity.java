@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.drug_info);
 
         TextView Medi = findViewById(R.id.medisook); // 변수 선언
         String content = Medi.getText().toString(); //텍스트 가져옴
