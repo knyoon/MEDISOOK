@@ -6,8 +6,12 @@
         <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.177" />
         <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/drawable/ic_launcher_background.xml" value="0.177" />
         <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/drawable/logo_tab.xml" value="0.177" />
+        <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/drawable/radius.xml" value="0.19" />
+        <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/drawable/radius_navy.xml" value="0.244" />
         <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/drawable/resize_greenstar.xml" value="0.1955" />
+        <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/drawable/resize_pencil.xml" value="0.2355" />
         <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/drawable/resize_redstar.xml" value="0.1155" />
+        <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/drawable/resize_star.xml" value="0.2355" />
         <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/drawable/resize_yellowstar.xml" value="0.1955" />
         <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/drawable/star_red.xml" value="0.1" />
         <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/font/font.xml" value="0.15729166666666666" />
@@ -15,7 +19,8 @@
         <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/font/noto_black1.xml" value="0.1" />
         <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/layout/A.xml" value="0.4" />
         <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/layout/activity_main.xml" value="0.264" />
-        <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/layout/drug_info.xml" value="0.264" />
+        <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/layout/drug_info.xml" value="0.1" />
+        <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/layout/record_pop.xml" value="0.1" />
         <entry key="..\:/Users/KONG/Desktop/medisook/app/src/main/res/layout/activity_main.xml" value="0.14166666666666666" />
       </map>
     </option>

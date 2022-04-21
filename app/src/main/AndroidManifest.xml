@@ -11,12 +11,20 @@
         android:theme="@style/Theme.Medisook">
 
         <activity
-            android:name=".MainActivity"
+            android:name=".DruginfoActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".RecordpopActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="@android:style/Theme.DeviceDefault.Light.Dialog" />
             </intent-filter>
         </activity>
     </application>

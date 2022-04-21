@@ -2,19 +2,32 @@ package com.medisook.app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class DruginfoActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.drug_info);
+
+
+        Button record_pop_btn = (Button) findViewById(R.id.record_pop_btn);
+        record_pop_btn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent intent = new Intent(getApplicationContext(), RecordpopActivity.class);
+                startActivity(intent);
+            }
+        });
 
         TextView Medi = findViewById(R.id.medisook); // 변수 선언
         String content = Medi.getText().toString(); //텍스트 가져옴

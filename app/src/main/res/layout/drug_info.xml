@@ -5,14 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".DruginfoActivity">
 
     <TextView
         android:id="@+id/medisook"
         android:layout_width="wrap_content"
         android:layout_height="66dp"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="1"
         android:fontFamily="@font/noto_black"
         android:gravity="center_vertical"
         android:text="MEDISOOK"
@@ -31,15 +30,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="94dp"
-        android:layout_weight="2"
         android:gravity="center"
         android:orientation="horizontal">
 
         <ImageView
             android:layout_width="102dp"
             android:layout_height="58dp"
-            android:layout_marginLeft="43dp"
-            android:src="@drawable/drung_sampleimage" />
+            android:layout_marginLeft="46dp"
+            android:src="@drawable/drung_sampleimage"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -50,7 +48,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:layout_gravity="center"
+                android:layout_marginLeft="13dp"
                 android:layout_marginBottom="10dp"
                 android:fontFamily="@font/noto_medium"
                 android:text="덱시부펜연질켑슐(덱시부프로펜)"
@@ -58,40 +56,47 @@
                 android:textSize="15dp" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:orientation="horizontal">
 
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
+                <!--                <ImageButton-->
+                <!--                    android:layout_width="73dp"-->
+                <!--                    android:layout_height="23dp"-->
+                <!--                    android:adjustViewBounds="true"-->
+                <!--                    android:background="@color/white"-->
+                <!--                    android:scaleType="fitCenter"-->
+                <!--                    android:src="@drawable/save_button" />-->
 
-                <ImageButton
+                <Button
                     android:layout_width="73dp"
                     android:layout_height="23dp"
-                    android:adjustViewBounds="true"
-                    android:background="@color/white"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/save_button" />
+                    android:layout_marginLeft="12dp"
+                    android:background="@drawable/radius"
+                    android:drawableLeft="@drawable/resize_star"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:includeFontPadding="false"
+                    android:fontFamily="@font/noto_bold"
+                    android:text="찜하기"
+                    android:textColor="#445E86"
+                    android:textSize="12dp" />
 
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
-
-                <ImageButton
-                    android:layout_width="73dp"
+                <Button
+                    android:id="@+id/record_pop_btn"
+                    android:layout_width="80dp"
                     android:layout_height="23dp"
-                    android:adjustViewBounds="true"
-                    android:background="@color/white"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/record_button" />
+                    android:layout_marginLeft="12dp"
+                    android:drawableLeft="@drawable/resize_pencil"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:includeFontPadding="false"
+                    android:background="@drawable/radius"
+                    android:fontFamily="@font/noto_bold"
+                    android:text="기록하기"
+                    android:textColor="#445E86"
+                    android:textSize="12dp" />
 
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
             </LinearLayout>
 
         </LinearLayout>
@@ -105,7 +110,6 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="115dp"
-        android:layout_weight="2"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -253,6 +257,47 @@
         android:layout_height="2dp"
         android:background="#445E86" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:orientation="horizontal">
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:background="@drawable/radius_navy"
+            android:fontFamily="@font/noto_bold"
+            android:includeFontPadding="false"
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
+            android:text="잦은 음주 주의"
+            android:textColor="@color/white"
+            android:textSize="10dp"/>
+
+        <TextView
+            android:layout_marginLeft="6dp"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:includeFontPadding="false"
+            android:layout_gravity="center"
+            android:background="@drawable/radius_navy"
+            android:fontFamily="@font/noto_bold"
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
+            android:text="잦은 음주 주의"
+            android:textColor="@color/white"
+            android:textSize="10dp" />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -262,9 +307,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="44dp"
         android:layout_marginBottom="10dp"
-        android:layout_weight="1"
         android:gravity="center"
         android:orientation="horizontal">
 
