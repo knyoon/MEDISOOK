@@ -7,8 +7,8 @@
     android:orientation="vertical"
     tools:context=".RedpopActivity"
     android:background="@drawable/popup_radius"
-    android:backgroundTint="@null"
-    android:gravity="center_horizontal">
+    android:gravity="center_horizontal"
+    android:layout_gravity="center">
 
         <EditText
             android:layout_marginTop="23dp"
