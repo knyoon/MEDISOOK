@@ -11,13 +11,21 @@
         android:theme="@style/Theme.Medisook">
 
         <activity
-            android:name=".DruginfoActivity"
+            android:name=".SearchActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".DruginfoActivity"
+            android:exported="true">
+        </activity>
+        </activity>
+        <activity android:name=".RedpopActivity"
+            android:theme="@android:style/Theme.Dialog" />
 
 <!--        이렇게 설정해놓으면 팝업이 현재 화면 위에 올라감.-->
         <activity
@@ -36,5 +44,4 @@
             android:theme="@style/Theme.AppCompat">
         </activity>
     </application>
-
-</manifest>
+    </manifest>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="264dp"
+    android:layout_height="410dp"
+    android:orientation="vertical"
+    tools:context=".RedpopActivity"
+    android:background="@drawable/popup_radius"
+    android:backgroundTint="@null"
+    android:gravity="center_horizontal">
+
+        <EditText
+            android:layout_marginTop="23dp"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="@drawable/search_bar_popup"
+            android:fontFamily="@font/noto_medium"
+            android:text="     검색      "
+            android:textColor="#445E86"
+            android:textSize="12dp" />
+
+</LinearLayout>

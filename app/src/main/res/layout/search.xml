@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".SearchActivity">
+
+    <TextView
+        android:id="@+id/medisook"
+        android:layout_width="wrap_content"
+        android:layout_height="66dp"
+        android:layout_gravity="center_horizontal"
+        android:fontFamily="@font/noto_black"
+        android:gravity="center_vertical"
+        android:text="MEDISOOK"
+        android:textColor="#445E86"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="2dp"
+        android:background="#445E86" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:paddingTop="23dp">
+
+        <EditText
+            android:layout_width="304dp"
+            android:layout_height="40dp"
+            android:background="@drawable/search_bar"
+            android:fontFamily="@font/noto_medium"
+            android:text="     검색      "
+            android:textColor="#445E86"
+            android:textSize="12dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+        <Button
+            android:id="@+id/red_filter_btn"
+            android:layout_marginRight="11dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/filter_button_red"
+            android:text="증상 +"
+            android:fontFamily="@font/noto_medium"
+            android:includeFontPadding="false"
+            app:backgroundTint="@null"/>
+        <Button
+            android:id="@+id/green_filter_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="11dp"
+            android:background="@drawable/filter_button_green"
+            android:text="제외 성분 +"
+            android:fontFamily="@font/noto_medium"
+            android:includeFontPadding="false"
+            app:backgroundTint="@null"/>
+
+        <Button
+            android:id="@+id/yellow_filter_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/filter_button_yellow"
+            android:text="복약 대상 +"
+            android:fontFamily="@font/noto_medium"
+            android:includeFontPadding="false"
+            app:backgroundTint="@null"/>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+        </LinearLayout>
+    </ScrollView>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="10dp"
+        android:baselineAligned="false"
+        android:gravity="center">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="#00FFFFFF"
+            android:scaleType="centerCrop"
+            android:src="@drawable/logo_tab" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="30dp"
+            android:background="#445E86" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="#00FFFFFF"
+            android:scaleType="centerCrop"
+            android:src="@drawable/mypage_tab"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+</LinearLayout>
