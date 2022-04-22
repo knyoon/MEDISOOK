@@ -19,13 +19,10 @@
             </intent-filter>
         </activity>
 
+<!--        이렇게 설정해놓으면 팝업이 현재 화면 위에 올라감.-->
         <activity
             android:name=".RecordpopActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="@android:style/Theme.DeviceDefault.Light.Dialog" />
-            </intent-filter>
+            android:theme="@android:style/Theme.Translucent">
         </activity>
     </application>
 
