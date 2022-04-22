@@ -4,19 +4,82 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="264dp"
     android:layout_height="410dp"
-    android:orientation="vertical"
-    tools:context=".RecordpopActivity"
+    android:layout_gravity="center"
     android:background="@drawable/popup_radius"
     android:backgroundTint="@null"
-    android:layout_gravity="center">
+    android:orientation="vertical"
+    tools:context=".RecordpopActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="33dp"
+        android:fontFamily="@font/noto_bold"
+        android:gravity="center_horizontal"
+        android:text="덱시부펜연질켑슐(덱시부프로펜)"
+        android:textSize="15dp" />
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="33dp"
-            android:gravity="center_horizontal"
-            android:text="덱시부펜연질켑슐(덱시부프로펜)"/>
+            android:layout_marginLeft="73dp"
+            android:layout_marginTop="27dp"
+            android:background="@drawable/resize_good" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="13dp"
+            android:layout_marginTop="27dp"
+            android:background="@drawable/resize_bad" />
+
+
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="192dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="26.89dp"
+        android:background="@drawable/popup_radius"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/noto_medium"
+            android:text="복약기간"
+            android:textColor="@color/navy"
+            android:textSize="12dp" />
+
+        <EditText
+            android:id="@+id/to_date"
+            android:layout_width="39dp"
+            android:layout_height="21dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="9dp"
+            android:background="@drawable/popup_radius" />
+
+        <View
+            android:layout_width="14dp"
+            android:layout_height="2dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="6dp"
+            android:background="@color/navy" />
+
+        <EditText
+            android:id="@+id/from_date"
+            android:layout_width="39dp"
+            android:layout_height="21dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="9dp"
+            android:background="@drawable/popup_radius" />
+    </LinearLayout>
+
 </LinearLayout>

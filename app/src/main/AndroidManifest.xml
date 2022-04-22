@@ -24,6 +24,11 @@
             android:name=".RecordpopActivity"
             android:theme="@android:style/Theme.Translucent">
         </activity>
+
+        <activity
+            android:name=".datePickerActivity"
+            android:theme="@android:style/Theme.Translucent">
+        </activity>
     </application>
 
 </manifest>
