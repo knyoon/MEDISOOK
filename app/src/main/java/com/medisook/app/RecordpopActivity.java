@@ -10,12 +10,15 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class RecordpopActivity extends Activity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,5 +29,13 @@ public class RecordpopActivity extends Activity {
         setContentView(R.layout.record_pop);
         //getWindow().setGravity(Gravity.CENTER);
 
+        final EditText to_date = (EditText) findViewById(R.id.to_date);
+        to_date.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(RecordpopActivity.this, datePickerActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }
