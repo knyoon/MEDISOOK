@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/MEDISOOK.iml" filepath="$PROJECT_DIR$/.idea/MEDISOOK.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/medisook.iml" filepath="$PROJECT_DIR$/.idea/modules/medisook.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/medisook.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/medisook.app.iml" />
     </modules>
   </component>
 </project>
