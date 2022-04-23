@@ -1,8 +1,5 @@
 package com.medisook.app;
-
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
@@ -14,7 +11,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import java.sql.Connection;
@@ -169,7 +165,6 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                 break;
             case R.id.green_filter_btn:
                 CustomDialog dialog2 = new CustomDialog(this);
-                CustomDialog.Builder dialog2_bulider = new CustomDialog.Builder(this);
                 dialog2.setDialogListener(new CustomDialog.CustomDialogListener() {
                     @Override
                     public void onOkClicked(String text) {
