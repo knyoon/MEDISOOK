@@ -93,6 +93,15 @@
             android:fontFamily="@font/noto_medium"
             android:textColor="@color/navy"
             android:background="@drawable/popup_radius" />
+
+
     </LinearLayout>
+
+    <Button
+        android:id="@+id/close_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="mOnClick"
+        android:text="확인" />
 
 </LinearLayout>
