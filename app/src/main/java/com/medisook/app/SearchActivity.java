@@ -68,7 +68,6 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
             Log.v("isConnection","MSSQL open");
             String connectionUrl = "jdbc:sqlserver://localhost:1433;database=seyoung";
-
             String id="medisook";
             String password="1715231";
             conn= DriverManager.getConnection(connectionUrl,id,password);
