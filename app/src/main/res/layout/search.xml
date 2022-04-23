@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".SearchActivity">
+    tools:context=".SearchActivity_save">
 
     <TextView
         android:id="@+id/medisook"
@@ -21,18 +21,15 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
     <View
         android:layout_width="wrap_content"
         android:layout_height="2dp"
         android:background="#445E86" />
-
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:paddingTop="23dp">
-
         <EditText
             android:layout_width="304dp"
             android:layout_height="40dp"
@@ -44,37 +41,42 @@
     </LinearLayout>
     <LinearLayout
         android:layout_marginTop="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center">
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center">
         <Button
+            android:minHeight="0dp"
             android:id="@+id/red_filter_btn"
             android:layout_marginRight="11dp"
+            android:textSize="12dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/filter_button_red"
             android:text="증상 +"
-            android:fontFamily="@font/noto_medium"
+            android:fontFamily="@font/noto_bold"
             android:includeFontPadding="false"
             app:backgroundTint="@null"/>
         <Button
+            android:minHeight="0dp"
             android:id="@+id/green_filter_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="11dp"
+            android:textSize="12dp"
             android:background="@drawable/filter_button_green"
             android:text="제외 성분 +"
-            android:fontFamily="@font/noto_medium"
+            android:fontFamily="@font/noto_bold"
             android:includeFontPadding="false"
             app:backgroundTint="@null"/>
-
         <Button
+            android:minHeight="0dp"
             android:id="@+id/yellow_filter_btn"
+            android:textSize="12dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/filter_button_yellow"
             android:text="복약 대상 +"
-            android:fontFamily="@font/noto_medium"
+            android:fontFamily="@font/noto_bold"
             android:includeFontPadding="false"
             app:backgroundTint="@null"/>
     </LinearLayout>
@@ -87,7 +89,13 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_gravity="center">
+            <TextView
+                android:id="@+id/txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="떠라" />
         </LinearLayout>
     </ScrollView>
     <LinearLayout
