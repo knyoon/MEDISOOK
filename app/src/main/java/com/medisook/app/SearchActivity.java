@@ -66,42 +66,31 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         filteredList = new ArrayList<>();
         drugItemArrayList = new ArrayList<>();
 
-        adapter = new Adapter(drugItemArrayList, this);
-        linearLayoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
-        recyclerView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-        for(int i = 0; i<100; i++){
-            adapter.setArrayData(new DrugItem(i+"번째 약"));
-        }
-        searchET.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
-            @Override
-            public void afterTextChanged(Editable editable) {
-                String searchText = searchET.getText().toString();
-                searchFilter(searchText);
-            }
-        });
-        recyclerView.setAdapter(adapter);
-
-
+//        Dialog red_popup = new Dialog(SearchActivity.this);
         red_filter_btn = (Button) findViewById(R.id.red_filter_btn);
-        green_filter_btn = (Button) findViewById(R.id.green_filter_btn);
-        yellow_filter_btn = (Button) findViewById(R.id.yellow_filter_btn);
+        green_filter_btn = (Button)findViewById(R.id.green_filter_btn);
+        yellow_filter_btn = (Button)findViewById(R.id.yellow_filter_btn);
         txt = (TextView) findViewById(R.id.txt);
         red_filter_btn.setOnClickListener(this);
         green_filter_btn.setOnClickListener(this);
         yellow_filter_btn.setOnClickListener(this);
         query2();
-
-    }
-    protected void onResume() {
-        super.onResume();
+//        red_popup.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        red_popup.setContentView(R.layout.redpop);
+//        red_filter_btn.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View view) {
+//                red_popup.show();
+//                red_popup.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//                Button popup_ok_btn = (Button) red_popup.findViewById(R.id.popup_ok_btn);
+//                popup_ok_btn.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        red_popup.dismiss();
+//                    }
+//                });
+//            }
+//        });
     }
     public void searchFilter(String searchText){
         filteredList.clear();;
@@ -114,6 +103,8 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     }//fd
     public void query2()
     {
+        Log.v("Android"," MSSQL Connect Example.");
+        Connection conn = null;
         try {
             URL url = new URL("http://192.168.18.130/test.php");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -143,16 +134,9 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                 Log.i("log_tag","name: "+j_data.getString("DRUG_NAME"));
             }
 
-            rd.close();
-            conn.disconnect();
-
-        }catch(JSONException e){
-            Log.e("log_tag", "Error parsing data "+e.toString());
-        }catch (MalformedURLException e) { // for URL.
-            Log.e("log_tag", "Error parsing data "+e.toString());
-        } catch (IOException e) { // for openConnection().
-            e.printStackTrace();
-            Log.e("log_tag", "Error in http connection "+e.toString());
+            conn.close();
+        } catch (Exception e) {
+            Log.w("Error connection","" + e.getMessage());
         }
     }
     @Override
@@ -161,14 +145,26 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         //View dialoglayout = inflater.inflate(R.layout.redpop, null);
         switch (v.getId()){
             case R.id.red_filter_btn:
+                final String[] items = new String[]{"가", "나"};
+                final boolean[] checkedItems = {false, false, false, true};
+                //CustomDialog.Builder dialog = new CustomDialog.Builder(SearchActivity.this);
                 CustomDialog dialog = new CustomDialog(this);
-                CustomDialog.Builder dialog_bulider = new CustomDialog.Builder(this);
-                dialog.setDialogListener(new CustomDialog.CustomDialogListener() {
-                    @Override
-                    public void onOkClicked(String text) {
-                        txt.setText(text);
-                    }
-                });
+                //dialog.setView(dialoglayout );
+                //dialog.setMultiChoiceItems(items, checkedItems, new DialogInterface.OnMultiChoiceClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i, boolean b) {
+//                        Log.d("체크박스", "1");
+//                    }
+//                });
+//                dialog.setMultiChoiceItems(items, checkedItems, DialogInterface.OnMultiChoiceClickListener(){
+//
+//            });
+//                dialog.setDialogListener(new CustomDialog.CustomDialogListener() {
+//                    @Override
+//                    public void onOkClicked(String text) {
+//                        txt.setText(text);
+//                    }
+//                });
                 dialog.show();
                 break;
             case R.id.green_filter_btn:
@@ -188,13 +184,24 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                 CustomDialog dialog3 = new CustomDialog(this);
                 CustomDialog.Builder dialog3_bulider = new CustomDialog.Builder(this);
                 dialog3.setDialogListener(new CustomDialog.CustomDialogListener() {
-                                              @Override
-                                              public void onOkClicked(String text) {
-                                                  //txt.setText(text);
-                                              }
-                                          });
+                    @Override
+                    public void onOkClicked(String text) {
+                        txt.setText(text);
+                    }
+                });
                 dialog3.show();
                 break;
         }
     }
+    //        버튼 구현
+//        final Button filter_btn1 = (Button) findViewById(R.id.red_filter_btn);
+////        final Button filter_btn2 = (Button) findViewById(R.id.green_filter_btn);
+////        final Button filter_btn3 = (Button) findViewById(R.id.yellow_filter_btn);
+//        filter_btn1.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(SearchActivity.this, RedpopActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 }
