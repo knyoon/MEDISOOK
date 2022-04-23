@@ -35,14 +35,14 @@ public class TodatePickerActivity extends AppCompatActivity {
     }
 
     public void mOnClick(View v){
-        Intent ymd = new Intent(this, RecordpopActivity.class);
-        ymd.putExtra("mYear",mYear);
-        ymd.putExtra("mMonth", mMonth);
-        ymd.putExtra("mDay", mDay);
-        setResult(RESULT_OK, ymd);
+        Intent to_ymd = new Intent(this, RecordpopActivity.class);
+        to_ymd.putExtra("mYear",mYear);
+        to_ymd.putExtra("mMonth", mMonth);
+        to_ymd.putExtra("mDay", mDay);
+        setResult(RESULT_OK, to_ymd);
         Log.d("태그","to_ymd 넘기기" +mYear + mMonth +mDay);
-        getIntent().addFlags(ymd.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(ymd);
+        getIntent().addFlags(to_ymd.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(to_ymd);
         finish();
     }
 
