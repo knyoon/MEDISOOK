@@ -26,8 +26,13 @@
         </activity>
 
         <activity
-            android:name=".datePickerActivity"
-            android:theme="@android:style/Theme.Translucent">
+            android:name=".TodatePickerActivity"
+            android:theme="@style/Theme.AppCompat">
+        </activity>
+
+        <activity
+            android:name=".FromdatePickerActivity"
+            android:theme="@style/Theme.AppCompat">
         </activity>
     </application>
 

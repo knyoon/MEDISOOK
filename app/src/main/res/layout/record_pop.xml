@@ -42,7 +42,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="192dp"
+        android:layout_width="230dp"
         android:layout_height="40dp"
         android:layout_gravity="center"
         android:layout_marginTop="26.89dp"
@@ -55,15 +55,22 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/noto_medium"
             android:text="복약기간"
+            android:gravity="center"
             android:textColor="@color/navy"
             android:textSize="12dp" />
 
         <EditText
             android:id="@+id/to_date"
-            android:layout_width="39dp"
+            android:layout_width="60dp"
             android:layout_height="21dp"
             android:layout_gravity="center"
+            android:gravity="center"
             android:layout_marginLeft="9dp"
+            android:includeFontPadding="false"
+            android:textSize="11dp"
+            android:text=""
+            android:fontFamily="@font/noto_medium"
+            android:textColor="@color/navy"
             android:background="@drawable/popup_radius" />
 
         <View
@@ -75,10 +82,16 @@
 
         <EditText
             android:id="@+id/from_date"
-            android:layout_width="39dp"
+            android:layout_width="60dp"
             android:layout_height="21dp"
             android:layout_gravity="center"
+            android:gravity="center"
             android:layout_marginLeft="9dp"
+            android:textSize="11dp"
+            android:text=""
+            android:includeFontPadding="false"
+            android:fontFamily="@font/noto_medium"
+            android:textColor="@color/navy"
             android:background="@drawable/popup_radius" />
     </LinearLayout>
 
