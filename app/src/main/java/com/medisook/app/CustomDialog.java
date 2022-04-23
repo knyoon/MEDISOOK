@@ -1,13 +1,14 @@
 package com.medisook.app;
-import android.app.Dialog;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class CustomDialog extends Dialog implements View.OnClickListener{
+public class CustomDialog extends AlertDialog implements View.OnClickListener{
     private Button okButton;
     private EditText editText;
     private Context context;
@@ -35,6 +36,7 @@ public class CustomDialog extends Dialog implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.popup_ok_btn:
+                Log.v("click", "test");
                 String text = editText.getText().toString();
                 customDialogListener.onOkClicked(text);
                 dismiss();
