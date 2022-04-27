@@ -31,6 +31,24 @@
         app:layout_constraintTop_toBottomOf="@id/medisook"
         tools:ignore="MissingConstraints" />
 
+    <ImageView
+        android:id="@+id/medisook"
+        android:layout_width="wrap_content"
+        android:layout_height="66dp"
+        android:src="@drawable/resize_medisooklogo"
+        android:layout_marginTop="29dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="wrap_content"
+        android:layout_height="2dp"
+        android:background="#445E86"
+        app:layout_constraintTop_toBottomOf="@id/medisook"
+        tools:ignore="MissingConstraints" />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/menu_bottom_navigation"
         android:layout_width="match_parent"
