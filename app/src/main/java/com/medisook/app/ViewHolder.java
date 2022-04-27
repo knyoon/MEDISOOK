@@ -15,8 +15,8 @@ public class ViewHolder extends RecyclerView.ViewHolder {
     ViewHolder(Context context, View itemView){
         super(itemView);
 
-        textView = itemView.findViewById(R.id.textView);
-        imageView = itemView.findViewById(R.id.imageView);
+        textView = itemView.findViewById(R.id.drugName);
+        imageView = itemView.findViewById(R.id.drugImage);
         imageView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
