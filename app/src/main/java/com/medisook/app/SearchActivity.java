@@ -3,10 +3,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.text.Editable;
 import android.text.SpannableString;
 import android.text.Spanned;
-import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +13,9 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
@@ -40,9 +41,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     private Button green_filter_btn;
     private Button yellow_filter_btn;
     private TextView txt;
-    ArrayList<DrugItem> drugItemArrayList, filteredList;
-    LinearLayoutManager linearLayoutManager;
-    EditText searchET;
+    private CheckBox checkBox3;
     RecyclerView recyclerView;
     Adapter adapter;
     @Override
@@ -58,21 +57,24 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         int end = start + word.length();
         spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#68B981")), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         Medi.setText(spannableString);
-        searchET = findViewById(R.id.search_bar);
+
         recyclerView = (RecyclerView)findViewById(R.id.recycler_view);
-
-        filteredList = new ArrayList<>();
-        drugItemArrayList = new ArrayList<>();
-
-//        Dialog red_popup = new Dialog(SearchActivity.this);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
+        adapter = new Adapter();
+        for(int i = 0; i<100; i++){
+            String str = i+"번째 약";
+            adapter.setArrayData(str);
+        }
+        recyclerView.setAdapter(adapter);
         red_filter_btn = (Button) findViewById(R.id.red_filter_btn);
-        green_filter_btn = (Button)findViewById(R.id.green_filter_btn);
-        yellow_filter_btn = (Button)findViewById(R.id.yellow_filter_btn);
+        green_filter_btn = (Button) findViewById(R.id.green_filter_btn);
+        yellow_filter_btn = (Button) findViewById(R.id.yellow_filter_btn);
         txt = (TextView) findViewById(R.id.txt);
         red_filter_btn.setOnClickListener(this);
         green_filter_btn.setOnClickListener(this);
         yellow_filter_btn.setOnClickListener(this);
         query2();
+
     }
     public void searchFilter(String searchText){
         filteredList.clear();;
@@ -159,7 +161,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                 dialog3.setDialogListener(new CustomDialog.CustomDialogListener() {
                                               @Override
                                               public void onOkClicked(String text) {
-                                                  txt.setText(text);
+                                                  //txt.setText(text);
                                               }
                                           });
                 dialog3.show();
