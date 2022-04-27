@@ -18,9 +18,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.Statement;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class SearchActivity extends AppCompatActivity implements View.OnClickListener {
@@ -100,19 +107,43 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     }//fd
     public void query2()
     {
-        Log.v("tag"," MSSQL Connect Example.");
-        Connection conn = null;
         try {
-            Class.forName("net.sourceforge.jtds.jdbc.Driver").newInstance();
-            Log.v("tag","MSSQL open");
-            String connectionUrl = "jdbc:sqlserver://localhost:1433/database=seyoung";
-            String id="medisook";
-            String password="1715231";
-            conn= DriverManager.getConnection(connectionUrl,id,password);
-            Statement stmt = conn.createStatement();
-            conn.close();
-        } catch (Exception e) {
-            Log.w("tag","" + e.getMessage());
+            URL url = new URL("http://10.101.14.15/test.php");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Content-type", "application/json");
+            Log.i("log_tag","connect!");
+            Log.i("log_tag", String.valueOf(conn.getResponseCode()));
+
+            BufferedReader rd;
+            if (conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
+                rd = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+            } else {
+                rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+            }
+            String line;
+            String result = "";
+            while ((line = rd.readLine()) != null) {
+                result = result.concat(line);
+            }
+            Log.i("log_tag",result);
+
+            JSONArray jsonarray = new JSONArray(result);
+            for (int i=0;i<jsonarray.length();i++){
+                JSONObject j_data=jsonarray.getJSONObject(i);
+                Log.i("log_tag","name: "+j_data.getString("DRUG_NAME"));
+            }
+
+            rd.close();
+            conn.disconnect();
+
+        }catch(JSONException e){
+            Log.e("log_tag", "Error parsing data "+e.toString());
+        }catch (MalformedURLException e) { // for URL.
+            Log.e("log_tag", "Error parsing data "+e.toString());
+        } catch (IOException e) { // for openConnection().
+            e.printStackTrace();
+            Log.e("log_tag", "Error in http connection "+e.toString());
         }
     }
     @Override
