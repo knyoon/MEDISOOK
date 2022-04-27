@@ -3,8 +3,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -41,7 +43,9 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     private Button green_filter_btn;
     private Button yellow_filter_btn;
     private TextView txt;
-    private CheckBox checkBox3;
+    ArrayList<DrugItem> drugItemArrayList, filteredList;
+    LinearLayoutManager linearLayoutManager;
+    EditText searchET;
     RecyclerView recyclerView;
     Adapter adapter;
     @Override
@@ -57,15 +61,36 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         int end = start + word.length();
         spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#68B981")), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         Medi.setText(spannableString);
-
+        searchET = findViewById(R.id.search_bar);
         recyclerView = (RecyclerView)findViewById(R.id.recycler_view);
+
+        filteredList = new ArrayList<>();
+        drugItemArrayList = new ArrayList<>();
+
+        adapter = new Adapter(drugItemArrayList, this);
+        linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
         adapter = new Adapter();
         for(int i = 0; i<100; i++){
             String str = i+"번째 약";
             adapter.setArrayData(str);
         }
+        searchET.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String searchText = searchET.getText().toString();
+                searchFilter(searchText);
+            }
+        });
         recyclerView.setAdapter(adapter);
+
+
         red_filter_btn = (Button) findViewById(R.id.red_filter_btn);
         green_filter_btn = (Button) findViewById(R.id.green_filter_btn);
         yellow_filter_btn = (Button) findViewById(R.id.yellow_filter_btn);
@@ -76,6 +101,9 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         query2();
 
     }
+    protected void onResume() {
+        super.onResume();
+    }
     public void searchFilter(String searchText){
         filteredList.clear();;
         for (int i=0; i<drugItemArrayList.size(); i++){
@@ -84,7 +112,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
             }
         }
         adapter.filterList(filteredList);
-    }//fd
+    }
     public void query2()
     {
         Log.v("Android"," MSSQL Connect Example.");
