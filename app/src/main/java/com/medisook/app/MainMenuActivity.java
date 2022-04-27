@@ -1,7 +1,9 @@
 package com.medisook.app;
 
 import android.os.Bundle;
+import android.text.SpannableString;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,11 +14,14 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class MainMenuActivity extends AppCompatActivity {
+
+
     private FragmentManager fragmentManager = getSupportFragmentManager();
     private MenuFragmentSearch fragmentSearch = new MenuFragmentSearch();
     private MenuFragmentMypage fragmentMypage = new MenuFragmentMypage();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
