@@ -1,6 +1,5 @@
 package com.medisook.app;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
@@ -14,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -112,7 +112,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
             }
         }
         adapter.filterList(filteredList);
-    }
+    }//fd
     public void query2()
     {
         Log.v("Android"," MSSQL Connect Example.");
