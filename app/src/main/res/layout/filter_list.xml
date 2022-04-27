@@ -1,0 +1,16 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <CheckBox
+        android:id="@+id/filter_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="35dp"
+        android:background="@null"
+        android:button="@null"
+        android:drawableRight="@drawable/selector"
+        android:fontFamily="@font/noto_medium"
+        android:textSize="12dp"
+        tools:ignore="MissingConstraints,NotSibling" />
+</androidx.constraintlayout.widget.ConstraintLayout>
