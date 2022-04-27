@@ -1,5 +1,6 @@
 package com.medisook.app;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import java.sql.Connection;
@@ -71,22 +73,6 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         green_filter_btn.setOnClickListener(this);
         yellow_filter_btn.setOnClickListener(this);
         query2();
-//        red_popup.requestWindowFeature(Window.FEATURE_NO_TITLE);
-//        red_popup.setContentView(R.layout.redpop);
-//        red_filter_btn.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View view) {
-//                red_popup.show();
-//                red_popup.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//                Button popup_ok_btn = (Button) red_popup.findViewById(R.id.popup_ok_btn);
-//                popup_ok_btn.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        red_popup.dismiss();
-//                    }
-//                });
-//            }
-//        });
     }
     public void searchFilter(String searchText){
         filteredList.clear();;
@@ -145,26 +131,18 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                 final boolean[] checkedItems = {false, false, false, true};
                 //CustomDialog.Builder dialog = new CustomDialog.Builder(SearchActivity.this);
                 CustomDialog dialog = new CustomDialog(this);
-                //dialog.setView(dialoglayout );
-                //dialog.setMultiChoiceItems(items, checkedItems, new DialogInterface.OnMultiChoiceClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int i, boolean b) {
-//                        Log.d("체크박스", "1");
-//                    }
-//                });
-//                dialog.setMultiChoiceItems(items, checkedItems, DialogInterface.OnMultiChoiceClickListener(){
-//
-//            });
-//                dialog.setDialogListener(new CustomDialog.CustomDialogListener() {
-//                    @Override
-//                    public void onOkClicked(String text) {
-//                        txt.setText(text);
-//                    }
-//                });
+                CustomDialog.Builder dialog_bulider = new CustomDialog.Builder(this);
+                dialog.setDialogListener(new CustomDialog.CustomDialogListener() {
+                    @Override
+                    public void onOkClicked(String text) {
+                        txt.setText(text);
+                    }
+                });
                 dialog.show();
                 break;
             case R.id.green_filter_btn:
                 CustomDialog dialog2 = new CustomDialog(this);
+                CustomDialog.Builder dialog2_bulider = new CustomDialog.Builder(this);
                 dialog2.setDialogListener(new CustomDialog.CustomDialogListener() {
                     @Override
                     public void onOkClicked(String text) {
@@ -179,24 +157,13 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                 CustomDialog dialog3 = new CustomDialog(this);
                 CustomDialog.Builder dialog3_bulider = new CustomDialog.Builder(this);
                 dialog3.setDialogListener(new CustomDialog.CustomDialogListener() {
-                    @Override
-                    public void onOkClicked(String text) {
-                        txt.setText(text);
-                    }
-                });
+                                              @Override
+                                              public void onOkClicked(String text) {
+                                                  txt.setText(text);
+                                              }
+                                          });
                 dialog3.show();
                 break;
         }
     }
-    //        버튼 구현
-//        final Button filter_btn1 = (Button) findViewById(R.id.red_filter_btn);
-////        final Button filter_btn2 = (Button) findViewById(R.id.green_filter_btn);
-////        final Button filter_btn3 = (Button) findViewById(R.id.yellow_filter_btn);
-//        filter_btn1.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(SearchActivity.this, RedpopActivity.class);
-//                startActivity(intent);
-//            }
-//        });
 }
