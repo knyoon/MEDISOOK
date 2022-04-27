@@ -29,14 +29,14 @@ public class RecordDialog extends AlertDialog implements View.OnClickListener{
         getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.record_pop);
-        okButton = (Button) findViewById(R.id.close_btn);
+        okButton = (Button) findViewById(R.id.popup_ok_btn);
         //editText = (EditText) findViewById(R.id.editText);
         okButton.setOnClickListener(this);
     }
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.close_btn:
+            case R.id.popup_ok_btn:
                 //Log.v("click", "test");
                 //String text = editText.getText().toString();
                 //customDialogListener.onOkClicked(text);
