@@ -13,9 +13,13 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class SearchActivity extends AppCompatActivity implements View.OnClickListener {
     private Button red_filter_btn;
@@ -23,6 +27,8 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     private Button yellow_filter_btn;
     private TextView txt;
     private CheckBox checkBox3;
+    RecyclerView recyclerView;
+    Adapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,14 +43,23 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#68B981")), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         Medi.setText(spannableString);
 
+        recyclerView = (RecyclerView)findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
+        adapter = new Adapter();
+        for(int i = 0; i<100; i++){
+            String str = i+"번째 약";
+            adapter.setArrayData(str);
+        }
+        recyclerView.setAdapter(adapter);
         red_filter_btn = (Button) findViewById(R.id.red_filter_btn);
-        green_filter_btn = (Button)findViewById(R.id.green_filter_btn);
-        yellow_filter_btn = (Button)findViewById(R.id.yellow_filter_btn);
+        green_filter_btn = (Button) findViewById(R.id.green_filter_btn);
+        yellow_filter_btn = (Button) findViewById(R.id.yellow_filter_btn);
         txt = (TextView) findViewById(R.id.txt);
         red_filter_btn.setOnClickListener(this);
         green_filter_btn.setOnClickListener(this);
         yellow_filter_btn.setOnClickListener(this);
         query2();
+
     }
     public void query2()
     {
@@ -98,7 +113,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                 dialog3.setDialogListener(new CustomDialog.CustomDialogListener() {
                                               @Override
                                               public void onOkClicked(String text) {
-                                                  txt.setText(text);
+                                                  //txt.setText(text);
                                               }
                                           });
                 dialog3.show();
