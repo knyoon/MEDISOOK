@@ -11,12 +11,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
@@ -96,7 +97,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
             }
         }
         adapter.filterList(filteredList);
-    }
+    }//fd
     public void query2()
     {
         Log.v("tag"," MSSQL Connect Example.");
