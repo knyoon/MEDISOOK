@@ -19,9 +19,9 @@ public class MainMenuActivity extends AppCompatActivity {
     private FragmentManager fragmentManager = getSupportFragmentManager();
     private MenuFragmentSearch fragmentSearch = new MenuFragmentSearch();
     private MenuFragmentMypage fragmentMypage = new MenuFragmentMypage();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
@@ -30,9 +30,9 @@ public class MainMenuActivity extends AppCompatActivity {
         transaction.replace(R.id.menu_frame_layout, fragmentSearch).commitAllowingStateLoss();
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.menu_bottom_navigation);
+        bottomNavigationView.setItemIconTintList(null);
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener()
         {
-
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
