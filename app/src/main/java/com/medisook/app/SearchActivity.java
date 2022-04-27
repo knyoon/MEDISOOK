@@ -73,8 +73,6 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
             }
         });
         recyclerView.setAdapter(adapter);
-
-
         red_filter_btn = (Button) findViewById(R.id.red_filter_btn);
         green_filter_btn = (Button) findViewById(R.id.green_filter_btn);
         yellow_filter_btn = (Button) findViewById(R.id.yellow_filter_btn);
@@ -83,7 +81,6 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         green_filter_btn.setOnClickListener(this);
         yellow_filter_btn.setOnClickListener(this);
         query2();
-
     }
     protected void onResume() {
         super.onResume();

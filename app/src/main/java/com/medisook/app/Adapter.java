@@ -2,6 +2,8 @@ package com.medisook.app;
 // https://3001ssw.tistory.com/201
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     //private ArrayList<String> arrayList;
     ArrayList<DrugItem> drugItemArrayList;
     Activity activity;
+    private Intent intent;
 
     public Adapter(ArrayList<DrugItem> drugItemArrayList, Activity activity) {
         this.drugItemArrayList = drugItemArrayList;
@@ -32,6 +35,15 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position){
         //String text = arrayList.get(position);
         holder.drugName.setText(drugItemArrayList.get(position).getDrugName());
+        holder.drugName.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+
+                intent = new Intent(view.getContext(), DruginfoActivity.class);
+                view.getContext().startActivity(intent);
+
+            }
+        });
     }
     public int getItemCount() {
         return drugItemArrayList.size();
