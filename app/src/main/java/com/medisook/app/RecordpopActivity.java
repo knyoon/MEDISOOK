@@ -50,13 +50,12 @@ public class RecordpopActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.record_pop);
 
-        EditText et_Date = (EditText) findViewById(R.id.to_date);
+        TextView et_Date = (TextView) findViewById(R.id.to_date);
         et_Date.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -105,7 +104,7 @@ public class RecordpopActivity extends Activity {
         String myFormat = "yyyy/MM/dd";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.KOREA);
 
-        EditText et_date = (EditText) findViewById(R.id.to_date);
+        TextView et_date = (TextView) findViewById(R.id.to_date);
     }
 
     public void mOnClick(View view) {
