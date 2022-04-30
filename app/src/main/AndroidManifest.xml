@@ -27,6 +27,10 @@
 
 
         <activity
+            android:name=".DruginfoActivity">
+        </activity>
+
+        <activity
             android:name=".TodatePickerActivity"
             android:theme="@style/Theme.AppCompat">
         </activity>
