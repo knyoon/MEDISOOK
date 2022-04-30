@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".SearchActivity">
+
+    <TextView
+        android:id="@+id/medisook"
+        android:layout_width="wrap_content"
+        android:layout_height="66dp"
+        android:layout_gravity="center_horizontal"
+        android:fontFamily="@font/noto_black"
+        android:text="MEDISOOK"
+        android:textColor="#445E86"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.01" />
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="2dp"
+        android:background="#445E86"
+        app:layout_constraintTop_toBottomOf="@id/medisook"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/search_bar"
+        android:layout_width="304dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/search_bar"
+        android:fontFamily="@font/noto_medium"
+        android:gravity="center"
+        android:hint="의약품명을 입력해 주세요."
+        android:textColor="#445E86"
+        android:textSize="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/medisook" />
+
+    <TextView
+        android:id="@+id/txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/noto_medium"
+        android:text="검색"
+        android:textColor="@color/navy"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="@+id/search_bar"
+        app:layout_constraintEnd_toEndOf="@id/search_bar"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="@id/search_bar"
+        app:layout_constraintTop_toTopOf="@+id/search_bar" />
+
+    <LinearLayout
+        android:id="@+id/filter_btns"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/search_bar">
+
+        <Button
+            android:id="@+id/red_filter_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="11dp"
+            android:background="@drawable/filter_button_red"
+            android:fontFamily="@font/noto_bold"
+            android:includeFontPadding="false"
+            android:minHeight="0dp"
+            android:text="증상 +"
+            android:textSize="12dp"
+            app:backgroundTint="@null" />
+
+        <Button
+            android:id="@+id/green_filter_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="11dp"
+            android:background="@drawable/filter_button_green"
+            android:fontFamily="@font/noto_bold"
+            android:includeFontPadding="false"
+            android:minHeight="0dp"
+            android:text="제외 성분 +"
+            android:textSize="12dp"
+            app:backgroundTint="@null" />
+
+        <Button
+            android:id="@+id/yellow_filter_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/filter_button_yellow"
+            android:fontFamily="@font/noto_bold"
+            android:includeFontPadding="false"
+            android:minHeight="0dp"
+            android:text="복약 대상 +"
+            android:textSize="12dp"
+            app:backgroundTint="@null" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="50dp"
+        android:background="#445E86"
+        tools:ignore="MissingConstraints" />
+
+    <ScrollView
+        android:layout_width="300dp"
+        android:layout_height="420dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@id/bottom_nav"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/filter_btns">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="NotSibling">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:layout_editor_absoluteX="31dp"
+                tools:layout_editor_absoluteY="-39dp" />
+        </RelativeLayout>
+    </ScrollView>
+
+    <!-- <androidx.constraintlayout.widget.ConstraintLayout-->
+    <!--     android:layout_width="match_parent"-->
+    <!--     android:layout_height="match_parent">-->
+    <!--     <androidx.recyclerview.widget.RecyclerView-->
+    <!--         android:id="@+id/recycler_view"-->
+    <!--         android:layout_width="match_parent"-->
+    <!--         android:layout_height="match_parent"/>-->
+    <!-- </androidx.constraintlayout.widget.ConstraintLayout>-->
+    <LinearLayout
+        android:id="@+id/bottom_nav"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="10dp"
+        android:baselineAligned="false"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:ignore="MissingConstraints">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="#00FFFFFF"
+            android:scaleType="centerCrop"
+            android:src="@drawable/logo_tab" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="30dp"
+            android:background="#445E86" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="#00FFFFFF"
+            android:scaleType="centerCrop"
+            android:src="@drawable/mypage_tab" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

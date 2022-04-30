@@ -1,0 +1,12 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:shape="oval"
+    tools:ignore="MissingDefaultResource">
+    <size android:height="19dp"
+        android:width="19dp"/>
+    <solid android:color="@color/white" />
+    <stroke android:color="@color/navy"
+        android:width="1.5dp"/>
+    <padding
+        android:right="19dp"/>
+</shape>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Unchecked -->
+    <item android:state_checked="false"
+        android:drawable="@drawable/checkbox_unselected_btn" android:top="4dp" android:right="4dp" android:bottom="4dp" android:left="4dp" />
+    <!-- Checked -->
+    <item android:state_checked="true"
+        android:drawable="@drawable/checkbox_selected_btn" android:top="4dp" android:right="4dp" android:bottom="4dp" android:left="4dp" />
+</selector>

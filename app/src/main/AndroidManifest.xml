@@ -11,7 +11,7 @@
         android:theme="@style/Theme.Medisook">
 
         <activity
-            android:name=".MainMenuActivity"
+            android:name=".DruginfoActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,6 +25,7 @@
             android:theme="@android:style/Theme.Translucent">
         </activity>
 
+
         <activity
             android:name=".TodatePickerActivity"
             android:theme="@style/Theme.AppCompat">
@@ -34,8 +35,6 @@
             android:name=".FromdatePickerActivity"
             android:theme="@style/Theme.AppCompat">
         </activity>
-
-
     </application>
 
 </manifest>
