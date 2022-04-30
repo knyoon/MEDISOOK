@@ -15,7 +15,6 @@ import com.google.android.material.navigation.NavigationBarView;
 
 public class MainMenuActivity extends AppCompatActivity {
 
-
     private FragmentManager fragmentManager = getSupportFragmentManager();
     private MenuFragmentSearch fragmentSearch = new MenuFragmentSearch();
     private MenuFragmentMypage fragmentMypage = new MenuFragmentMypage();

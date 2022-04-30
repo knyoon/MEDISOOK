@@ -119,11 +119,11 @@
 
     <ScrollView
         android:layout_width="300dp"
-        android:layout_height="420dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginBottom="20dp"
+        android:layout_height="440dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="83dp"
+        android:layout_marginRight="36dp"
+        android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toTopOf="@id/bottom_nav"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -155,6 +155,7 @@
     <!--         android:layout_width="match_parent"-->
     <!--         android:layout_height="match_parent"/>-->
     <!-- </androidx.constraintlayout.widget.ConstraintLayout>-->
+
     <LinearLayout
         android:orientation="horizontal"
         android:id="@+id/bottom_nav"
