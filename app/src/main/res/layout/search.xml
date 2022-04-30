@@ -4,30 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".SearchActivity">
+    android:layout_marginTop="91dp"
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/medisook"
-        android:layout_width="wrap_content"
-        android:layout_height="66dp"
-        android:layout_gravity="center_horizontal"
-        android:fontFamily="@font/noto_black"
-        android:text="MEDISOOK"
-        android:textColor="#445E86"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.01" />
+<!--    <TextView-->
+<!--        android:id="@+id/medisook"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="66dp"-->
+<!--        android:layout_gravity="center_horizontal"-->
+<!--        android:fontFamily="@font/noto_black"-->
+<!--        android:text="MEDISOOK"-->
+<!--        android:textColor="#445E86"-->
+<!--        android:textSize="20dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        app:layout_constraintRight_toRightOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.01" />-->
 
-    <View
-        android:layout_width="wrap_content"
-        android:layout_height="2dp"
-        android:background="#445E86"
-        app:layout_constraintTop_toBottomOf="@id/medisook"
-        tools:ignore="MissingConstraints" />
+<!--    <View-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="2dp"-->
+<!--        android:background="#445E86"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/medisook"-->
+<!--        tools:ignore="MissingConstraints" />-->
 
     <EditText
         android:id="@+id/search_bar"
@@ -43,7 +43,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/medisook" />
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/txt"
@@ -106,14 +106,16 @@
             app:backgroundTint="@null" />
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1.5dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="50dp"
-        android:background="#445E86"
-        tools:ignore="MissingConstraints" />
+
+<!--    <View-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="1.5dp"-->
+<!--        android:layout_marginLeft="50dp"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:layout_marginRight="50dp"-->
+<!--        android:background="#445E86"-->
+<!--        tools:ignore="MissingConstraints" />-->
+
 
     <ScrollView
         android:layout_width="300dp"
@@ -154,6 +156,7 @@
     <!--         android:layout_height="match_parent"/>-->
     <!-- </androidx.constraintlayout.widget.ConstraintLayout>-->
     <LinearLayout
+        android:orientation="horizontal"
         android:id="@+id/bottom_nav"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
@@ -164,44 +167,44 @@
         app:layout_constraintBottom_toBottomOf="parent"
         tools:ignore="MissingConstraints">
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+<!--        <View-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_weight="1" />-->
 
-        <ImageButton
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:background="#00FFFFFF"
-            android:scaleType="centerCrop"
-            android:src="@drawable/logo_tab" />
+<!--        <ImageButton-->
+<!--            android:layout_width="35dp"-->
+<!--            android:layout_height="29dp"-->
+<!--            android:background="#00FFFFFF"-->
+<!--            android:scaleType="centerCrop"-->
+<!--            android:src="@drawable/logo_tab" />-->
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+<!--        <View-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_weight="1" />-->
 
-        <View
-            android:layout_width="2dp"
-            android:layout_height="30dp"
-            android:background="#445E86" />
+<!--        <View-->
+<!--            android:layout_width="2dp"-->
+<!--            android:layout_height="30dp"-->
+<!--            android:background="#445E86" />-->
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+<!--        <View-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_weight="1" />-->
 
-        <ImageButton
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:background="#00FFFFFF"
-            android:scaleType="centerCrop"
-            android:src="@drawable/mypage_tab" />
+<!--        <ImageButton-->
+<!--            android:layout_width="32dp"-->
+<!--            android:layout_height="32dp"-->
+<!--            android:background="#00FFFFFF"-->
+<!--            android:scaleType="centerCrop"-->
+<!--            android:src="@drawable/mypage_tab" />-->
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+<!--        <View-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_weight="1" />-->
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

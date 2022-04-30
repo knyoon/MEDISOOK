@@ -3,7 +3,6 @@ package com.medisook.app;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,9 +18,9 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     Activity activity;
     private Intent intent;
 
-    public Adapter(ArrayList<DrugItem> drugItemArrayList, Activity activity) {
+    public Adapter(ArrayList<DrugItem> drugItemArrayList, MenuFragmentSearch activity) {
         this.drugItemArrayList = drugItemArrayList;
-        this.activity = activity;
+        this.activity = activity.getActivity();
        //arrayList = new ArrayList<>();
     }
     @NonNull
