@@ -315,53 +315,53 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/main_menu_bottom"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="44dp"
-        android:layout_marginBottom="10dp"
-        android:gravity="center"
-        android:orientation="horizontal">
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="44dp"-->
+<!--        android:layout_marginBottom="10dp"-->
+<!--        android:gravity="center"-->
+<!--        android:orientation="horizontal">-->
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+<!--        <View-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_weight="1" />-->
 
-        <ImageButton
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:background="#00FFFFFF"
-            android:scaleType="centerCrop"
-            android:src="@drawable/logo_tab" />
+<!--        <ImageButton-->
+<!--            android:layout_width="35dp"-->
+<!--            android:layout_height="35dp"-->
+<!--            android:background="#00FFFFFF"-->
+<!--            android:scaleType="centerCrop"-->
+<!--            android:src="@drawable/logo_tab" />-->
 
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+<!--        <View-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_weight="1" />-->
 
-        <View
-            android:layout_width="2dp"
-            android:layout_height="30dp"
-            android:background="#445E86" />
+<!--        <View-->
+<!--            android:layout_width="2dp"-->
+<!--            android:layout_height="30dp"-->
+<!--            android:background="#445E86" />-->
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+<!--        <View-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_weight="1" />-->
 
-        <ImageButton
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:background="#00FFFFFF"
-            android:scaleType="centerCrop"
-            android:src="@drawable/mypage_tab" />
+<!--        <ImageButton-->
+<!--            android:layout_width="32dp"-->
+<!--            android:layout_height="32dp"-->
+<!--            android:background="#00FFFFFF"-->
+<!--            android:scaleType="centerCrop"-->
+<!--            android:src="@drawable/mypage_tab" />-->
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+<!--        <View-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_weight="1" />-->
 
-    </LinearLayout>
+<!--    </LinearLayout>-->
 
 </LinearLayout>
