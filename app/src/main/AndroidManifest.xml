@@ -25,11 +25,6 @@
             android:theme="@android:style/Theme.Translucent">
         </activity>
 
-
-        <activity
-            android:name=".DruginfoActivity">
-        </activity>
-
         <activity
             android:name=".TodatePickerActivity"
             android:theme="@style/Theme.AppCompat">
