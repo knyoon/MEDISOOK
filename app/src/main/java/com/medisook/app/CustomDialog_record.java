@@ -25,6 +25,7 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
     private EditText to_date;
     private EditText from_date;
     private TextView et_Date;
+    private TextView et_Date1;
     private Button okButton;
     private Context context;
     private CustomDialogListener customDialogListener;
@@ -39,16 +40,16 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
         this.customDialogListener = customDialogListener;
     }
     Calendar myCalendar = Calendar.getInstance();
-    DatePickerDialog.OnDateSetListener myDatePicker = new DatePickerDialog.OnDateSetListener() {
-        @Override
-        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-            myCalendar.set(Calendar.YEAR, year);
-            myCalendar.set(Calendar.MONTH, month);
-            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-
-            updateLabel();
-        }
-    };
+//    DatePickerDialog.OnDateSetListener myDatePicker = new DatePickerDialog.OnDateSetListener() {
+//        @Override
+//        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+//            myCalendar.set(Calendar.YEAR, year);
+//            myCalendar.set(Calendar.MONTH, month);
+//            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+//            Log.d("태그", String.valueOf(year));
+//            updateLabel();
+//        }
+//    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE| WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
@@ -57,8 +58,10 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
         setContentView(R.layout.record_pop);
         okButton = (Button) findViewById(R.id.popup_ok_btn);
         et_Date= (TextView) findViewById(R.id.to_date);
+        et_Date1= (TextView) findViewById(R.id.from_date);
         okButton.setOnClickListener(this);
         et_Date.setOnClickListener(this);
+        et_Date1.setOnClickListener(this);
     }
     @Override
     public void onClick(View v) {
@@ -67,15 +70,49 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
                 dismiss();
                 break;
             case R.id.to_date:
-                Log.v("태그", "context");
+                Log.v("태그", "to-date 클릭");
+                DatePickerDialog.OnDateSetListener myDatePicker = new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        myCalendar.set(Calendar.YEAR, year);
+                        myCalendar.set(Calendar.MONTH, month);
+                        myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                        Log.d("태그", String.valueOf(year));
+                        updateLabel();
+                    }
+                };
                 new DatePickerDialog(context, myDatePicker, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                break;
+            case R.id.from_date:
+                Log.v("태그", "from-date 클릭");
+                DatePickerDialog.OnDateSetListener myDatePicker1 = new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        myCalendar.set(Calendar.YEAR, year);
+                        myCalendar.set(Calendar.MONTH, month);
+                        myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                        Log.d("태그", String.valueOf(year));
+                        updateLabel1();
+                    }
+                };
+                new DatePickerDialog(context, myDatePicker1, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
         }
     }
     private void updateLabel(){
-        String myFormat = "yyyy/MM/dd";
+        String myFormat = "yy/MM/dd";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.KOREA);
         TextView et_date = (TextView) findViewById(R.id.to_date);
+        et_date.setText(sdf.format(myCalendar.getTime()));
+//        TextView et_date1 = (TextView) findViewById(R.id.from_date);
+//        et_date1.setText(sdf.format(myCalendar.getTime()));
+    }
+    private void updateLabel1(){
+        String myFormat = "yy/MM/dd";
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.KOREA);
+        TextView et_date1 = (TextView) findViewById(R.id.from_date);
+        et_date1.setText(sdf.format(myCalendar.getTime()));
     }
 //    public void mOnClick(View view) {
 //        Intent back = new Intent(this, DruginfoActivity.class);
