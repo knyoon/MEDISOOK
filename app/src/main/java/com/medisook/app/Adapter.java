@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -19,6 +21,24 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     //private ArrayList<String> arrayList;
     ArrayList<DrugItem> drugItemArrayList;
     Activity activity;
+
+    public int getItemCount() {
+        return drugItemArrayList.size();
+    }
+    public void filterList(ArrayList<DrugItem> filteredList){
+        drugItemArrayList = filteredList;
+        notifyDataSetChanged();
+    }
+    public class ViewHolder extends RecyclerView.ViewHolder{
+        TextView drugName;
+        public ViewHolder(Context context, @NonNull View itemView){
+            super(itemView);
+            this.drugName = itemView.findViewById(R.id.drugName);
+        }
+    }
+    public void setArrayData(DrugItem strData){
+        drugItemArrayList.add(strData);
+    }
 
     private Intent intent;
 
@@ -35,8 +55,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         ViewHolder viewholder = new ViewHolder(context, view);
         return viewholder;
     }
-    //private FragmentManager fragmentManager;
-    //private DruginfoActivity fragmentdruginfo = new DruginfoActivity();
+
 
     public void onBindViewHolder(@NonNull ViewHolder holder, int position){
         //String text = arrayList.get(position);
@@ -44,27 +63,19 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         holder.drugName.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                intent = new Intent(view.getContext(), DruginfoActivity.class);
-                view.getContext().startActivity(intent);
+                FragmentManager fm = ((FragmentActivity) view.getContext()).getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction;
+                DruginfoActivity fragmentDruginfo = new DruginfoActivity();
+                fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.menu_frame_layout, fragmentDruginfo);
+                fragmentTransaction.commit();
+
+//                intent = new Intent(view.getContext(), DruginfoActivity.class);
+//                view.getContext().startActivity(intent);
             }
         });
     }
-    public int getItemCount() {
-        return drugItemArrayList.size();
-    }
-    public void filterList(ArrayList<DrugItem> filteredList){
-            drugItemArrayList = filteredList;
-            notifyDataSetChanged();
-        }
-    public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView drugName;
-        public ViewHolder(Context context, @NonNull View itemView){
-            super(itemView);
-            this.drugName = itemView.findViewById(R.id.drugName);
-        }
-    }
-    public void setArrayData(DrugItem strData){
-        drugItemArrayList.add(strData);
-    }
+
+
 }
 
