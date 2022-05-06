@@ -84,9 +84,9 @@
             android:layout_marginLeft="6dp"
             android:background="@color/navy" />
 
-        <EditText
+        <TextView
             android:id="@+id/from_date"
-            android:layout_width="60dp"
+            android:layout_width="54dp"
             android:layout_height="21dp"
             android:layout_gravity="center"
             android:layout_marginLeft="9dp"
@@ -94,7 +94,7 @@
             android:fontFamily="@font/noto_medium"
             android:gravity="center"
             android:includeFontPadding="false"
-            android:text=""
+            android:text="default"
             android:textColor="@color/navy"
             android:textSize="11dp" />
     </LinearLayout>
