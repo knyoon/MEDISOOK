@@ -6,12 +6,42 @@
         <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.177" />
         <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/drawable/ic_launcher_background.xml" value="0.177" />
         <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/drawable/logo_tab.xml" value="0.177" />
+        <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/drawable/menu_item_color.xml" value="0.1355" />
+        <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/drawable/popup_radius.xml" value="0.1155" />
+        <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/drawable/radius.xml" value="0.19" />
+        <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/drawable/radius_navy.xml" value="0.244" />
+        <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/drawable/resize_bad.xml" value="0.1215" />
+        <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/drawable/resize_good.xml" value="0.1215" />
+        <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/drawable/resize_greenstar.xml" value="0.1955" />
+        <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/drawable/resize_medisooklogo.xml" value="0.1015" />
+        <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/drawable/resize_pencil.xml" value="0.2355" />
+        <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/drawable/resize_redstar.xml" value="0.1155" />
+        <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/drawable/resize_star.xml" value="0.2355" />
+        <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/drawable/resize_yellowstar.xml" value="0.1955" />
+        <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/drawable/search_bar.xml" value="0.1495" />
+        <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/drawable/star_red.xml" value="0.1" />
         <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/font/font.xml" value="0.15729166666666666" />
         <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/font/noto_black.xml" value="0.14270833333333333" />
         <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/font/noto_black1.xml" value="0.1" />
         <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/layout/A.xml" value="0.4" />
         <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/layout/activity_main.xml" value="0.264" />
-        <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/layout/drug_info.xml" value="0.264" />
+        <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/layout/activity_main_menu.xml" value="0.264" />
+        <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/layout/date_picker.xml" value="0.264" />
+        <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/layout/drug_info.xml" value="0.2" />
+        <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/layout/fragment_main_menu.xml" value="0.125" />
+        <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/layout/fragment_menu_main.xml" value="0.22916666666666666" />
+        <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/layout/fragment_menu_mypage.xml" value="0.1" />
+        <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/layout/fragment_menu_search.xml" value="0.1" />
+        <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/layout/fromdate_picker.xml" value="0.14739583333333334" />
+        <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/layout/menu_fragment_main.xml" value="0.13958333333333334" />
+        <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/layout/menu_fragment_mypage.xml" value="0.13958333333333334" />
+        <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/layout/record_pop.xml" value="0.264" />
+        <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/layout/redpop.xml" value="0.1" />
+        <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/layout/search.xml" value="0.536" />
+        <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/menu/main_menu_bottom.xml" value="0.264" />
+        <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/menu/main_meun_bottom.xml" value="0.125" />
+        <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1215" />
+        <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1215" />
         <entry key="..\:/Users/KONG/Desktop/medisook/app/src/main/res/drawable/checkbox_selected_btn.xml" value="0.186" />
         <entry key="..\:/Users/KONG/Desktop/medisook/app/src/main/res/drawable/checkbox_unselected_btn.xml" value="0.1" />
         <entry key="..\:/Users/KONG/Desktop/medisook/app/src/main/res/drawable/filter_button_green.xml" value="0.1195" />
@@ -27,6 +57,8 @@
         <entry key="..\:/Users/KONG/Desktop/medisook/app/src/main/res/layout/activity_gallery.xml" value="0.109375" />
         <entry key="..\:/Users/KONG/Desktop/medisook/app/src/main/res/layout/activity_main.xml" value="0.2109704641350211" />
         <entry key="..\:/Users/KONG/Desktop/medisook/app/src/main/res/layout/drug_list.xml" value="0.1" />
+        <entry key="..\:/Users/KONG/Desktop/medisook/app/src/main/res/layout/activity_main.xml" value="0.14166666666666666" />
+        <entry key="..\:/Users/KONG/Desktop/medisook/app/src/main/res/layout/drug_list.xml" value="0.33" />
         <entry key="..\:/Users/KONG/Desktop/medisook/app/src/main/res/layout/filter_list.xml" value="0.35885416666666664" />
         <entry key="..\:/Users/KONG/Desktop/medisook/app/src/main/res/layout/layout_listitem.xml" value="0.22" />
         <entry key="..\:/Users/KONG/Desktop/medisook/app/src/main/res/layout/main_page.xml" value="0.22" />

@@ -3,14 +3,17 @@ package com.medisook.app;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
-
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import java.util.ArrayList;
 
 public class Adapter extends RecyclerView.Adapter<ViewHolder> {
@@ -21,7 +24,8 @@ public class Adapter extends RecyclerView.Adapter<ViewHolder> {
 
     public Adapter(ArrayList<DrugItem> drugItemArrayList, Activity activity) {
         this.drugItemArrayList = drugItemArrayList;
-        this.activity = activity;
+       // this.activity = activity;
+        this.activity = activity.getActivity();
     }
     @NonNull
     @Override
@@ -40,9 +44,18 @@ public class Adapter extends RecyclerView.Adapter<ViewHolder> {
         holder.textView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Log.v("toast", "adapter에서 테스트");
-                intent = new Intent(view.getContext(), DruginfoActivity.class);
-                view.getContext().startActivity(intent);
+//                Log.v("toast", "adapter에서 테스트");
+//                intent = new Intent(view.getContext(), DruginfoActivity.class);
+//                view.getContext().startActivity(intent);
+                FragmentManager fm = ((FragmentActivity) view.getContext()).getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction;
+                DruginfoActivity fragmentDruginfo = new DruginfoActivity();
+                fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.menu_frame_layout, fragmentDruginfo);
+                fragmentTransaction.commit();
+
+//                intent = new Intent(view.getContext(), DruginfoActivity.class);
+//                view.getContext().startActivity(intent);
             }
         });
     }
