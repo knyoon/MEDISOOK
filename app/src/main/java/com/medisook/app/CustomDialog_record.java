@@ -3,11 +3,15 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -28,6 +32,7 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
     private TextView et_Date1;
     private Button okButton;
     private Context context;
+    private EditText et_record;
     private CustomDialogListener customDialogListener;
     public CustomDialog_record(Context context) {
         super(context);
@@ -50,15 +55,41 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
 //            updateLabel();
 //        }
 //    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE| WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
-        getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         super.onCreate(savedInstanceState);
+//        if(Build.VERSION.SDK_INT < 30)
+//            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+//        else
+//            getWindow().setDecorFitsSystemWindows(true);
         setContentView(R.layout.record_pop);
         okButton = (Button) findViewById(R.id.popup_ok_btn);
         et_Date= (TextView) findViewById(R.id.to_date);
         et_Date1= (TextView) findViewById(R.id.from_date);
+
+        et_record = (EditText) findViewById(R.id.record);
+        et_record.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean focused) {
+                if(focused){
+                    //open keyboard
+                    getWindow().setFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM,
+                            WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+                    ((InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE)).showSoftInput(v,
+                            InputMethodManager.SHOW_FORCED);
+                }
+                else{
+                    //close keyboard
+                    ((InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(
+                            v.getWindowToken(), 0);
+
+                }
+            }
+        });
+        et_record.setOnClickListener(this);
         okButton.setOnClickListener(this);
         et_Date.setOnClickListener(this);
         et_Date1.setOnClickListener(this);
@@ -68,6 +99,9 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
         switch (v.getId()){
             case R.id.popup_ok_btn:
                 dismiss();
+                break;
+            case R.id.record:
+                showSoftKeyboard();
                 break;
             case R.id.to_date:
                 Log.v("태그", "to-date 클릭");
@@ -113,6 +147,28 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.KOREA);
         TextView et_date1 = (TextView) findViewById(R.id.from_date);
         et_date1.setText(sdf.format(myCalendar.getTime()));
+    }
+
+
+    public void showSoftKeyboard() {
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM,
+                WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+        InputMethodManager imm = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);
+
+//        et_record.postDelayed(new Runnable()
+//        {
+//            @Override
+//            public void run()
+//            {
+//                et_record.requestFocus();
+//                imm.showSoftInput(et_record, 0);
+//            }
+//        }, 100);
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
+        //imm.showSoftInput(record, InputMethodManager.SHOW_IMPLICIT);
+
+//        InputMethodManager immhide = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+//        immhide.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
     }
 //    public void mOnClick(View view) {
 //        Intent back = new Intent(this, DruginfoActivity.class);

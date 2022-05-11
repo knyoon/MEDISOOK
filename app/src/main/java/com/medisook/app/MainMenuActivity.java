@@ -18,7 +18,7 @@ public class MainMenuActivity extends AppCompatActivity {
     private FragmentManager fragmentManager = getSupportFragmentManager();
     private MenuFragmentSearch fragmentSearch = new MenuFragmentSearch();
     private MenuFragmentMypage fragmentMypage = new MenuFragmentMypage();
-//    private DruginfoActivity fragmentDruginfo = new DruginfoActivity();
+    private DruginfoActivity fragmentDruginfo = new DruginfoActivity();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,9 +43,9 @@ public class MainMenuActivity extends AppCompatActivity {
                     case R.id.menu_mypage:
                         transaction.replace(R.id.menu_frame_layout, fragmentMypage).commitAllowingStateLoss();
                         break;
-//                    case R.id.druginfo_page:
-//                        transaction.replace(R.id.menu_frame_layout, fragmentDruginfo).commitAllowingStateLoss();
-//                        break;
+                    case R.id.druginfo_page:
+                        transaction.replace(R.id.menu_frame_layout, fragmentDruginfo).commitAllowingStateLoss();
+                        break;
                 }
                 return true;
             }
