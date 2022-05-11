@@ -103,7 +103,6 @@ public class RecordpopActivity extends Activity {
     private void updateLabel(){
         String myFormat = "yyyy/MM/dd";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.KOREA);
-
         TextView et_date = (TextView) findViewById(R.id.to_date);
     }
 

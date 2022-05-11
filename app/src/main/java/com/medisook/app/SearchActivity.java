@@ -10,8 +10,8 @@ import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,7 +27,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     private Button green_filter_btn;
     private Button yellow_filter_btn;
     private TextView txt;
-    ArrayList<DrugItem> drugItemArrayList, filteredList;
+    ArrayList<DrugItem> drugItemArrayList, filtered_drugList;
     LinearLayoutManager linearLayoutManager;
     EditText searchET;
     RecyclerView recyclerView;
@@ -36,7 +36,6 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search);
-
         TextView Medi = findViewById(R.id.medisook); // 변수 선언
         String content = Medi.getText().toString(); //텍스트 가져옴
         SpannableString spannableString = new SpannableString(content); //객체생성
@@ -48,16 +47,18 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         searchET = findViewById(R.id.search_bar);
         recyclerView = (RecyclerView)findViewById(R.id.recycler_view);
 
-        filteredList = new ArrayList<>();
+        filtered_drugList = new ArrayList<>();
         drugItemArrayList = new ArrayList<>();
 
         adapter = new Adapter(drugItemArrayList, this);
-        linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+       // linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
         for(int i = 0; i<100; i++){
             adapter.setArrayData(new DrugItem(i+"번째 약"));
+            Log.v("태그", "setarraydata drug 되는지");
+            Log.v("태그", String.valueOf(drugItemArrayList.size()));
         }
         searchET.addTextChangedListener(new TextWatcher() {
             @Override
@@ -69,7 +70,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void afterTextChanged(Editable editable) {
                 String searchText = searchET.getText().toString();
-                searchFilter(searchText);
+                searchDrug(searchText);
             }
         });
         recyclerView.setAdapter(adapter);
@@ -85,14 +86,16 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     protected void onResume() {
         super.onResume();
     }
-    public void searchFilter(String searchText){
-        filteredList.clear();;
+    public void searchDrug(String searchText){
+        filtered_drugList.clear();
         for (int i=0; i<drugItemArrayList.size(); i++){
+            Log.v("태그", "drug list test");
+            Log.v("태그", String.valueOf(drugItemArrayList.size()));
             if(drugItemArrayList.get(i).getDrugName().toLowerCase().contains(searchText.toLowerCase())){
-                filteredList.add(drugItemArrayList.get(i));
+                filtered_drugList.add(drugItemArrayList.get(i));
             }
         }
-        adapter.filterList(filteredList);
+        adapter.filterList(filtered_drugList);
     }
     public void query2()
     {
@@ -119,13 +122,24 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.red_filter_btn:
                 CustomDialog dialog = new CustomDialog(this);
                 CustomDialog.Builder dialog_bulider = new CustomDialog.Builder(this);
+
                 dialog.setDialogListener(new CustomDialog.CustomDialogListener() {
                     @Override
                     public void onOkClicked(String text) {
-                        txt.setText(text);
+                        //txt.setText(text);
                     }
                 });
+//                dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+//                    @Override
+//                    public void onShow(DialogInterface dialogInterface) {
+//                        InputMethodManager imm = (InputMethodManager)
+//                                mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+//                        imm.showSoftInput(mFullPopUpEditBox, 0);
+//                    }
+//                });
                 dialog.show();
+                dialog.getWindow().clearFlags(
+                        WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
                 break;
             case R.id.green_filter_btn:
                 CustomDialog dialog2 = new CustomDialog(this);
@@ -153,4 +167,9 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                 break;
         }
     }
+//    public static void popSoftkeyboardInAlertDialog(Context ctx, EditText editText) {
+//        editText.requestFocus();
+//        InputMethodManager imm = (InputMethodManager) ctx.getSystemService(Context.INPUT_METHOD_SERVICE);
+//        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+//    }
 }
