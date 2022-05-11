@@ -72,6 +72,7 @@ public class DruginfoActivity extends Fragment implements View.OnClickListener{
                     }
                 });
                 dialog.show();
+
                 break;
 //            case R.id.to_date:
 //                new DatePickerDialog(this, myDatePicker, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
