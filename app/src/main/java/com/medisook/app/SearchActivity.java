@@ -108,7 +108,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     public void query2()
     {
         try {
-            URL url = new URL("http://10.101.14.15/test.php");
+            URL url = new URL("http://192.168.18.130/test.php");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
             conn.setRequestProperty("Content-type", "application/json");
@@ -116,11 +116,13 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
             Log.i("log_tag", String.valueOf(conn.getResponseCode()));
 
             BufferedReader rd;
+            Log.i("log_tag","connect!");
             if (conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
                 rd = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
             } else {
                 rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
             }
+            Log.i("log_tag","connect!");
             String line;
             String result = "";
             while ((line = rd.readLine()) != null) {
