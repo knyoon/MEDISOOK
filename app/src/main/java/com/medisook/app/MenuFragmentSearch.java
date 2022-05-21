@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.sql.Connection;
@@ -38,45 +39,8 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search);
-        
-//        searchET = findViewById(R.id.search_bar);
-//        recyclerView = (RecyclerView)findViewById(R.id.recycler_view);
-//
-//        filteredList = new ArrayList<>();
-//        drugItemArrayList = new ArrayList<>();
-//
-//        adapter = new Adapter(drugItemArrayList, this);
-//        linearLayoutManager = new LinearLayoutManager(getApplicationContext());
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
-//        recyclerView.setAdapter(adapter);
-//        adapter.notifyDataSetChanged();
-//        for(int i = 0; i<100; i++){
-//            adapter.setArrayData(new DrugItem(i+"번째 약"));
-//        }
-//        searchET.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//            }
-//            @Override
-//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//            }
-//            @Override
-//            public void afterTextChanged(Editable editable) {
-//                String searchText = searchET.getText().toString();
-//                searchFilter(searchText);
-//            }
-//        });
-//        recyclerView.setAdapter(adapter);
-//        red_filter_btn = (Button) findViewById(R.id.red_filter_btn);
-//        green_filter_btn = (Button) findViewById(R.id.green_filter_btn);
-//        yellow_filter_btn = (Button) findViewById(R.id.yellow_filter_btn);
-//        txt = (TextView) findViewById(R.id.txt);
-//        red_filter_btn.setOnClickListener(this);
-//        green_filter_btn.setOnClickListener(this);
-//        yellow_filter_btn.setOnClickListener(this);
-//        query2();
     }
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
     }
     private void setContentView(int search) {
@@ -122,6 +86,8 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                     }
                 });
                 dialog.show();
+                dialog.getWindow().clearFlags(
+                        WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
                 break;
             case R.id.green_filter_btn:
                 CustomDialog dialog2 = new CustomDialog(getActivity());
@@ -133,8 +99,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                     }
                 });
                 dialog2.show();
-                dialog.getWindow().clearFlags(
-                        WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+
                 break;
             case R.id.yellow_filter_btn:
                 final String[] items = new String[]{"가", "나"};
@@ -157,8 +122,10 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
         ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.search, container, false);
         EditText searchET = (EditText) rootView.findViewById(R.id.search_bar);
         recyclerView = (RecyclerView) rootView. findViewById(R.id.recycler_view);
-        filteredList = new ArrayList<>();
+
+        filtered_drugList = new ArrayList<>();
         drugItemArrayList = new ArrayList<>();
+
         adapter = new Adapter(drugItemArrayList, this);
         linearLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
@@ -177,7 +144,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
             @Override
             public void afterTextChanged(Editable editable) {
                 String searchText = searchET.getText().toString();
-                searchFilter(searchText);
+                searchDrug(searchText);
             }
         });
         recyclerView.setAdapter(adapter);

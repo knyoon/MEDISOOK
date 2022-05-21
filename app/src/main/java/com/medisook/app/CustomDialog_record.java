@@ -45,17 +45,6 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
         this.customDialogListener = customDialogListener;
     }
     Calendar myCalendar = Calendar.getInstance();
-//    DatePickerDialog.OnDateSetListener myDatePicker = new DatePickerDialog.OnDateSetListener() {
-//        @Override
-//        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-//            myCalendar.set(Calendar.YEAR, year);
-//            myCalendar.set(Calendar.MONTH, month);
-//            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-//            Log.d("태그", String.valueOf(year));
-//            updateLabel();
-//        }
-//    };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE| WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
@@ -71,24 +60,6 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
         et_Date1= (TextView) findViewById(R.id.from_date);
 
         et_record = (EditText) findViewById(R.id.record);
-        et_record.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean focused) {
-                if(focused){
-                    //open keyboard
-                    getWindow().setFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM,
-                            WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
-                    ((InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE)).showSoftInput(v,
-                            InputMethodManager.SHOW_FORCED);
-                }
-                else{
-                    //close keyboard
-                    ((InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(
-                            v.getWindowToken(), 0);
-
-                }
-            }
-        });
         et_record.setOnClickListener(this);
         okButton.setOnClickListener(this);
         et_Date.setOnClickListener(this);
