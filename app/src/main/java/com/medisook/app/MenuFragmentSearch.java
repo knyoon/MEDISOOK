@@ -183,10 +183,11 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 drugData.setDrugName(id);
                 drugData.setDrugImg(image);
 
-                drugItemArrayList.add(drugData);
-                Log.d(TAG,drugItemArrayList.get(0).toString());
-                adapter.notifyDataSetChanged();
+                adapter.setArrayData(drugData);
+                Log.d(TAG,drugItemArrayList.get(i).toString());
             }
+
+            adapter.notifyDataSetChanged();
 
 
 
@@ -274,9 +275,8 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
         GetData task = new GetData();
         task.execute( "http://" + IP_ADDRESS + "/test.php", "");
 
-        for(int i = 0; i<100; i++){
-            adapter.setArrayData(new DrugItem());
-        }
+        DrugItem drugitem=new DrugItem();
+
         searchET.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {

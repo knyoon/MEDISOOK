@@ -7,7 +7,6 @@ public class DrugItem {
     private String member_entp;
     private String member_image;
 
-
     public String getMember_id() {
         return member_name;
     }
@@ -32,9 +31,9 @@ public class DrugItem {
         this.member_image = member_image;
     }
 
-    /*public DrugItem(String drugName){
+    public DrugItem(){
         this.drugName = drugName;
-    }*/
+    }
     public String getDrugName(){
         return drugName;
     }
