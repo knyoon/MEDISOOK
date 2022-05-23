@@ -1,44 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".SearchActivity_save">
+    tools:context=".DruginfoActivity"
+    android:id="@+id/druginfo_page"
+    android:layout_marginTop="91dp">
 
-    <TextView
-        android:id="@+id/medisook"
-        android:layout_width="wrap_content"
-        android:layout_height="66dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="1"
-        android:fontFamily="@font/noto_black"
-        android:gravity="center_vertical"
-        android:text="MEDISOOK"
-        android:textColor="#445E86"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <!--    <TextView-->
+    <!--        android:id="@+id/medisook"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="66dp"-->
+    <!--        android:layout_gravity="center_horizontal"-->
+    <!--        android:fontFamily="@font/noto_black"-->
+    <!--        android:gravity="center_vertical"-->
+    <!--        android:text="MEDISOOK"-->
+    <!--        android:textColor="#445E86"-->
+    <!--        android:textSize="20dp"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--        app:layout_constraintRight_toRightOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
-    <View
-        android:layout_width="wrap_content"
-        android:layout_height="2dp"
-        android:background="#445E86" />
+    <!--    <View-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="2dp"-->
+    <!--        android:background="#445E86" />-->
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="94dp"
-        android:layout_weight="2"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        tools:ignore="MissingConstraints">
 
         <ImageView
             android:layout_width="102dp"
             android:layout_height="58dp"
-            android:layout_marginLeft="43dp"
+            android:layout_marginLeft="46dp"
             android:src="@drawable/drung_sampleimage" />
 
         <LinearLayout
@@ -50,7 +52,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:layout_gravity="center"
+                android:layout_marginLeft="13dp"
                 android:layout_marginBottom="10dp"
                 android:fontFamily="@font/noto_medium"
                 android:text="덱시부펜연질켑슐(덱시부프로펜)"
@@ -58,56 +60,67 @@
                 android:textSize="15dp" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:orientation="horizontal">
 
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
+                <!--                <ImageButton-->
+                <!--                    android:layout_width="73dp"-->
+                <!--                    android:layout_height="23dp"-->
+                <!--                    android:adjustViewBounds="true"-->
+                <!--                    android:background="@color/white"-->
+                <!--                    android:scaleType="fitCenter"-->
+                <!--                    android:src="@drawable/save_button" />-->
 
-                <ImageButton
+                <Button
                     android:layout_width="73dp"
                     android:layout_height="23dp"
-                    android:adjustViewBounds="true"
-                    android:background="@color/white"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/save_button" />
+                    android:layout_marginLeft="12dp"
+                    android:background="@drawable/radius"
+                    android:drawableLeft="@drawable/resize_star"
+                    android:fontFamily="@font/noto_bold"
+                    android:includeFontPadding="false"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:text="찜하기"
+                    android:textColor="#445E86"
+                    android:textSize="12dp" />
 
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
-
-                <ImageButton
-                    android:layout_width="73dp"
+                <Button
+                    android:id="@+id/record_pop_btn"
+                    android:layout_width="80dp"
                     android:layout_height="23dp"
-                    android:adjustViewBounds="true"
-                    android:background="@color/white"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/record_button" />
+                    android:layout_marginLeft="12dp"
+                    android:background="@drawable/radius"
+                    android:drawableLeft="@drawable/resize_pencil"
+                    android:fontFamily="@font/noto_bold"
+                    android:includeFontPadding="false"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:text="기록하기"
+                    android:textColor="#445E86"
+                    android:textSize="12dp" />
 
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
             </LinearLayout>
 
         </LinearLayout>
     </LinearLayout>
 
     <View
+        app:layout_constraintTop_toBottomOf="@id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="2dp"
-        android:background="#445E86" />
+        android:background="#445E86"
+        tools:ignore="MissingConstraints" />
 
     <LinearLayout
+        android:id="@+id/warning"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="115dp"
-        android:layout_weight="2"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        tools:ignore="MissingConstraints">
 
         <View
             android:layout_width="0dp"
@@ -249,68 +262,47 @@
     </LinearLayout>
 
     <View
+        app:layout_constraintTop_toBottomOf="@id/warning"
         android:layout_width="wrap_content"
         android:layout_height="2dp"
-        android:background="#445E86" />
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="426dp"
-        android:layout_weight="22"
-        android:text="상단바: 페이지 내용 : 하단 바 = 1 : 30 : 1.  이 부분에 페이지 내용이 들어간다." />
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/menu_bottom_navigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        app:labelVisibilityMode="labeled"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/main_menu_bottom"/>
+        android:background="#445E86"
+        tools:ignore="MissingConstraints" />
 
     <LinearLayout
+        app:layout_constraintTop_toBottomOf="@id/warning"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_weight="1"
-        android:gravity="center"
+        android:layout_marginTop="22dp"
         android:orientation="horizontal">
-
         <View
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_weight="1" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:background="@drawable/radius_navy"
+            android:fontFamily="@font/noto_bold"
+            android:includeFontPadding="false"
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
+            android:text="잦은 음주 주의"
+            android:textColor="@color/white"
+            android:textSize="10dp"/>
 
-        <ImageButton
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:background="#00FFFFFF"
-            android:scaleType="centerCrop"
-            android:src="@drawable/logo_tab" />
-
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
-        <View
-            android:layout_width="2dp"
-            android:layout_height="30dp"
-            android:background="#445E86" />
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
-        <ImageButton
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:background="#00FFFFFF"
-            android:scaleType="centerCrop"
-            android:src="@drawable/mypage_tab" />
+        <TextView
+            android:layout_marginLeft="6dp"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:includeFontPadding="false"
+            android:layout_gravity="center"
+            android:background="@drawable/radius_navy"
+            android:fontFamily="@font/noto_bold"
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
+            android:text="잦은 음주 주의"
+            android:textColor="@color/white"
+            android:textSize="10dp" />
 
         <View
             android:layout_width="0dp"
@@ -319,4 +311,53 @@
 
     </LinearLayout>
 
-</LinearLayout>
+    <!--    <LinearLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="44dp"-->
+    <!--        android:layout_marginBottom="10dp"-->
+    <!--        android:gravity="center"-->
+    <!--        android:orientation="horizontal">-->
+
+    <!--        <View-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="0dp"-->
+    <!--            android:layout_weight="1" />-->
+
+    <!--        <ImageButton-->
+    <!--            android:layout_width="35dp"-->
+    <!--            android:layout_height="35dp"-->
+    <!--            android:background="#00FFFFFF"-->
+    <!--            android:scaleType="centerCrop"-->
+    <!--            android:src="@drawable/logo_tab" />-->
+
+
+    <!--        <View-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="0dp"-->
+    <!--            android:layout_weight="1" />-->
+
+    <!--        <View-->
+    <!--            android:layout_width="2dp"-->
+    <!--            android:layout_height="30dp"-->
+    <!--            android:background="#445E86" />-->
+
+    <!--        <View-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="0dp"-->
+    <!--            android:layout_weight="1" />-->
+
+    <!--        <ImageButton-->
+    <!--            android:layout_width="32dp"-->
+    <!--            android:layout_height="32dp"-->
+    <!--            android:background="#00FFFFFF"-->
+    <!--            android:scaleType="centerCrop"-->
+    <!--            android:src="@drawable/mypage_tab" />-->
+
+    <!--        <View-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="0dp"-->
+    <!--            android:layout_weight="1" />-->
+
+    <!--    </LinearLayout>-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

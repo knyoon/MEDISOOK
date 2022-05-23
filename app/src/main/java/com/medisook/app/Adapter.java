@@ -3,17 +3,18 @@ package com.medisook.app;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentActivity;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
 
 
@@ -31,9 +32,13 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     }
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView drugName;
+        ImageView drugImage;
+
         public ViewHolder(Context context, @NonNull View itemView){
             super(itemView);
             this.drugName = itemView.findViewById(R.id.drugName);
+            this.drugImage = itemView.findViewById(R.id.drugImage);
+
         }
     }
     public void setArrayData(DrugItem strData){
