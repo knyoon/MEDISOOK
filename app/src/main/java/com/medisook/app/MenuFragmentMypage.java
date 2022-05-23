@@ -28,13 +28,17 @@ public class MenuFragmentMypage extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.mypage);
 
+    }
+
+    private void setContentView(int mypage) {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.fragment_menu_mypage, container, false);
+        ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.mypage, container, false);
         //textview = (TextView) rootView.findViewById(R.id.medisook);
         return rootView;
 

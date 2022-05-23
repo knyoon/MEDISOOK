@@ -20,20 +20,20 @@
         </activity>
 
 <!--        이렇게 설정해놓으면 팝업이 현재 화면 위에 올라감.-->
-        <activity
-            android:name=".RecordpopActivity"
-            android:theme="@android:style/Theme.Translucent">
-        </activity>
+<!--        <activity-->
+<!--            android:name=".RecordpopActivity"-->
+<!--            android:theme="@android:style/Theme.Translucent">-->
+<!--        </activity>-->
 
-        <activity
-            android:name=".TodatePickerActivity"
-            android:theme="@style/Theme.AppCompat">
-        </activity>
+<!--        <activity-->
+<!--            android:name=".TodatePickerActivity"-->
+<!--            android:theme="@style/Theme.AppCompat">-->
+<!--        </activity>-->
 
-        <activity
-            android:name=".FromdatePickerActivity"
-            android:theme="@style/Theme.AppCompat">
-        </activity>
+<!--        <activity-->
+<!--            android:name=".FromdatePickerActivity"-->
+<!--            android:theme="@style/Theme.AppCompat">-->
+<!--        </activity>-->
     </application>
 
 </manifest>
