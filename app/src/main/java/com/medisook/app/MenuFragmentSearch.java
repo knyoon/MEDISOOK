@@ -11,6 +11,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -187,6 +188,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
             else {
 
                 mJsonString = result;
+
                 showResult();
             }
         }
@@ -404,13 +406,21 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
             @Override
             public boolean onKey(View view, int i, KeyEvent keyEvent) {
                 switch (i){
-                    case KeyEvent.KEYCODE_ENTER:
-                        String searchText = searchET.getText().toString();
-                        Log.d("태그", searchText.toString());
-                        InsertData insert = new InsertData();
-                        insert.execute( "http://" + IP_ADDRESS + "/test1.php", searchText);
+                    case KeyEvent.KEYCODE_ENTER :
+                        if(keyEvent.getAction()==KeyEvent.ACTION_UP){
+                            String searchText = searchET.getText().toString();
+                            Log.d("태그", searchText.toString());
+                            drugItemArrayList.clear();
+                            InsertData insert = new InsertData();
+                            insert.execute( "http://" + IP_ADDRESS + "/test1.php", searchText);
+                            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                            imm.hideSoftInputFromWindow(searchET.getWindowToken(), 0);
+                        }
+                        return true;
+                    case KeyEvent.KEYCODE_DEL:
+
                 }
-                return true;
+                return false;
             }
         });
 
