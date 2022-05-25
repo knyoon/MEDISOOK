@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,6 +60,104 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search);
 
+    }
+
+    private class InsertData extends AsyncTask<String, Void, String>{
+
+        ProgressDialog progressDialog;
+        String errorString = null;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            progressDialog = ProgressDialog.show(getActivity(),
+                    "Please Wait", null, true, true);
+        }
+
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            progressDialog.dismiss();
+
+            if (result == null){
+
+                mTextViewResult.setText(errorString);
+            }
+            else {
+
+                mJsonString = result;
+                showResult();
+            }
+        }
+
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            String serverURL = params[0];
+            String postParameters = "Data=" + params[1];
+
+
+            try {
+
+                //String searchDrug="Data="+searchET.getText().toString();
+                Log.d("과연", postParameters);
+                URL url = new URL(serverURL);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+
+                httpURLConnection.setReadTimeout(20000);
+                httpURLConnection.setConnectTimeout(20000);
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoInput(true);
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.connect();
+
+
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                outputStream.write(postParameters.getBytes("UTF-8"));
+                outputStream.flush();
+                outputStream.close();
+
+
+                int responseStatusCode = httpURLConnection.getResponseCode();
+                Log.d(TAG, "response code - " + responseStatusCode);
+
+                InputStream inputStream;
+                if(responseStatusCode == HttpURLConnection.HTTP_OK) {
+                    inputStream = httpURLConnection.getInputStream();
+                }
+                else{
+                    inputStream = httpURLConnection.getErrorStream();
+                }
+
+
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+                StringBuilder sb = new StringBuilder();
+                String line;
+
+                while((line = bufferedReader.readLine()) != null){
+                    sb.append(line);
+                }
+
+                bufferedReader.close();
+
+                return sb.toString().trim();
+
+
+            } catch (Exception e) {
+
+                Log.d(TAG, "InsertData : Error ", e);
+                errorString = e.toString();
+
+                return null;
+            }
+
+        }
     }
 
     private class GetData extends AsyncTask<String, Void, String>{
@@ -274,8 +373,8 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
         adapter.notifyDataSetChanged();
 
 
-        GetData task = new GetData();
-        task.execute( "http://" + IP_ADDRESS + "/test.php", "");
+        //GetData task = new GetData();
+        //task.execute( "http://" + IP_ADDRESS + "/test.php", "");
 
         DrugItem drugitem=new DrugItem();
 
@@ -300,6 +399,20 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
         red_filter_btn.setOnClickListener(this);
         green_filter_btn.setOnClickListener(this);
         yellow_filter_btn.setOnClickListener(this);
+
+        searchET.setOnKeyListener(new View.OnKeyListener(){
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                switch (i){
+                    case KeyEvent.KEYCODE_ENTER:
+                        String searchText = searchET.getText().toString();
+                        Log.d("태그", searchText.toString());
+                        InsertData insert = new InsertData();
+                        insert.execute( "http://" + IP_ADDRESS + "/test1.php", searchText);
+                }
+                return true;
+            }
+        });
 
         return rootView;
         // Inflate the layout for this fragment
