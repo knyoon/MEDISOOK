@@ -28,43 +28,24 @@ public class Adapter_filter extends RecyclerView.Adapter<ViewHolder_filter> {
     }
     @Override
     public void onBindViewHolder(@NonNull com.medisook.app.ViewHolder_filter holder, int position) {
-        //final int pos = position;
-        //FilterItem filterName = filterItemArrayList.get(position);
+        final int pos = position;
         holder.checkBox.setText(filterItemArrayList.get(position).getFilterName()); //삭제해도 되나?
-        //holder.checkBox.setTag(filterItemArrayList.get(position));
-        // holder.checkBox.setChecked(filterItemArrayList.get(position).isSelected());
+        holder.checkBox.setTag(filterItemArrayList.get(position));
+        holder.checkBox.setChecked(filterItemArrayList.get(position).isSelected());
         holder.checkBox.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 CheckBox cb = (CheckBox) v;
                 FilterItem filter = (FilterItem) cb.getTag();
-                Toast.makeText(cb.getContext(), cb.getText(), Toast.LENGTH_SHORT).show();
-                //filter.setSelected(cb.isChecked());
-                //filterItemArrayList.get(pos).setSelected(cb.isChecked());
-                //holder.filter_selected_1.setText(filterItemArrayList.get(position).getfilterName());
+                filter.setSelected(cb.isChecked());
+                filterItemArrayList.get(pos).setSelected(cb.isChecked());
+                //Toast.makeText(cb.getContext(), cb.getText(), Toast.LENGTH_SHORT).show();
             }
         });
     }
-//
-//    @Override
-//    public void onBindViewHolder(@NonNull ViewHolder_filter holder, @SuppressLint("RecyclerView") int position) {
-//        final int pos = position;
-//        FilterItem filterName = filterItemArrayList.get(position);
-//        holder.checkBox.setText(filterName.getfilterName()); //삭제해도 되나?
-//        holder.checkBox.setTag(filterItemArrayList.get(position));
-//       // holder.checkBox.setChecked(filterItemArrayList.get(position).isSelected());
-//        holder.checkBox.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View v) {
-//                CheckBox cb = (CheckBox) v;
-//                FilterItem filter = (FilterItem) cb.getTag();
-//                Toast.makeText(cb.getContext(), cb.getText(), Toast.LENGTH_SHORT).show();
-//                //filter.setSelected(cb.isChecked());
-//                //filterItemArrayList.get(pos).setSelected(cb.isChecked());
-//                //holder.filter_selected_1.setText(filterItemArrayList.get(position).getfilterName());
-//            }
-//        });
-//    }
+    public ArrayList<FilterItem> getFilterItemArrayList() {
+        return filterItemArrayList;
+    }
     public int getItemCount() {
         return filterItemArrayList.size();
     }
@@ -75,19 +56,4 @@ public class Adapter_filter extends RecyclerView.Adapter<ViewHolder_filter> {
         filterItemArrayList = filteredList;
         notifyDataSetChanged();
     }
-//    public class ViewHolder_filter extends RecyclerView.ViewHolder{
-//        TextView filterName;
-//        CheckBox checkBox;
-//        TextView filter_selected_1;
-//        TextView filter_selected_2;
-//        TextView filter_selected_3;
-//        public ViewHolder_filter(Context context, @NonNull View itemView){
-//            super(itemView);
-//            this.filterName = itemView.findViewById(R.id.filter_content);
-//            this.checkBox = (CheckBox) itemView.findViewById(R.id.filter_content);
-//            this.filter_selected_1 = (TextView) itemView.findViewById(R.id.filter_selected_1);
-////            this.filter_selected_2 = (TextView) itemView.findViewById(R.id.filter_selected_2);
-////            this.filter_selected_3 = (TextView) itemView.findViewById(R.id.filter_selected_3);
-//        }
-//    }
 }

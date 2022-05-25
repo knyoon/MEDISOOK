@@ -7,7 +7,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
+import android.widget.Toast;
 import android.widget.Button;
 import android.widget.EditText;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -51,7 +51,7 @@ public class CustomDialog extends AlertDialog implements View.OnClickListener{
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
         for(int i = 0; i<100; i++){
-            adapter.setArrayData(new FilterItem(i+"번째 필터"));
+            adapter.setArrayData(new FilterItem(i+"번째 필터", false));
         }
         searchET.addTextChangedListener(new TextWatcher() {
             @Override
@@ -86,6 +86,19 @@ public class CustomDialog extends AlertDialog implements View.OnClickListener{
             case R.id.popup_ok_btn:
                 String text = searchET.getText().toString();
                 customDialogListener.onOkClicked(text);
+                String data = "";
+                ArrayList<FilterItem> filterItemArrayList = adapter.getFilterItemArrayList();
+                for (int i = 0; i<filterItemArrayList.size(); i++){
+                    FilterItem filteredItem = filterItemArrayList.get(i);
+                    if(filteredItem.isSelected() == true) {
+                        Log.d("필터", filteredItem.getFilterName());
+                        data = data+filteredItem.getFilterName()+", ";
+                    }
+                    //adapter.setArrayData(new FilterItem(i+" 번째 필터"));
+                }
+                Toast.makeText(this.context, "Selected filter : "+data, Toast.LENGTH_LONG).show();
+                //String text = searchET.getText().toString();
+                customDialogListener.onOkClicked(data);
                 dismiss();
                 break;
         }

@@ -10,16 +10,16 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class ViewHolder extends RecyclerView.ViewHolder {
-    public ImageView imageView;
-    public TextView textView;
+    public ImageView drugImage;
+    public TextView drugName;
     ViewHolder(Context context, View itemView){
         super(itemView);
-        textView = itemView.findViewById(R.id.drugName);
-        imageView = itemView.findViewById(R.id.drugImage);
-        imageView.setOnClickListener(new View.OnClickListener(){
+        drugName = itemView.findViewById(R.id.drugName);
+        drugImage = itemView.findViewById(R.id.drugImage);
+        drugImage.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                String strText = textView.getText().toString();
+                String strText = drugName.getText().toString();
                 Toast.makeText(context, strText, Toast.LENGTH_SHORT).show();
             }
         });

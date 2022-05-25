@@ -43,10 +43,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
+        android:imeOptions="actionDone"
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/noto_medium"
@@ -106,7 +106,19 @@
             app:backgroundTint="@null" />
     </LinearLayout>
 
-
+    <TextView
+        android:id="@+id/txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="@font/noto_medium"
+        android:text="test"
+        android:textColor="@color/navy"
+        android:textSize="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/filter_btns" />
 <!--    <View-->
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="1.5dp"-->
@@ -128,7 +140,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/filter_btns">
+        app:layout_constraintTop_toBottomOf="@id/txt">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
