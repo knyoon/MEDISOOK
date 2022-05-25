@@ -31,8 +31,7 @@ public class DrugItem {
         this.member_image = member_image;
     }
 
-    public DrugItem(){
-        this.drugName = drugName;
+    public DrugItem(){ this.drugName = drugName;
     }
     public String getDrugName(){
         return drugName;
