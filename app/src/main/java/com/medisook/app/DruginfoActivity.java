@@ -46,6 +46,7 @@ public class DruginfoActivity extends Fragment implements View.OnClickListener{
                 break;
         }
     }
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.drug_info, container, false);
         drugName_view = (TextView) rootView.findViewById(R.id.drugName);
@@ -71,7 +72,6 @@ public class DruginfoActivity extends Fragment implements View.OnClickListener{
         Log.d("test", "drugitem : " + drugItem.get(0));
         drugName_view.setText(drugName);
 
-        
         final Button record_pop_btn = (Button) rootView.findViewById(R.id.record_pop_btn);
         record_pop_btn.setOnClickListener(this);
         return rootView;

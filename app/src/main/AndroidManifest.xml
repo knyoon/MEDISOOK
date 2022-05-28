@@ -12,7 +12,6 @@
         android:hardwareAccelerated="false"
         android:largeHeap="true"
         android:theme="@style/Theme.Medisook">
-
         <activity
             android:name=".MainMenuActivity"
             android:exported="true"

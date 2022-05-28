@@ -70,10 +70,8 @@ public class Adapter extends RecyclerView.Adapter<ViewHolder> {
                 bundle.putSerializable("DrugItem", drugItemArrayList);
                 bundle.putInt("position", position);
                 fragmentDruginfo.setArguments(bundle);
-                //Log.d("test", String.valueOf(drugItemArrayList));
-                fragmentTransaction = fm.beginTransaction();
-                fragmentTransaction.replace(R.id.menu_frame_layout, fragmentDruginfo);
-                fragmentTransaction.commit();
+                fragmentTransaction = fm.beginTransaction().add(R.id.menu_frame_layout, fragmentDruginfo);
+                fragmentTransaction.addToBackStack(null).commit();
             }
         });
     }

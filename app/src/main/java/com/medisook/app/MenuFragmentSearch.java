@@ -277,17 +277,17 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
 //        for(int i = 0; i<100; i++){
 //            adapter.setArrayData(new DrugItem(i+"번째 약"));
 //        }
-        searchET.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
-            @Override
-            public void afterTextChanged(Editable editable) {
-            }
-        });
+//        searchET.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//            }
+//            @Override
+//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//            }
+//            @Override
+//            public void afterTextChanged(Editable editable) {
+//            }
+//        });
         recyclerView.setAdapter(adapter);
         red_filter_btn = (Button) rootView. findViewById(R.id.red_filter_btn);
         green_filter_btn = (Button)rootView. findViewById(R.id.green_filter_btn);
@@ -300,7 +300,6 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
             @Override
             public boolean onKey(View view, int i, KeyEvent keyEvent) {
                 String searchText = searchET.getText().toString();
-
                 switch (i){
                     case KeyEvent.KEYCODE_ENTER:
                        if (keyEvent.getAction() == keyEvent.ACTION_UP) {
@@ -315,7 +314,6 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 return false;
             }
         });
-
         return rootView;
     }
 }

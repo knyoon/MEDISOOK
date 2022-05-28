@@ -30,12 +30,14 @@
         app:layout_constraintTop_toBottomOf="@id/drugName">
 
         <ImageButton
+            android:id="@+id/good_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="73dp"
             android:background="@drawable/resize_good" />
 
         <ImageButton
+            android:id="@+id/bad_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="13dp"
@@ -109,6 +111,7 @@
         android:textColor="#445E86"
         android:textSize="12sp"
         android:focusable="true"
+        android:singleLine="true"
         app:layout_constraintTop_toBottomOf="@id/term"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -130,6 +133,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/record"
         app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/hashtag"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:text="시험삼아서"
+        app:layout_constraintTop_toBottomOf="@id/txt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/popup_ok_btn"
+        tools:ignore="MissingConstraints" />
+
 
     <Button
         android:id="@+id/popup_ok_btn"

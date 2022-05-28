@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 import android.widget.Button;
 import android.widget.EditText;
@@ -43,7 +45,6 @@ public class CustomDialog extends AlertDialog implements View.OnClickListener{
         okButton.setOnClickListener(this);
         searchET = findViewById(R.id.search_bar);
         recyclerView = (RecyclerView)findViewById(R.id.recycler_view_filter);
-
         filtered_filterList = new ArrayList<>();
         filterItemArrayList = new ArrayList<>();
         adapter = new Adapter_filter(filterItemArrayList, this);
@@ -67,6 +68,23 @@ public class CustomDialog extends AlertDialog implements View.OnClickListener{
             }
         });
         recyclerView.setAdapter(adapter);
+        searchET.setOnKeyListener(new View.OnKeyListener(){
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                String searchText = searchET.getText().toString();
+                switch (i){
+                    case KeyEvent.KEYCODE_ENTER:
+                        if (keyEvent.getAction() == keyEvent.ACTION_UP) {
+                            Log.d("키보드", searchText);
+
+                            InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                            imm.hideSoftInputFromWindow(searchET.getWindowToken(), 0);
+                        } return true;
+                    case KeyEvent.KEYCODE_DEL:
+                }
+                return false;
+            }
+        });
     }
 //    protected void onResume() {
 //        onResume();
