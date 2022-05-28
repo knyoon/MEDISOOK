@@ -18,6 +18,7 @@
         tools:ignore="MissingConstraints">
 
         <ImageView
+            android:id="@+id/drugImage"
             android:layout_width="102dp"
             android:layout_height="58dp"
             android:src="@drawable/drung_sampleimage" />
@@ -30,6 +31,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/drugName"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_marginLeft="5dp"
