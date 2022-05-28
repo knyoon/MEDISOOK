@@ -2,6 +2,9 @@ package com.medisook.app;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -55,6 +58,8 @@ public class DruginfoActivity extends Fragment implements View.OnClickListener{
 //                new DatePickerDialog(this, myDatePicker, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
 //                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
         }
+//        getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
+//        getActivity().getSupportFragmentManager().popBackStack();
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

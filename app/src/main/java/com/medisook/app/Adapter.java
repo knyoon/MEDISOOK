@@ -93,9 +93,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
                 FragmentManager fm = ((FragmentActivity) view.getContext()).getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction;
                 DruginfoActivity fragmentDruginfo = new DruginfoActivity();
-                fragmentTransaction = fm.beginTransaction();
-                fragmentTransaction.replace(R.id.menu_frame_layout, fragmentDruginfo);
-                fragmentTransaction.commit();
+                fragmentTransaction = fm.beginTransaction().add(R.id.menu_frame_layout, fragmentDruginfo);
+                fragmentTransaction.addToBackStack(null).commit();
 
 //                intent = new Intent(view.getContext(), DruginfoActivity.class);
 //                view.getContext().startActivity(intent);

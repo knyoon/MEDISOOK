@@ -95,11 +95,11 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
                         break;
                     case R.id.popup_ok_btn:
                         Log.v("기록", "오케이버튼 누름");
-                        Log.v("기록",GoodBad + "최종 넘기기");
                         break;
 
                 }
-                Log.v("기록", GoodBad); //세영언니한테 넘기기
+                Log.v("세영", GoodBad); //세영언니한테 넘기기
+
 //                if(view.getId() == R.id.popup_ok_btn) {
 //                    Log.v("기록",GoodBad);
 //                }
@@ -122,13 +122,14 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
                 if (event.getAction() != KeyEvent.ACTION_DOWN) {
                     //et_record.setText(et_record.getText());
                     String result = et_record.getText().toString(); //EditText에 입력된 값 가져오기
+                    Log.v("세영", et_record.getText().toString());
                     TextView textView1 = (TextView) findViewById(R.id.hashtag) ;
                     textView1.setText(et_record.getText()) ;
                     et_record.getText().clear();
                     InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(et_record.getWindowToken(), 0);
                     //Toast.makeText(mContext.getApplicationContext(), et_record.getText(), Toast.LENGTH_LONG).show();
-                    Log.v("키보드", "엔터" + et_record.getText());
+
                     return true;
                 }
                 switch (keyCode) {
@@ -162,7 +163,7 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
                         myCalendar.set(Calendar.YEAR, year);
                         myCalendar.set(Calendar.MONTH, month);
                         myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                        Log.v("태그", String.valueOf(year) + String.valueOf(month) + String.valueOf(dayOfMonth));
+                        Log.v("세영", String.valueOf(year) + String.valueOf(month) + String.valueOf(dayOfMonth));
                         updateLabel();
                     }
                 };
@@ -177,7 +178,7 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
                         myCalendar.set(Calendar.YEAR, year);
                         myCalendar.set(Calendar.MONTH, month);
                         myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                        Log.d("태그", String.valueOf(year));
+                        Log.v("세영", String.valueOf(year) + String.valueOf(month) + String.valueOf(dayOfMonth));
                         updateLabel1();
                     }
                 };
