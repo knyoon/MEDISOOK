@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="91dp"
+    tools:context=".MenuFragmentMypage"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/himessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:orientation="horizontal"
+        tools:ignore="MissingConstraints">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/name"
+            android:gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@id/hi"
+            android:text="사람이름"
+            android:textColor="#445E86"
+            android:textSize="15dp"
+            android:fontFamily="@font/noto_medium"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/hi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/name"
+            android:text=" 님 안녕하세요!"
+            android:textColor="#445E86"
+            android:textSize="15dp"
+            android:fontFamily="@font/noto_medium"
+            tools:ignore="MissingConstraints" />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginTop="39dp"
+        android:layout_marginVertical="5dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/himessage"
+        tools:ignore="MissingConstraints">
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+        <Button
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/radius"
+            android:drawableLeft="@drawable/resize_star"
+            android:fontFamily="@font/noto_medium"
+            android:includeFontPadding="false"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:paddingLeft="8dp"
+            android:paddingTop="1dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="1dp"
+            android:text="찜하기"
+            android:textColor="#445E86"
+            android:textSize="11dp"
+            app:backgroundTint="@null" />
+        <Button
+            android:layout_width="85dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="13dp"
+            android:background="@drawable/radius"
+            android:drawableLeft="@drawable/resize_pencil"
+            android:fontFamily="@font/noto_medium"
+            android:includeFontPadding="false"
+            android:paddingLeft="8dp"
+            android:paddingTop="1dp"
+            android:paddingRight="9dp"
+            android:paddingBottom="1dp"
+            android:text="캘린더"
+            android:textColor="#445E86"
+            android:textSize="11dp"
+            app:backgroundTint="@null" />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/filterbutton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="31dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/button">
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+        <Button
+            android:layout_width="51dp"
+            android:layout_height="51dp"
+            android:background="@drawable/resize_hashtagbutton"
+            app:backgroundTint="@null" />
+        <Button
+            android:layout_width="51dp"
+            android:layout_height="51dp"
+            android:layout_marginStart="13.33dp"
+            android:background="@drawable/resize_goodbutton"
+            app:backgroundTint="@null"/>
+        <Button
+            android:layout_width="51dp"
+            android:layout_height="51dp"
+            android:layout_marginStart="13.33dp"
+            android:background="@drawable/resize_badbutton"
+            app:backgroundTint="@null"/>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="300dp"
+        android:layout_height="400dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginRight="36dp"
+        android:layout_marginBottom="70dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/filterbutton">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="NotSibling">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_record"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:layout_editor_absoluteX="31dp"
+                tools:layout_editor_absoluteY="-39dp" />
+        </RelativeLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
