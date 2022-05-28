@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,9 +20,11 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.squareup.picasso.Picasso;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Adapter extends RecyclerView.Adapter<ViewHolder> {
+
     ArrayList<DrugItem> drugItemArrayList;
     Activity activity;
 
@@ -61,6 +65,12 @@ public class Adapter extends RecyclerView.Adapter<ViewHolder> {
                 FragmentManager fm = ((FragmentActivity) view.getContext()).getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction;
                 DruginfoActivity fragmentDruginfo = new DruginfoActivity();
+                DrugItem drugItem = new DrugItem();
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("DrugItem", drugItemArrayList);
+                bundle.putInt("position", position);
+                fragmentDruginfo.setArguments(bundle);
+                //Log.d("test", String.valueOf(drugItemArrayList));
                 fragmentTransaction = fm.beginTransaction();
                 fragmentTransaction.replace(R.id.menu_frame_layout, fragmentDruginfo);
                 fragmentTransaction.commit();

@@ -3,11 +3,14 @@ package com.medisook.app;
 import androidx.fragment.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
+
+import java.util.ArrayList;
 
 public class DruginfoActivity extends Fragment implements View.OnClickListener{
     @Override
@@ -37,6 +40,12 @@ public class DruginfoActivity extends Fragment implements View.OnClickListener{
     }
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.drug_info, container, false);
+        Bundle bundle = getArguments();
+        int position = bundle.getInt("position");
+        ArrayList<DrugItem> drugItem = (ArrayList<DrugItem>) bundle.getSerializable(("DrugItem"));
+        Log.d("test", "position : " + position);
+        Log.d("test", "drugitem : " + drugItem.size());
+        Log.d("test", "drugitem : " + drugItem.get(0));
         final Button record_pop_btn = (Button) rootView.findViewById(R.id.record_pop_btn);
         record_pop_btn.setOnClickListener(this);
         return rootView;

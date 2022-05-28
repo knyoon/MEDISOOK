@@ -1,6 +1,8 @@
 package com.medisook.app;
 
-public class DrugItem {
+import java.io.Serializable;
+
+public class DrugItem implements Serializable {
     String drugName;
     String drugImg;
 
