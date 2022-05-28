@@ -116,7 +116,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
 
                 httpURLConnection.setReadTimeout(20000);
-                httpURLConnection.setConnectTimeout(20000);
+                httpURLConnection.setConnectTimeout(50000);
                 httpURLConnection.setRequestMethod("POST");
                 httpURLConnection.setDoInput(true);
                 httpURLConnection.setDoOutput(true);
