@@ -1,26 +1,35 @@
 package com.medisook.app;
 
+import android.app.ProgressDialog;
 import android.content.Context;
-import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.text.Editable;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.TextWatcher;
-import android.text.style.ForegroundColorSpan;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
@@ -32,6 +41,19 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
     private Button green_filter_btn;
     private Button yellow_filter_btn;
     private TextView txt;
+
+    private static String IP_ADDRESS = "192.168.18.199:80";
+    private static String TAG = "메롱";
+
+    private EditText mEditTextName;
+    private EditText mEditTextCountry;
+    private TextView mTextViewResult;
+    private ArrayList<DrugItem> mArrayList;
+    private Adapter mAdapter;
+    private RecyclerView mRecyclerView;
+    private EditText mEditTextSearchKeyword;
+    private String mJsonString;
+
     ArrayList<DrugItem> drugItemArrayList, filteredList;
     LinearLayoutManager linearLayoutManager;
     EditText searchET;
@@ -42,8 +64,147 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search);
 
+    }
+
+    private class InsertData extends AsyncTask<String, Void, String>{
+
+        ProgressDialog progressDialog;
+        String errorString = null;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            progressDialog = ProgressDialog.show(getActivity(),
+                    "Please Wait", null, true, true);
+        }
+
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            progressDialog.dismiss();
+
+            if (result == null){
+
+                mTextViewResult.setText(errorString);
+            }
+            else {
+
+                mJsonString = result;
+                showResult();
+            }
+        }
+
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            String serverURL = params[0];
+            String postParameters = "Data=" + params[1];
+
+
+            try {
+
+                //String searchDrug="Data="+searchET.getText().toString();
+                Log.d("과연", postParameters);
+                URL url = new URL(serverURL);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+
+                httpURLConnection.setReadTimeout(20000);
+                httpURLConnection.setConnectTimeout(20000);
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoInput(true);
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.connect();
+
+
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                outputStream.write(postParameters.getBytes("UTF-8"));
+                outputStream.flush();
+                outputStream.close();
+
+
+                int responseStatusCode = httpURLConnection.getResponseCode();
+                Log.d(TAG, "response code - " + responseStatusCode);
+
+                InputStream inputStream;
+                if(responseStatusCode == HttpURLConnection.HTTP_OK) {
+                    inputStream = httpURLConnection.getInputStream();
+                }
+                else{
+                    inputStream = httpURLConnection.getErrorStream();
+                }
+
+
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+                StringBuilder sb = new StringBuilder();
+                String line;
+
+                while((line = bufferedReader.readLine()) != null){
+                    sb.append(line);
+                }
+
+                bufferedReader.close();
+
+                return sb.toString().trim();
+
+
+            } catch (Exception e) {
+
+                Log.d(TAG, "InsertData : Error ", e);
+                errorString = e.toString();
+
+                return null;
+            }
+
+        }
+    }
+
+    private void showResult(){
+
+        String TAG_JSON="drug";
+        String TAG_ID = "DRUG_NAME";
+        String TAG_NAME = "ENTP_NAME";
+        String TAG_IMAGE ="IMAGE";
+
+
+        try {
+            JSONObject jsonObject = new JSONObject(mJsonString);
+
+            JSONArray jsonArray = jsonObject.getJSONArray(TAG_JSON);
+
+            for(int i=0;i<jsonArray.length();i++){
+
+                JSONObject item = jsonArray.getJSONObject(i);
+
+                String id = item.getString(TAG_ID);
+                String name = item.getString(TAG_NAME);
+                String image = item.getString(TAG_IMAGE);
+
+                DrugItem drugData = new DrugItem();
+
+                drugData.setDrugName(id);
+                drugData.setDrugImg(image);
+
+                adapter.setArrayData(drugData);
+                Log.d(TAG, drugData.getDrugImg().toString());
+            }
+
+            adapter.notifyDataSetChanged();
+
+
+
+        } catch (JSONException e) {
+
+            Log.d(TAG, "showResult : ", e);
+        }
 
     }
+
 
     private void setContentView(int search) {
     }
@@ -116,7 +277,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 break;
         }
     }
-    
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.search, container, false);
@@ -132,10 +293,15 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
         linearLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
         recyclerView.setAdapter(adapter);
+        drugItemArrayList.clear();
         adapter.notifyDataSetChanged();
-        for(int i = 0; i<100; i++){
-            adapter.setArrayData(new DrugItem(i+"번째 약"));
-        }
+
+
+        //GetData task = new GetData();
+        //task.execute( "http://" + IP_ADDRESS + "/test.php", "");
+
+        DrugItem drugitem=new DrugItem();
+
         searchET.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -157,7 +323,29 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
         red_filter_btn.setOnClickListener(this);
         green_filter_btn.setOnClickListener(this);
         yellow_filter_btn.setOnClickListener(this);
-        query2();
+
+        searchET.setOnKeyListener(new View.OnKeyListener(){
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                switch (i){
+                    case KeyEvent.KEYCODE_ENTER :
+                        if(keyEvent.getAction()==KeyEvent.ACTION_UP){
+                            String searchText = searchET.getText().toString();
+                            Log.d("태그", searchText.toString());
+                            drugItemArrayList.clear();
+                            InsertData insert = new InsertData();
+                            insert.execute( "http://" + IP_ADDRESS + "/test1.php", searchText);
+                            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                            imm.hideSoftInputFromWindow(searchET.getWindowToken(), 0);
+                        }
+                        return true;
+                    case KeyEvent.KEYCODE_DEL:
+
+                }
+                return false;
+            }
+        });
+
         return rootView;
         // Inflate the layout for this fragment
 //        return inflater.inflate(R.layout.fragment_menu_main, container, false);

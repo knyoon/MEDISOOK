@@ -2,16 +2,21 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.medisook.app">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:windowSoftInputMode="adjustPan"
+        android:usesCleartextTraffic="true"
         android:theme="@style/Theme.Medisook">
 
         <activity
             android:name=".MainMenuActivity"
+            android:windowSoftInputMode="adjustNothing"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,21 +24,7 @@
             </intent-filter>
         </activity>
 
-<!--        이렇게 설정해놓으면 팝업이 현재 화면 위에 올라감.-->
-<!--        <activity-->
-<!--            android:name=".RecordpopActivity"-->
-<!--            android:theme="@android:style/Theme.Translucent">-->
-<!--        </activity>-->
 
-<!--        <activity-->
-<!--            android:name=".TodatePickerActivity"-->
-<!--            android:theme="@style/Theme.AppCompat">-->
-<!--        </activity>-->
-
-<!--        <activity-->
-<!--            android:name=".FromdatePickerActivity"-->
-<!--            android:theme="@style/Theme.AppCompat">-->
-<!--        </activity>-->
     </application>
 
 </manifest>

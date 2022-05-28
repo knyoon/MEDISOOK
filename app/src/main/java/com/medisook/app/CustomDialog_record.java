@@ -54,20 +54,21 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
     public void setDialogListener(CustomDialogListener customDialogListener){
         this.customDialogListener = customDialogListener;
     }
+
     Calendar myCalendar = Calendar.getInstance();
 
-    class BtnOnClickListener implements View.OnClickListener{
-        @Override
-        public void onClick(View view){
-            String GoodBad = "null";
-            switch (view.getId()){
-                case R.id.good_btn:
-                    GoodBad = "good";
-                    Log.v("기록", "좋아요 누름");
-                    break;
-            }
-        }
-    }
+//    class BtnOnClickListener implements View.OnClickListener{
+//        @Override
+//        public void onClick(View view){
+//            String GoodBad = "null";
+//            switch (view.getId()){
+//                case R.id.good_btn:
+//                    GoodBad = "good";
+//                    Log.v("기록", "좋아요 누름");
+//                    break;
+//            }
+//        }
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,22 +79,38 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
         setContentView(R.layout.record_pop);
 
         good_btn = (ImageButton) findViewById(R.id.good_btn);
-        good_btn.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String GoodBad = "good";
-                Log.v("기록", "좋아요 누름");
-            }
-        });
         bad_btn = (ImageButton) findViewById(R.id.bad_btn);
-        bad_btn.setOnClickListener(new Button.OnClickListener() {
+        okButton = (Button) findViewById(R.id.popup_ok_btn);
+
+        Button.OnClickListener btnObject = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String GoodBad = "bad";
-                Log.v("기록", "싫어요 누름");
+                String GoodBad = "입력되지않음";
+                switch (view.getId()){
+                    case R.id.good_btn:
+                        GoodBad = "good";
+                        break;
+                    case R.id.bad_btn:
+                        GoodBad = "bad";
+                        break;
+                    case R.id.popup_ok_btn:
+                        Log.v("기록", "오케이버튼 누름");
+                        Log.v("기록",GoodBad + "최종 넘기기");
+                        break;
+
+                }
+                Log.v("기록", GoodBad); //세영언니한테 넘기기
+//                if(view.getId() == R.id.popup_ok_btn) {
+//                    Log.v("기록",GoodBad);
+//                }
+//                Log.v("기록", GoodBad);
             }
-        });
-        okButton = (Button) findViewById(R.id.popup_ok_btn);
+        };
+
+        findViewById(R.id.good_btn).setOnClickListener(btnObject);
+        findViewById(R.id.bad_btn).setOnClickListener(btnObject);
+        findViewById(R.id.popup_ok_btn).setOnClickListener(btnObject);
+
         et_Date= (TextView) findViewById(R.id.to_date);
         et_Date1= (TextView) findViewById(R.id.from_date);
         et_record = (EditText) findViewById(R.id.record);
@@ -103,12 +120,15 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 Log.v("키보드", "이벤트" + et_record.getText());
                 if (event.getAction() != KeyEvent.ACTION_DOWN) {
-                    et_record.setText(et_record.getText());
+                    //et_record.setText(et_record.getText());
                     String result = et_record.getText().toString(); //EditText에 입력된 값 가져오기
-                    Toast.makeText(mContext.getApplicationContext(), et_record.getText(), Toast.LENGTH_LONG).show();
-                    Log.v("키보드", "엔터" + et_record.getText());
                     TextView textView1 = (TextView) findViewById(R.id.hashtag) ;
                     textView1.setText(et_record.getText()) ;
+                    et_record.getText().clear();
+                    InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(et_record.getWindowToken(), 0);
+                    //Toast.makeText(mContext.getApplicationContext(), et_record.getText(), Toast.LENGTH_LONG).show();
+                    Log.v("키보드", "엔터" + et_record.getText());
                     return true;
                 }
                 switch (keyCode) {
@@ -122,12 +142,11 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
                 return false;
             }
         });
-
+        okButton = (Button) findViewById(R.id.popup_ok_btn);
         okButton.setOnClickListener(this);
         et_Date.setOnClickListener(this);
         et_Date1.setOnClickListener(this);
     }
-
 
     @Override
     public void onClick(View v) {
@@ -143,7 +162,7 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
                         myCalendar.set(Calendar.YEAR, year);
                         myCalendar.set(Calendar.MONTH, month);
                         myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                        Log.d("태그", String.valueOf(year));
+                        Log.v("태그", String.valueOf(year) + String.valueOf(month) + String.valueOf(dayOfMonth));
                         updateLabel();
                     }
                 };
@@ -166,6 +185,7 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
         }
     }
+
     private void updateLabel(){
         String myFormat = "yy/MM/dd";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.KOREA);

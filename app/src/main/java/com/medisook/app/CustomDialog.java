@@ -4,8 +4,10 @@ import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -47,6 +49,24 @@ public class CustomDialog extends AlertDialog implements View.OnClickListener{
             adapter.setArrayData(str);
         }
         recyclerView.setAdapter(adapter);
+        EditText searchET = findViewById(R.id.search_bar);
+        searchET.setOnKeyListener(new View.OnKeyListener(){
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                String searchText = searchET.getText().toString();
+                switch (i){
+                    case KeyEvent.KEYCODE_ENTER:
+                        if (keyEvent.getAction() == keyEvent.ACTION_UP) {
+                            Log.d("키보드", searchText);
+                            InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                            imm.hideSoftInputFromWindow(searchET.getWindowToken(), 0);
+                        } return true;
+                    case KeyEvent.KEYCODE_DEL:
+                }
+                return false;
+            }
+        });
+
     }
     @Override
     public void onClick(View v) {

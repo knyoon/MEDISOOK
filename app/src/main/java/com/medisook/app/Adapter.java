@@ -3,17 +3,21 @@ package com.medisook.app;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentActivity;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 
@@ -31,9 +35,13 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     }
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView drugName;
+        ImageView drugImage;
+
         public ViewHolder(Context context, @NonNull View itemView){
             super(itemView);
             this.drugName = itemView.findViewById(R.id.drugName);
+            this.drugImage = itemView.findViewById(R.id.drugImage);
+
         }
     }
     public void setArrayData(DrugItem strData){
@@ -45,7 +53,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     public Adapter(ArrayList<DrugItem> drugItemArrayList, MenuFragmentSearch activity) {
         this.drugItemArrayList = drugItemArrayList;
         this.activity = activity.getActivity();
-       //arrayList = new ArrayList<>();
+        //arrayList = new ArrayList<>();
     }
     @NonNull
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
@@ -59,6 +67,25 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     public void onBindViewHolder(@NonNull ViewHolder holder, int position){
         //String text = arrayList.get(position);
+        DrugItem drugimage = drugItemArrayList.get(position);
+        String imageurl=drugimage.getDrugImg();
+
+
+
+
+        if(imageurl.isEmpty()==false){
+            Picasso.get()
+                    .load(imageurl)
+                    .error(R.drawable.drung_sampleimage)
+                    .placeholder(R.drawable.drung_sampleimage)
+                    .into(holder.drugImage);
+        }
+
+        else{
+            Drawable drawable= activity.getResources().getDrawable(R.drawable.drung_sampleimage);
+            holder.drugImage.setImageDrawable(drawable);
+        }
+
         holder.drugName.setText(drugItemArrayList.get(position).getDrugName());
         holder.drugName.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -75,5 +102,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             }
         });
     }
-}
 
+
+}

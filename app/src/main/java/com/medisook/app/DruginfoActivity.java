@@ -61,6 +61,7 @@ public class DruginfoActivity extends Fragment implements View.OnClickListener{
         ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.drug_info, container, false);
         //textview = (TextView) rootView.findViewById(R.id.medisook);
         EditText eText1 = (EditText) rootView.findViewById(R.id.record);
+        //eText1.setOnClickListener(this);
         final Button record_pop_btn = (Button) rootView.findViewById(R.id.record_pop_btn);
         record_pop_btn.setOnClickListener(this);
         return rootView;
