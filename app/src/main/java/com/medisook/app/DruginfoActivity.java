@@ -2,6 +2,8 @@ package com.medisook.app;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+
+import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -44,6 +46,8 @@ public class DruginfoActivity extends Fragment implements View.OnClickListener{
                 dialog.show();
                 dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
                 break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + v.getId());
         }
     }
 
