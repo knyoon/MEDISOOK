@@ -30,12 +30,14 @@
         app:layout_constraintTop_toBottomOf="@id/drugName">
 
         <ImageButton
+            android:id="@+id/good_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="73dp"
             android:background="@drawable/resize_good" />
 
         <ImageButton
+            android:id="@+id/bad_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="13dp"

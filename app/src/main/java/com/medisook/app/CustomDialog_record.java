@@ -19,6 +19,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +39,8 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
     private Button okButton;
     private Context mContext;
     private EditText et_record;
+    private ImageButton good_btn;
+    private ImageButton bad_btn;
     private CustomDialogListener customDialogListener;
 
     public CustomDialog_record(Context context) {
@@ -53,6 +56,19 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
     }
     Calendar myCalendar = Calendar.getInstance();
 
+    class BtnOnClickListener implements View.OnClickListener{
+        @Override
+        public void onClick(View view){
+            String GoodBad = "null";
+            switch (view.getId()){
+                case R.id.good_btn:
+                    GoodBad = "good";
+                    Log.v("기록", "좋아요 누름");
+                    break;
+            }
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE| WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
@@ -61,6 +77,22 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.record_pop);
 
+        good_btn = (ImageButton) findViewById(R.id.good_btn);
+        good_btn.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String GoodBad = "good";
+                Log.v("기록", "좋아요 누름");
+            }
+        });
+        bad_btn = (ImageButton) findViewById(R.id.bad_btn);
+        bad_btn.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String GoodBad = "bad";
+                Log.v("기록", "싫어요 누름");
+            }
+        });
         okButton = (Button) findViewById(R.id.popup_ok_btn);
         et_Date= (TextView) findViewById(R.id.to_date);
         et_Date1= (TextView) findViewById(R.id.from_date);

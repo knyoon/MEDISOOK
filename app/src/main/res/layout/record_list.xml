@@ -42,8 +42,9 @@
         android:fontFamily="@font/noto_medium"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/drugImage"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/hashtagreview" />
         <TextView
+            android:id="@+id/hashtagreview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/radius_navy"
