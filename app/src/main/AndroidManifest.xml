@@ -24,6 +24,14 @@
             </intent-filter>
         </activity>
 
+<!--        <activity-->
+<!--            android:name=".MenuFragmentMypage"-->
+<!--            android:windowSoftInputMode="adjustNothing"-->
+<!--            android:exported="true"-->
+<!--            >-->
+
+<!--        </activity>-->
+
 
     </application>
 

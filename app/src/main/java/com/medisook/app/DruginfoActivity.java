@@ -35,7 +35,7 @@ import java.util.Calendar;
 import java.util.Locale;
 
 public class DruginfoActivity extends Fragment implements View.OnClickListener{
-
+    private TextView txt;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,9 +50,16 @@ public class DruginfoActivity extends Fragment implements View.OnClickListener{
         LayoutInflater inflater = (LayoutInflater) this.getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         switch (v.getId()){
             case R.id.record_pop_btn:
-                CustomDialog_record dialog = new CustomDialog_record(getActivity());
-                dialog.show();
-                dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+                CustomDialog_record record_dialog = new CustomDialog_record(getActivity());
+                CustomDialog_record.Builder record_dialogbulider = new CustomDialog_record.Builder(getActivity());
+                record_dialog.setDialogListener(new CustomDialog_record.CustomDialog_record_Listener() {
+                    @Override
+                    public void onOkClicked(String text) {
+                        txt.setText(text);
+                    }
+                });
+                record_dialog.show();
+                record_dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
                 break;
 //            case R.id.to_date:
 //                new DatePickerDialog(this, myDatePicker, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
@@ -66,6 +73,7 @@ public class DruginfoActivity extends Fragment implements View.OnClickListener{
         ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.drug_info, container, false);
         //textview = (TextView) rootView.findViewById(R.id.medisook);
         EditText eText1 = (EditText) rootView.findViewById(R.id.record);
+        txt = (TextView)rootView.findViewById(R.id.text);
         //eText1.setOnClickListener(this);
         final Button record_pop_btn = (Button) rootView.findViewById(R.id.record_pop_btn);
         record_pop_btn.setOnClickListener(this);

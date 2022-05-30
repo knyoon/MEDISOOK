@@ -16,33 +16,33 @@
         android:orientation="horizontal"
         tools:ignore="MissingConstraints">
 
-    <View
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
-    <TextView
-    android:id="@+id/name"
-    android:gravity="center_vertical"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    app:layout_constraintEnd_toStartOf="@id/hi"
-    android:text="사람이름"
-        android:textColor="#445E86"
-        android:textSize="15dp"
-        android:fontFamily="@font/noto_medium"
-        tools:ignore="MissingConstraints" />
+        <TextView
+            android:id="@+id/name"
+            android:gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@id/hi"
+            android:text="사람이름"
+            android:textColor="#445E86"
+            android:textSize="15dp"
+            android:fontFamily="@font/noto_medium"
+            tools:ignore="MissingConstraints" />
 
-    <TextView
-        android:id="@+id/hi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/name"
-        android:text=" 님 안녕하세요!"
-        android:textColor="#445E86"
-        android:textSize="15dp"
-        android:fontFamily="@font/noto_medium"
-        tools:ignore="MissingConstraints" />
+        <TextView
+            android:id="@+id/hi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/name"
+            android:text=" 님 안녕하세요!"
+            android:textColor="#445E86"
+            android:textSize="15dp"
+            android:fontFamily="@font/noto_medium"
+            tools:ignore="MissingConstraints" />
         <View
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -158,7 +158,7 @@
             tools:ignore="NotSibling">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view"
+                android:id="@+id/recycler_view_record"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:layout_editor_absoluteX="31dp"

@@ -238,7 +238,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
     @Override
     public void onClick(View v) {
         LayoutInflater inflater = (LayoutInflater) this.getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        //View dialoglayout = inflater.inflate(R.layout.redpop, null);
+        //View dialoglayout = infdialog_buliderlater.inflate(R.layout.redpop, null);
         switch (v.getId()){
             case R.id.red_filter_btn:
                 CustomDialog dialog = new CustomDialog(getActivity());

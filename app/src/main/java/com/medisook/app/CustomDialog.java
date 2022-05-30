@@ -21,6 +21,7 @@ public class CustomDialog extends AlertDialog implements View.OnClickListener{
     private EditText editText;
     private Context context;
     private CustomDialogListener customDialogListener;
+
     public CustomDialog(Context context) {
         super(context);
         this.context = context;

@@ -37,4 +37,5 @@
         app:layout_constraintStart_toEndOf="@id/drugImage"
         app:layout_constraintTop_toTopOf="parent" />
 
+
 </androidx.constraintlayout.widget.ConstraintLayout>

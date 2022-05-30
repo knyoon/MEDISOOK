@@ -6,8 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="70dp"
-    android:orientation="vertical"
     android:background="@color/white"
+    android:orientation="vertical"
     tools:context=".DruginfoActivity">
 
     <LinearLayout
@@ -46,6 +46,7 @@
                 android:layout_marginVertical="5dp"
                 android:gravity="center"
                 android:orientation="horizontal">
+
                 <Button
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
@@ -63,6 +64,7 @@
                     android:textColor="#445E86"
                     android:textSize="11dp"
                     app:backgroundTint="@null" />
+
                 <Button
                     android:id="@+id/record_pop_btn"
                     android:layout_width="85dp"
@@ -83,6 +85,7 @@
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+
     <View
         android:id="@+id/view"
         android:layout_width="wrap_content"
@@ -91,6 +94,7 @@
         app:layout_constraintBottom_toTopOf="@+id/warning"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         tools:ignore="MissingConstraints" />
+
     <LinearLayout
         android:id="@+id/warning"
         android:layout_width="wrap_content"
@@ -146,14 +150,17 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_weight="1" />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:orientation="vertical">
+
             <FrameLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent">
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -282,80 +289,242 @@
     </LinearLayout>
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="360dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="15dp"
         android:layout_marginStart="15dp"
+        android:layout_marginTop="76dp"
         android:layout_marginEnd="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="10dp"
+        android:orientation="vertical"
         app:layout_constraintBaseline_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/linearLayout2">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/noto_medium"
-            android:textColor="#445E86"
-            android:textSize="15dp"
-            android:text="나리는 꽃가루에 눈이 따끔해 (아야)
-눈물이 고여도 꾹 참을래
-내 마음 한켠 비밀스런 오르골에 넣어두고서
-영원히 되감을 순간이니까
-우리 둘의 마지막 페이지를 잘 부탁해
-어느 작별이 이보다 완벽할까
-Love me only till this spring
-오 라일락 꽃이 지는 날 goodbye
-이런 결말이 어울려
-안녕 꽃잎 같은 안녕
-하이얀 우리 봄날의 climax
-아 얼마나 기쁜 일이야
-Ooh ooh
-Love me only till this spring
-봄바람처럼
-Ooh ooh
-Love me only till this spring
-봄바람처럼
-기분이 달아 콧노래 부르네 (랄라)
-입꼬리는 살짝 올린 채
-어쩜 이렇게 하늘은 더 바람은 또 완벽한 건지
-오늘따라 내 모습 맘에 들어
-처음 만난 그날처럼 예쁘다고 말해줄래
-어느 이별이 이토록 달콤할까
-Love resembles misty dream
-오 라일락 꽃이 지는 날 goodbye
-이런 결말이 어울려
-안녕 꽃잎 같은 안녕
-하이얀 우리 봄날의 climax
-아 얼마나 기쁜 일이야
-Ooh ooh
-Love resembles misty dream
-뜬구름처럼
-Ooh ooh
-Love resembles misty dream
-뜬구름처럼
-너도 언젠가 날 잊게 될까
-지금 표정과 오늘의 향기도
-단잠 사이에 스쳐간
-봄날의 꿈처럼
-오 라일락 꽃이 지는 날 goodbye
-너의 대답이 날 울려
-안녕 약속 같은 안녕
-하이얀 우리 봄날에 climax
-아 얼마나 기쁜 일이야
-Ooh ooh
-Love me only until this spring
-봄바람처럼
-Ooh ooh (oh)
-Love me only until this spring
-봄바람처럼
-Ooh ooh
-Love resembles misty dream
-뜬구름처럼
-Ooh ooh
-Love resembles misty dream
-뜬구름처럼"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ENTP"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/text"
+                android:text="값 받아오나 테스트"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@id/ENTP_NAME"
+                tools:ignore="MissingConstraints" />
+            //회사명
+            <TextView
+                android:id="@+id/ENTP_NAME"
+                android:layout_width="74dp"
+                android:layout_height="32dp"
+                android:fontFamily="@font/noto_medium"
+                android:text="ENTP_NAME"
+                android:textColor="#445E86"
+                android:textSize="12dp"
+                app:layout_constraintBottom_toTopOf="@id/DRUG_CODE"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/DRUG_CODE"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="314dp"
+                android:fontFamily="@font/noto_medium"
+                android:text="DRUG_CODE"
+                android:textColor="#445E86"
+                android:textSize="12dp"
+                app:layout_constraintBottom_toTopOf="@id/CLASS_NAME"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ENTP_NAME" />
+
+            //신경안정제 뭐이런 약 분류
+            <TextView
+                android:id="@+id/CLASS_NAME"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="309dp"
+                android:fontFamily="@font/noto_medium"
+                android:text="CLASS_NAME"
+                android:textColor="#445E86"
+                android:textSize="12dp"
+                app:layout_constraintBottom_toTopOf="@id/QNT"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/DRUG_CODE" />
+
+            //주요 성분 갯수
+            <TextView
+                android:id="@+id/QNT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="361dp"
+                android:fontFamily="@font/noto_medium"
+                android:text="QNT"
+                android:textColor="#445E86"
+                android:textSize="12dp"
+                app:layout_constraintBottom_toTopOf="@id/OTC"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/CLASS_NAME" />
+
+            //일반/전문의약인지
+            <TextView
+                android:id="@+id/OTC"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="363dp"
+                android:fontFamily="@font/noto_medium"
+                android:text="OTC"
+                android:textColor="#445E86"
+                android:textSize="12dp"
+                app:layout_constraintBottom_toTopOf="@id/CHART"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/QNT" />
+
+            //약 외형 묘사
+            <TextView
+                android:id="@+id/CHART"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="347dp"
+                android:fontFamily="@font/noto_medium"
+                android:text="CHART"
+                android:textColor="#445E86"
+                android:textSize="12dp"
+                app:layout_constraintBottom_toTopOf="@id/EFCY"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/OTC" />
+
+            //효능
+            <TextView
+                android:id="@+id/EFCY"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="358dp"
+                android:fontFamily="@font/noto_medium"
+                android:text="EFCY"
+                android:textColor="#445E86"
+                android:textSize="12dp"
+                app:layout_constraintBottom_toTopOf="@id/USEMETHOD"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/CHART" />
+
+            //복용방법
+            <TextView
+                android:id="@+id/USEMETHOD"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="312dp"
+                android:fontFamily="@font/noto_medium"
+                android:text="USEMETHOD"
+                android:textColor="#445E86"
+                android:textSize="12dp"
+                app:layout_constraintBottom_toTopOf="@id/QESITM"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/EFCY" />
+
+            //주의사항
+            <TextView
+                android:id="@+id/QESITM"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="342dp"
+                android:fontFamily="@font/noto_medium"
+                android:text="QESITM"
+                android:textColor="#445E86"
+                android:textSize="12dp"
+                app:layout_constraintBottom_toTopOf="@id/DEPOSIT"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/USEMETHOD" />
+
+            //보관방법
+            <TextView
+                android:id="@+id/DEPOSIT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="336dp"
+                android:fontFamily="@font/noto_medium"
+                android:text="DEPOSIT"
+                android:textColor="#445E86"
+                android:textSize="12dp"
+                app:layout_constraintBottom_toTopOf="@id/VALID_TERM"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/QESITM" />
+
+            //복용기간
+            <TextView
+                android:id="@+id/VALID_TERM"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="313dp"
+                android:fontFamily="@font/noto_medium"
+                android:text="VALID_TERM"
+                android:textColor="#445E86"
+                android:textSize="12dp"
+                app:layout_constraintBottom_toTopOf="@id/TOTAL_CONTENT"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/DEPOSIT" />
+
+            //총량 성분 총량
+            <TextView
+                android:id="@+id/TOTAL_CONTENT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="286dp"
+                android:fontFamily="@font/noto_medium"
+                android:text="TOTAL_CONTENT"
+                android:textColor="#445E86"
+                android:textSize="12dp"
+                app:layout_constraintBottom_toTopOf="@id/MAIN_INGR"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/VALID_TERM" />
+
+            //주요성분
+            <TextView
+                android:id="@+id/MAIN_INGR"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="321dp"
+                android:fontFamily="@font/noto_medium"
+                android:text="MAIN_INGR"
+                android:textColor="#445E86"
+                android:textSize="12dp"
+                app:layout_constraintBottom_toTopOf="@id/INGR_NAME"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/TOTAL_CONTENT" />
+
+            //총성분
+            <TextView
+                android:id="@+id/INGR_NAME"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="317dp"
+                android:layout_marginBottom="1dp"
+                android:fontFamily="@font/noto_medium"
+                android:text="INGR_NAME"
+                android:textColor="#445E86"
+                android:textSize="12dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/MAIN_INGR" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
