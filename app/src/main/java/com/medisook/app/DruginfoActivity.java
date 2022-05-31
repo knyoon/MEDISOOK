@@ -1,9 +1,5 @@
 package com.medisook.app;
 
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-
-import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -15,6 +11,9 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 
 import com.squareup.picasso.Picasso;
 

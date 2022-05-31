@@ -1,13 +1,8 @@
 package com.medisook.app;
-import static android.content.Context.INPUT_METHOD_SERVICE;
-
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -18,6 +13,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -41,7 +37,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
     private Button yellow_filter_btn;
     private TextView txt;
 
-    private static String IP_ADDRESS = "192.168.18.199:80";
+    private static String IP_ADDRESS = "10.101.14.89:80";
     private static String TAG = "메롱";
     private EditText mEditTextName;
     private EditText mEditTextCountry;
@@ -168,9 +164,24 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
     private void showResult(){
 
         String TAG_JSON="drug";
-        String TAG_ID = "DRUG_NAME";
-        String TAG_NAME = "ENTP_NAME";
-        String TAG_IMAGE ="IMAGE";
+        String TAG_NAME = "DRUG_NAME";
+        String TAG_ENTP = "ENTP_NAME";
+        String TAG_IMAGE = "IMAGE";
+        String TAG_DCODE ="DRUG_CODE";
+        String TAG_CLASSN ="CLASS_NAME";
+        String TAG_QNT ="QNT";
+        String TAG_OTC ="OTC";
+        String TAG_CHART ="CHART";
+        String TAG_EFCY ="EFCY";
+        String TAG_USE ="USEMETHOD";
+        String TAG_QESITM ="QESITM";
+        String TAG_DEPOSIT ="DEPOSIT";
+        String TAG_TERM ="VALID_TERM";
+        String TAG_CONTENT ="TOTAL_CONTENT";
+        String TAG_MAINGR ="MAIN_INGR";
+        String TAG_TINGR ="INGR_NAME";
+
+
 
         try {
             JSONObject jsonObject = new JSONObject(mJsonString);
@@ -179,13 +190,35 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
 
                 JSONObject item = jsonArray.getJSONObject(i);
 
-                String id = item.getString(TAG_ID);
                 String name = item.getString(TAG_NAME);
+                String entp = item.getString(TAG_ENTP);
                 String image = item.getString(TAG_IMAGE);
+                String drugcode = item.getString(TAG_DCODE);
+                String classname = item.getString(TAG_CLASSN);
+                String qnt = item.getString(TAG_QNT);
+                String otc = item.getString(TAG_OTC);
+                String chart = item.getString(TAG_CHART);
+                String efcy = item.getString(TAG_EFCY);
+                String usemethod = item.getString(TAG_USE);
+                String qesitm = item.getString(TAG_QESITM);
+                String deposit = item.getString(TAG_DEPOSIT);
+                String term = item.getString(TAG_TERM);
+                String totalcontent = item.getString(TAG_CONTENT);
+                String mainingr = item.getString(TAG_MAINGR);
+                String ingrname = item.getString(TAG_TINGR);
 
                 DrugItem drugData = new DrugItem();
 
-                drugData.setDrugName(id);
+                drugData.setDrugName(name);
+                drugData.setDrugImg(image);
+                drugData.setDrugImg(image);
+                drugData.setDrugImg(image);
+                drugData.setDrugImg(image);
+                drugData.setDrugImg(image);
+                drugData.setDrugImg(image);
+                drugData.setDrugImg(image);
+                drugData.setDrugImg(image);
+                drugData.setDrugImg(image);
                 drugData.setDrugImg(image);
 
                 adapter.setArrayData(drugData);
