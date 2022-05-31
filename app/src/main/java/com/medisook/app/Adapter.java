@@ -48,12 +48,10 @@ public class Adapter extends RecyclerView.Adapter<ViewHolder> {
                     .placeholder(R.drawable.drung_sampleimage)
                     .into(holder.drugImage);
         }
-
         else{
             Drawable drawable= activity.getResources().getDrawable(R.drawable.drung_sampleimage);
             holder.drugImage.setImageDrawable(drawable);
         }
-
         holder.drugName.setText(drugItemArrayList.get(position).getDrugName());
             holder.drugName.setOnClickListener(new View.OnClickListener(){
             @Override

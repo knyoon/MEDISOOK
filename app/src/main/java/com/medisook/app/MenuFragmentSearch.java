@@ -37,7 +37,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
     private Button yellow_filter_btn;
     private TextView txt;
 
-    private static String IP_ADDRESS = "172.30.1.14:1719";
+    private static String IP_ADDRESS = "10.101.14.89:80";
     private static String TAG = "메롱";
     private EditText mEditTextName;
     private EditText mEditTextCountry;
@@ -79,7 +79,6 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                     "Please Wait", null, true, true);
         }
 
-
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
@@ -87,7 +86,6 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
             progressDialog.dismiss();
 
             if (result == null){
-
                 mTextViewResult.setText(errorString);
             }
             else {
@@ -137,7 +135,6 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                     inputStream = httpURLConnection.getErrorStream();
                 }
 
-
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
                 BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 
@@ -166,9 +163,22 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
     private void showResult(){
 
         String TAG_JSON="drug";
-        String TAG_ID = "DRUG_NAME";
-        String TAG_NAME = "ENTP_NAME";
-        String TAG_IMAGE ="IMAGE";
+        String TAG_NAME = "DRUG_NAME";
+        String TAG_ENTP = "ENTP_NAME";
+        String TAG_IMAGE = "IMAGE";
+        String TAG_DCODE ="DRUG_CODE";
+        String TAG_CLASSN ="CLASS_NAME";
+        String TAG_QNT ="QNT";
+        String TAG_OTC ="OTC";
+        String TAG_CHART ="CHART";
+        String TAG_EFCY ="EFCY";
+        String TAG_USE ="USEMETHOD";
+        String TAG_QESITM ="QESITM";
+        String TAG_DEPOSIT ="DEPOSIT";
+        String TAG_TERM ="VALID_TERM";
+        String TAG_CONTENT ="TOTAL_CONTENT";
+        String TAG_MAINGR ="MAIN_INGR";
+        String TAG_TINGR ="INGR_NAME";
 
         try {
             JSONObject jsonObject = new JSONObject(mJsonString);
@@ -177,19 +187,45 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
 
                 JSONObject item = jsonArray.getJSONObject(i);
 
-                String id = item.getString(TAG_ID);
                 String name = item.getString(TAG_NAME);
+                String entp = item.getString(TAG_ENTP);
                 String image = item.getString(TAG_IMAGE);
+                String drugcode = item.getString(TAG_DCODE);
+                String classname = item.getString(TAG_CLASSN);
+                String qnt = item.getString(TAG_QNT);
+                String otc = item.getString(TAG_OTC);
+                String chart = item.getString(TAG_CHART);
+                String efcy = item.getString(TAG_EFCY);
+                String usemethod = item.getString(TAG_USE);
+                String qesitm = item.getString(TAG_QESITM);
+                String deposit = item.getString(TAG_DEPOSIT);
+                String term = item.getString(TAG_TERM);
+                String totalcontent = item.getString(TAG_CONTENT);
+                String mainingr = item.getString(TAG_MAINGR);
+                String ingrname = item.getString(TAG_TINGR);
 
                 DrugItem drugData = new DrugItem();
 
-                drugData.setDrugName(id);
+                drugData.setDrugName(name);
                 drugData.setDrugImg(image);
+                drugData.setDrugentp(entp);
+                drugData.setDrugcode(drugcode);
+                drugData.setClassname(classname);
+                drugData.setQnt(qnt);
+                drugData.setOtc(otc);
+                drugData.setChart(chart);
+                drugData.setEfcy(efcy);
+                drugData.setUsemethod(usemethod);
+                drugData.setQesitm(qesitm);
+                drugData.setTerm(term);
+                drugData.setDeposit(deposit);
+                drugData.setTotalcontent(totalcontent);
+                drugData.setMainingr(mainingr);
+                drugData.setIngrname(ingrname);
 
                 adapter.setArrayData(drugData);
                 Log.d(TAG, drugData.getDrugImg().toString());
             }
-
             adapter.notifyDataSetChanged();
 
 
