@@ -211,15 +211,20 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
 
                 drugData.setDrugName(name);
                 drugData.setDrugImg(image);
-                drugData.setDrugImg(image);
-                drugData.setDrugImg(image);
-                drugData.setDrugImg(image);
-                drugData.setDrugImg(image);
-                drugData.setDrugImg(image);
-                drugData.setDrugImg(image);
-                drugData.setDrugImg(image);
-                drugData.setDrugImg(image);
-                drugData.setDrugImg(image);
+                drugData.setDrugImg(entp);
+                drugData.setDrugImg(drugcode);
+                drugData.setDrugImg(classname);
+                drugData.setDrugImg(qnt);
+                drugData.setDrugImg(otc);
+                drugData.setDrugImg(chart);
+                drugData.setDrugImg(efcy);
+                drugData.setDrugImg(usemethod);
+                drugData.setDrugImg(qesitm);
+                drugData.setDrugImg(term);
+                drugData.setDrugImg(deposit);
+                drugData.setDrugImg(totalcontent);
+                drugData.setDrugImg(mainingr);
+                drugData.setDrugImg(ingrname);
 
                 adapter.setArrayData(drugData);
                 Log.d(TAG, drugData.getDrugImg().toString());

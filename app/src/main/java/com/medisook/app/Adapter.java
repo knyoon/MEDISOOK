@@ -1,5 +1,6 @@
 package com.medisook.app;
 // https://3001ssw.tistory.com/201
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -42,7 +43,7 @@ public class Adapter extends RecyclerView.Adapter<ViewHolder> {
         return viewholder;
     }
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         DrugItem drugimage = drugItemArrayList.get(position);
         String imageurl=drugimage.getDrugImg();
         if(imageurl.isEmpty()==false){
