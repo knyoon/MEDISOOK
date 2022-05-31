@@ -1,13 +1,9 @@
 package com.medisook.app;
-import static android.content.Context.INPUT_METHOD_SERVICE;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -41,7 +37,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
     private Button yellow_filter_btn;
     private TextView txt;
 
-    private static String IP_ADDRESS = "192.168.18.199:80";
+    private static String IP_ADDRESS = "172.30.1.14:1719";
     private static String TAG = "메롱";
     private EditText mEditTextName;
     private EditText mEditTextCountry;
@@ -53,10 +49,12 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
     private String mJsonString;
 
     ArrayList<DrugItem> drugItemArrayList, filtered_drugList;
+    ArrayList<String> listItemArrayList;
     LinearLayoutManager linearLayoutManager;
 
-    RecyclerView recyclerView;
+    RecyclerView recyclerView, recyclerView_list;
     Adapter adapter;
+    Adapter_list adapter_list;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -222,11 +220,15 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 CustomDialog.Builder dialog_bulider = new CustomDialog.Builder(getActivity());
                 dialog.setDialogListener(new CustomDialog.CustomDialogListener() {
                     @Override
-                    public void onOkClicked(String text) {
-                        txt.setText(text);
+                    public void onOkClicked(ArrayList<String> list) {
+                        for (int i = 0;i<list.size();i++){
+                            adapter_list.setArrayData(list.get(i));
+                            Log.d("리스트_2", list.get(i));
+                        } adapter_list.notifyDataSetChanged();
                     }
                 });
                 dialog.show();
+                Log.d("테스트", "버튼 눌리는지");
                 dialog.getWindow().clearFlags(
                         WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
                 break;
@@ -235,8 +237,8 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 CustomDialog.Builder dialog2_bulider = new CustomDialog.Builder(getActivity());
                 dialog2.setDialogListener(new CustomDialog.CustomDialogListener() {
                     @Override
-                    public void onOkClicked(String text) {
-                        txt.setText(text);
+                    public void onOkClicked(ArrayList<String> text) {
+//                        txt.setText(text);
                     }
                 });
                 dialog2.show();
@@ -249,7 +251,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 CustomDialog.Builder dialog3_bulider = new CustomDialog.Builder(getActivity());
                 dialog3.setDialogListener(new CustomDialog.CustomDialogListener() {
                     @Override
-                    public void onOkClicked(String text) {
+                    public void onOkClicked(ArrayList<String> text) {
                         //txt.setText(text);
                     }
                 });
@@ -263,17 +265,25 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
         ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.search, container, false);
         EditText searchET = (EditText) rootView.findViewById(R.id.search_bar);
         recyclerView = (RecyclerView) rootView. findViewById(R.id.recycler_view);
+        recyclerView_list = (RecyclerView) rootView. findViewById(R.id.recycler_view_list);
 
         filtered_drugList = new ArrayList<>();
         drugItemArrayList = new ArrayList<>();
+        //recyclerview 선언부
+        listItemArrayList = new ArrayList<>();
 
         adapter = new Adapter(drugItemArrayList, this);
+        adapter_list = new Adapter_list(listItemArrayList, this);
         linearLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
+        recyclerView_list.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
+        recyclerView_list.setAdapter(adapter_list);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
         recyclerView.setAdapter(adapter);
 
         drugItemArrayList.clear();
         adapter.notifyDataSetChanged();
+        adapter_list.notifyDataSetChanged();
 //        for(int i = 0; i<100; i++){
 //            adapter.setArrayData(new DrugItem(i+"번째 약"));
 //        }
