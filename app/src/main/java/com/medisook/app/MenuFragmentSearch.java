@@ -12,14 +12,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,9 +37,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 
@@ -42,9 +46,8 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
     private Button yellow_filter_btn;
     private TextView txt;
 
-    private static String IP_ADDRESS = "192.168.18.199:80";
+    private static String IP_ADDRESS = "172.30.1.14:1719";
     private static String TAG = "메롱";
-
     private EditText mEditTextName;
     private EditText mEditTextCountry;
     private TextView mTextViewResult;
@@ -54,19 +57,25 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
     private EditText mEditTextSearchKeyword;
     private String mJsonString;
 
-    ArrayList<DrugItem> drugItemArrayList, filteredList;
+    ArrayList<DrugItem> drugItemArrayList, filtered_drugList;
+    ArrayList<String> listItemArrayList;
     LinearLayoutManager linearLayoutManager;
-    EditText searchET;
-    RecyclerView recyclerView;
+
+    RecyclerView recyclerView, recyclerView_list;
     Adapter adapter;
+    Adapter_list adapter_list;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search);
-
+    }
+    public void onResume() {
+        super.onResume();
+    }
+    private void setContentView(int search) {
     }
 
-    private class InsertData extends AsyncTask<String, Void, String>{
+    private class InsertData extends AsyncTask<String, Void, String> {
 
         ProgressDialog progressDialog;
         String errorString = null;
@@ -93,6 +102,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
             else {
 
                 mJsonString = result;
+                Log.d("과연", result);
                 showResult();
             }
         }
@@ -100,7 +110,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
 
         @Override
         protected String doInBackground(String... params) {
-
+            Log.d("과연", "test");
             String serverURL = params[0];
             String postParameters = "Data=" + params[1];
 
@@ -118,7 +128,6 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 httpURLConnection.setDoInput(true);
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.connect();
-
 
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 outputStream.write(postParameters.getBytes("UTF-8"));
@@ -160,7 +169,6 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
 
                 return null;
             }
-
         }
     }
 
@@ -171,12 +179,9 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
         String TAG_NAME = "ENTP_NAME";
         String TAG_IMAGE ="IMAGE";
 
-
         try {
             JSONObject jsonObject = new JSONObject(mJsonString);
-
             JSONArray jsonArray = jsonObject.getJSONArray(TAG_JSON);
-
             for(int i=0;i<jsonArray.length();i++){
 
                 JSONObject item = jsonArray.getJSONObject(i);
@@ -204,63 +209,49 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
         }
 
     }
+//    public void searchDrug(String searchText){
+//        filtered_drugList.clear();
+//        for (int i=0; i<drugItemArrayList.size(); i++){
+//            if(drugItemArrayList.get(i).getDrugName().toLowerCase().contains(searchText.toLowerCase())){
+//                filtered_drugList.add(drugItemArrayList.get(i));
+//            }
+//        }
+//        adapter.filterList(filtered_drugList);
+//    }
 
-
-    private void setContentView(int search) {
-    }
-
-    public void searchFilter(String searchText){
-        filteredList.clear();;
-        for (int i=0; i<drugItemArrayList.size(); i++){
-            if(drugItemArrayList.get(i).getDrugName().toLowerCase().contains(searchText.toLowerCase())){
-                filteredList.add(drugItemArrayList.get(i));
-            }
-        }
-        adapter.filterList(filteredList);
-    }
-    public void query2()
-    {
-        Log.v("tag"," MSSQL Connect Example.");
-        Connection conn = null;
-        try {
-            Class.forName("net.sourceforge.jtds.jdbc.Driver").newInstance();
-            Log.v("tag","MSSQL open");
-            String connectionUrl = "jdbc:sqlserver://localhost:1433/database=seyoung";
-            String id="medisook";
-            String password="1715231";
-            conn= DriverManager.getConnection(connectionUrl,id,password);
-            Statement stmt = conn.createStatement();
-            conn.close();
-        } catch (Exception e) {
-            Log.w("tag","" + e.getMessage());
-        }
-    }
     @Override
     public void onClick(View v) {
         LayoutInflater inflater = (LayoutInflater) this.getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        //View dialoglayout = infdialog_buliderlater.inflate(R.layout.redpop, null);
+        //View dialoglayout = inflater.inflate(R.layout.redpop, null);
         switch (v.getId()){
             case R.id.red_filter_btn:
                 CustomDialog dialog = new CustomDialog(getActivity());
                 CustomDialog.Builder dialog_bulider = new CustomDialog.Builder(getActivity());
                 dialog.setDialogListener(new CustomDialog.CustomDialogListener() {
                     @Override
-                    public void onOkClicked(String text) {
-                        txt.setText(text);
+                    public void onOkClicked(ArrayList<String> list) {
+                        for (int i = 0;i<list.size();i++){
+                            adapter_list.setArrayData(list.get(i));
+                            Log.d("리스트_2", list.get(i));
+                        } adapter_list.notifyDataSetChanged();
                     }
                 });
                 dialog.show();
+                Log.d("테스트", "버튼 눌리는지");
+                dialog.getWindow().clearFlags(
+                        WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
                 break;
             case R.id.green_filter_btn:
                 CustomDialog dialog2 = new CustomDialog(getActivity());
                 CustomDialog.Builder dialog2_bulider = new CustomDialog.Builder(getActivity());
                 dialog2.setDialogListener(new CustomDialog.CustomDialogListener() {
                     @Override
-                    public void onOkClicked(String text) {
-                        txt.setText(text);
+                    public void onOkClicked(ArrayList<String> text) {
+//                        txt.setText(text);
                     }
                 });
                 dialog2.show();
+
                 break;
             case R.id.yellow_filter_btn:
                 final String[] items = new String[]{"가", "나"};
@@ -269,7 +260,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 CustomDialog.Builder dialog3_bulider = new CustomDialog.Builder(getActivity());
                 dialog3.setDialogListener(new CustomDialog.CustomDialogListener() {
                     @Override
-                    public void onOkClicked(String text) {
+                    public void onOkClicked(ArrayList<String> text) {
                         //txt.setText(text);
                     }
                 });
@@ -282,39 +273,40 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.search, container, false);
         EditText searchET = (EditText) rootView.findViewById(R.id.search_bar);
-
         recyclerView = (RecyclerView) rootView. findViewById(R.id.recycler_view);
+        recyclerView_list = (RecyclerView) rootView. findViewById(R.id.recycler_view_list);
 
-        filteredList = new ArrayList<>();
+        filtered_drugList = new ArrayList<>();
         drugItemArrayList = new ArrayList<>();
-
+        //recyclerview 선언부
+        listItemArrayList = new ArrayList<>();
 
         adapter = new Adapter(drugItemArrayList, this);
+        adapter_list = new Adapter_list(listItemArrayList, this);
         linearLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
+        recyclerView_list.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
+        recyclerView_list.setAdapter(adapter_list);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
         recyclerView.setAdapter(adapter);
+
         drugItemArrayList.clear();
         adapter.notifyDataSetChanged();
-
-
-        //GetData task = new GetData();
-        //task.execute( "http://" + IP_ADDRESS + "/test.php", "");
-
-        DrugItem drugitem=new DrugItem();
-
-        searchET.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
-            @Override
-            public void afterTextChanged(Editable editable) {
-                String searchText = searchET.getText().toString();
-                searchFilter(searchText);
-            }
-        });
+        adapter_list.notifyDataSetChanged();
+//        for(int i = 0; i<100; i++){
+//            adapter.setArrayData(new DrugItem(i+"번째 약"));
+//        }
+//        searchET.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//            }
+//            @Override
+//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//            }
+//            @Override
+//            public void afterTextChanged(Editable editable) {
+//            }
+//        });
         recyclerView.setAdapter(adapter);
         red_filter_btn = (Button) rootView. findViewById(R.id.red_filter_btn);
         green_filter_btn = (Button)rootView. findViewById(R.id.green_filter_btn);
@@ -323,31 +315,24 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
         red_filter_btn.setOnClickListener(this);
         green_filter_btn.setOnClickListener(this);
         yellow_filter_btn.setOnClickListener(this);
-
         searchET.setOnKeyListener(new View.OnKeyListener(){
             @Override
             public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                String searchText = searchET.getText().toString();
                 switch (i){
-                    case KeyEvent.KEYCODE_ENTER :
-                        if(keyEvent.getAction()==KeyEvent.ACTION_UP){
-                            String searchText = searchET.getText().toString();
-                            Log.d("태그", searchText.toString());
-                            drugItemArrayList.clear();
-                            InsertData insert = new InsertData();
-                            insert.execute( "http://" + IP_ADDRESS + "/test1.php", searchText);
-                            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                            imm.hideSoftInputFromWindow(searchET.getWindowToken(), 0);
-                        }
-                        return true;
+                    case KeyEvent.KEYCODE_ENTER:
+                       if (keyEvent.getAction() == keyEvent.ACTION_UP) {
+                           drugItemArrayList.clear();
+                           InsertData insert = new InsertData();
+                           insert.execute("http://" + IP_ADDRESS + "/test1.php", searchText);
+                           InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                           imm.hideSoftInputFromWindow(searchET.getWindowToken(), 0);
+                       } return true;
                     case KeyEvent.KEYCODE_DEL:
-
                 }
                 return false;
             }
         });
-
         return rootView;
-        // Inflate the layout for this fragment
-//        return inflater.inflate(R.layout.fragment_menu_main, container, false);
     }
 }

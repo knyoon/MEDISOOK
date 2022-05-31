@@ -1,6 +1,6 @@
 package com.medisook.app;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -13,6 +13,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -25,16 +26,18 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Locale;
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
 
 public class DruginfoActivity extends Fragment implements View.OnClickListener{
+    TextView drugName_view;
+    ImageView drugImg_view;
     private TextView txt;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -70,7 +73,31 @@ public class DruginfoActivity extends Fragment implements View.OnClickListener{
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.drug_info, container, false);
+        drugName_view = (TextView) rootView.findViewById(R.id.drugName);
+        drugImg_view = (ImageView) rootView.findViewById(R.id.drugImage);
+        Bundle bundle = getArguments();
+        int position = bundle.getInt("position");
+        ArrayList<DrugItem> drugItem = (ArrayList<DrugItem>) bundle.getSerializable(("DrugItem"));
+        String drugName = drugItem.get(position).getDrugName();
+        String drugImage  = drugItem.get(position).getDrugImg();
+        if(drugImage.isEmpty()==false){
+            Picasso.get()
+                    .load(drugImage)
+                    .error(R.drawable.drung_sampleimage)
+                    .placeholder(R.drawable.drung_sampleimage)
+                    .into(drugImg_view);
+        }
+        else{
+            Drawable drawable= ContextCompat.getDrawable(getContext(), R.drawable.drung_sampleimage);
+            drugImg_view.setImageDrawable(drawable);
+        }
+        Log.d("test", "position : " + position);
+        Log.d("test", "drugitem : " + drugItem.size());
+        Log.d("test", "drugitem : " + drugItem.get(0));
+        drugName_view.setText(drugName);
+
         //textview = (TextView) rootView.findViewById(R.id.medisook);
         EditText eText1 = (EditText) rootView.findViewById(R.id.record);
         txt = (TextView)rootView.findViewById(R.id.text);
@@ -80,4 +107,16 @@ public class DruginfoActivity extends Fragment implements View.OnClickListener{
         return rootView;
         //return inflater.inflate(R.layout.fragment_menu_mypage, container, false);
     }
+//    private void updateLabel(){
+//        String myFormat = "yyyy/MM/dd";
+//        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.KOREA);
+//        EditText et_date = (EditText) findViewById(R.id.to_date);
+//    }
+//
+//    public void mOnClick(View view) {
+//        Intent back = new Intent(this, DruginfoActivity.class);
+//        getIntent().addFlags(back.FLAG_ACTIVITY_CLEAR_TOP);
+//        //startActivity(back);
+//        finish();
+//    }
 }

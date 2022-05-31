@@ -48,3 +48,4 @@ public class Adapter_record extends RecyclerView.Adapter<ViewHolder_record> {
     public void setArrayData(RecordItem strData){recordItemArrayList.add(strData);
     }
 }
+

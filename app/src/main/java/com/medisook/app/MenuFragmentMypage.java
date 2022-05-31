@@ -3,6 +3,7 @@ package com.medisook.app;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.annotation.ContentView;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -54,9 +55,7 @@ public class MenuFragmentMypage extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.mypage, container, false);
         tv_hashtag = (TextView)rootView.findViewById(R.id.hashtag);
-
         recyclerView = (RecyclerView) rootView. findViewById(R.id.recycler_view_record);
-
         recordItemArrayList = new ArrayList<>();
 
         adapter = new Adapter_record(recordItemArrayList, this);
@@ -71,5 +70,7 @@ public class MenuFragmentMypage extends Fragment {
         }
         recyclerView.setAdapter(adapter);
         return rootView;
+        // Inflate the layout for this fragment
+        //return inflater.inflate(R.layout.fragment_menu_mypage, container, false);
     }
 }

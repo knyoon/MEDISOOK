@@ -36,23 +36,34 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     />
-
-        <!--        <EditText-->
-<!--            android:id="@+id/search_bar"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="40dp"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:layout_marginTop="25dp"-->
-<!--            android:background="@drawable/search_bar_popup"-->
-<!--            android:fontFamily="@font/noto_medium"-->
-<!--            android:text="     검색      "-->
-<!--            android:textColor="#445E86"-->
-<!--            android:textSize="12dp"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintHorizontal_bias="0.5"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent" />-->
         <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            app:layout_constraintTop_toBottomOf="@id/search_bar"
+            app:layout_constraintBottom_toTopOf="@id/filter_list"
+            tools:ignore="MissingConstraints"
+            android:orientation="horizontal">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view_list"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/noto_medium"
+                    android:textColor="@color/navy"
+                    android:textSize="12dp" />
+<!--                <TextView-->
+<!--                    android:id="@+id/filter_selected"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:fontFamily="@font/noto_medium"-->
+<!--                    android:textColor="@color/navy"-->
+<!--                    android:textSize="12dp"-->
+<!--                    android:text="test1"/>-->
+        </ScrollView>
+
+        <ScrollView
+            android:id="@+id/filter_list"
             android:layout_width="match_parent"
             android:layout_height="180dp"
             app:layout_constraintTop_toBottomOf="@id/search_bar"

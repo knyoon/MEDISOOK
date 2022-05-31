@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -22,6 +23,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.Toast;
 
 import org.w3c.dom.Text;
@@ -47,7 +49,10 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
     private EditText et_record;
     private ImageButton good_btn;
     private ImageButton bad_btn;
+    private ImageButton good_btn;
+    private ImageButton bad_btn;
     private CustomDialog_record_Listener customDialogListener;
+
 
     public CustomDialog_record(Context context) {
         super(context);
@@ -61,7 +66,6 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
     public void setDialogListener(CustomDialog_record_Listener customDialogListener) {
         this.customDialogListener = customDialogListener;
     }
-
     Calendar myCalendar = Calendar.getInstance();
 
     @Override
