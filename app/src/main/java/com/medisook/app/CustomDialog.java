@@ -19,10 +19,12 @@ import java.util.ArrayList;
 
 public class CustomDialog extends AlertDialog implements View.OnClickListener{
     ArrayList<FilterItem> filterItemArrayList, filtered_filterList;
+    ArrayList<String> listItemArrayList;
     LinearLayoutManager linearLayoutManager;
     EditText searchET;
-    RecyclerView recyclerView;
+    RecyclerView recyclerView, recyclerView_list;
     Adapter_filter adapter;
+    Adapter_list adapter_list;
     private Button okButton;
     private Context context;
     private CustomDialogListener customDialogListener;
@@ -31,7 +33,7 @@ public class CustomDialog extends AlertDialog implements View.OnClickListener{
         this.context = context;
     }
     interface CustomDialogListener{
-        void onOkClicked(String text);
+        void onOkClicked(ArrayList<String> text);
     }
     public void setDialogListener(CustomDialogListener customDialogListener){
         this.customDialogListener = customDialogListener;
@@ -45,15 +47,32 @@ public class CustomDialog extends AlertDialog implements View.OnClickListener{
         okButton.setOnClickListener(this);
         searchET = findViewById(R.id.search_bar);
         recyclerView = (RecyclerView)findViewById(R.id.recycler_view_filter);
+        recyclerView_list = (RecyclerView)findViewById(R.id.recycler_view_list);
         filtered_filterList = new ArrayList<>();
         filterItemArrayList = new ArrayList<>();
-        adapter = new Adapter_filter(filterItemArrayList, this);
+        listItemArrayList = new ArrayList<>();
+        adapter = new Adapter_filter(filterItemArrayList, listItemArrayList, adapter_list, this);
+        //adapter_list = new Adapter_list(listItemArrayList, adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.context, RecyclerView.VERTICAL, false));
         recyclerView.setAdapter(adapter);
+        recyclerView_list.setLayoutManager(new LinearLayoutManager(this.context, RecyclerView.VERTICAL, false));
+        recyclerView_list.setAdapter(adapter_list);
         adapter.notifyDataSetChanged();
+        //adapter_list.notifyDataSetChanged();
+        //adapter_list.setArrayData("안녕");
+//        Log.d("리스트", String.valueOf(listItemArrayList.size()));
+//        for(int i = 0; i<listItemArrayList.size(); i++){
+//
+//        }
         for(int i = 0; i<100; i++){
             adapter.setArrayData(new FilterItem(i+"번째 필터", false));
         }
+        adapter.setOnItemClicklistener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(ViewHolder_filter holder, View view, int position) {
+                Log.d("리스트", "클릭 테스트");
+            }
+        });
         searchET.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -68,6 +87,7 @@ public class CustomDialog extends AlertDialog implements View.OnClickListener{
             }
         });
         recyclerView.setAdapter(adapter);
+        //recyclerView_list.setAdapter(adapter_list);
         searchET.setOnKeyListener(new View.OnKeyListener(){
             @Override
             public boolean onKey(View view, int i, KeyEvent keyEvent) {
@@ -76,7 +96,6 @@ public class CustomDialog extends AlertDialog implements View.OnClickListener{
                     case KeyEvent.KEYCODE_ENTER:
                         if (keyEvent.getAction() == keyEvent.ACTION_UP) {
                             Log.d("키보드", searchText);
-
                             InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
                             imm.hideSoftInputFromWindow(searchET.getWindowToken(), 0);
                         } return true;
@@ -103,14 +122,15 @@ public class CustomDialog extends AlertDialog implements View.OnClickListener{
         switch (v.getId()){
             case R.id.popup_ok_btn:
                 String text = searchET.getText().toString();
-                customDialogListener.onOkClicked(text);
-                String data = "";
+                //customDialogListener.onOkClicked(text);
+                ArrayList<String> data = new ArrayList<>();
                 ArrayList<FilterItem> filterItemArrayList = adapter.getFilterItemArrayList();
                 for (int i = 0; i<filterItemArrayList.size(); i++){
                     FilterItem filteredItem = filterItemArrayList.get(i);
                     if(filteredItem.isSelected() == true) {
+                        //adapter_list.setArrayData(String.valueOf(filterItemArrayList.get(i)));
                         Log.d("필터", filteredItem.getFilterName());
-                        data = data+filteredItem.getFilterName()+", ";
+                        data.add(filteredItem.getFilterName());
                     }
                     //adapter.setArrayData(new FilterItem(i+" 번째 필터"));
                 }

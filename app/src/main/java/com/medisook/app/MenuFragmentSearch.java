@@ -1,4 +1,5 @@
 package com.medisook.app;
+
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -13,7 +14,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -37,7 +37,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
     private Button yellow_filter_btn;
     private TextView txt;
 
-    private static String IP_ADDRESS = "10.101.14.89:80";
+    private static String IP_ADDRESS = "172.30.1.14:1719";
     private static String TAG = "메롱";
     private EditText mEditTextName;
     private EditText mEditTextCountry;
@@ -49,10 +49,12 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
     private String mJsonString;
 
     ArrayList<DrugItem> drugItemArrayList, filtered_drugList;
+    ArrayList<String> listItemArrayList;
     LinearLayoutManager linearLayoutManager;
 
-    RecyclerView recyclerView;
+    RecyclerView recyclerView, recyclerView_list;
     Adapter adapter;
+    Adapter_list adapter_list;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,7 +114,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
 
                 httpURLConnection.setReadTimeout(20000);
-                httpURLConnection.setConnectTimeout(50000);
+                httpURLConnection.setConnectTimeout(20000);
                 httpURLConnection.setRequestMethod("POST");
                 httpURLConnection.setDoInput(true);
                 httpURLConnection.setDoOutput(true);
@@ -164,24 +166,9 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
     private void showResult(){
 
         String TAG_JSON="drug";
-        String TAG_NAME = "DRUG_NAME";
-        String TAG_ENTP = "ENTP_NAME";
-        String TAG_IMAGE = "IMAGE";
-        String TAG_DCODE ="DRUG_CODE";
-        String TAG_CLASSN ="CLASS_NAME";
-        String TAG_QNT ="QNT";
-        String TAG_OTC ="OTC";
-        String TAG_CHART ="CHART";
-        String TAG_EFCY ="EFCY";
-        String TAG_USE ="USEMETHOD";
-        String TAG_QESITM ="QESITM";
-        String TAG_DEPOSIT ="DEPOSIT";
-        String TAG_TERM ="VALID_TERM";
-        String TAG_CONTENT ="TOTAL_CONTENT";
-        String TAG_MAINGR ="MAIN_INGR";
-        String TAG_TINGR ="INGR_NAME";
-
-
+        String TAG_ID = "DRUG_NAME";
+        String TAG_NAME = "ENTP_NAME";
+        String TAG_IMAGE ="IMAGE";
 
         try {
             JSONObject jsonObject = new JSONObject(mJsonString);
@@ -190,41 +177,14 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
 
                 JSONObject item = jsonArray.getJSONObject(i);
 
+                String id = item.getString(TAG_ID);
                 String name = item.getString(TAG_NAME);
-                String entp = item.getString(TAG_ENTP);
                 String image = item.getString(TAG_IMAGE);
-                String drugcode = item.getString(TAG_DCODE);
-                String classname = item.getString(TAG_CLASSN);
-                String qnt = item.getString(TAG_QNT);
-                String otc = item.getString(TAG_OTC);
-                String chart = item.getString(TAG_CHART);
-                String efcy = item.getString(TAG_EFCY);
-                String usemethod = item.getString(TAG_USE);
-                String qesitm = item.getString(TAG_QESITM);
-                String deposit = item.getString(TAG_DEPOSIT);
-                String term = item.getString(TAG_TERM);
-                String totalcontent = item.getString(TAG_CONTENT);
-                String mainingr = item.getString(TAG_MAINGR);
-                String ingrname = item.getString(TAG_TINGR);
 
                 DrugItem drugData = new DrugItem();
 
-                drugData.setDrugName(name);
+                drugData.setDrugName(id);
                 drugData.setDrugImg(image);
-                drugData.setDrugImg(entp);
-                drugData.setDrugImg(drugcode);
-                drugData.setDrugImg(classname);
-                drugData.setDrugImg(qnt);
-                drugData.setDrugImg(otc);
-                drugData.setDrugImg(chart);
-                drugData.setDrugImg(efcy);
-                drugData.setDrugImg(usemethod);
-                drugData.setDrugImg(qesitm);
-                drugData.setDrugImg(term);
-                drugData.setDrugImg(deposit);
-                drugData.setDrugImg(totalcontent);
-                drugData.setDrugImg(mainingr);
-                drugData.setDrugImg(ingrname);
 
                 adapter.setArrayData(drugData);
                 Log.d(TAG, drugData.getDrugImg().toString());
@@ -260,11 +220,15 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 CustomDialog.Builder dialog_bulider = new CustomDialog.Builder(getActivity());
                 dialog.setDialogListener(new CustomDialog.CustomDialogListener() {
                     @Override
-                    public void onOkClicked(String text) {
-                        txt.setText(text);
+                    public void onOkClicked(ArrayList<String> list) {
+                        for (int i = 0;i<list.size();i++){
+                            adapter_list.setArrayData(list.get(i));
+                            Log.d("리스트_2", list.get(i));
+                        } adapter_list.notifyDataSetChanged();
                     }
                 });
                 dialog.show();
+                Log.d("테스트", "버튼 눌리는지");
                 dialog.getWindow().clearFlags(
                         WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
                 break;
@@ -273,8 +237,8 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 CustomDialog.Builder dialog2_bulider = new CustomDialog.Builder(getActivity());
                 dialog2.setDialogListener(new CustomDialog.CustomDialogListener() {
                     @Override
-                    public void onOkClicked(String text) {
-                        txt.setText(text);
+                    public void onOkClicked(ArrayList<String> text) {
+//                        txt.setText(text);
                     }
                 });
                 dialog2.show();
@@ -287,7 +251,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 CustomDialog.Builder dialog3_bulider = new CustomDialog.Builder(getActivity());
                 dialog3.setDialogListener(new CustomDialog.CustomDialogListener() {
                     @Override
-                    public void onOkClicked(String text) {
+                    public void onOkClicked(ArrayList<String> text) {
                         //txt.setText(text);
                     }
                 });
@@ -301,17 +265,25 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
         ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.search, container, false);
         EditText searchET = (EditText) rootView.findViewById(R.id.search_bar);
         recyclerView = (RecyclerView) rootView. findViewById(R.id.recycler_view);
+        recyclerView_list = (RecyclerView) rootView. findViewById(R.id.recycler_view_list);
 
         filtered_drugList = new ArrayList<>();
         drugItemArrayList = new ArrayList<>();
+        //recyclerview 선언부
+        listItemArrayList = new ArrayList<>();
 
         adapter = new Adapter(drugItemArrayList, this);
+        adapter_list = new Adapter_list(listItemArrayList, this);
         linearLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
+        recyclerView_list.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
+        recyclerView_list.setAdapter(adapter_list);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
         recyclerView.setAdapter(adapter);
 
         drugItemArrayList.clear();
         adapter.notifyDataSetChanged();
+        adapter_list.notifyDataSetChanged();
 //        for(int i = 0; i<100; i++){
 //            adapter.setArrayData(new DrugItem(i+"번째 약"));
 //        }
