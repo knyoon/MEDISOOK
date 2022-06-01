@@ -29,6 +29,9 @@ public class Adapter_list extends RecyclerView.Adapter<ViewHolder_list> {
             case 2:
                 view = inflater.inflate(R.layout.list_list_ingr, parent, false);
                 break;
+            case 3:
+                view = inflater.inflate(R.layout.list_list_qesitm, parent, false);
+                break;
         }
         //View view = inflater.inflate(R.layout.list_list_sym, parent, false);
         ViewHolder_list viewholder_list = new ViewHolder_list(context, view);
@@ -37,7 +40,15 @@ public class Adapter_list extends RecyclerView.Adapter<ViewHolder_list> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder_list holder, int position) {
         final int pos = position;
-
+        view.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                listItemArrayList.remove(position);
+                Log.d("list", "삭제 되는지");
+                notifyDataSetChanged();
+                return false;
+            }
+        });
         holder.txt.setText(listItemArrayList.get(pos)); //삭제해도 되나?
         holder.txt.setTag(listItemArrayList.get(position));
         holder.txt.setOnClickListener(new View.OnClickListener(){

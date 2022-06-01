@@ -1,5 +1,6 @@
 package com.medisook.app;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -14,9 +15,15 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.flexbox.FlexWrap;
+import com.google.android.flexbox.FlexboxLayoutManager;
+import com.google.android.flexbox.JustifyContent;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -48,8 +55,10 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
     private EditText mEditTextSearchKeyword;
     private String mJsonString;
     private String searchText;
+    String postParameters;
     ArrayList<DrugItem> drugItemArrayList, filtered_drugList;
-    ArrayList<String> listItemArrayList;
+    ArrayList<String> listItemArrayList, total_list;
+    String[] parameter ={"efcy1", "efcy2", "efcy3","exc1","exc2","exc3","who1","who2","who3"};
     LinearLayoutManager linearLayoutManager;
 
     RecyclerView recyclerView, recyclerView_list;
@@ -108,8 +117,8 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 URL url = new URL(serverURL);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
 
-                httpURLConnection.setReadTimeout(20000);
-                httpURLConnection.setConnectTimeout(20000);
+                httpURLConnection.setReadTimeout(50000);
+                httpURLConnection.setConnectTimeout(50000);
                 httpURLConnection.setRequestMethod("POST");
                 httpURLConnection.setDoInput(true);
                 httpURLConnection.setDoOutput(true);
@@ -191,16 +200,25 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
         protected String doInBackground(String... params) {
             Log.d("과연", "test");
             String serverURL = params[0];
-//            String postParameters = "Data=" + params[1];
-            String postParameters = "Data=" + searchText;
-
+            if(params[1]=="0"){
+                postParameters = "Data=" + searchText;
+            }
+            else if (params[1]=="1"){
+                parameter[0]= "Efcy1=" + total_list.get(0);
+                parameter[1] = "&Efcy2=" + total_list.get(1);
+                parameter[2] = "&Efcy3=" + total_list.get(2);
+                parameter[3] = "&Except1=" + total_list.get(3);
+                parameter[4] = "&Except2=" + total_list.get(4);
+                parameter[5] = "&Except3=" + total_list.get(5);
+                parameter[6] = "&Who1=" + total_list.get(6);
+                parameter[7] = "&Who2=" + total_list.get(7);
+                parameter[8] = "&Who3=" + total_list.get(8);
+            }
             try {
-
                 //String searchDrug="Data="+searchET.getText().toString();
-                Log.d("과연", postParameters);
+//                Log.d("과연", postParameters);
                 URL url = new URL(serverURL);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-
                 httpURLConnection.setReadTimeout(20000);
                 httpURLConnection.setConnectTimeout(20000);
                 httpURLConnection.setRequestMethod("POST");
@@ -209,10 +227,17 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 httpURLConnection.connect();
 
                 OutputStream outputStream = httpURLConnection.getOutputStream();
-                outputStream.write(postParameters.getBytes("UTF-8"));
+                if(params[1]=="0"){
+                    outputStream.write(postParameters.getBytes("UTF-8"));
+                }
+                else if (params[1]=="1"){
+                    for(int i=0;i<9;i++){
+                        outputStream.write(parameter[i].getBytes("UTF-8"));
+                        Log.d("과연", parameter[i]);
+                    }
+                }
                 outputStream.flush();
                 outputStream.close();
-
 
                 int responseStatusCode = httpURLConnection.getResponseCode();
                 Log.d(TAG, "response code - " + responseStatusCode);
@@ -330,6 +355,8 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
     public void onClick(View v) {
         LayoutInflater inflater = (LayoutInflater) this.getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         //View dialoglayout = inflater.inflate(R.layout.redpop, null);
+        total_list = new ArrayList<>();
+
         switch (v.getId()){
             case R.id.red_filter_btn:
                 btn_pos = 1;
@@ -339,49 +366,106 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                     @Override
                     public void onOkClicked(ArrayList<String> list_efcy) {
                         drugItemArrayList.clear();
-                        for (int i = 0;i<list_efcy.size();i++){
-                            InsertData insert = new InsertData();
-                            insert.execute("http://" + IP_ADDRESS + "/filterserch.php", list_efcy.get(i));
-                            adapter_list.setArrayData(list_efcy.get(i), 1);
-                            Log.d("리스트_2", "efcy : " + list_efcy.size());
-                        } adapter_list.notifyDataSetChanged();
+                        if(list_efcy.size() == 0 || list_efcy.size() >3 ){
+                            Log.d("리스트", "리스트 : " + list_efcy.size());
+                            Toast.makeText(dialog.getContext(),"증상을 1개 이상 3개 이하로 선택해 주세요." ,Toast.LENGTH_LONG ).show();
+                        } else {
+                            CustomDialog dialog2 = new CustomDialog(getActivity(), 2);
+                            CustomDialog.Builder dialog2_bulider = new CustomDialog.Builder(getActivity());
+                            dialog2.setDialogListener(new CustomDialog.CustomDialogListener() {
+                                @Override
+                                public void onOkClicked(ArrayList<String> list_ingr) {
+                                    CustomDialog dialog3 = new CustomDialog(getActivity(), 3);
+                                    CustomDialog.Builder dialog3_bulider = new CustomDialog.Builder(getActivity());
+                                    dialog3.setDialogListener(new CustomDialog.CustomDialogListener() {
+                                        @Override
+                                        public void onOkClicked(ArrayList<String> list_qesitm) {
+                                            for (int i = 0; i < list_qesitm.size(); i++) {
+                                                adapter_list.setArrayData(list_qesitm.get(i), 3);
+                                                total_list.add(list_qesitm.get(i));
+                                            }
+                                            int count_list = list_qesitm.size();
+                                            while(count_list<3){
+                                                count_list += 1;
+                                                total_list.add("슬라임");
+                                            }
+                                            ReadData insert = new ReadData();
+                                            insert.execute("http://" + IP_ADDRESS + "/filterserch.php", "1");
+                                            adapter_list.notifyDataSetChanged();
+                                            Log.d("리스트", "list size : "+drugItemArrayList.size());
+                                        }
+                                    });
+                                    dialog3.show();
+                                    dialog3.getWindow().clearFlags(
+                                            WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+                                    for (int i = 0;i<list_ingr.size();i++){
+                                        adapter_list.setArrayData(list_ingr.get(i), 2);
+                                        total_list.add(list_ingr.get(i));
+                                    }
+                                    int count_list = list_ingr.size();
+                                    while(count_list<3){
+                                        count_list += 1;
+                                        total_list.add("슬라임");
+                                    }
+                                    adapter_list.notifyDataSetChanged();
+                                }
+                            });
+                            dialog2.show();
+                            dialog2.getWindow().clearFlags(
+                                    WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+                            for (int i = 0;i<list_efcy.size();i++){
+
+                                adapter_list.setArrayData(list_efcy.get(i), 1);
+                                total_list.add(list_efcy.get(i));
+                            }
+                            int count_list = list_efcy.size();
+                            while(count_list<3){
+                                count_list += 1;
+                                total_list.add("슬라임");
+                                Log.d("리스트", "total list size : "+total_list.size());
+                            }
+                            adapter_list.notifyDataSetChanged();
+                        }
                     }
                 });
                 dialog.show();
                 dialog.getWindow().clearFlags(
                         WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
                 break;
-            case R.id.green_filter_btn:
-                btn_pos = 2;
-                CustomDialog dialog2 = new CustomDialog(getActivity(), 2);
-                CustomDialog.Builder dialog2_bulider = new CustomDialog.Builder(getActivity());
-                dialog2.setDialogListener(new CustomDialog.CustomDialogListener() {
-                    @Override
-                    public void onOkClicked(ArrayList<String> list_ingr) {
-                        for (int i = 0;i<list_ingr.size();i++){
-                            adapter_list.setArrayData(list_ingr.get(i), 2);
-                            Log.d("리스트_2", "ingr : " + list_ingr.size());
-                        } adapter_list.notifyDataSetChanged();
-                    }
-                });
-                dialog2.show();
-                dialog2.getWindow().clearFlags(
-                        WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
-                break;
-            case R.id.yellow_filter_btn:
-                btn_pos = 3;
-                final String[] items = new String[]{"가", "나"};
-                final boolean[] checkedItems = {false, false, false, true};
-                CustomDialog dialog3 = new CustomDialog(getActivity(), 3);
-                CustomDialog.Builder dialog3_bulider = new CustomDialog.Builder(getActivity());
-                dialog3.setDialogListener(new CustomDialog.CustomDialogListener() {
-                    @Override
-                    public void onOkClicked(ArrayList<String> text) {
-                        //txt.setText(text);
-                    }
-                });
-                dialog3.show();
-                break;
+//            case R.id.green_filter_btn:
+//                btn_pos = 2;
+//                CustomDialog dialog2 = new CustomDialog(getActivity(), 2);
+//                CustomDialog.Builder dialog2_bulider = new CustomDialog.Builder(getActivity());
+//                dialog2.setDialogListener(new CustomDialog.CustomDialogListener() {
+//                    @Override
+//                    public void onOkClicked(ArrayList<String> list_ingr) {
+//                        for (int i = 0;i<list_ingr.size();i++){
+//                            adapter_list.setArrayData(list_ingr.get(i), 2);
+//                            Log.d("리스트_2", "ingr : " + list_ingr.size());
+//                        } adapter_list.notifyDataSetChanged();
+//                    }
+//                });
+//                dialog2.show();
+//                dialog2.getWindow().clearFlags(
+//                        WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+//                break;
+//            case R.id.yellow_filter_btn:
+//                btn_pos = 3;
+//                CustomDialog dialog3 = new CustomDialog(getActivity(), 3);
+//                CustomDialog.Builder dialog3_bulider = new CustomDialog.Builder(getActivity());
+//                dialog3.setDialogListener(new CustomDialog.CustomDialogListener() {
+//                    @Override
+//                    public void onOkClicked(ArrayList<String> list_qesitm) {
+//                        for (int i = 0;i<list_qesitm.size();i++){
+//                            adapter_list.setArrayData(list_qesitm.get(i), 2);
+//                            Log.d("리스트_2", "ingr : " + list_qesitm.size());
+//                        } adapter_list.notifyDataSetChanged();
+//                    }
+//                });
+//                dialog3.show();
+//                dialog3.getWindow().clearFlags(
+//                        WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+//                break;
         }
     }
 
@@ -396,11 +480,14 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
         drugItemArrayList = new ArrayList<>();
         //recyclerview 선언부
         listItemArrayList = new ArrayList<>();
-
         adapter = new Adapter(drugItemArrayList, this);
         adapter_list = new Adapter_list(listItemArrayList, this);
-        linearLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
-        recyclerView_list.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
+        //linearLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
+        FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(getActivity());
+        layoutManager.setFlexWrap(FlexWrap.WRAP);
+        layoutManager.setJustifyContent(JustifyContent.CENTER);
+        //recyclerView_list.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
+        recyclerView_list.setLayoutManager(layoutManager);
         recyclerView_list.setAdapter(adapter_list);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
@@ -437,10 +524,12 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 searchText = searchET.getText().toString();
                 switch (i){
                     case KeyEvent.KEYCODE_ENTER:
-                       if (keyEvent.getAction() == keyEvent.ACTION_UP) {
+                       if (keyEvent.getAction() == keyEvent.ACTION_UP && searchText.isEmpty()==false) {
+                           Log.d("test", "searchText : "+searchText);
                            drugItemArrayList.clear();
                            ReadData read = new ReadData();
-                           read.execute("http://" + IP_ADDRESS + "/test1.php", searchText);
+                           read.execute("http://" + IP_ADDRESS + "/test1.php","0");
+                           Log.d("리스트", "list size_2 : "+drugItemArrayList.size());
                            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                            imm.hideSoftInputFromWindow(searchET.getWindowToken(), 0);
                        } return true;
