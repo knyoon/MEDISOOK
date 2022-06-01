@@ -20,37 +20,38 @@
 
         <ImageView
             android:id="@+id/drugImage"
-            android:layout_width="102dp"
-            android:layout_height="58dp"
+            android:layout_width="120dp"
+            android:layout_height="70dp"
             android:src="@drawable/drung_sampleimage" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
             android:gravity="left"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/drugName"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_marginLeft="5dp"
+                android:layout_width="200dp"
+                android:layout_height="64dp"
+                android:layout_marginStart="5dp"
                 android:layout_marginBottom="5dp"
                 android:fontFamily="@font/noto_medium"
                 android:text="덱시부펜연질켑슐"
                 android:textColor="#445E86"
-                android:textSize="15dp" />
+                android:textSize="15sp"
+                android:singleLine="false"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:layout_marginVertical="5dp"
+                android:layout_marginBottom="10dp"
                 android:gravity="center"
                 android:orientation="horizontal">
-
                 <Button
-                    android:layout_width="80dp"
+                    android:id="@+id/wish_btn"
+                    android:layout_width="83dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/radius"
                     android:drawableLeft="@drawable/resize_star"
@@ -58,36 +59,35 @@
                     android:includeFontPadding="false"
                     android:minWidth="0dp"
                     android:minHeight="0dp"
-                    android:paddingLeft="8dp"
+                    android:paddingStart="8dp"
                     android:paddingTop="1dp"
-                    android:paddingRight="15dp"
+                    android:paddingEnd="15dp"
                     android:paddingBottom="1dp"
                     android:text="찜하기"
                     android:textColor="#445E86"
-                    android:textSize="11dp"
+                    android:textSize="11sp"
                     app:backgroundTint="@null" />
 
                 <Button
                     android:id="@+id/record_pop_btn"
-                    android:layout_width="85dp"
+                    android:layout_width="87dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
+                    android:layout_marginStart="12dp"
                     android:background="@drawable/radius"
                     android:drawableLeft="@drawable/resize_pencil"
                     android:fontFamily="@font/noto_medium"
                     android:includeFontPadding="false"
-                    android:paddingLeft="8dp"
+                    android:paddingStart="8dp"
                     android:paddingTop="1dp"
-                    android:paddingRight="9dp"
+                    android:paddingEnd="9dp"
                     android:paddingBottom="1dp"
                     android:text="기록하기"
                     android:textColor="#445E86"
-                    android:textSize="11dp"
+                    android:textSize="11sp"
                     app:backgroundTint="@null" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-
     <View
         android:id="@+id/view"
         android:layout_width="wrap_content"
@@ -96,7 +96,6 @@
         app:layout_constraintBottom_toTopOf="@+id/warning"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         tools:ignore="MissingConstraints" />
-
     <LinearLayout
         android:id="@+id/warning"
         android:layout_width="wrap_content"
@@ -116,34 +115,35 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:orientation="vertical">
-
             <FrameLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent">
-
                 <ImageView
+                    android:id="@+id/pregcaution"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:src="@drawable/resize_redstar" />
 
                 <TextView
+                    android:id="@+id/num_pregcaution"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:fontFamily="@font/noto_bold"
                     android:text="2"
                     android:textColor="#F65E5D"
-                    android:textSize="15dp" />
+                    android:textSize="15sp" />
             </FrameLayout>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="62dp"
                 android:layout_height="28dp"
+                android:gravity="center_horizontal"
                 android:fontFamily="@font/noto_medium"
-                android:text="노약자주의"
+                android:text="임부 주의"
                 android:textColor="#445E86"
-                android:textSize="12dp" />
+                android:textSize="12sp" />
 
         </LinearLayout>
 
@@ -158,34 +158,34 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:orientation="vertical">
-
             <FrameLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent">
-
                 <ImageView
+                    android:id="@+id/childcaution"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:src="@drawable/resize_yellowstar" />
 
                 <TextView
+                    android:id="@+id/num_childcaution"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:fontFamily="@font/noto_bold"
                     android:text="2"
                     android:textColor="#FFBC47"
-                    android:textSize="15dp" />
+                    android:textSize="15sp" />
             </FrameLayout>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="62dp"
                 android:layout_height="28dp"
                 android:fontFamily="@font/noto_medium"
-                android:text="노약자주의"
+                android:text="어린이 주의"
                 android:textColor="#445E86"
-                android:textSize="12dp" />
+                android:textSize="12sp" />
 
         </LinearLayout>
 
@@ -205,28 +205,31 @@
                 android:layout_height="fill_parent">
 
                 <ImageView
+                    android:id="@+id/oldcaution"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:src="@drawable/resize_greenstar" />
 
                 <TextView
+                    android:id="@+id/num_oldcaution"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:fontFamily="@font/noto_bold"
                     android:text="2"
                     android:textColor="#5FA976"
-                    android:textSize="15dp" />
+                    android:textSize="15sp" />
             </FrameLayout>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="62dp"
                 android:layout_height="28dp"
                 android:fontFamily="@font/noto_medium"
-                android:text="노약자주의"
+                android:text="노인 주의"
+                android:gravity="center_horizontal"
                 android:textColor="#445E86"
-                android:textSize="12dp" />
+                android:textSize="12sp" />
 
         </LinearLayout>
 
@@ -263,236 +266,389 @@
             android:background="@drawable/radius_navy"
             android:fontFamily="@font/noto_bold"
             android:includeFontPadding="false"
-            android:paddingLeft="6dp"
-            android:paddingRight="6dp"
+            android:paddingVertical="3dp"
+            android:paddingHorizontal="7dp"
             android:text="잦은 음주 주의"
+            android:minHeight="0dp"
             android:textColor="@color/white"
-            android:textSize="10dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="6dp"
-            android:background="@drawable/radius_navy"
-            android:fontFamily="@font/noto_bold"
-            android:includeFontPadding="false"
-            android:paddingLeft="6dp"
-            android:paddingRight="6dp"
-            android:text="잦은 음주 주의"
-            android:textColor="@color/white"
-            android:textSize="10dp" />
+            android:textSize="10sp"
+            tools:ignore="SmallSp" />
 
         <View
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_weight="1" />
-
     </LinearLayout>
 
     <ScrollView
         android:id="@+id/scrollView2"
-        android:layout_width="350dp"
-        android:layout_height="360dp"
-        android:layout_marginTop="76dp"
+        android:layout_width="match_parent"
+        android:layout_height="310dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
         android:layout_marginBottom="10dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.737"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/linearLayout2">
+        app:layout_constraintTop_toBottomOf="@id/linearLayout2"
+        app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/ENTP"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            //회사명
             <TextView
-                android:id="@+id/ENTP_NAME"
+                android:id="@+id/text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@id/tv_ENTP"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ENTP" />
+
+            //회사명
+            <TextView
+                android:id="@+id/tv_ENTP"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="▶회사명"
+                android:fontFamily="@font/noto_medium"
+                android:textColor="#445E86"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@id/ENTP_NAME"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text" />
+
+            <TextView
+                android:id="@+id/ENTP_NAME"
+                android:layout_width="74dp"
+                android:layout_height="32dp"
                 android:fontFamily="@font/noto_medium"
                 android:text="ENTP_NAME"
                 android:textColor="#445E86"
-                android:textSize="12dp"
-                app:layout_constraintBottom_toTopOf="@id/DRUG_CODE"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@id/tv_Class"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/tv_ENTP" />
+
+
+            //신경안정제 뭐이런 약 분류
             <TextView
-                android:id="@+id/DRUG_CODE"
+                android:id="@+id/tv_Class"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="▶약 분류"
                 android:fontFamily="@font/noto_medium"
-                android:text="DRUG_CODE"
                 android:textColor="#445E86"
-                android:textSize="12dp"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toTopOf="@id/CLASS_NAME"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/ENTP_NAME" />
 
-            //신경안정제 뭐이런 약 분류
             <TextView
                 android:id="@+id/CLASS_NAME"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="309dp"
                 android:fontFamily="@font/noto_medium"
                 android:text="CLASS_NAME"
                 android:textColor="#445E86"
-                android:textSize="12dp"
-                app:layout_constraintBottom_toTopOf="@id/QNT"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@id/tv_mainingr"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/DRUG_CODE" />
+                app:layout_constraintTop_toBottomOf="@id/tv_Class" />
 
-            //주요 성분 갯수
-
+            //주요성분
             <TextView
-                android:id="@+id/QNT"
+                android:id="@+id/tv_mainingr"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="▶주요성분"
                 android:fontFamily="@font/noto_medium"
-                android:text="QNT"
                 android:textColor="#445E86"
-                android:textSize="12dp"
-                app:layout_constraintBottom_toTopOf="@id/OTC"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@id/MAIN_INGR"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/CLASS_NAME" />
 
+            <TextView
+                android:id="@+id/MAIN_INGR"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="321dp"
+                android:fontFamily="@font/noto_medium"
+                android:text="MAIN_INGR"
+                android:textColor="#445E86"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@id/tv_Ingr"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_mainingr" />
+
+            //전체성분
+            <TextView
+                android:id="@+id/tv_Ingr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="▶전체성분"
+                android:fontFamily="@font/noto_medium"
+                android:textColor="#445E86"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@id/INGR_NAME"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/MAIN_INGR" />
+
+            <TextView
+                android:id="@+id/INGR_NAME"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="317dp"
+                android:layout_marginBottom="1dp"
+                android:fontFamily="@font/noto_medium"
+                android:text="INGR_NAME"
+                android:textColor="#445E86"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@id/tv_total"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_Ingr" />
+
+            //총량 성분 총량
+            <TextView
+                android:id="@+id/tv_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="▶성분 총량"
+                android:fontFamily="@font/noto_medium"
+                android:textColor="#445E86"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@id/TOTAL_CONTENT"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/INGR_NAME" />
+
+            <TextView
+                android:id="@+id/TOTAL_CONTENT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="286dp"
+                android:fontFamily="@font/noto_medium"
+                android:text="TOTAL_CONTENT"
+                android:textColor="#445E86"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@id/tv_Otc"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_total" />
+
             //일반/전문의약인지
+            <TextView
+                android:id="@+id/tv_Otc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="▶일반/전문의약품"
+                android:fontFamily="@font/noto_medium"
+                android:textColor="#445E86"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@id/OTC"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/TOTAL_CONTENT" />
 
             <TextView
                 android:id="@+id/OTC"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="363dp"
                 android:fontFamily="@font/noto_medium"
                 android:text="OTC"
                 android:textColor="#445E86"
-                android:textSize="12dp"
-                app:layout_constraintBottom_toTopOf="@id/CHART"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@id/tv_Chart"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/QNT" />
+                app:layout_constraintTop_toBottomOf="@id/tv_Otc" />
 
             //약 외형 묘사
+            <TextView
+                android:id="@+id/tv_Chart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="▶약 외형"
+                android:fontFamily="@font/noto_medium"
+                android:textColor="#445E86"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@id/CHART"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/OTC" />
 
             <TextView
                 android:id="@+id/CHART"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="347dp"
                 android:fontFamily="@font/noto_medium"
                 android:text="CHART"
                 android:textColor="#445E86"
-                android:textSize="12dp"
-                app:layout_constraintBottom_toTopOf="@id/EFCY"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@id/tv_Deposit"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/OTC" />
-
-            //효능
-            <TextView
-                android:id="@+id/EFCY"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/noto_medium"
-                android:text="EFCY"
-                android:textColor="#445E86"
-                android:textSize="12dp"
-                app:layout_constraintBottom_toTopOf="@id/USEMETHOD"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/CHART" />
-
-            //복용방법
-
-            <TextView
-                android:id="@+id/USEMETHOD"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/noto_medium"
-                android:text="USEMETHOD"
-                android:textColor="#445E86"
-                android:textSize="12dp"
-                app:layout_constraintBottom_toTopOf="@id/QESITM"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/EFCY" />
-
-            //주의사항
-
-            <TextView
-                android:id="@+id/QESITM"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/noto_medium"
-                android:text="QESITM"
-                android:textColor="#445E86"
-                android:textSize="12dp"
-                app:layout_constraintBottom_toTopOf="@id/DEPOSIT"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/USEMETHOD" />
+                app:layout_constraintTop_toBottomOf="@id/tv_Chart" />
 
             //보관방법
+            <TextView
+                android:id="@+id/tv_Deposit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="▶보관방법"
+                android:fontFamily="@font/noto_medium"
+                android:textColor="#445E86"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@id/DEPOSIT"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/CHART" />
 
             <TextView
                 android:id="@+id/DEPOSIT"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="336dp"
                 android:fontFamily="@font/noto_medium"
                 android:text="DEPOSIT"
                 android:textColor="#445E86"
-                android:textSize="12dp"
-                app:layout_constraintBottom_toTopOf="@id/VALID_TERM"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@id/tv_Term"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/QESITM" />
+                app:layout_constraintTop_toBottomOf="@id/tv_Deposit" />
 
             //복용기간
+            <TextView
+                android:id="@+id/tv_Term"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="▶복용기간"
+                android:fontFamily="@font/noto_medium"
+                android:textColor="#445E86"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@id/VALID_TERM"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/DEPOSIT" />
+
             <TextView
                 android:id="@+id/VALID_TERM"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="313dp"
                 android:fontFamily="@font/noto_medium"
                 android:text="VALID_TERM"
                 android:textColor="#445E86"
-                android:textSize="12dp"
-                app:layout_constraintBottom_toTopOf="@id/TOTAL_CONTENT"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@id/tv_Efcy"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/DEPOSIT" />
+                app:layout_constraintTop_toBottomOf="@id/tv_Term" />
 
-            //총량 성분 총량
+            //효능
             <TextView
-                android:id="@+id/TOTAL_CONTENT"
+                android:id="@+id/tv_Efcy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="▶효능"
                 android:fontFamily="@font/noto_medium"
-                android:text="TOTAL_CONTENT"
                 android:textColor="#445E86"
-                android:textSize="12dp"
-                app:layout_constraintBottom_toTopOf="@id/MAIN_INGR"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@id/EFCY"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/VALID_TERM" />
 
-            //주요성분
             <TextView
-                android:id="@+id/MAIN_INGR"
+                android:id="@+id/EFCY"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="358dp"
                 android:fontFamily="@font/noto_medium"
-                android:text="MAIN_INGR"
+                android:text="EFCY"
                 android:textColor="#445E86"
-                android:textSize="12dp"
-                app:layout_constraintBottom_toTopOf="@id/INGR_NAME"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@id/tv_Use"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/TOTAL_CONTENT" />
+                app:layout_constraintTop_toBottomOf="@id/tv_Efcy" />
 
-            //총성분
+            //복용방법
             <TextView
-                android:id="@+id/INGR_NAME"
+                android:id="@+id/tv_Use"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="▶복용방법"
                 android:fontFamily="@font/noto_medium"
-                android:text="INGR_NAME"
                 android:textColor="#445E86"
-                android:textSize="12dp"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@id/USEMETHOD"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/EFCY" />
+
+            <TextView
+                android:id="@+id/USEMETHOD"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="312dp"
+                android:fontFamily="@font/noto_medium"
+                android:textColor="#445E86"
+                android:textSize="12sp"
+                android:text="USEMETHOD"
+                app:layout_constraintBottom_toTopOf="@id/tv_qes"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_Use" />
+
+            //주의사항
+            <TextView
+                android:id="@+id/tv_qes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="▶주의성분"
+                android:fontFamily="@font/noto_medium"
+                android:textColor="#445E86"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@id/QESITM"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/USEMETHOD" />
+
+            <TextView
+                android:id="@+id/QESITM"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="342dp"
+                android:fontFamily="@font/noto_medium"
+                android:text="QESITM"
+                android:textColor="#445E86"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@id/tv_Qnt"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_qes" />
+
+            //주요 성분 갯수
+            <TextView
+                android:id="@+id/tv_Qnt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="▶주요성분개수"
+                android:fontFamily="@font/noto_medium"
+                android:textColor="#445E86"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@id/QNT"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/QESITM" />
+
+            <TextView
+                android:id="@+id/QNT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="361dp"
+                android:fontFamily="@font/noto_medium"
+                android:text="QNT"
+                android:textColor="#445E86"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/MAIN_INGR" />
+                app:layout_constraintTop_toBottomOf="@id/tv_Qnt" />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

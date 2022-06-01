@@ -15,8 +15,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
         android:layout_marginTop="33dp"
+        android:layout_marginEnd="15dp"
         android:fontFamily="@font/noto_bold"
         android:gravity="center_horizontal"
         android:text="덱시부펜연질켑슐(덱시부프로펜)"
@@ -59,6 +59,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/button">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -67,6 +68,7 @@
             android:text="복약기간"
             android:textColor="@color/navy"
             android:textSize="12sp" />
+
         <TextView
             android:id="@+id/to_date"
             android:layout_width="60dp"
@@ -80,6 +82,7 @@
             android:text="default"
             android:textColor="@color/navy"
             android:textSize="11dp" />
+
         <View
             android:layout_width="14dp"
             android:layout_height="2dp"
@@ -104,37 +107,36 @@
 
     <EditText
         android:id="@+id/record"
-        android:gravity="center"
         android:layout_width="230dp"
         android:layout_height="40dp"
+        android:layout_marginTop="25dp"
         android:background="@drawable/popup_radius"
+        android:focusable="true"
         android:fontFamily="@font/noto_medium"
+        android:gravity="center"
         android:hint="태그를 입력해주세요."
+        android:singleLine="true"
         android:textColor="#445E86"
         android:textSize="12sp"
-        android:focusable="true"
-        android:singleLine="true"
-        app:layout_constraintTop_toBottomOf="@id/term"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        android:layout_marginTop="25dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/term" />
 
     <TextView
         android:id="@+id/txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
         android:fontFamily="@font/noto_medium"
         android:text="기록"
-        android:layout_marginStart="5dp"
         android:textColor="@color/navy"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/record"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.115"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/record"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="@+id/record" />
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -142,26 +144,25 @@
         android:layout_height="70dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@id/popup_ok_btn"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txt"
-        app:layout_constraintVertical_bias="0.437">
-
+        app:layout_constraintVertical_bias="0.5"
+        android:layout_marginTop="30dp">
         <TextView
             android:id="@+id/hashtag1"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:layout_marginStart="50dp"
-            android:layout_marginEnd="15dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginEnd="12dp"
             android:background="@drawable/radius_navy"
             android:text=""
             android:textColor="@color/white"
-            android:textSize="15dp"
-            app:layout_constraintEnd_toStartOf="@id/hashtag2"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:textSize="12dp"
+            android:fontFamily="@font/noto_medium"
+            android:includeFontPadding="false"
             tools:ignore="MissingConstraints" />
-
         <TextView
             android:id="@+id/hashtag2"
             android:layout_width="wrap_content"
@@ -170,12 +171,12 @@
             android:background="@drawable/radius_navy"
             android:text=""
             android:textColor="@color/white"
-            android:textSize="15dp"
-            app:layout_constraintEnd_toStartOf="@id/hashtag3"
+            android:textSize="12dp"
+            android:fontFamily="@font/noto_medium"
+            android:includeFontPadding="false"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintStart_toEndOf="@id/hashtag1"
             tools:ignore="MissingConstraints" />
-
         <TextView
             android:id="@+id/hashtag3"
             android:layout_width="wrap_content"
@@ -183,9 +184,10 @@
             android:background="@drawable/radius_navy"
             android:text=""
             android:textColor="@color/white"
-            android:textSize="15dp"
+            android:textSize="12dp"
+            android:fontFamily="@font/noto_medium"
+            android:includeFontPadding="false"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintStart_toEndOf="@id/hashtag2"
             tools:ignore="MissingConstraints" />
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -203,11 +205,11 @@
         android:textColor="@color/white"
         android:textSize="12dp"
         app:backgroundTint="@null"
-        app:layout_constraintTop_toBottomOf="@id/record"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/record"
         app:layout_constraintVertical_bias="0.9" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
