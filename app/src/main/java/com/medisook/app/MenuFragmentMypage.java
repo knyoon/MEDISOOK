@@ -54,7 +54,7 @@ public class MenuFragmentMypage extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.mypage, container, false);
-        tv_hashtag = (TextView)rootView.findViewById(R.id.hashtag);
+        tv_hashtag = (TextView)rootView.findViewById(R.id.tv_hashtag);
         recyclerView = (RecyclerView) rootView. findViewById(R.id.recycler_view_record);
         recordItemArrayList = new ArrayList<>();
 

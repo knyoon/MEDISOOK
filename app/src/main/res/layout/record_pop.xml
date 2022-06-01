@@ -136,20 +136,59 @@
         app:layout_constraintTop_toTopOf="@+id/record"
         app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/hashtag"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:background="@drawable/radius_navy"
-        android:text=""
-        android:textColor="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/txt"
-        android:textSize="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/popup_ok_btn"
-        tools:ignore="MissingConstraints" />
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/popup_ok_btn"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt"
+        app:layout_constraintVertical_bias="0.437">
+
+        <TextView
+            android:id="@+id/hashtag1"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/radius_navy"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="15dp"
+            app:layout_constraintEnd_toStartOf="@id/hashtag2"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/hashtag2"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/radius_navy"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="15dp"
+            app:layout_constraintEnd_toStartOf="@id/hashtag3"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toEndOf="@id/hashtag1"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/hashtag3"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:background="@drawable/radius_navy"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toEndOf="@id/hashtag2"
+            tools:ignore="MissingConstraints" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
         android:id="@+id/popup_ok_btn"

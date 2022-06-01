@@ -36,11 +36,13 @@ import org.w3c.dom.Text;
 import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Locale;
 
 public class CustomDialog_record extends AlertDialog implements View.OnClickListener{
     private final ArrayList<DrugItem> drugItemArrayList;
+    private ArrayList<String> hashtagArrayList;
     int position;
     TextView TextView_get, textValue;
     private EditText to_date;
@@ -49,6 +51,8 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
     private TextView final_date;
     private EditText from_date;
     private TextView textView1;
+    private TextView textView2;
+    private TextView textView3;
     private TextView drugName;
     private TextView et_Date;
     private TextView txt;
@@ -104,7 +108,9 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
 
         inital_date = (TextView) findViewById(R.id.to_date);
         final_date = (TextView) findViewById(R.id.from_date);
-        textView1 = (TextView) findViewById(R.id.hashtag);
+        textView1 = (TextView) findViewById(R.id.hashtag1);
+        textView2 = (TextView) findViewById(R.id.hashtag2);
+        textView3 = (TextView) findViewById(R.id.hashtag3);
         drugName = (TextView) findViewById(R.id.drugName);
         drugName.setText(drugItemArrayList.get(position).getDrugName());
 
@@ -114,31 +120,52 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
         et_Date = (TextView) findViewById(R.id.to_date);
         et_Date1 = (TextView) findViewById(R.id.from_date);
         et_record = (EditText) findViewById(R.id.record);
+        hashtagArrayList = new ArrayList<>(Arrays.asList("", "", ""));
 
         et_record.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 Log.v("키보드", "이벤트" + et_record.getText());
-                if (event.getAction() != KeyEvent.ACTION_DOWN) {
-                    String result = et_record.getText().toString(); //EditText에 입력된 값 가져오기
-                    Log.v("세영", et_record.getText().toString());
-                    textView1.setText(et_record.getText());
-                    et_record.getText().clear();
-                    InputMethodManager imm = (InputMethodManager) mContext.getSystemService(INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(et_record.getWindowToken(), 0);
-                    //Toast.makeText(mContext.getApplicationContext(), et_record.getText(), Toast.LENGTH_LONG).show();
-                    return true;
-                }
-                switch (keyCode) {
-                    case KeyEvent.KEYCODE_1:
-                        break;
-                    case KeyEvent.KEYCODE_2:
-                        break;
-                    case KeyEvent.KEYCODE_3:
-                        break;
-                }
+                    if (event.getAction() != KeyEvent.ACTION_DOWN) {
+                        //String result = et_record.getText().toString(); //EditText에 입력된 값 가져오기
+                        Log.v("세영", et_record.getText().toString());
+                        textView1.setText(et_record.getText());
+                        hashtagArrayList.add(0, String.valueOf(et_record.getText().toString()));
+                        Log.v("태그", String.valueOf(hashtagArrayList));
+                        textView1.setText(String.valueOf(hashtagArrayList.get(0)));
+                        textView2.setText(String.valueOf(hashtagArrayList.get(1)));
+                        textView3.setText(String.valueOf(hashtagArrayList.get(2)));
+
+//                        for(int i =0; i<=2; i++){
+//                            hashtagArrayList.add(String.valueOf(et_record.getText().toString()));
+//                            Log.v("태그", String.valueOf(hashtagArrayList));
+//                            Log.v("태그2", String.valueOf(hashtagArrayList.get(i)));
+//                        }
+                        Log.v("태그1", String.valueOf(hashtagArrayList.get(0)));
+                        Log.v("태그2", String.valueOf(hashtagArrayList.get(1)));
+                        Log.v("태그3", String.valueOf(hashtagArrayList.get(2)));
+                        //Log.v("태그2", hashtagArrayList.get(1));
+                        et_record.getText().clear();
+//                        textView1.setText(String.valueOf(hashtagArrayList.get(0)));
+//                        textView2.setText(String.valueOf(hashtagArrayList.get(1)));
+//                        textView3.setText(String.valueOf(hashtagArrayList.get(2)));
+                        InputMethodManager imm = (InputMethodManager) mContext.getSystemService(INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(et_record.getWindowToken(), 0);
+                        //Toast.makeText(mContext.getApplicationContext(), et_record.getText(), Toast.LENGTH_LONG).show();
+                        return true;
+
+                    }
+//                    switch (keyCode) {
+//                        case KeyEvent.KEYCODE_1:
+//                            break;
+//                        case KeyEvent.KEYCODE_2:
+//                            break;
+//                        case KeyEvent.KEYCODE_3:
+//                            break;
+//                    }
                 return false;
             }
+
         });
 
         okButton = (Button) findViewById(R.id.popup_ok_btn);
@@ -202,12 +229,15 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
                 Log.v("보내자1", textView1.getText().toString());
                 Log.v("세영", drugName.getText().toString());
                 String name = drugName.getText().toString();
-                String txt = textView1.getText().toString();
+                String txt1 = textView1.getText().toString();
+                String txt2 = textView2.getText().toString();
+                String txt3 = textView3.getText().toString();
                 String start = inital_date.getText().toString();
                 String end = final_date.getText().toString();
                 String favor = GoodBad;
-                Log.d("보내자2", "약이름: " + name + "좋아요/싫어요" + favor + "복용시작: " + start + "복용끝 :" + end + "리뷰: " + txt );
-                customDialogListener.onOkClicked("약이름: " + name + "좋아요/싫어요" + favor + "복용시작: " + start + "복용끝 :" + end + "리뷰: " + txt);
+                //Log.d("보내자2", "약이름: " + name + "좋아요/싫어요" + favor + "복용시작: " + start + "복용끝 :" + end + "리뷰: " + txt1 + txt2 + txt3 );
+                customDialogListener.onOkClicked("약이름: " + name + "좋아요/싫어요" + favor + "복용시작: " + start + "복용끝 :" + end +
+                        "리뷰: " + txt1 + txt2 + txt3);
                 dismiss();
                 break;
         }

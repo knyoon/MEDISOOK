@@ -14,6 +14,7 @@
         <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/drawable/resize_badbutton.xml" value="0.1775" />
         <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/drawable/resize_good.xml" value="0.1215" />
         <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/drawable/resize_goodbutton.xml" value="0.1775" />
+        <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/drawable/resize_greenbox.xml" value="0.1" />
         <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/drawable/resize_greenstar.xml" value="0.1955" />
         <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/drawable/resize_hashtagbutton.xml" value="0.1775" />
         <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/drawable/resize_medisooklogo.xml" value="0.1015" />
@@ -40,8 +41,8 @@
         <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/layout/fromdate_picker.xml" value="0.14739583333333334" />
         <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/layout/menu_fragment_main.xml" value="0.13958333333333334" />
         <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/layout/menu_fragment_mypage.xml" value="0.13958333333333334" />
-        <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/layout/mypage.xml" value="0.1" />
-        <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/layout/record_list.xml" value="0.33820459290187893" />
+        <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/layout/mypage.xml" value="0.536" />
+        <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/layout/record_list.xml" value="0.4" />
         <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/layout/record_pop.xml" value="0.4" />
         <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/layout/redpop.xml" value="0.1" />
         <entry key="..\:/Users/82104/AndroidStudioProjects/medisook2/app/src/main/res/layout/search.xml" value="0.1" />
