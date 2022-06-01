@@ -23,6 +23,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
@@ -54,6 +55,7 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
     private TextView start;
     private TextView et_Date1;
     private Button okButton;
+    private Button wish_btn;
     private Context mContext;
     private EditText et_record;
     private ImageButton good_btn;
@@ -138,6 +140,7 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
                 return false;
             }
         });
+
         okButton = (Button) findViewById(R.id.popup_ok_btn);
         good_btn.setOnClickListener(this);
         bad_btn.setOnClickListener(this);

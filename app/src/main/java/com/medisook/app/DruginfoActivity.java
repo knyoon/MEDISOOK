@@ -36,7 +36,7 @@ public class DruginfoActivity extends Fragment implements View.OnClickListener{
     TextView drugName_view;
     ImageView drugImg_view;
     TextView drugentp_view;
-    TextView drugcode_view;
+    //TextView drugcode_view;
     TextView qnt_view;
     TextView otc_view;
     TextView chart_view;
@@ -49,6 +49,8 @@ public class DruginfoActivity extends Fragment implements View.OnClickListener{
     TextView totalcontent_view;
     TextView mainingr_view;
     TextView ingrname_view;
+    Button wish_btn;
+    private Context context;
     ArrayList<DrugItem> drugItem;
     int position;
     private TextView txt;
@@ -56,6 +58,7 @@ public class DruginfoActivity extends Fragment implements View.OnClickListener{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.drug_info);
+
 
     }
 
@@ -78,15 +81,25 @@ public class DruginfoActivity extends Fragment implements View.OnClickListener{
                 record_dialog.show();
                 record_dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
                 break;
+            case R.id.wish_btn:
+                Log.d("찜하기", "누름");
+                Toast.makeText(context, "찜하기 누름", Toast.LENGTH_SHORT).show();
+                break;
+
         }
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.drug_info, container, false);
+
+        context = container.getContext();
+        wish_btn = (Button) rootView.findViewById(R.id.wish_btn);
+        wish_btn.setOnClickListener(this);
+
         drugName_view = (TextView) rootView.findViewById(R.id.drugName);
         drugImg_view = (ImageView) rootView.findViewById(R.id.drugImage);
         drugentp_view = (TextView) rootView.findViewById(R.id.ENTP_NAME);
-        drugcode_view = (TextView) rootView.findViewById(R.id.DRUG_CODE);
+        //drugcode_view = (TextView) rootView.findViewById(R.id.DRUG_CODE);
         qnt_view = (TextView) rootView.findViewById(R.id.QNT);
         otc_view = (TextView) rootView.findViewById(R.id.OTC);
         chart_view = (TextView) rootView.findViewById(R.id.CHART);
@@ -105,7 +118,7 @@ public class DruginfoActivity extends Fragment implements View.OnClickListener{
         String drugName = drugItem.get(position).getDrugName();
         String drugImage  = drugItem.get(position).getDrugImg();
         String entp = drugItem.get(position).getDrugentp();
-        String drugcode =drugItem.get(position).getDrugcode();
+        //String drugcode =drugItem.get(position).getDrugcode();
         String classname =drugItem.get(position).getClassname();
         String qnt = drugItem.get(position).getQnt();
         String otc = drugItem.get(position).getOtc();
@@ -134,7 +147,7 @@ public class DruginfoActivity extends Fragment implements View.OnClickListener{
         Log.d("test", "drugitem : " + drugItem.get(0));
         drugName_view.setText(drugName);
         drugentp_view.setText(entp);
-        drugcode_view.setText(drugcode);
+       // drugcode_view.setText(drugcode);
         qnt_view.setText(qnt);
         otc_view.setText(otc);
         chart_view.setText(chart);
