@@ -51,7 +51,7 @@ public class DruginfoActivity extends Fragment implements View.OnClickListener{
             case R.id.record_pop_btn:
                 CustomDialog_record dialog = new CustomDialog_record(getActivity(), position, drugItem);
                 CustomDialog_record.Builder dialog_bulider = new CustomDialog_record.Builder(getActivity());
-                dialog.setDialogListener(new CustomDialog_record.CustomDialogListener() {
+                dialog.setDialogListener(new CustomDialog_record.CustomDialog_record_Listener() {
                     @Override
                     public void onOkClicked(String text) {
                     }
