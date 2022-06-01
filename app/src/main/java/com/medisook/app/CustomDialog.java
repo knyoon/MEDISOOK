@@ -15,11 +15,18 @@ import android.widget.EditText;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CustomDialog extends AlertDialog implements View.OnClickListener{
     ArrayList<FilterItem> filterItemArrayList, filtered_filterList;
-    ArrayList<String> listItemArrayList;
+    ArrayList<String> listItemArrayList, sym_list;
     LinearLayoutManager linearLayoutManager;
     EditText searchET;
     RecyclerView recyclerView, recyclerView_list;
@@ -28,9 +35,11 @@ public class CustomDialog extends AlertDialog implements View.OnClickListener{
     private Button okButton;
     private Context context;
     private CustomDialogListener customDialogListener;
-    public CustomDialog(Context context) {
+    int btn_pos;
+    public CustomDialog(Context context, int btn_pos) {
         super(context);
         this.context = context;
+        this.btn_pos = btn_pos;
     }
     interface CustomDialogListener{
         void onOkClicked(ArrayList<String> text);
@@ -64,13 +73,46 @@ public class CustomDialog extends AlertDialog implements View.OnClickListener{
 //        for(int i = 0; i<listItemArrayList.size(); i++){
 //
 //        }
-        for(int i = 0; i<100; i++){
-            adapter.setArrayData(new FilterItem(i+"번째 필터", false));
+        try{
+            sym_list = new ArrayList<String>();
+            File file=new File("C:\\Users\\KONG\\Desktop\\medisook\\app\\src\\main\\java\\com\\medisook\\app\\sym.txt");
+//            if (!file.exists()) {
+//                file.createNewFile();
+//            }
+//            FileReader fr=new FileReader(file);
+            FileInputStream input=new FileInputStream("C:\\Users\\KONG\\Desktop\\medisook\\app\\src\\main\\java\\com\\medisook\\app\\sym.txt");
+            Log.d("리스트", "test");
+            InputStreamReader reader=new InputStreamReader(input,"UTF-8");
+            BufferedReader in=new BufferedReader(reader);
+            String readLine = null;
+            while( ( readLine =in.readLine()) != null ){
+                sym_list.add(readLine);
+                Log.d("리스트", readLine);
+            }
+//            fr.close();
+            reader.close();
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        String[] sym_list = {"변비소염[항염]","가려움", "허리통증", "비타민 보급", "관절염", "피곤함", "벌레물린데", "습진","두드러기"};
+        String[] ingr_list = {"시스플라틴", "디만니톨", "클로닉신리시네이트", "L-아스파르트산-L-오르니틴","니모디핀", "돔페리돈","아시클로버","메드록시프로게스테론아세테이트","네틸마이신황산염", "베쿠로늄브롬화물"};
+        switch (btn_pos){
+            case 1:
+                for(int i = 0; sym_list.length > i; i++){
+                    adapter.setArrayData(new FilterItem(sym_list[i]));
+                }
+            case 2:
+                for(int i = 0; sym_list.length > i; i++){
+                    adapter.setArrayData(new FilterItem(ingr_list[i]));
+                }
+            case 3:
+                for(int i = 0; sym_list.length > i; i++){
+                    adapter.setArrayData(new FilterItem(sym_list[i]));
+                }
         }
         adapter.setOnItemClicklistener(new OnItemClickListener() {
             @Override
             public void onItemClick(ViewHolder_filter holder, View view, int position) {
-                Log.d("리스트", "클릭 테스트");
             }
         });
         searchET.addTextChangedListener(new TextWatcher() {

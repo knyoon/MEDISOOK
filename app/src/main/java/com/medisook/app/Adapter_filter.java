@@ -46,7 +46,7 @@ public class Adapter_filter extends RecyclerView.Adapter<ViewHolder_filter> impl
                 filter.setSelected(cb.isChecked());
                 filterItemArrayList.get(pos).setSelected(cb.isChecked());
                 listItemArrayList.add(String.valueOf(cb.getText()));
-                Log.d("리스트", String.valueOf(listItemArrayList.size()));
+//                Log.d("리스트", String.valueOf(listItemArrayList.size()));
             }
         });
     }

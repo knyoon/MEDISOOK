@@ -37,7 +37,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
     private Button yellow_filter_btn;
     private TextView txt;
 
-    private static String IP_ADDRESS = "10.101.14.89:80";
+    private static String IP_ADDRESS = "192.168.18.61:80";
     private static String TAG = "메롱";
     private EditText mEditTextName;
     private EditText mEditTextCountry;
@@ -47,7 +47,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
     private RecyclerView mRecyclerView;
     private EditText mEditTextSearchKeyword;
     private String mJsonString;
-
+    private String searchText;
     ArrayList<DrugItem> drugItemArrayList, filtered_drugList;
     ArrayList<String> listItemArrayList;
     LinearLayoutManager linearLayoutManager;
@@ -55,6 +55,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
     RecyclerView recyclerView, recyclerView_list;
     Adapter adapter;
     Adapter_list adapter_list;
+    int btn_pos;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,13 +97,102 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
             }
         }
 
+        @Override
+        protected String doInBackground(String... params) {
+            Log.d("과연", "test");
+            String serverURL = params[0];
+            String postParameters = "Efcy1=" + params[1];
+            try {
+                //String searchDrug="Data="+searchET.getText().toString();
+                Log.d("과연", postParameters);
+                URL url = new URL(serverURL);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+
+                httpURLConnection.setReadTimeout(20000);
+                httpURLConnection.setConnectTimeout(20000);
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoInput(true);
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.connect();
+
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                outputStream.write(postParameters.getBytes("UTF-8"));
+                outputStream.flush();
+                outputStream.close();
+
+
+                int responseStatusCode = httpURLConnection.getResponseCode();
+                Log.d(TAG, "response code - " + responseStatusCode);
+
+                InputStream inputStream;
+                if(responseStatusCode == HttpURLConnection.HTTP_OK) {
+                    inputStream = httpURLConnection.getInputStream();
+                }
+                else{
+                    inputStream = httpURLConnection.getErrorStream();
+                }
+
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+                StringBuilder sb = new StringBuilder();
+                String line;
+
+                while((line = bufferedReader.readLine()) != null){
+                    sb.append(line);
+                }
+
+                bufferedReader.close();
+
+                return sb.toString().trim();
+
+
+            } catch (Exception e) {
+
+                Log.d(TAG, "InsertData : Error ", e);
+                errorString = e.toString();
+
+                return null;
+            }
+        }
+    }
+    private class ReadData extends AsyncTask<String, Void, String> {
+
+        ProgressDialog progressDialog;
+        String errorString = null;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            progressDialog = ProgressDialog.show(getActivity(),
+                    "Please Wait", null, true, true);
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            progressDialog.dismiss();
+
+            if (result == null){
+                mTextViewResult.setText(errorString);
+            }
+            else {
+
+                mJsonString = result;
+                Log.d("과연", result);
+                showResult();
+            }
+        }
+
 
         @Override
         protected String doInBackground(String... params) {
             Log.d("과연", "test");
             String serverURL = params[0];
-            String postParameters = "Data=" + params[1];
-
+//            String postParameters = "Data=" + params[1];
+            String postParameters = "Data=" + searchText;
 
             try {
 
@@ -159,7 +249,6 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
             }
         }
     }
-
     private void showResult(){
 
         String TAG_JSON="drug";
@@ -236,15 +325,6 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
         }
 
     }
-//    public void searchDrug(String searchText){
-//        filtered_drugList.clear();
-//        for (int i=0; i<drugItemArrayList.size(); i++){
-//            if(drugItemArrayList.get(i).getDrugName().toLowerCase().contains(searchText.toLowerCase())){
-//                filtered_drugList.add(drugItemArrayList.get(i));
-//            }
-//        }
-//        adapter.filterList(filtered_drugList);
-//    }
 
     @Override
     public void onClick(View v) {
@@ -252,38 +332,47 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
         //View dialoglayout = inflater.inflate(R.layout.redpop, null);
         switch (v.getId()){
             case R.id.red_filter_btn:
-                CustomDialog dialog = new CustomDialog(getActivity());
+                btn_pos = 1;
+                CustomDialog dialog = new CustomDialog(getActivity(), 1);
                 CustomDialog.Builder dialog_bulider = new CustomDialog.Builder(getActivity());
                 dialog.setDialogListener(new CustomDialog.CustomDialogListener() {
                     @Override
-                    public void onOkClicked(ArrayList<String> list) {
-                        for (int i = 0;i<list.size();i++){
-                            adapter_list.setArrayData(list.get(i));
-                            Log.d("리스트_2", list.get(i));
+                    public void onOkClicked(ArrayList<String> list_efcy) {
+                        drugItemArrayList.clear();
+                        for (int i = 0;i<list_efcy.size();i++){
+                            InsertData insert = new InsertData();
+                            insert.execute("http://" + IP_ADDRESS + "/filterserch.php", list_efcy.get(i));
+                            adapter_list.setArrayData(list_efcy.get(i), 1);
+                            Log.d("리스트_2", "efcy : " + list_efcy.size());
                         } adapter_list.notifyDataSetChanged();
                     }
                 });
                 dialog.show();
-                Log.d("테스트", "버튼 눌리는지");
                 dialog.getWindow().clearFlags(
                         WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
                 break;
             case R.id.green_filter_btn:
-                CustomDialog dialog2 = new CustomDialog(getActivity());
+                btn_pos = 2;
+                CustomDialog dialog2 = new CustomDialog(getActivity(), 2);
                 CustomDialog.Builder dialog2_bulider = new CustomDialog.Builder(getActivity());
                 dialog2.setDialogListener(new CustomDialog.CustomDialogListener() {
                     @Override
-                    public void onOkClicked(ArrayList<String> text) {
-//                        txt.setText(text);
+                    public void onOkClicked(ArrayList<String> list_ingr) {
+                        for (int i = 0;i<list_ingr.size();i++){
+                            adapter_list.setArrayData(list_ingr.get(i), 2);
+                            Log.d("리스트_2", "ingr : " + list_ingr.size());
+                        } adapter_list.notifyDataSetChanged();
                     }
                 });
                 dialog2.show();
-
+                dialog2.getWindow().clearFlags(
+                        WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
                 break;
             case R.id.yellow_filter_btn:
+                btn_pos = 3;
                 final String[] items = new String[]{"가", "나"};
                 final boolean[] checkedItems = {false, false, false, true};
-                CustomDialog dialog3 = new CustomDialog(getActivity());
+                CustomDialog dialog3 = new CustomDialog(getActivity(), 3);
                 CustomDialog.Builder dialog3_bulider = new CustomDialog.Builder(getActivity());
                 dialog3.setDialogListener(new CustomDialog.CustomDialogListener() {
                     @Override
@@ -345,13 +434,13 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
         searchET.setOnKeyListener(new View.OnKeyListener(){
             @Override
             public boolean onKey(View view, int i, KeyEvent keyEvent) {
-                String searchText = searchET.getText().toString();
+                searchText = searchET.getText().toString();
                 switch (i){
                     case KeyEvent.KEYCODE_ENTER:
                        if (keyEvent.getAction() == keyEvent.ACTION_UP) {
                            drugItemArrayList.clear();
-                           InsertData insert = new InsertData();
-                           insert.execute("http://" + IP_ADDRESS + "/test1.php", searchText);
+                           ReadData read = new ReadData();
+                           read.execute("http://" + IP_ADDRESS + "/test1.php", searchText);
                            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                            imm.hideSoftInputFromWindow(searchET.getWindowToken(), 0);
                        } return true;
