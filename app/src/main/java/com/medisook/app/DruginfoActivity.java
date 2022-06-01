@@ -1,7 +1,15 @@
 package com.medisook.app;
 
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -19,9 +27,12 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class DruginfoActivity extends Fragment implements View.OnClickListener{
+    private String data;
     TextView drugName_view;
     ImageView drugImg_view;
     TextView drugentp_view;
@@ -45,7 +56,9 @@ public class DruginfoActivity extends Fragment implements View.OnClickListener{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.drug_info);
+
     }
+
     public void setContentView(int drug_info) {
     }
 
@@ -54,11 +67,12 @@ public class DruginfoActivity extends Fragment implements View.OnClickListener{
         LayoutInflater inflater = (LayoutInflater) this.getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         switch (v.getId()){
             case R.id.record_pop_btn:
-                CustomDialog_record record_dialog = new CustomDialog_record(getActivity());
+                CustomDialog_record record_dialog = new CustomDialog_record(getActivity(), position, drugItem);
                 CustomDialog_record.Builder record_dialogbulider = new CustomDialog_record.Builder(getActivity());
                 record_dialog.setDialogListener(new CustomDialog_record.CustomDialog_record_Listener() {
                     @Override
                     public void onOkClicked(String text) {
+                        txt.setText(text);
                     }
                 });
                 record_dialog.show();

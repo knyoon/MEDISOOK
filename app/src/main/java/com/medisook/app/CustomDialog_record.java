@@ -7,12 +7,14 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
@@ -21,8 +23,12 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.Toast;
+
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
@@ -37,6 +43,7 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
     int position;
     TextView TextView_get, textValue;
     private EditText to_date;
+    TextView drugName_view;
     private TextView inital_date;
     private TextView final_date;
     private EditText from_date;
@@ -51,10 +58,22 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
     private EditText et_record;
     private ImageButton good_btn;
     private ImageButton bad_btn;
-    private ImageButton good_btn;
-    private ImageButton bad_btn;
     private CustomDialog_record_Listener customDialogListener;
 
+//    public CustomDialog_record() {
+//        super();
+//    }
+//
+//    public void setArguments(Bundle args) {
+//    }
+
+    public void show(FragmentManager supportFragmentManager, String sample_dialog_fragment) {
+    }
+
+    interface CustomDialog_recordListener{
+        void onOkClicked(String text);
+        void onOkClicked(ArrayList<RecordItem> text);
+    }
 
     public CustomDialog_record(Context context, int position, ArrayList<DrugItem> drugItemArrayList) {
         super(context);
@@ -74,6 +93,7 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
         getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
@@ -99,13 +119,12 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
                 Log.v("키보드", "이벤트" + et_record.getText());
                 if (event.getAction() != KeyEvent.ACTION_DOWN) {
                     String result = et_record.getText().toString(); //EditText에 입력된 값 가져오기
-                    Log.v("세영- 태그기록", et_record.getText().toString());
+                    Log.v("세영", et_record.getText().toString());
                     textView1.setText(et_record.getText());
                     et_record.getText().clear();
-                    InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+                    InputMethodManager imm = (InputMethodManager) mContext.getSystemService(INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(et_record.getWindowToken(), 0);
                     //Toast.makeText(mContext.getApplicationContext(), et_record.getText(), Toast.LENGTH_LONG).show();
-
                     return true;
                 }
                 switch (keyCode) {
@@ -119,23 +138,29 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
                 return false;
             }
         });
+        okButton = (Button) findViewById(R.id.popup_ok_btn);
+        good_btn.setOnClickListener(this);
+        bad_btn.setOnClickListener(this);
         okButton.setOnClickListener(this);
         et_Date.setOnClickListener(this);
         et_Date1.setOnClickListener(this);
     }
+//
+//    private Bundle setArguments() {
+//        return drugName_view;
+//    }
 
-
+    String GoodBad = "입력되지않음";
     @Override
     public void onClick(View v) {
-        String GoodBad = "입력되지않음";
         switch (v.getId()) {
             case R.id.good_btn:
                 GoodBad = "good";
-                Log.d("세영-좋아요 버튼", GoodBad);
+                Log.v("세영", GoodBad);
                 break;
             case R.id.bad_btn:
                 GoodBad = "bad";
-                Log.d("세영-싫어요 버튼", GoodBad);
+                Log.v("세영", GoodBad);
                 break;
             case R.id.to_date:
                 Log.v("태그", "to-date 클릭");
@@ -147,7 +172,7 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
                         myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                         String inital_date = String.valueOf(year) + String.valueOf(month) + String.valueOf(dayOfMonth);
                         //Log.v("보내", inital_date);
-                        Log.v("세영- 시작 날짜", inital_date);
+                        Log.v("세영", inital_date);
                         updateLabel();
                     }
                 };
@@ -163,7 +188,7 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
                         myCalendar.set(Calendar.MONTH, month);
                         myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                         String final_date = String.valueOf(year) + String.valueOf(month) + String.valueOf(dayOfMonth);
-                        Log.v("세영- 끝 날짜", final_date);
+                        Log.d("세영", final_date);
                         updateLabel1();
                     }
                 };
@@ -172,12 +197,14 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
                 break;
             case R.id.popup_ok_btn:
                 Log.v("보내자1", textView1.getText().toString());
+                Log.v("세영", drugName.getText().toString());
+                String name = drugName.getText().toString();
                 String txt = textView1.getText().toString();
                 String start = inital_date.getText().toString();
                 String end = final_date.getText().toString();
                 String favor = GoodBad;
-                Log.v("보내자2", txt + start + end + favor);
-                customDialogListener.onOkClicked(txt + start + end + favor);
+                Log.d("보내자2", "약이름: " + name + "좋아요/싫어요" + favor + "복용시작: " + start + "복용끝 :" + end + "리뷰: " + txt );
+                customDialogListener.onOkClicked("약이름: " + name + "좋아요/싫어요" + favor + "복용시작: " + start + "복용끝 :" + end + "리뷰: " + txt);
                 dismiss();
                 break;
         }

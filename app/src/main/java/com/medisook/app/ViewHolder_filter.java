@@ -24,6 +24,11 @@ public class ViewHolder_filter extends RecyclerView.ViewHolder {
                     listener.onItemClick(ViewHolder_filter.this, compoundButton, position);
                 }
             }
+
+            private int getAbsoluteAdapterPosition() {
+                return 0;
+            }
+
         });
         checkBox.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -35,6 +40,10 @@ public class ViewHolder_filter extends RecyclerView.ViewHolder {
                 }
                 //Toast.makeText(context, strText, Toast.LENGTH_SHORT).show();
             }
+
+            private int getAbsoluteAdapterPosition() {
+                return 0;
+            }
         });
         itemView.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -44,6 +53,11 @@ public class ViewHolder_filter extends RecyclerView.ViewHolder {
                     listener.onItemClick(ViewHolder_filter.this, view, position);
                 }
             }
+
+            private int getAbsoluteAdapterPosition() {
+                return 0;
+            }
         });
     }
+
 }

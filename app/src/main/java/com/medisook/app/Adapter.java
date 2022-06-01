@@ -1,5 +1,6 @@
 package com.medisook.app;
 // https://3001ssw.tistory.com/201
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -42,7 +43,7 @@ public class Adapter extends RecyclerView.Adapter<ViewHolder> {
         return viewholder;
     }
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         DrugItem drugimage = drugItemArrayList.get(position);
         String imageurl=drugimage.getDrugImg();
         if(imageurl.isEmpty()==false){
@@ -60,14 +61,17 @@ public class Adapter extends RecyclerView.Adapter<ViewHolder> {
             holder.drugName.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+
                 FragmentManager fm = ((FragmentActivity) view.getContext()).getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction;
+
                 DruginfoActivity fragmentDruginfo = new DruginfoActivity();
                 DrugItem drugItem = new DrugItem();
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("DrugItem", drugItemArrayList);
                 bundle.putInt("position", position);
                 fragmentDruginfo.setArguments(bundle);
+
                 fragmentTransaction = fm.beginTransaction().add(R.id.menu_frame_layout, fragmentDruginfo);
                 fragmentTransaction.addToBackStack(null).commit();
             }

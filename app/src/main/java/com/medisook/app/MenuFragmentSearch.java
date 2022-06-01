@@ -46,7 +46,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
     private Button yellow_filter_btn;
     private TextView txt;
 
-    private static String IP_ADDRESS = "10.101.14.89:80";
+    private static String IP_ADDRESS = "192.168.18.61:80";
     private static String TAG = "메롱";
     private EditText mEditTextName;
     private EditText mEditTextCountry;
@@ -88,6 +88,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                     "Please Wait", null, true, true);
         }
 
+
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
@@ -95,6 +96,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
             progressDialog.dismiss();
 
             if (result == null){
+
                 mTextViewResult.setText(errorString);
             }
             else {
@@ -143,6 +145,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 else{
                     inputStream = httpURLConnection.getErrorStream();
                 }
+
 
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
                 BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
@@ -235,6 +238,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 adapter.setArrayData(drugData);
                 Log.d(TAG, drugData.getDrugImg().toString());
             }
+
             adapter.notifyDataSetChanged();
 
 
