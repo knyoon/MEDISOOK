@@ -1,6 +1,9 @@
 package com.medisook.app;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.annotation.ContentView;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -24,7 +27,7 @@ import java.util.ArrayList;
 
 
 public class MenuFragmentMypage extends Fragment {
-
+    private TextView tv_hashtag;
     ArrayList<RecordItem> recordItemArrayList;
     LinearLayoutManager linearLayoutManager;
     RecyclerView recyclerView;
@@ -40,7 +43,6 @@ public class MenuFragmentMypage extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.mypage);
     }
     public void onResume() {
@@ -52,6 +54,7 @@ public class MenuFragmentMypage extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.mypage, container, false);
+        tv_hashtag = (TextView)rootView.findViewById(R.id.tv_hashtag);
         recyclerView = (RecyclerView) rootView. findViewById(R.id.recycler_view_record);
 
         recordItemArrayList = new ArrayList<>();
@@ -68,5 +71,7 @@ public class MenuFragmentMypage extends Fragment {
         }
         recyclerView.setAdapter(adapter);
         return rootView;
+        // Inflate the layout for this fragment
+        //return inflater.inflate(R.layout.fragment_menu_mypage, container, false);
     }
 }

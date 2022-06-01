@@ -13,7 +13,7 @@ public class ViewHolder_record extends RecyclerView.ViewHolder {
     public TextView drugName;
     ViewHolder_record(Context context, View itemView){
         super(itemView);
-        drugName = itemView.findViewById(R.id.drugName);
+        drugName = itemView.findViewById(R.id.record_drugname);
 //        drugImage = itemView.findViewById(R.id.drugImage);
 //        drugImage.setOnClickListener(new View.OnClickListener(){
 //            @Override

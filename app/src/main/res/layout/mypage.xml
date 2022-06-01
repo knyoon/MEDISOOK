@@ -138,7 +138,7 @@
     </LinearLayout>
 
     <ScrollView
-        android:layout_width="300dp"
+        android:layout_width="302dp"
         android:layout_height="400dp"
         android:layout_marginLeft="36dp"
         android:layout_marginTop="24dp"
@@ -155,7 +155,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="NotSibling">
+            tools:ignore="NotSibling"
+            android:layout_marginVertical="5dp">
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_record"
                 android:layout_width="match_parent"
