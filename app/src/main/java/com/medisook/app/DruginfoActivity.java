@@ -15,8 +15,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
 public class DruginfoActivity extends Fragment implements View.OnClickListener{
@@ -36,6 +34,8 @@ public class DruginfoActivity extends Fragment implements View.OnClickListener{
     TextView totalcontent_view;
     TextView mainingr_view;
     TextView ingrname_view;
+    ArrayList<DrugItem> drugItem;
+    int position;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +49,7 @@ public class DruginfoActivity extends Fragment implements View.OnClickListener{
         LayoutInflater inflater = (LayoutInflater) this.getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         switch (v.getId()){
             case R.id.record_pop_btn:
-                CustomDialog_record dialog = new CustomDialog_record(getActivity());
+                CustomDialog_record dialog = new CustomDialog_record(getActivity(), position, drugItem);
                 CustomDialog_record.Builder dialog_bulider = new CustomDialog_record.Builder(getActivity());
                 dialog.setDialogListener(new CustomDialog_record.CustomDialogListener() {
                     @Override
@@ -81,8 +81,8 @@ public class DruginfoActivity extends Fragment implements View.OnClickListener{
         mainingr_view = (TextView) rootView.findViewById(R.id.MAIN_INGR);
         ingrname_view = (TextView) rootView.findViewById(R.id.INGR_NAME);
         Bundle bundle = getArguments();
-        int position = bundle.getInt("position");
-        ArrayList<DrugItem> drugItem = (ArrayList<DrugItem>) bundle.getSerializable(("DrugItem"));
+        position = bundle.getInt("position");
+        drugItem = (ArrayList<DrugItem>) bundle.getSerializable(("DrugItem"));
         String drugName = drugItem.get(position).getDrugName();
         String drugImage  = drugItem.get(position).getDrugImg();
         String entp = drugItem.get(position).getDrugentp();

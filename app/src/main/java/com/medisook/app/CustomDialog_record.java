@@ -18,13 +18,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
 public class CustomDialog_record extends AlertDialog implements View.OnClickListener{
+    private final ArrayList<DrugItem> drugItemArrayList;
+    int position;
     TextView TextView_get, textValue;
     private EditText to_date;
     private EditText from_date;
+    private TextView drugName;
     private TextView et_Date;
     private TextView et_Date1;
     private TextView textView1;
@@ -35,9 +39,11 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
     private ImageButton bad_btn;
     private CustomDialogListener customDialogListener;
 
-    public CustomDialog_record(Context context) {
+    public CustomDialog_record(Context context, int position, ArrayList<DrugItem> drugItemArrayList) {
         super(context);
         this.mContext = context;
+        this.drugItemArrayList = drugItemArrayList;
+        this.position = position;
     }
     interface CustomDialogListener{
         void onOkClicked(String text);
@@ -65,6 +71,9 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
         getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.record_pop);
+        drugName = (TextView) findViewById(R.id.drugName);
+        drugName.setText(drugItemArrayList.get(position).getDrugName());
+
         good_btn = (ImageButton) findViewById(R.id.good_btn);
         good_btn.setOnClickListener(new Button.OnClickListener() {
             @Override
