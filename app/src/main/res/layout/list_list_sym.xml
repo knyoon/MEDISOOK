@@ -18,6 +18,6 @@
         android:layout_marginHorizontal="10dp"
         android:text="필터"
         android:textColor="@color/white"
-        android:background="@drawable/selected_list"
+        android:background="@drawable/selected_list_sym"
         tools:ignore="MissingConstraints"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
