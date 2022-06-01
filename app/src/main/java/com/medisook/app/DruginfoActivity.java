@@ -19,8 +19,6 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
 public class DruginfoActivity extends Fragment implements View.OnClickListener{
@@ -40,6 +38,8 @@ public class DruginfoActivity extends Fragment implements View.OnClickListener{
     TextView totalcontent_view;
     TextView mainingr_view;
     TextView ingrname_view;
+    ArrayList<DrugItem> drugItem;
+    int position;
     private TextView txt;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -86,8 +86,8 @@ public class DruginfoActivity extends Fragment implements View.OnClickListener{
         mainingr_view = (TextView) rootView.findViewById(R.id.MAIN_INGR);
         ingrname_view = (TextView) rootView.findViewById(R.id.INGR_NAME);
         Bundle bundle = getArguments();
-        int position = bundle.getInt("position");
-        ArrayList<DrugItem> drugItem = (ArrayList<DrugItem>) bundle.getSerializable(("DrugItem"));
+        position = bundle.getInt("position");
+        drugItem = (ArrayList<DrugItem>) bundle.getSerializable(("DrugItem"));
         String drugName = drugItem.get(position).getDrugName();
         String drugImage  = drugItem.get(position).getDrugImg();
         String entp = drugItem.get(position).getDrugentp();

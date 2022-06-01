@@ -5,8 +5,6 @@ import static android.content.Context.INPUT_METHOD_SERVICE;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
@@ -30,16 +28,20 @@ import org.w3c.dom.Text;
 
 import java.net.URI;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class CustomDialog_record extends AlertDialog implements View.OnClickListener {
+public class CustomDialog_record extends AlertDialog implements View.OnClickListener{
+    private final ArrayList<DrugItem> drugItemArrayList;
+    int position;
     TextView TextView_get, textValue;
     private EditText to_date;
     private TextView inital_date;
     private TextView final_date;
     private EditText from_date;
     private TextView textView1;
+    private TextView drugName;
     private TextView et_Date;
     private TextView txt;
     private TextView start;
@@ -54,9 +56,11 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
     private CustomDialog_record_Listener customDialogListener;
 
 
-    public CustomDialog_record(Context context) {
+    public CustomDialog_record(Context context, int position, ArrayList<DrugItem> drugItemArrayList) {
         super(context);
         this.mContext = context;
+        this.drugItemArrayList = drugItemArrayList;
+        this.position = position;
     }
 
     interface CustomDialog_record_Listener {
@@ -79,6 +83,9 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
         inital_date = (TextView) findViewById(R.id.to_date);
         final_date = (TextView) findViewById(R.id.from_date);
         textView1 = (TextView) findViewById(R.id.hashtag);
+        drugName = (TextView) findViewById(R.id.drugName);
+        drugName.setText(drugItemArrayList.get(position).getDrugName());
+
         good_btn = (ImageButton) findViewById(R.id.good_btn);
         bad_btn = (ImageButton) findViewById(R.id.bad_btn);
         okButton = (Button) findViewById(R.id.popup_ok_btn);
@@ -112,13 +119,11 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
                 return false;
             }
         });
-        okButton = (Button) findViewById(R.id.popup_ok_btn);
-        good_btn.setOnClickListener(this);
-        bad_btn.setOnClickListener(this);
         okButton.setOnClickListener(this);
         et_Date.setOnClickListener(this);
         et_Date1.setOnClickListener(this);
     }
+
 
     @Override
     public void onClick(View v) {
