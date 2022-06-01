@@ -60,6 +60,8 @@
         <entry key="..\:/Users/KONG/Desktop/medisook/app/src/main/res/drawable/search_bar_popup.xml" value="0.1325" />
         <entry key="..\:/Users/KONG/Desktop/medisook/app/src/main/res/drawable/selected_list.xml" value="0.2045" />
         <entry key="..\:/Users/KONG/Desktop/medisook/app/src/main/res/drawable/selected_list_ingr.xml" value="0.189" />
+        <entry key="..\:/Users/KONG/Desktop/medisook/app/src/main/res/drawable/selected_list_qesitm.xml" value="0.1875" />
+        <entry key="..\:/Users/KONG/Desktop/medisook/app/src/main/res/drawable/selected_list_sym.xml" value="0.1" />
         <entry key="..\:/Users/KONG/Desktop/medisook/app/src/main/res/drawable/selector.xml" value="0.108" />
         <entry key="..\:/Users/KONG/Desktop/medisook/app/src/main/res/layout/AndroidManifest.xml" value="0.19814814814814816" />
         <entry key="..\:/Users/KONG/Desktop/medisook/app/src/main/res/layout/activity_gallery.xml" value="0.109375" />
@@ -73,6 +75,8 @@
         <entry key="..\:/Users/KONG/Desktop/medisook/app/src/main/res/layout/layout_listitem.xml" value="0.22" />
         <entry key="..\:/Users/KONG/Desktop/medisook/app/src/main/res/layout/list_list.xml" value="0.75" />
         <entry key="..\:/Users/KONG/Desktop/medisook/app/src/main/res/layout/list_list_ingr.xml" value="0.184375" />
+        <entry key="..\:/Users/KONG/Desktop/medisook/app/src/main/res/layout/list_list_qesitm.xml" value="0.18385416666666668" />
+        <entry key="..\:/Users/KONG/Desktop/medisook/app/src/main/res/layout/list_list_sym.xml" value="0.18020833333333333" />
         <entry key="..\:/Users/KONG/Desktop/medisook/app/src/main/res/layout/main_page.xml" value="0.22" />
         <entry key="..\:/Users/KONG/Desktop/medisook/app/src/main/res/layout/my_page.xml" value="0.1" />
         <entry key="..\:/Users/KONG/Desktop/medisook/app/src/main/res/layout/mypage.xml" value="0.18229166666666666" />

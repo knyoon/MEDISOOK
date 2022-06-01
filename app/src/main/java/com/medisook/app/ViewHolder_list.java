@@ -14,6 +14,16 @@ public class ViewHolder_list extends RecyclerView.ViewHolder {
     public TextView txt;
     ViewHolder_list(Context context, View itemView){
         super(itemView);
+//        itemView.setOnLongClickListener(new View.OnLongClickListener(){
+//            @Override
+//            public boolean onLongClick(View view) {
+//                int position = getAbsoluteAdapterPosition();
+//                if(position != RecyclerView.NO_POSITION){
+//
+//                }
+//                return false;
+//            }
+//        });
         txt = (TextView) itemView.findViewById(R.id.list_content);
         txt.setOnClickListener(new View.OnClickListener(){
             @Override

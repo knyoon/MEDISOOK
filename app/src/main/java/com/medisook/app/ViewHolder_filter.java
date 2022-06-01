@@ -1,5 +1,6 @@
 package com.medisook.app;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -19,6 +20,9 @@ public class ViewHolder_filter extends RecyclerView.ViewHolder {
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                String strText = checkBox.getText().toString();
+                Toast.makeText(checkBox.getContext(), strText, Toast.LENGTH_SHORT).show();
+                Log.d("checkbox", "test");
                 int position = getAbsoluteAdapterPosition();
                 if(listener != null){
                     listener.onItemClick(ViewHolder_filter.this, compoundButton, position);
@@ -28,12 +32,13 @@ public class ViewHolder_filter extends RecyclerView.ViewHolder {
         checkBox.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+
                 String strText = checkBox.getText().toString();
                 int position = getAbsoluteAdapterPosition();
                 if(listener != null){
                     listener.onItemClick(ViewHolder_filter.this, view, position);
                 }
-                //Toast.makeText(context, strText, Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), strText, Toast.LENGTH_SHORT).show();
             }
         });
         itemView.setOnClickListener(new View.OnClickListener(){

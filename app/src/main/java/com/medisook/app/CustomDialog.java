@@ -94,21 +94,26 @@ public class CustomDialog extends AlertDialog implements View.OnClickListener{
         }catch (Exception e) {
             e.printStackTrace();
         }
-        String[] sym_list = {"변비소염[항염]","가려움", "허리통증", "비타민 보급", "관절염", "피곤함", "벌레물린데", "습진","두드러기"};
-        String[] ingr_list = {"시스플라틴", "디만니톨", "클로닉신리시네이트", "L-아스파르트산-L-오르니틴","니모디핀", "돔페리돈","아시클로버","메드록시프로게스테론아세테이트","네틸마이신황산염", "베쿠로늄브롬화물"};
+        String[] sym_list = {"변비소염[항염]","가려움", "허리통증", "비타민 보급", "관절염", "피곤함", "벌레물린데", "습진","두드러기", "생리통"};
+        String[] ingr_list = {"덱시부프로펜", "시스플라틴", "디만니톨", "클로닉신리시네이트", "L-아스파르트산-L-오르니틴","니모디핀", "돔페리돈","아시클로버","메드록시프로게스테론아세테이트","네틸마이신황산염", "베쿠로늄브롬화물"};
+        String[] qesitm_list = {"임부 주의", "노인 주의", "어린이 주의", "졸음 주의", "음주 주의", "흡연 주의", "공복 주의"};
         switch (btn_pos){
             case 1:
+
                 for(int i = 0; sym_list.length > i; i++){
                     adapter.setArrayData(new FilterItem(sym_list[i]));
                 }
+                break;
             case 2:
-                for(int i = 0; sym_list.length > i; i++){
+                for(int i = 0; ingr_list.length > i; i++){
                     adapter.setArrayData(new FilterItem(ingr_list[i]));
                 }
+                break;
             case 3:
-                for(int i = 0; sym_list.length > i; i++){
-                    adapter.setArrayData(new FilterItem(sym_list[i]));
+                for(int i = 0; qesitm_list.length > i; i++){
+                    adapter.setArrayData(new FilterItem(qesitm_list[i]));
                 }
+                break;
         }
         adapter.setOnItemClicklistener(new OnItemClickListener() {
             @Override
@@ -176,7 +181,7 @@ public class CustomDialog extends AlertDialog implements View.OnClickListener{
                     }
                     //adapter.setArrayData(new FilterItem(i+" 번째 필터"));
                 }
-                Toast.makeText(this.context, "Selected filter : "+data, Toast.LENGTH_LONG).show();
+//                Toast.makeText(this.context, "Selected filter : "+data, Toast.LENGTH_LONG).show();
                 //String text = searchET.getText().toString();
                 customDialogListener.onOkClicked(data);
                 dismiss();
