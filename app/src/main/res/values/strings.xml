@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">medisook</string>
     <string name="drug_name">덱시부펜연질켑슐(덱시부프로펜)</string>
+    <string name="join"><u>회원가입</u></string>
+    <string name="hello">MEDISOOK에 오신 것을 환영합니다!  \n
+닉네임과 아이디, 비밀번호를 설정해 주세요.</string>
     <!-- TODO: Remove or change this placeholder text -->
 </resources>
