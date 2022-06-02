@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".JoinActivity">
+
+    <ImageView
+        android:id="@+id/medisook"
+        android:layout_width="wrap_content"
+        android:layout_height="53sp"
+        android:src="@drawable/resize_medisooklogo"
+        android:paddingVertical="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toTopOf="@id/join"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/join"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="회원가입"
+        android:textColor="@color/navy"
+        android:fontFamily="@font/noto_medium"
+        android:textSize="15sp"
+        android:layout_marginTop="55dp"
+        app:layout_constraintTop_toBottomOf="@id/medisook"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/green"
+        android:gravity="center_horizontal"
+        android:text="@string/hello"
+        android:fontFamily="@font/noto_medium"
+        android:layout_marginTop="45dp"
+        app:layout_constraintTop_toBottomOf="@id/join"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

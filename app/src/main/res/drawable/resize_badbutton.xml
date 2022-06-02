@@ -3,5 +3,5 @@
     <item
         android:width="51.11dp"
         android:height="51.11dp"
-        android:drawable="@drawable/badbutton"/>
+        android:drawable="@drawable/bad"/>
 </selector>
