@@ -37,14 +37,13 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-
 public class MenuFragmentSearch extends Fragment implements View.OnClickListener {
     private Button red_filter_btn;
     private Button green_filter_btn;
     private Button yellow_filter_btn;
     private TextView txt;
 
-    private static String IP_ADDRESS = "192.168.18.61:80";
+    private static String IP_ADDRESS = "192.168.18.87:80";
     private static String TAG = "메롱";
     private EditText mEditTextName;
     private EditText mEditTextCountry;
@@ -65,6 +64,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
     Adapter adapter;
     Adapter_list adapter_list;
     int btn_pos;
+    boolean is_empty;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -366,6 +366,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                     @Override
                     public void onOkClicked(ArrayList<String> list_efcy) {
                         drugItemArrayList.clear();
+                        listItemArrayList.clear();
                         if(list_efcy.size() == 0 || list_efcy.size() >3 ){
                             Log.d("리스트", "리스트 : " + list_efcy.size());
                             Toast.makeText(dialog.getContext(),"증상을 1개 이상 3개 이하로 선택해 주세요." ,Toast.LENGTH_LONG ).show();
@@ -380,11 +381,14 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                                     dialog3.setDialogListener(new CustomDialog.CustomDialogListener() {
                                         @Override
                                         public void onOkClicked(ArrayList<String> list_qesitm) {
+                                            int count_list = list_qesitm.size();
+                                            if(count_list > 0){
+                                                yellow_filter_btn.setBackground(getResources().getDrawable(R.drawable.filter_button_yellow));
+                                            }
                                             for (int i = 0; i < list_qesitm.size(); i++) {
                                                 adapter_list.setArrayData(list_qesitm.get(i), 3);
                                                 total_list.add(list_qesitm.get(i));
                                             }
-                                            int count_list = list_qesitm.size();
                                             while(count_list<3){
                                                 count_list += 1;
                                                 total_list.add("슬라임");
@@ -398,11 +402,14 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                                     dialog3.show();
                                     dialog3.getWindow().clearFlags(
                                             WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+                                    int count_list = list_ingr.size();
+                                    if(count_list > 0){
+                                        green_filter_btn.setBackground(getResources().getDrawable(R.drawable.filter_button_green));
+                                    }
                                     for (int i = 0;i<list_ingr.size();i++){
                                         adapter_list.setArrayData(list_ingr.get(i), 2);
                                         total_list.add(list_ingr.get(i));
                                     }
-                                    int count_list = list_ingr.size();
                                     while(count_list<3){
                                         count_list += 1;
                                         total_list.add("슬라임");
@@ -413,12 +420,11 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                             dialog2.show();
                             dialog2.getWindow().clearFlags(
                                     WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+                            int count_list = list_efcy.size();
                             for (int i = 0;i<list_efcy.size();i++){
-
                                 adapter_list.setArrayData(list_efcy.get(i), 1);
                                 total_list.add(list_efcy.get(i));
                             }
-                            int count_list = list_efcy.size();
                             while(count_list<3){
                                 count_list += 1;
                                 total_list.add("슬라임");

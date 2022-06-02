@@ -16,11 +16,30 @@
             android:name=".MainMenuActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustNothing">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+        </activity>
+
+        <activity android:name=".LoginActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".JoinActivity"></activity>
+<!--        <activity-->
+<!--            android:name=".MenuFragmentMypage"-->
+<!--            android:windowSoftInputMode="adjustNothing"-->
+<!--            android:exported="true"-->
+<!--            >-->
+
+<!--        </activity>-->
+
+
     </application>
 
 </manifest>
