@@ -45,6 +45,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
 
     private static String IP_ADDRESS = "192.168.18.87:80";
     private static String TAG = "메롱";
+    private static String ID = "medisook";
     private EditText mEditTextName;
     private EditText mEditTextCountry;
     private TextView mTextViewResult;
@@ -58,6 +59,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
     ArrayList<DrugItem> drugItemArrayList, filtered_drugList;
     ArrayList<String> listItemArrayList, total_list;
     String[] parameter ={"efcy1", "efcy2", "efcy3","exc1","exc2","exc3","who1","who2","who3"};
+    String[] insertpar ={"id","tag1", "tag2","tag3","drugname","image","otc","goodbad","date1","date2"};
     LinearLayoutManager linearLayoutManager;
 
     RecyclerView recyclerView, recyclerView_list;
@@ -88,7 +90,6 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                     "Please Wait", null, true, true);
         }
 
-        @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
@@ -101,18 +102,27 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
 
                 mJsonString = result;
                 Log.d("과연", result);
-                showResult();
+
             }
         }
 
         @Override
         protected String doInBackground(String... params) {
-            Log.d("과연", "test");
+            Log.d("과연", "insert test");
             String serverURL = params[0];
-            String postParameters = "Efcy1=" + params[1];
+            insertpar[0]= "Id=" + ID;
+            insertpar[1] = "&DRUG_NAME=" + total_list.get(1);
+            insertpar[2] = "&OTC=" + total_list.get(1);
+            insertpar[3] = "&IMAGE=" + total_list.get(1);
+            insertpar[4] = "&TAG1=" + total_list.get(1);
+            insertpar[5] = "&TAG2=" + total_list.get(1);
+            insertpar[6] = "&TAG3=" + total_list.get(1);
+            insertpar[7] = "&GOODBAD=" + total_list.get(1);
+            insertpar[8] = "&DATE1=" + total_list.get(1);
+            insertpar[9] = "&DATE2=" + total_list.get(1);
+
             try {
                 //String searchDrug="Data="+searchET.getText().toString();
-                Log.d("과연", postParameters);
                 URL url = new URL(serverURL);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
 
@@ -124,7 +134,10 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 httpURLConnection.connect();
 
                 OutputStream outputStream = httpURLConnection.getOutputStream();
-                outputStream.write(postParameters.getBytes("UTF-8"));
+                for(int i=0;i<9;i++){
+                    outputStream.write(parameter[i].getBytes("UTF-8"));
+                    Log.d("과연", parameter[i]);
+                }
                 outputStream.flush();
                 outputStream.close();
 
@@ -146,7 +159,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 StringBuilder sb = new StringBuilder();
                 String line;
 
-                while((line = bufferedReader.readLine()) != null){
+               while((line = bufferedReader.readLine()) != null){
                     sb.append(line);
                 }
 
@@ -266,7 +279,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
 
             } catch (Exception e) {
 
-                Log.d(TAG, "InsertData : Error ", e);
+                Log.d(TAG, "ReadData : Error ", e);
                 errorString = e.toString();
 
                 return null;
@@ -431,40 +444,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 dialog.getWindow().clearFlags(
                         WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
                 break;
-//            case R.id.green_filter_btn:
-//                btn_pos = 2;
-//                CustomDialog dialog2 = new CustomDialog(getActivity(), 2);
-//                CustomDialog.Builder dialog2_bulider = new CustomDialog.Builder(getActivity());
-//                dialog2.setDialogListener(new CustomDialog.CustomDialogListener() {
-//                    @Override
-//                    public void onOkClicked(ArrayList<String> list_ingr) {
-//                        for (int i = 0;i<list_ingr.size();i++){
-//                            adapter_list.setArrayData(list_ingr.get(i), 2);
-//                            Log.d("리스트_2", "ingr : " + list_ingr.size());
-//                        } adapter_list.notifyDataSetChanged();
-//                    }
-//                });
-//                dialog2.show();
-//                dialog2.getWindow().clearFlags(
-//                        WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
-//                break;
-//            case R.id.yellow_filter_btn:
-//                btn_pos = 3;
-//                CustomDialog dialog3 = new CustomDialog(getActivity(), 3);
-//                CustomDialog.Builder dialog3_bulider = new CustomDialog.Builder(getActivity());
-//                dialog3.setDialogListener(new CustomDialog.CustomDialogListener() {
-//                    @Override
-//                    public void onOkClicked(ArrayList<String> list_qesitm) {
-//                        for (int i = 0;i<list_qesitm.size();i++){
-//                            adapter_list.setArrayData(list_qesitm.get(i), 2);
-//                            Log.d("리스트_2", "ingr : " + list_qesitm.size());
-//                        } adapter_list.notifyDataSetChanged();
-//                    }
-//                });
-//                dialog3.show();
-//                dialog3.getWindow().clearFlags(
-//                        WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
-//                break;
+
         }
     }
 
