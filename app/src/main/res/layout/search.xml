@@ -57,13 +57,12 @@
             android:text="증상 +"
             android:textSize="12dp"
             app:backgroundTint="@null" />
-
         <Button
             android:id="@+id/green_filter_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="11dp"
-            android:background="@drawable/filter_button_green"
+            android:background="@drawable/filter_button_gray"
             android:fontFamily="@font/noto_bold"
             android:includeFontPadding="false"
             android:minHeight="0dp"
@@ -74,7 +73,7 @@
             android:id="@+id/yellow_filter_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/filter_button_yellow"
+            android:background="@drawable/filter_button_gray"
             android:fontFamily="@font/noto_bold"
             android:includeFontPadding="false"
             android:minHeight="0dp"
@@ -82,7 +81,6 @@
             android:textSize="12dp"
             app:backgroundTint="@null" />
     </LinearLayout>
-
         <com.google.android.flexbox.FlexboxLayout
             android:id="@+id/selected_filter_list"
             app:flexWrap="wrap"
@@ -99,48 +97,24 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_list"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:nestedScrollingEnabled="false"
-                android:overScrollMode="never" />
+                android:layout_height="wrap_content"
+/>
         </com.google.android.flexbox.FlexboxLayout>
-
-<!--    <TextView-->
-<!--        android:id="@+id/txt"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="center"-->
-<!--        android:fontFamily="@font/noto_medium"-->
-<!--        android:text="test"-->
-<!--        android:textColor="@color/navy"-->
-<!--        android:textSize="12dp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.5"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/filter_btns" />-->
     <ScrollView
         android:id="@+id/drug_list_sv"
         android:layout_width="300dp"
-        android:layout_height="440dp"
-        android:layout_marginHorizontal="36dp"
-        android:layout_marginTop="83dp"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toTopOf="@id/bottom_nav"
+        android:layout_height="match_parent"
+        android:layout_marginTop="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constrainedHeight="true"
         app:layout_constraintTop_toBottomOf="@id/selected_filter_list">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="NotSibling">
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </RelativeLayout>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
     </ScrollView>
 
     <!-- <androidx.constraintlayout.widget.ConstraintLayout-->
@@ -152,56 +126,4 @@
     <!--         android:layout_height="match_parent"/>-->
     <!-- </androidx.constraintlayout.widget.ConstraintLayout>-->
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:id="@+id/bottom_nav"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_gravity="bottom"
-        android:layout_marginBottom="10dp"
-        android:baselineAligned="false"
-        android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:ignore="MissingConstraints">
-
-<!--        <View-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="0dp"-->
-<!--            android:layout_weight="1" />-->
-
-<!--        <ImageButton-->
-<!--            android:layout_width="35dp"-->
-<!--            android:layout_height="29dp"-->
-<!--            android:background="#00FFFFFF"-->
-<!--            android:scaleType="centerCrop"-->
-<!--            android:src="@drawable/logo_tab" />-->
-
-<!--        <View-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="0dp"-->
-<!--            android:layout_weight="1" />-->
-
-<!--        <View-->
-<!--            android:layout_width="2dp"-->
-<!--            android:layout_height="30dp"-->
-<!--            android:background="#445E86" />-->
-
-<!--        <View-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="0dp"-->
-<!--            android:layout_weight="1" />-->
-
-<!--        <ImageButton-->
-<!--            android:layout_width="32dp"-->
-<!--            android:layout_height="32dp"-->
-<!--            android:background="#00FFFFFF"-->
-<!--            android:scaleType="centerCrop"-->
-<!--            android:src="@drawable/mypage_tab" />-->
-
-<!--        <View-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="0dp"-->
-<!--            android:layout_weight="1" />-->
-
-    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
