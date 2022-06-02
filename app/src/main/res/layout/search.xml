@@ -7,28 +7,6 @@
     android:layout_marginTop="80dp"
     android:orientation="vertical">
 
-<!--    <TextView-->
-<!--        android:id="@+id/medisook"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="66dp"-->
-<!--        android:layout_gravity="center_horizontal"-->
-<!--        android:fontFamily="@font/noto_black"-->
-<!--        android:text="MEDISOOK"-->
-<!--        android:textColor="#445E86"-->
-<!--        android:textSize="20dp"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintLeft_toLeftOf="parent"-->
-<!--        app:layout_constraintRight_toRightOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintVertical_bias="0.01" />-->
-
-<!--    <View-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="2dp"-->
-<!--        android:background="#445E86"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/medisook"-->
-<!--        tools:ignore="MissingConstraints" />-->
-
     <EditText
         android:id="@+id/search_bar"
         android:layout_width="304dp"

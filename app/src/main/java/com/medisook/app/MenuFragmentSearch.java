@@ -1,6 +1,5 @@
 package com.medisook.app;
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -44,7 +43,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
     private Button yellow_filter_btn;
     private TextView txt;
 
-    private static String IP_ADDRESS = "192.168.18.61:80";
+    private static String IP_ADDRESS = "192.168.18.87:80";
     private static String TAG = "메롱";
     private EditText mEditTextName;
     private EditText mEditTextCountry;
@@ -219,8 +218,8 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
 //                Log.d("과연", postParameters);
                 URL url = new URL(serverURL);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                httpURLConnection.setReadTimeout(20000);
-                httpURLConnection.setConnectTimeout(20000);
+                httpURLConnection.setReadTimeout(50000);
+                httpURLConnection.setConnectTimeout(50000);
                 httpURLConnection.setRequestMethod("POST");
                 httpURLConnection.setDoInput(true);
                 httpURLConnection.setDoOutput(true);
