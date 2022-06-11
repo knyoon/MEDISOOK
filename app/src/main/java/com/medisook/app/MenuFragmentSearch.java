@@ -46,7 +46,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
     private Button yellow_filter_btn;
     private TextView txt;
 
-    private static String IP_ADDRESS = "192.168.18.61:80";
+    private static String IP_ADDRESS = "1.235.201.139:3838";
     private static String TAG = "메롱";
     private EditText mEditTextName;
     private EditText mEditTextCountry;
