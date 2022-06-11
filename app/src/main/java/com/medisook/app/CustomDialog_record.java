@@ -140,7 +140,6 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 Log.v("키보드", "이벤트" + et_record.getText());
                     if (event.getAction() != KeyEvent.ACTION_DOWN) {
-                        //String result = et_record.getText().toString(); //EditText에 입력된 값 가져오기
                         Log.v("세영", et_record.getText().toString());
 //                        textView1.setText(et_record.getText());
                         hashtagArrayList.add(count_tag, String.valueOf(et_record.getText().toString()));
@@ -164,19 +163,11 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
 
 
 
-//                        for(int i =0; i<=2; i++){
-//                            hashtagArrayList.add(String.valueOf(et_record.getText().toString()));
-//                            Log.v("태그", String.valueOf(hashtagArrayList));
-//                            Log.v("태그2", String.valueOf(hashtagArrayList.get(i)));
-//                        }
                         Log.v("태그1", String.valueOf(hashtagArrayList.get(0)));
                         Log.v("태그2", String.valueOf(hashtagArrayList.get(1)));
                         Log.v("태그3", String.valueOf(hashtagArrayList.get(2)));
-                        //Log.v("태그2", hashtagArrayList.get(1));
+
                         et_record.getText().clear();
-//                        textView1.setText(String.valueOf(hashtagArrayList.get(0)));
-//                        textView2.setText(String.valueOf(hashtagArrayList.get(1)));
-//                        textView3.setText(String.valueOf(hashtagArrayList.get(2)));
                         InputMethodManager imm = (InputMethodManager) mContext.getSystemService(INPUT_METHOD_SERVICE);
                         imm.hideSoftInputFromWindow(et_record.getWindowToken(), 0);
                         //Toast.makeText(mContext.getApplicationContext(), et_record.getText(), Toast.LENGTH_LONG).show();
@@ -222,6 +213,7 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
                 break;
             case R.id.to_date:
                 Log.v("태그", "to-date 클릭");
+
                 DatePickerDialog.OnDateSetListener myDatePicker = new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
