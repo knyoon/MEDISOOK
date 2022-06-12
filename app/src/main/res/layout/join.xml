@@ -70,6 +70,16 @@
             android:hint="한글 또는 영문 최대 10자"
             android:textColor="@color/navy"
             android:textSize="12sp" />
+        <Button
+            android:id="@+id/check_nk"
+            android:layout_marginStart="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:textSize="12sp"
+            android:text="중복확인"
+            android:background="#AFAFAF"
+            app:backgroundTint="@null"
+            />
     </LinearLayout>
 
     <LinearLayout
@@ -92,7 +102,7 @@
 
         <EditText
             android:id="@+id/password"
-            android:layout_width="219dp"
+            android:layout_width="315dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/noto_medium"
             android:gravity="center"

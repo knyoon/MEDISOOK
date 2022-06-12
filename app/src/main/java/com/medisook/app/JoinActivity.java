@@ -22,6 +22,7 @@ public class JoinActivity extends AppCompatActivity implements View.OnClickListe
     private EditText warn_nk;
     private EditText warn_pw;
     private Button join_btn;
+    private Button check_nk;
     private Context mContext;
     boolean nk_result=false;
     boolean pw_result = false;
@@ -34,11 +35,15 @@ public class JoinActivity extends AppCompatActivity implements View.OnClickListe
 
         warn_nk = (EditText) findViewById(R.id.warn_nk);
         warn_pw = (EditText) findViewById(R.id.warn_pw);
+        et_password = (EditText) findViewById(R.id.password);
+        et_password.setOnClickListener(this);
         et_nickname = (EditText) findViewById(R.id.nickname);
+        et_nickname.setOnClickListener(this);
         join_btn = (Button) findViewById(R.id.join_btn);
         join_btn.setOnClickListener(this);
+        check_nk = (Button) findViewById(R.id.check_nk);
+        check_nk.setOnClickListener(this);
 
-        et_nickname.setOnClickListener(this);
         et_nickname.setOnKeyListener(new View.OnKeyListener(){
             @Override
             public boolean onKey(View view, int i, KeyEvent keyEvent) {
@@ -68,8 +73,6 @@ public class JoinActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        et_password = (EditText) findViewById(R.id.password);
-        et_password.setOnClickListener(this);
         et_password.setOnKeyListener(new View.OnKeyListener(){
             @Override
             public boolean onKey(View view, int i, KeyEvent keyEvent) {
@@ -105,7 +108,7 @@ public class JoinActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()){
             case R.id.join_btn:
                 Log.v("회원가입", "테스트- " + nk_result + pw_result);
-                if(nk_result == true | pw_result == true){
+                if(nk_result == true && pw_result == true){
                     Toast.makeText(this.getApplicationContext(),"회원가입 성공!", Toast.LENGTH_SHORT).show();
                     Intent intentMainActivity =
                             new Intent(JoinActivity.this, LoginActivity.class);
@@ -116,6 +119,9 @@ public class JoinActivity extends AppCompatActivity implements View.OnClickListe
                     et_password.setText(null);
                     et_nickname.setText(null);
                 }
+                break;
+            case R.id.check_nk:
+                //닉네임 중복확인 부분
         }
     }
 }
