@@ -52,7 +52,7 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
     private ImageButton good_btn;
     private ImageButton bad_btn;
     private CustomDialog_record_Listener customDialogListener;
-
+    int count_tag;
 //    public CustomDialog_record() {
 //        super();
 //    }
@@ -108,7 +108,7 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
         et_Date1 = (TextView) findViewById(R.id.from_date);
         et_record = (EditText) findViewById(R.id.record);
         hashtagArrayList = new ArrayList<>(Arrays.asList("", "", ""));
-
+        count_tag = 0;
         et_record.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -118,9 +118,24 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
                         textView1.setText(et_record.getText());
                         hashtagArrayList.add(0, String.valueOf(et_record.getText().toString()));
                         Log.v("태그", String.valueOf(hashtagArrayList));
-                        textView1.setText(String.valueOf(hashtagArrayList.get(0)));
-                        textView2.setText(String.valueOf(hashtagArrayList.get(1)));
-                        textView3.setText(String.valueOf(hashtagArrayList.get(2)));
+                        switch (count_tag){
+                            case 0:
+                                textView1.setText(String.valueOf(hashtagArrayList.get(0)));
+                                textView1.setPadding(25, 7, 25, 7);
+                                break;
+                            case 1:
+                                textView2.setText(String.valueOf(hashtagArrayList.get(1)));
+                                textView2.setPadding(25, 7, 25, 7);
+                                break;
+                            case 2:
+                                textView3.setText(String.valueOf(hashtagArrayList.get(2)));
+                                textView3.setPadding(25, 7, 25, 7);
+                                break;
+                        }
+                        count_tag +=1;
+
+
+
 
                         Log.v("태그1", String.valueOf(hashtagArrayList.get(0)));
                         Log.v("태그2", String.valueOf(hashtagArrayList.get(1)));
