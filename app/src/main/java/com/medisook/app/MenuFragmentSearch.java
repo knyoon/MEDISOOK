@@ -42,7 +42,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
     private Button yellow_filter_btn;
     private TextView txt;
 
-    private static String IP_ADDRESS = "10.101.14.116:80";
+    public static String IP_ADDRESS = "192.168.18.36:80";
     //private static String ID = "medisook";
     private static String TAG = "메롱";
     private EditText mEditTextName;
@@ -276,33 +276,24 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
         });
         return rootView;
     }
-    private class InsertData extends AsyncTask<String, Void, String> {
+    public class InsertData extends AsyncTask<String, Void, String> {
 
-        ProgressDialog progressDialog;
-        String errorString = null;
+//        ProgressDialog progressDialog = ProgressDialog.show(getActivity(),
+//                "Please Wait", null, true, true);
+//        //String errorString = null;
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
 
-            progressDialog = ProgressDialog.show(getActivity(),
-                    "Please Wait", null, true, true);
         }
 
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
-            progressDialog.dismiss();
+            //progressDialog.dismiss();
+            //mTextViewResult.setText(result);
 
-            if (result == null){
-                mTextViewResult.setText(errorString);
-            }
-            else {
-
-                mJsonString = result;
-                Log.d("과연", result);
-
-            }
         }
 
 
@@ -311,9 +302,9 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
             Log.d("과연", "insert test");
             String serverURL = params[0];
             if (params[1] == "0") {//회원가입
-                DrugItem j =new DrugItem();
-                join[0]="ID="+j.getNickname();
-                join[1]="&PASSWORD="+j.getPassword();
+
+                join[0]="ID="+nk;
+                join[1]="&PASSWORD="+pw;
             }
 
             else if (params[1] == "1") {//기록하기
@@ -391,7 +382,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
             } catch (Exception e) {
 
                 Log.d(TAG, "InsertData : Error ", e);
-                errorString = e.toString();
+                //errorString = e.toString();
 
                 return null;
             }

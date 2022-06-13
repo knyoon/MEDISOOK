@@ -1,5 +1,7 @@
 package com.medisook.app;
 
+import static com.medisook.app.MenuFragmentSearch.IP_ADDRESS;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.regex.Pattern;
 
+
 public class JoinActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText et_nickname;
     private EditText et_password;
@@ -25,6 +28,7 @@ public class JoinActivity extends AppCompatActivity implements View.OnClickListe
     private Context mContext;
     boolean nk_result=false;
     boolean pw_result = false;
+    MenuFragmentSearch mf=new MenuFragmentSearch();
 
 
     @Override
@@ -79,6 +83,8 @@ public class JoinActivity extends AppCompatActivity implements View.OnClickListe
             public boolean onKey(View view, int i, KeyEvent keyEvent) {
                 String pw = et_password.getText().toString();
                 join.setPassword(pw);
+                Log.d("메롱", "result: " +join.getPassword());
+
                 switch (i){
                     case KeyEvent.KEYCODE_ENTER:
                         if (keyEvent.getAction() == keyEvent.ACTION_UP) {
@@ -115,6 +121,8 @@ public class JoinActivity extends AppCompatActivity implements View.OnClickListe
                     Intent intentMainActivity =
                             new Intent(JoinActivity.this, LoginActivity.class);
                     startActivity(intentMainActivity);
+                    MenuFragmentSearch.InsertData insert = mf.new InsertData();
+                    insert.execute("http://" + IP_ADDRESS + "/join.php", "0");
                 }
                 else{
                     Toast.makeText(this.getApplicationContext(),"회원가입을 실패했습니다.\n다시 시도하십시오.", Toast.LENGTH_SHORT).show();
