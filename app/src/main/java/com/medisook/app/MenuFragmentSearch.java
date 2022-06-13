@@ -1,6 +1,5 @@
 package com.medisook.app;
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -43,8 +42,8 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
     private Button yellow_filter_btn;
     private TextView txt;
 
-    private static String IP_ADDRESS = "1.235.201.139:3838";
-    private static String ID = "medisook";
+    public static String IP_ADDRESS = "192.168.18.36:80";
+    //private static String ID = "medisook";
     private static String TAG = "메롱";
     private EditText mEditTextName;
     private EditText mEditTextCountry;
@@ -58,6 +57,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
     String postParameters;
     ArrayList<DrugItem> drugItemArrayList, filtered_drugList;
     ArrayList<String> listItemArrayList, total_list;
+    String[] join={"id","password"};
     String[] parameter = {"efcy1", "efcy2", "efcy3", "exc1", "exc2", "exc3", "who1", "who2", "who3"};
     String[] insertpar = {"id", "tag1", "tag2", "tag3", "drugname", "image", "otc", "goodbad", "date1", "date2"};
     LinearLayoutManager linearLayoutManager;
@@ -66,7 +66,8 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
     Adapter adapter;
     Adapter_list adapter_list;
     int btn_pos;
-    boolean is_empty;
+    String nk;
+    String pw;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -168,40 +169,6 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 dialog.getWindow().clearFlags(
                         WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
                 break;
-//            case R.id.green_filter_btn:
-//                btn_pos = 2;
-//                CustomDialog dialog2 = new CustomDialog(getActivity(), 2);
-//                CustomDialog.Builder dialog2_bulider = new CustomDialog.Builder(getActivity());
-//                dialog2.setDialogListener(new CustomDialog.CustomDialogListener() {
-//                    @Override
-//                    public void onOkClicked(ArrayList<String> list_ingr) {
-//                        for (int i = 0;i<list_ingr.size();i++){
-//                            adapter_list.setArrayData(list_ingr.get(i), 2);
-//                            Log.d("리스트_2", "ingr : " + list_ingr.size());
-//                        } adapter_list.notifyDataSetChanged();
-//                    }
-//                });
-//                dialog2.show();
-//                dialog2.getWindow().clearFlags(
-//                        WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
-//                break;
-//            case R.id.yellow_filter_btn:
-//                btn_pos = 3;
-//                CustomDialog dialog3 = new CustomDialog(getActivity(), 3);
-//                CustomDialog.Builder dialog3_bulider = new CustomDialog.Builder(getActivity());
-//                dialog3.setDialogListener(new CustomDialog.CustomDialogListener() {
-//                    @Override
-//                    public void onOkClicked(ArrayList<String> list_qesitm) {
-//                        for (int i = 0;i<list_qesitm.size();i++){
-//                            adapter_list.setArrayData(list_qesitm.get(i), 2);
-//                            Log.d("리스트_2", "ingr : " + list_qesitm.size());
-//                        } adapter_list.notifyDataSetChanged();
-//                    }
-//                });
-//                dialog3.show();
-//                dialog3.getWindow().clearFlags(
-//                        WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
-//                break;
         }
     }
     @Override
@@ -276,33 +243,25 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
         });
         return rootView;
     }
-    private class InsertData extends AsyncTask<String, Void, String> {
+    public class InsertData extends AsyncTask<String, Void, String> {
 
-        ProgressDialog progressDialog;
-        String errorString = null;
-
+//        ProgressDialog progressDialog = ProgressDialog.show(getActivity(),
+//                "Please Wait", null, true, true);
+//        //String errorString = null;
+//        String nk;
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+//            Log.d("과연", "insert test");
 
-            progressDialog = ProgressDialog.show(getActivity(),
-                    "Please Wait", null, true, true);
         }
 
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
-            progressDialog.dismiss();
+            //progressDialog.dismiss();
+            //mTextViewResult.setText(result);
 
-            if (result == null){
-                mTextViewResult.setText(errorString);
-            }
-            else {
-
-                mJsonString = result;
-                Log.d("과연", result);
-
-            }
         }
 
 
@@ -310,20 +269,30 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
         protected String doInBackground(String... params) {
             Log.d("과연", "insert test");
             String serverURL = params[0];
-            insertpar[0]= "Id=" + total_list.get(0);
-            insertpar[1] = "&DRUG_NAME=" + total_list.get(1);
-            insertpar[2] = "&OTC=" + total_list.get(1);
-            insertpar[3] = "&IMAGE=" + total_list.get(1);
-            insertpar[4] = "&TAG1=" + total_list.get(1);
-            insertpar[5] = "&TAG2=" + total_list.get(1);
-            insertpar[6] = "&TAG3=" + total_list.get(1);
-            insertpar[7] = "&GOODBAD=" + total_list.get(1);
-            insertpar[8] = "&DATE1=" + total_list.get(1);
-            insertpar[9] = "&DATE2=" + total_list.get(1);
+            if (params[1] == "0") {//회원가입
+                Log.d("닉네임", "서치에서 닉네임 : "+nk+pw);
+                join[0]="ID="+nk;
+                join[1]="&PASSWORD="+pw;
+            }
+
+            else if (params[1] == "1") {//기록하기
+                insertpar[0]= "Id=" + total_list.get(0);
+                insertpar[1] = "&DRUG_NAME=" + total_list.get(1);
+                insertpar[2] = "&OTC=" + total_list.get(1);
+                insertpar[3] = "&IMAGE=" + total_list.get(1);
+                insertpar[4] = "&TAG1=" + total_list.get(1);
+                insertpar[5] = "&TAG2=" + total_list.get(1);
+                insertpar[6] = "&TAG3=" + total_list.get(1);
+                insertpar[7] = "&GOODBAD=" + total_list.get(1);
+                insertpar[8] = "&DATE1=" + total_list.get(1);
+                insertpar[9] = "&DATE2=" + total_list.get(1);
+
+            }
+
 
             try {
                 //String searchDrug="Data="+searchET.getText().toString();
-                Log.d("과연", postParameters);
+                //Log.d("과연", postParameters);
                 URL url = new URL(serverURL);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
 
@@ -335,7 +304,19 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 httpURLConnection.connect();
 
                 OutputStream outputStream = httpURLConnection.getOutputStream();
-                outputStream.write(postParameters.getBytes("UTF-8"));
+                if (params[1] == "0") {
+                    for (int i = 0; i < 2; i++) {
+                        outputStream.write(join[i].getBytes("UTF-8"));
+                        Log.d("과연", join[i]);
+                    }
+
+                }
+                else if (params[1] == "1") {
+                    for (int i = 0; i < 10; i++) {
+                        outputStream.write(insertpar[i].getBytes("UTF-8"));
+                        Log.d("과연", insertpar[i]);
+                    }
+                }
                 outputStream.flush();
                 outputStream.close();
 
@@ -369,190 +350,214 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
             } catch (Exception e) {
 
                 Log.d(TAG, "InsertData : Error ", e);
+                //errorString = e.toString();
+
+                return null;
+            }
+        }
+    }
+    private class ReadData extends AsyncTask<String, Void, String> {
+
+        ProgressDialog progressDialog;
+        String errorString = null;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            progressDialog = ProgressDialog.show(getActivity(),
+                    "Please Wait", null, true, true);
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            progressDialog.dismiss();
+
+            if (result == null) {
+                mTextViewResult.setText(errorString);
+            } else {
+
+                mJsonString = result;
+                Log.d("과연", result);
+                showResult();
+            }
+        }
+
+
+        @Override
+        protected String doInBackground(String... params) {
+            Log.d("과연", "test");
+            String serverURL = params[0];
+            if (params[1] == "0") {
+                postParameters = "Data=" + searchText;
+            } else if (params[1] == "1") {
+                parameter[0] = "Efcy1=" + total_list.get(0);
+                parameter[1] = "&Efcy2=" + total_list.get(1);
+                parameter[2] = "&Efcy3=" + total_list.get(2);
+                parameter[3] = "&Except1=" + total_list.get(3);
+                parameter[4] = "&Except2=" + total_list.get(4);
+                parameter[5] = "&Except3=" + total_list.get(5);
+                parameter[6] = "&Who1=" + total_list.get(6);
+                parameter[7] = "&Who2=" + total_list.get(7);
+                parameter[8] = "&Who3=" + total_list.get(8);
+            }
+            try {
+                //String searchDrug="Data="+searchET.getText().toString();
+//                Log.d("과연", postParameters);
+                URL url = new URL(serverURL);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setReadTimeout(20000);
+                httpURLConnection.setConnectTimeout(20000);
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoInput(true);
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.connect();
+
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                if (params[1] == "0") {
+                    outputStream.write(postParameters.getBytes("UTF-8"));
+                } else if (params[1] == "1") {
+                    for (int i = 0; i < 9; i++) {
+                        outputStream.write(parameter[i].getBytes("UTF-8"));
+                        Log.d("과연", parameter[i]);
+                    }
+                }
+                outputStream.flush();
+                outputStream.close();
+
+                int responseStatusCode = httpURLConnection.getResponseCode();
+                Log.d(TAG, "response code - " + responseStatusCode);
+
+                InputStream inputStream;
+                if (responseStatusCode == HttpURLConnection.HTTP_OK) {
+                    inputStream = httpURLConnection.getInputStream();
+                } else {
+                    inputStream = httpURLConnection.getErrorStream();
+                }
+
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+                StringBuilder sb = new StringBuilder();
+                String line;
+
+                while ((line = bufferedReader.readLine()) != null) {
+                    sb.append(line);
+                }
+
+                bufferedReader.close();
+
+                return sb.toString().trim();
+
+
+            } catch (Exception e) {
+
+                Log.d(TAG, "InsertData : Error ", e);
                 errorString = e.toString();
 
                 return null;
             }
         }
     }
-        private class ReadData extends AsyncTask<String, Void, String> {
 
-            ProgressDialog progressDialog;
-            String errorString = null;
+    private void showResult() {
 
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
+        String TAG_JSON = "drug";
+        String TAG_NAME = "DRUG_NAME";
+        String TAG_ENTP = "ENTP_NAME";
+        String TAG_IMAGE = "IMAGE";
+        String TAG_DCODE = "DRUG_CODE";
+        String TAG_CLASSN = "CLASS_NAME";
+        String TAG_QNT = "QNT";
+        String TAG_OTC = "OTC";
+        String TAG_CHART = "CHART";
+        String TAG_EFCY = "EFCY";
+        String TAG_USE = "USEMETHOD";
+        String TAG_QESITM = "QESITM";
+        String TAG_DEPOSIT = "DEPOSIT";
+        String TAG_TERM = "VALID_TERM";
+        String TAG_CONTENT = "TOTAL_CONTENT";
+        String TAG_MAINGR = "MAIN_INGR";
+        String TAG_TINGR = "INGR_NAME";
+        String TAG_IMBUCOUNT="IMBU_COUNT";
+        String TAG_KIDCOUNT="KID_COUNT";
+        String TAG_NOINCOUNT="NOIN_COUNT";
+        String TAG_WARNING="WARNING";
 
-                progressDialog = ProgressDialog.show(getActivity(),
-                        "Please Wait", null, true, true);
+
+        try {
+            JSONObject jsonObject = new JSONObject(mJsonString);
+            JSONArray jsonArray = jsonObject.getJSONArray(TAG_JSON);
+            for (int i = 0; i < jsonArray.length(); i++) {
+
+                JSONObject item = jsonArray.getJSONObject(i);
+
+                String name = item.getString(TAG_NAME);
+                String entp = item.getString(TAG_ENTP);
+                String image = item.getString(TAG_IMAGE);
+                String drugcode = item.getString(TAG_DCODE);
+                String classname = item.getString(TAG_CLASSN);
+                String qnt = item.getString(TAG_QNT);
+                String otc = item.getString(TAG_OTC);
+                String chart = item.getString(TAG_CHART);
+                String efcy = item.getString(TAG_EFCY);
+                String usemethod = item.getString(TAG_USE);
+                String qesitm = item.getString(TAG_QESITM);
+                String deposit = item.getString(TAG_DEPOSIT);
+                String term = item.getString(TAG_TERM);
+                String totalcontent = item.getString(TAG_CONTENT);
+                String mainingr = item.getString(TAG_MAINGR);
+                String ingrname = item.getString(TAG_TINGR);
+                String imbucount = item.getString(TAG_IMBUCOUNT);
+                String noincount = item.getString(TAG_NOINCOUNT);
+                String kidcount = item.getString(TAG_KIDCOUNT);
+                String warning = item.getString(TAG_WARNING);
+                //String [] warning_s=warning.split(",");
+
+
+                DrugItem drugData = new DrugItem();
+
+                drugData.setDrugName(name);
+                drugData.setDrugImg(image);
+                drugData.setDrugentp(entp);
+                drugData.setDrugcode(drugcode);
+                drugData.setClassname(classname);
+                drugData.setQnt(qnt);
+                drugData.setOtc(otc);
+                drugData.setChart(chart);
+                drugData.setEfcy(efcy);
+                drugData.setUsemethod(usemethod);
+                drugData.setQesitm(qesitm);
+                drugData.setTerm(term);
+                drugData.setDeposit(deposit);
+                drugData.setTotalcontent(totalcontent);
+                drugData.setMainingr(mainingr);
+                drugData.setIngrname(ingrname);
+                drugData.setImbucount(imbucount);
+                drugData.setNoincount(noincount);
+                drugData.setKidcount(kidcount);
+                drugData.setWarning(warning);
+
+
+                adapter.setArrayData(drugData);
+                Log.d(TAG, drugData.getDrugImg().toString());
             }
-
-            @Override
-            protected void onPostExecute(String result) {
-                super.onPostExecute(result);
-
-                progressDialog.dismiss();
-
-                if (result == null) {
-                    mTextViewResult.setText(errorString);
-                } else {
-
-                    mJsonString = result;
-                    Log.d("과연", result);
-                    showResult();
-                }
-            }
+            adapter.notifyDataSetChanged();
 
 
-            @Override
-            protected String doInBackground(String... params) {
-                Log.d("과연", "test");
-                String serverURL = params[0];
-                if (params[1] == "0") {
-                    postParameters = "Data=" + searchText;
-                } else if (params[1] == "1") {
-                    parameter[0] = "Efcy1=" + total_list.get(0);
-                    parameter[1] = "&Efcy2=" + total_list.get(1);
-                    parameter[2] = "&Efcy3=" + total_list.get(2);
-                    parameter[3] = "&Except1=" + total_list.get(3);
-                    parameter[4] = "&Except2=" + total_list.get(4);
-                    parameter[5] = "&Except3=" + total_list.get(5);
-                    parameter[6] = "&Who1=" + total_list.get(6);
-                    parameter[7] = "&Who2=" + total_list.get(7);
-                    parameter[8] = "&Who3=" + total_list.get(8);
-                }
-                try {
-                    //String searchDrug="Data="+searchET.getText().toString();
-//                Log.d("과연", postParameters);
-                    URL url = new URL(serverURL);
-                    HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                    httpURLConnection.setReadTimeout(20000);
-                    httpURLConnection.setConnectTimeout(20000);
-                    httpURLConnection.setRequestMethod("POST");
-                    httpURLConnection.setDoInput(true);
-                    httpURLConnection.setDoOutput(true);
-                    httpURLConnection.connect();
+        } catch (JSONException e) {
 
-                    OutputStream outputStream = httpURLConnection.getOutputStream();
-                    if (params[1] == "0") {
-                        outputStream.write(postParameters.getBytes("UTF-8"));
-                    } else if (params[1] == "1") {
-                        for (int i = 0; i < 9; i++) {
-                            outputStream.write(parameter[i].getBytes("UTF-8"));
-                            Log.d("과연", parameter[i]);
-                        }
-                    }
-                    outputStream.flush();
-                    outputStream.close();
-
-                    int responseStatusCode = httpURLConnection.getResponseCode();
-                    Log.d(TAG, "response code - " + responseStatusCode);
-
-                    InputStream inputStream;
-                    if (responseStatusCode == HttpURLConnection.HTTP_OK) {
-                        inputStream = httpURLConnection.getInputStream();
-                    } else {
-                        inputStream = httpURLConnection.getErrorStream();
-                    }
-
-                    InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
-                    BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-
-                    StringBuilder sb = new StringBuilder();
-                    String line;
-
-                    while ((line = bufferedReader.readLine()) != null) {
-                        sb.append(line);
-                    }
-
-                    bufferedReader.close();
-
-                    return sb.toString().trim();
-
-
-                } catch (Exception e) {
-
-                    Log.d(TAG, "InsertData : Error ", e);
-                    errorString = e.toString();
-
-                    return null;
-                }
-            }
+            Log.d(TAG, "showResult : ", e);
         }
 
-        private void showResult() {
-
-            String TAG_JSON = "drug";
-            String TAG_NAME = "DRUG_NAME";
-            String TAG_ENTP = "ENTP_NAME";
-            String TAG_IMAGE = "IMAGE";
-            String TAG_DCODE = "DRUG_CODE";
-            String TAG_CLASSN = "CLASS_NAME";
-            String TAG_QNT = "QNT";
-            String TAG_OTC = "OTC";
-            String TAG_CHART = "CHART";
-            String TAG_EFCY = "EFCY";
-            String TAG_USE = "USEMETHOD";
-            String TAG_QESITM = "QESITM";
-            String TAG_DEPOSIT = "DEPOSIT";
-            String TAG_TERM = "VALID_TERM";
-            String TAG_CONTENT = "TOTAL_CONTENT";
-            String TAG_MAINGR = "MAIN_INGR";
-            String TAG_TINGR = "INGR_NAME";
-
-            try {
-                JSONObject jsonObject = new JSONObject(mJsonString);
-                JSONArray jsonArray = jsonObject.getJSONArray(TAG_JSON);
-                for (int i = 0; i < jsonArray.length(); i++) {
-
-                    JSONObject item = jsonArray.getJSONObject(i);
-
-                    String name = item.getString(TAG_NAME);
-                    String entp = item.getString(TAG_ENTP);
-                    String image = item.getString(TAG_IMAGE);
-                    String drugcode = item.getString(TAG_DCODE);
-                    String classname = item.getString(TAG_CLASSN);
-                    String qnt = item.getString(TAG_QNT);
-                    String otc = item.getString(TAG_OTC);
-                    String chart = item.getString(TAG_CHART);
-                    String efcy = item.getString(TAG_EFCY);
-                    String usemethod = item.getString(TAG_USE);
-                    String qesitm = item.getString(TAG_QESITM);
-                    String deposit = item.getString(TAG_DEPOSIT);
-                    String term = item.getString(TAG_TERM);
-                    String totalcontent = item.getString(TAG_CONTENT);
-                    String mainingr = item.getString(TAG_MAINGR);
-                    String ingrname = item.getString(TAG_TINGR);
-
-                    DrugItem drugData = new DrugItem();
-
-                    drugData.setDrugName(name);
-                    drugData.setDrugImg(image);
-                    drugData.setDrugentp(entp);
-                    drugData.setDrugcode(drugcode);
-                    drugData.setClassname(classname);
-                    drugData.setQnt(qnt);
-                    drugData.setOtc(otc);
-                    drugData.setChart(chart);
-                    drugData.setEfcy(efcy);
-                    drugData.setUsemethod(usemethod);
-                    drugData.setQesitm(qesitm);
-                    drugData.setTerm(term);
-                    drugData.setDeposit(deposit);
-                    drugData.setTotalcontent(totalcontent);
-                    drugData.setMainingr(mainingr);
-                    drugData.setIngrname(ingrname);
-
-                    adapter.setArrayData(drugData);
-                    Log.d(TAG, drugData.getDrugImg().toString());
-                }
-                adapter.notifyDataSetChanged();
-
-            } catch (JSONException e) {
-
-                Log.d(TAG, "showResult : ", e);
-            }
-
-        }
     }
+
+    public void getNickname(String nickname, String password){
+        nk = nickname;
+        pw = password;
+        Log.d("닉네임", "get nickname test : "+nk+pw);
+    }
+
+}
