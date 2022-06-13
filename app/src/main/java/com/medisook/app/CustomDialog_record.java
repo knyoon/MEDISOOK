@@ -252,8 +252,6 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.KOREA);
         TextView et_date = (TextView) findViewById(R.id.to_date);
         et_date.setText(sdf.format(myCalendar.getTime()));
-//        TextView et_date1 = (TextView) findViewById(R.id.from_date);
-//        et_date1.setText(sdf.format(myCalendar.getTime()));
     }
 
     private void updateLabel1() {

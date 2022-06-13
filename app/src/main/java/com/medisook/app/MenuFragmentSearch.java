@@ -245,11 +245,6 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
         return rootView;
     }
     public class InsertData extends AsyncTask<String, Void, String> {
-
-//        ProgressDialog progressDialog = ProgressDialog.show(getActivity(),
-//                "Please Wait", null, true, true);
-//        //String errorString = null;
-//        String nk;
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -281,8 +276,8 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 insertpar[0]= "Id=" + nk;
                 insertpar[3] = "&IMAGE=" + record_total_list.get(0);
                 insertpar[1] = "&DRUG_NAME=" + record_total_list.get(1);
-                insertpar[2] = "&OTC=" +record_total_list.get(2);
-                insertpar[7] = "&GOODBAD=" + record_total_list.get(3);
+                insertpar[2] = "&OTC=" +record_total_list.get(3);
+                insertpar[7] = "&GOODBAD=" + record_total_list.get(2);
                 insertpar[8] = "&DATE1=" +record_total_list.get(4);
                 insertpar[9] = "&DATE2=" +record_total_list.get(5);
                 insertpar[4] = "&TAG1=" + record_total_list.get(6);

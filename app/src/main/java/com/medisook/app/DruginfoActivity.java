@@ -100,7 +100,6 @@ public class DruginfoActivity extends Fragment implements View.OnClickListener{
                 Log.d("찜하기", "누름");
                 Toast.makeText(context, "찜하기 누름", Toast.LENGTH_SHORT).show();
                 break;
-
         }
     }
 
