@@ -1,6 +1,5 @@
 package com.medisook.app;
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -43,8 +42,8 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
     private Button yellow_filter_btn;
     private TextView txt;
 
-    private static String IP_ADDRESS = "192.168.18.87:80";
-    private static String ID = "medisook";
+    private static String IP_ADDRESS = "10.101.14.116:80";
+    //private static String ID = "medisook";
     private static String TAG = "메롱";
     private EditText mEditTextName;
     private EditText mEditTextCountry;
@@ -58,6 +57,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
     String postParameters;
     ArrayList<DrugItem> drugItemArrayList, filtered_drugList;
     ArrayList<String> listItemArrayList, total_list;
+    String[] join={"id","password"};
     String[] parameter = {"efcy1", "efcy2", "efcy3", "exc1", "exc2", "exc3", "who1", "who2", "who3"};
     String[] insertpar = {"id", "tag1", "tag2", "tag3", "drugname", "image", "otc", "goodbad", "date1", "date2"};
     LinearLayoutManager linearLayoutManager;
@@ -310,20 +310,30 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
         protected String doInBackground(String... params) {
             Log.d("과연", "insert test");
             String serverURL = params[0];
-            insertpar[0]= "Id=" + total_list.get(0);
-            insertpar[1] = "&DRUG_NAME=" + total_list.get(1);
-            insertpar[2] = "&OTC=" + total_list.get(1);
-            insertpar[3] = "&IMAGE=" + total_list.get(1);
-            insertpar[4] = "&TAG1=" + total_list.get(1);
-            insertpar[5] = "&TAG2=" + total_list.get(1);
-            insertpar[6] = "&TAG3=" + total_list.get(1);
-            insertpar[7] = "&GOODBAD=" + total_list.get(1);
-            insertpar[8] = "&DATE1=" + total_list.get(1);
-            insertpar[9] = "&DATE2=" + total_list.get(1);
+            if (params[1] == "0") {//회원가입
+                DrugItem j =new DrugItem();
+                join[0]="ID="+j.getNickname();
+                join[1]="&PASSWORD="+j.getPassword();
+            }
+
+            else if (params[1] == "1") {//기록하기
+                insertpar[0]= "Id=" + total_list.get(0);
+                insertpar[1] = "&DRUG_NAME=" + total_list.get(1);
+                insertpar[2] = "&OTC=" + total_list.get(1);
+                insertpar[3] = "&IMAGE=" + total_list.get(1);
+                insertpar[4] = "&TAG1=" + total_list.get(1);
+                insertpar[5] = "&TAG2=" + total_list.get(1);
+                insertpar[6] = "&TAG3=" + total_list.get(1);
+                insertpar[7] = "&GOODBAD=" + total_list.get(1);
+                insertpar[8] = "&DATE1=" + total_list.get(1);
+                insertpar[9] = "&DATE2=" + total_list.get(1);
+
+            }
+
 
             try {
                 //String searchDrug="Data="+searchET.getText().toString();
-                Log.d("과연", postParameters);
+                //Log.d("과연", postParameters);
                 URL url = new URL(serverURL);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
 
@@ -335,7 +345,19 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 httpURLConnection.connect();
 
                 OutputStream outputStream = httpURLConnection.getOutputStream();
-                outputStream.write(postParameters.getBytes("UTF-8"));
+                if (params[1] == "0") {
+                    for (int i = 0; i < 2; i++) {
+                        outputStream.write(join[i].getBytes("UTF-8"));
+                        Log.d("과연", join[i]);
+                    }
+
+                }
+                else if (params[1] == "1") {
+                    for (int i = 0; i < 10; i++) {
+                        outputStream.write(insertpar[i].getBytes("UTF-8"));
+                        Log.d("과연", insertpar[i]);
+                    }
+                }
                 outputStream.flush();
                 outputStream.close();
 
@@ -500,6 +522,11 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
             String TAG_CONTENT = "TOTAL_CONTENT";
             String TAG_MAINGR = "MAIN_INGR";
             String TAG_TINGR = "INGR_NAME";
+            String TAG_IMBUCOUNT="IMBU_COUNT";
+            String TAG_KIDCOUNT="KID_COUNT";
+            String TAG_NOINCOUNT="NOIN_COUNT";
+            String TAG_WARNING="WARNING";
+
 
             try {
                 JSONObject jsonObject = new JSONObject(mJsonString);
@@ -524,6 +551,12 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                     String totalcontent = item.getString(TAG_CONTENT);
                     String mainingr = item.getString(TAG_MAINGR);
                     String ingrname = item.getString(TAG_TINGR);
+                    String imbucount = item.getString(TAG_IMBUCOUNT);
+                    String noincount = item.getString(TAG_NOINCOUNT);
+                    String kidcount = item.getString(TAG_KIDCOUNT);
+                    String warning = item.getString(TAG_WARNING);
+                    //String [] warning_s=warning.split(",");
+
 
                     DrugItem drugData = new DrugItem();
 
@@ -543,6 +576,11 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                     drugData.setTotalcontent(totalcontent);
                     drugData.setMainingr(mainingr);
                     drugData.setIngrname(ingrname);
+                    drugData.setImbucount(imbucount);
+                    drugData.setNoincount(noincount);
+                    drugData.setKidcount(kidcount);
+                    drugData.setWarning(warning);
+
 
                     adapter.setArrayData(drugData);
                     Log.d(TAG, drugData.getDrugImg().toString());
@@ -558,4 +596,3 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
         }
 
     }
-}

@@ -19,6 +19,12 @@ public class DrugItem implements Serializable {
     String totalcontent;
     String mainingr;
     String ingrname;
+    String password;
+    String imbucount;
+    String nickname;
+    String kidcount;
+    String noincount;
+    String warning;
 
     public DrugItem() {
     }
@@ -152,6 +158,54 @@ public class DrugItem implements Serializable {
 
     public void setIngrname(String ingrname) {
         this.ingrname = ingrname;
+    }
+
+    public String getImbucount() {
+        return imbucount;
+    }
+
+    public void setImbucount(String imbucount) {
+        this.imbucount = imbucount;
+    }
+
+    public String getNointcount() {
+        return noincount;
+    }
+
+    public void setNoincount(String noincount) {
+        this.noincount = noincount;
+    }
+
+    public String getKidcount() {
+        return kidcount;
+    }
+
+    public void setKidcount(String kidcount) {
+        this.kidcount = kidcount;
+    }
+
+    public String getWarning() {
+        return warning;
+    }
+
+    public void setWarning(String warning) {
+        this.warning = warning;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
 

@@ -61,6 +61,7 @@
             android:text="별명"
             android:textColor="@color/navy"
             android:textSize="12sp" />
+
         <EditText
             android:id="@+id/nickname"
             android:layout_width="219dp"
@@ -70,7 +71,29 @@
             android:hint="한글 또는 영문 최대 10자"
             android:textColor="@color/navy"
             android:textSize="12sp" />
+        <Button
+            android:id="@+id/check_nk"
+            android:layout_marginStart="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:textSize="12sp"
+            android:text="중복확인"
+            android:background="#AFAFAF"
+            app:backgroundTint="@null"
+            />
     </LinearLayout>
+
+    <EditText
+        android:id="@+id/warn_nk"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:background="@null"
+        android:fontFamily="@font/noto_medium"
+        android:textColor="#F65E5D"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nickname_ll" />
 
     <LinearLayout
         android:id="@+id/password_ll"
@@ -79,7 +102,7 @@
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/nickname_ll">
+        app:layout_constraintTop_toBottomOf="@id/warn_nk">
 
         <TextView
             android:layout_width="wrap_content"
@@ -92,7 +115,7 @@
 
         <EditText
             android:id="@+id/password"
-            android:layout_width="219dp"
+            android:layout_width="315dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/noto_medium"
             android:gravity="center"
@@ -102,8 +125,20 @@
             android:textSize="12sp" />
     </LinearLayout>
 
+    <EditText
+        android:id="@+id/warn_pw"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:background="@null"
+        android:fontFamily="@font/noto_medium"
+        android:textColor="#F65E5D"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/password_ll" />
+
     <Button
-        android:id="@+id/login_btn"
+        android:id="@+id/join_btn"
         android:layout_width="230dp"
         android:layout_height="40dp"
         android:layout_marginTop="60dp"
@@ -118,5 +153,5 @@
         app:backgroundTint="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/password_ll" />
+        app:layout_constraintTop_toBottomOf="@id/warn_pw" />
 </androidx.constraintlayout.widget.ConstraintLayout>
