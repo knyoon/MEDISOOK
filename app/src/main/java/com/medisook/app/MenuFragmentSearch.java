@@ -245,7 +245,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
     }
     public class InsertData extends AsyncTask<String, Void, String> {
 
-//        ProgressDialog progressDialog = ProgressDialog.show(getActivity(),
+        //        ProgressDialog progressDialog = ProgressDialog.show(getActivity(),
 //                "Please Wait", null, true, true);
 //        //String errorString = null;
 //        String nk;
@@ -276,7 +276,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
             }
 
             else if (params[1] == "1") {//기록하기
-                insertpar[0]= "Id=" + total_list.get(0);
+                insertpar[0]= "Id=" + nk;
                 insertpar[1] = "&DRUG_NAME=" + total_list.get(1);
                 insertpar[2] = "&OTC=" + total_list.get(1);
                 insertpar[3] = "&IMAGE=" + total_list.get(1);
@@ -340,6 +340,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
 
                 while((line = bufferedReader.readLine()) != null){
                     sb.append(line);
+                    Log.d(TAG, line);
                 }
 
                 bufferedReader.close();

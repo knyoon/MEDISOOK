@@ -17,7 +17,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.regex.Pattern;
 
-
 public class JoinActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText et_nickname;
     private EditText et_password;
@@ -29,6 +28,10 @@ public class JoinActivity extends AppCompatActivity implements View.OnClickListe
     boolean nk_result=false;
     boolean pw_result = false;
     MenuFragmentSearch mf=new MenuFragmentSearch();
+    String nk;
+    String nk_final;
+    String pw;
+    String pw_final;
 
 
     @Override
@@ -46,13 +49,12 @@ public class JoinActivity extends AppCompatActivity implements View.OnClickListe
         join_btn.setOnClickListener(this);
         check_nk = (Button) findViewById(R.id.check_nk);
         check_nk.setOnClickListener(this);
-        DrugItem join = new DrugItem();
 
         et_nickname.setOnKeyListener(new View.OnKeyListener(){
             @Override
             public boolean onKey(View view, int i, KeyEvent keyEvent) {
-                String nk =  et_nickname.getText().toString();
-                join.setNickname(nk);
+                nk =  et_nickname.getText().toString();
+
                 switch (i){
                     case KeyEvent.KEYCODE_ENTER:
                         if (keyEvent.getAction() == keyEvent.ACTION_UP) {
@@ -81,14 +83,11 @@ public class JoinActivity extends AppCompatActivity implements View.OnClickListe
         et_password.setOnKeyListener(new View.OnKeyListener(){
             @Override
             public boolean onKey(View view, int i, KeyEvent keyEvent) {
-                String pw = et_password.getText().toString();
-                join.setPassword(pw);
-                Log.d("메롱", "result: " +join.getPassword());
-
+                pw = et_password.getText().toString();
                 switch (i){
                     case KeyEvent.KEYCODE_ENTER:
                         if (keyEvent.getAction() == keyEvent.ACTION_UP) {
-                            if(Pattern.matches("^[A-Za-z0-9]{8,12}$", pw)) {
+                            if(Pattern.matches("^(?=.*[a-zA-z])(?=.*[0-9])(?!.*[^a-zA-z0-9]).{5,20}$", pw)) {
                                 warn_pw.setText(null);
                                 pw_result = true;
                             }
@@ -117,12 +116,19 @@ public class JoinActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.join_btn:
                 Log.v("회원가입", "테스트- " + nk_result + pw_result);
                 if(nk_result == true && pw_result == true){
-                    Toast.makeText(this.getApplicationContext(),"회원가입 성공!", Toast.LENGTH_SHORT).show();
-                    Intent intentMainActivity =
-                            new Intent(JoinActivity.this, LoginActivity.class);
-                    startActivity(intentMainActivity);
+                    nk_final = nk;
+                    pw_final = pw;
+                    mf = new MenuFragmentSearch();
+                    mf.getNickname(nk_final, pw_final);
                     MenuFragmentSearch.InsertData insert = mf.new InsertData();
                     insert.execute("http://" + IP_ADDRESS + "/join.php", "0");
+                    Log.d("닉네임", "nk final :  "+ nk_final);
+                    Toast.makeText(this.getApplicationContext(),"회원가입 성공!", Toast.LENGTH_SHORT).show();
+                    Intent intentLoginActivity =
+                            new Intent(JoinActivity.this, LoginActivity.class);
+                    startActivity(intentLoginActivity);
+
+                    Log.d("닉네임", "어디까지 실행되나");
                 }
                 else{
                     Toast.makeText(this.getApplicationContext(),"회원가입을 실패했습니다.\n다시 시도하십시오.", Toast.LENGTH_SHORT).show();
