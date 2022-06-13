@@ -64,6 +64,7 @@
             android:layout_height="0dp"
             android:layout_weight="1" />
         <Button
+            android:id="@+id/star"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:background="@drawable/radius"
@@ -80,7 +81,9 @@
             android:textColor="#445E86"
             android:textSize="11dp"
             app:backgroundTint="@null" />
+
         <Button
+            android:id="@+id/calender"
             android:layout_width="85dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="13dp"

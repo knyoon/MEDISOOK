@@ -10,8 +10,6 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
-import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -30,7 +28,7 @@ public class CustomDialog extends AlertDialog implements View.OnClickListener{
     private Button okButton;
     private Context context;
     private CustomDialogListener customDialogListener;
-    public CustomDialog(Context context) {
+    public CustomDialog(Context context, int i) {
         super(context);
         this.context = context;
     }

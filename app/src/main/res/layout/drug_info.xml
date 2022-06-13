@@ -131,7 +131,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:fontFamily="@font/noto_bold"
-                    android:text="2"
+                    android:text=""
                     android:textColor="#F65E5D"
                     android:textSize="15sp" />
             </FrameLayout>
@@ -174,7 +174,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:fontFamily="@font/noto_bold"
-                    android:text="2"
+                    android:text=""
                     android:textColor="#FFBC47"
                     android:textSize="15sp" />
             </FrameLayout>
@@ -217,7 +217,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:fontFamily="@font/noto_bold"
-                    android:text="2"
+                    android:text=""
                     android:textColor="#5FA976"
                     android:textSize="15sp" />
             </FrameLayout>

@@ -1,11 +1,9 @@
 package com.medisook.app;
 // https://3001ssw.tistory.com/201
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -39,7 +37,7 @@ public class Adapter_list extends RecyclerView.Adapter<ViewHolder_list> {
     public int getItemCount() {
         return listItemArrayList.size();
     }
-    public void setArrayData(String strData){
+    public void setArrayData(String strData, int i){
         listItemArrayList.add(strData);
     }
 //    public void filterList(ArrayList<FilterItem> filteredList){

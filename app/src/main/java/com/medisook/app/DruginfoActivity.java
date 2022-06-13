@@ -1,15 +1,5 @@
 package com.medisook.app;
 
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
-import android.app.Activity;
-import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -18,21 +8,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.squareup.picasso.Picasso;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 
-import org.w3c.dom.Text;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 public class DruginfoActivity extends Fragment implements View.OnClickListener{
     private String data;
+    TextView imbucount_view;
+    TextView noincount_view;
+    TextView kidcount_view;
     TextView drugName_view;
     ImageView drugImg_view;
     TextView drugentp_view;
@@ -56,10 +49,8 @@ public class DruginfoActivity extends Fragment implements View.OnClickListener{
     private TextView txt;
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.drug_info);
-
-
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.drug_info);
     }
 
     public void setContentView(int drug_info) {
@@ -96,6 +87,10 @@ public class DruginfoActivity extends Fragment implements View.OnClickListener{
         wish_btn = (Button) rootView.findViewById(R.id.wish_btn);
         wish_btn.setOnClickListener(this);
 
+        imbucount_view = (TextView) rootView.findViewById(R.id.num_pregcaution);
+        noincount_view = (TextView) rootView.findViewById(R.id.num_oldcaution);
+        kidcount_view = (TextView) rootView.findViewById(R.id.num_childcaution);
+
         drugName_view = (TextView) rootView.findViewById(R.id.drugName);
         drugImg_view = (ImageView) rootView.findViewById(R.id.drugImage);
         drugentp_view = (TextView) rootView.findViewById(R.id.ENTP_NAME);
@@ -115,6 +110,10 @@ public class DruginfoActivity extends Fragment implements View.OnClickListener{
         Bundle bundle = getArguments();
         position = bundle.getInt("position");
         drugItem = (ArrayList<DrugItem>) bundle.getSerializable(("DrugItem"));
+
+        String kidcount = drugItem.get(position).getKidcount();
+        String imbucount = drugItem.get(position).getImbucount();
+        String noincount = drugItem.get(position).getNointcount();
         String drugName = drugItem.get(position).getDrugName();
         String drugImage  = drugItem.get(position).getDrugImg();
         String entp = drugItem.get(position).getDrugentp();
@@ -145,6 +144,10 @@ public class DruginfoActivity extends Fragment implements View.OnClickListener{
         Log.d("test", "position : " + position);
         Log.d("test", "drugitem : " + drugItem.size());
         Log.d("test", "drugitem : " + drugItem.get(0));
+
+        kidcount_view.setText(kidcount);
+        imbucount_view.setText(imbucount);
+        noincount_view.setText(noincount);
         drugName_view.setText(drugName);
         drugentp_view.setText(entp);
        // drugcode_view.setText(drugcode);
