@@ -35,7 +35,6 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 
 public class MenuFragmentSearch extends Fragment implements View.OnClickListener {
     private Button red_filter_btn;
@@ -56,6 +55,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
     private String mJsonString;
     private String searchText;
     String postParameters;
+    String user;
     ArrayList<DrugItem> drugItemArrayList, filtered_drugList;
     ArrayList<String> listItemArrayList, total_list;
     String[] join={"id","password"};
@@ -66,6 +66,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
     RecyclerView recyclerView, recyclerView_list;
     Adapter adapter;
     Adapter_list adapter_list;
+    Adapter_record adapter_record;
     int btn_pos;
     String nk;
     String pw;
@@ -398,13 +399,16 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 parameter[7] = "&Who2=" + total_list.get(7);
                 parameter[8] = "&Who3=" + total_list.get(8);
             }
+            else if(params[1]=="2"){//마이페이지
+                user="ID="+nk;
+            }
             try {
                 //String searchDrug="Data="+searchET.getText().toString();
 //                Log.d("과연", postParameters);
                 URL url = new URL(serverURL);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                httpURLConnection.setReadTimeout(20000);
-                httpURLConnection.setConnectTimeout(20000);
+                httpURLConnection.setReadTimeout(100000);
+                httpURLConnection.setConnectTimeout(100000);
                 httpURLConnection.setRequestMethod("POST");
                 httpURLConnection.setDoInput(true);
                 httpURLConnection.setDoOutput(true);
@@ -418,6 +422,10 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                         outputStream.write(parameter[i].getBytes("UTF-8"));
                         Log.d("과연", parameter[i]);
                     }
+                }
+                else if(params[1]=="2"){//마이페이지
+                    outputStream.write(user.getBytes("UTF-8"));
+                    Log.d("과연", user);
                 }
                 outputStream.flush();
                 outputStream.close();
@@ -480,6 +488,16 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
         String TAG_KIDCOUNT="KID_COUNT";
         String TAG_NOINCOUNT="NOIN_COUNT";
         String TAG_WARNING="WARNING";
+        String TAG_TAG1="TAG1";
+        String TAG_TAG2="TAG2";
+        String TAG_TAG3="TAG3";
+        String TAG_GOODBAD="GOODBAD";
+        String TAG_DATE1="DATE1";
+        String TAG_DATE2="DATE2";
+        String TAG_ID="USER_ID";
+
+
+
 
 
         try {
@@ -509,10 +527,18 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 String noincount = item.getString(TAG_NOINCOUNT);
                 String kidcount = item.getString(TAG_KIDCOUNT);
                 String warning = item.getString(TAG_WARNING);
-                //String [] warning_s=warning.split(",");
+                String tag1 = item.getString(TAG_TAG1);
+                String tag2 = item.getString(TAG_TAG2);
+                String tag3 = item.getString(TAG_TAG3);
+                String goodbad = item.getString(TAG_GOODBAD);
+                String date1 = item.getString(TAG_DATE1);
+                String date2 = item.getString(TAG_DATE2);
+                String id = item.getString(TAG_ID);
+
 
 
                 DrugItem drugData = new DrugItem();
+                RecordItem record=new RecordItem();
 
                 drugData.setDrugName(name);
                 drugData.setDrugImg(image);
@@ -534,9 +560,20 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 drugData.setNoincount(noincount);
                 drugData.setKidcount(kidcount);
                 drugData.setWarning(warning);
+                record.setDrugName(name);
+                record.setDrugImg(image);
+                record.setMember_name(otc);//otc
+                record.setMember_id(id);//아이디
+                record.setTag1(tag1);
+                record.setTag2(tag2);
+                record.setTag3(tag3);
+                record.setGoodbad(goodbad);
+                record.setDate1(date1);
+                record.setDate2(date2);
 
 
                 adapter.setArrayData(drugData);
+                adapter_record.setArraydata(record);
                 Log.d(TAG, drugData.getDrugImg().toString());
             }
             adapter.notifyDataSetChanged();
