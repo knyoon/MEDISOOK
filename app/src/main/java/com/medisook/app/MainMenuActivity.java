@@ -1,7 +1,9 @@
 package com.medisook.app;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.SpannableString;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 
@@ -19,10 +21,11 @@ public class MainMenuActivity extends AppCompatActivity {
     private MenuFragmentSearch fragmentSearch = new MenuFragmentSearch();
     private MenuFragmentMypage fragmentMypage = new MenuFragmentMypage();
     private DruginfoActivity fragmentDruginfo = new DruginfoActivity();
-
+    String nickname;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        Intent intent = getIntent();
+        nickname = intent.getStringExtra("nickname");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
@@ -41,6 +44,7 @@ public class MainMenuActivity extends AppCompatActivity {
                         transaction.replace(R.id.menu_frame_layout, fragmentSearch).commitAllowingStateLoss();
                         break;
                     case R.id.menu_mypage:
+                        Log.d("버튼", "마이페이지");
                         transaction.replace(R.id.menu_frame_layout, fragmentMypage).commitAllowingStateLoss();
                         break;
                     case R.id.druginfo_page:

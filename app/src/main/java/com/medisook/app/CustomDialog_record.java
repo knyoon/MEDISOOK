@@ -7,20 +7,33 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
+import org.w3c.dom.Text;
+
+import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -52,7 +65,7 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
     private ImageButton good_btn;
     private ImageButton bad_btn;
     private CustomDialog_record_Listener customDialogListener;
-
+    int count_tag;
 //    public CustomDialog_record() {
 //        super();
 //    }
@@ -84,6 +97,19 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
     }
     Calendar myCalendar = Calendar.getInstance();
 
+    class BtnOnClickListener implements View.OnClickListener{
+        @Override
+        public void onClick(View view){
+            String GoodBad = "null";
+            switch (view.getId()){
+                case R.id.good_btn:
+                    GoodBad = "good";
+                    Log.v("기록", "좋아요 누름");
+                    break;
+            }
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -108,39 +134,41 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
         et_Date1 = (TextView) findViewById(R.id.from_date);
         et_record = (EditText) findViewById(R.id.record);
         hashtagArrayList = new ArrayList<>(Arrays.asList("", "", ""));
-
+        count_tag = 0;
         et_record.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 Log.v("키보드", "이벤트" + et_record.getText());
-                if (event.getAction() != KeyEvent.ACTION_DOWN) {
-                    Log.v("세영", et_record.getText().toString());
-                    textView1.setText(et_record.getText());
-                    hashtagArrayList.add(0, String.valueOf(et_record.getText().toString()));
-                    Log.v("태그", String.valueOf(hashtagArrayList));
-                    textView1.setText(String.valueOf(hashtagArrayList.get(0)));
-                    textView2.setText(String.valueOf(hashtagArrayList.get(1)));
-                    textView3.setText(String.valueOf(hashtagArrayList.get(2)));
+                    if (event.getAction() != KeyEvent.ACTION_DOWN) {
+                        Log.v("세영", et_record.getText().toString());
+                        hashtagArrayList.add(count_tag, String.valueOf(et_record.getText().toString()));
+                        Log.v("태그", String.valueOf(hashtagArrayList));
+                        switch (count_tag){
+                            case 0:
+                                textView1.setText(String.valueOf(hashtagArrayList.get(0)));
+                                textView1.setPadding(50, 20, 50, 30);
+                                break;
+                            case 1:
+                                textView2.setText(String.valueOf(hashtagArrayList.get(1)));
+                                textView2.setPadding(50, 20, 50, 30);
+                                break;
+                            case 2:
+                                textView3.setText(String.valueOf(hashtagArrayList.get(2)));
+                                textView3.setPadding(50, 20, 50, 30);
+                                break;
+                        }
+                        count_tag +=1;
 
-                    Log.v("태그1", String.valueOf(hashtagArrayList.get(0)));
-                    Log.v("태그2", String.valueOf(hashtagArrayList.get(1)));
-                    Log.v("태그3", String.valueOf(hashtagArrayList.get(2)));
+                        Log.v("태그1", String.valueOf(hashtagArrayList.get(0)));
+                        Log.v("태그2", String.valueOf(hashtagArrayList.get(1)));
+                        Log.v("태그3", String.valueOf(hashtagArrayList.get(2)));
 
-                    et_record.getText().clear();
-                    InputMethodManager imm = (InputMethodManager) mContext.getSystemService(INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(et_record.getWindowToken(), 0);
-                    //Toast.makeText(mContext.getApplicationContext(), et_record.getText(), Toast.LENGTH_LONG).show();
-                    return true;
-
-                }
-//                    switch (keyCode) {
-//                        case KeyEvent.KEYCODE_1:
-//                            break;
-//                        case KeyEvent.KEYCODE_2:
-//                            break;
-//                        case KeyEvent.KEYCODE_3:
-//                            break;
-//                    }
+                        et_record.getText().clear();
+                        InputMethodManager imm = (InputMethodManager) mContext.getSystemService(INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(et_record.getWindowToken(), 0);
+                        //Toast.makeText(mContext.getApplicationContext(), et_record.getText(), Toast.LENGTH_LONG).show();
+                        return true;
+                    }
                 return false;
             }
 
@@ -153,10 +181,6 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
         et_Date.setOnClickListener(this);
         et_Date1.setOnClickListener(this);
     }
-//
-//    private Bundle setArguments() {
-//        return drugName_view;
-//    }
 
     String GoodBad = "입력되지않음";
     @Override
@@ -215,8 +239,9 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
                 String end = final_date.getText().toString();
                 String favor = GoodBad;
                 //Log.d("보내자2", "약이름: " + name + "좋아요/싫어요" + favor + "복용시작: " + start + "복용끝 :" + end + "리뷰: " + txt1 + txt2 + txt3 );
-                customDialogListener.onOkClicked("약이름: " + name + "좋아요/싫어요" + favor + "복용시작: " + start + "복용끝 :" + end +
-                        "리뷰: " + txt1 + txt2 + txt3);
+//                customDialogListener.onOkClicked("약이름: " + name + "좋아요/싫어요" + favor + "복용시작: " + start + "복용끝 :" + end +
+//                        "리뷰: " + txt1 + txt2 + txt3);
+                customDialogListener.onOkClicked(name+","+favor+","+start+","+end+","+txt1+","+txt2+","+txt3);
                 dismiss();
                 break;
         }
@@ -227,8 +252,6 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.KOREA);
         TextView et_date = (TextView) findViewById(R.id.to_date);
         et_date.setText(sdf.format(myCalendar.getTime()));
-//        TextView et_date1 = (TextView) findViewById(R.id.from_date);
-//        et_date1.setText(sdf.format(myCalendar.getTime()));
     }
 
     private void updateLabel1() {
