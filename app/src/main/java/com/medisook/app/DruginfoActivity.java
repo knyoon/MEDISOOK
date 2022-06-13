@@ -138,24 +138,28 @@ public class DruginfoActivity extends Fragment implements View.OnClickListener{
                     case 0:
                         warnArrayList.add(0, Warn_Zip[i]);
                         warn1.setText(warnArrayList.get(0) + "주의");
+                        warn1.setPadding(20, 5, 20, 5);
                         Log.d("주의키워드1", Warn_Zip[i]);
                         count_tag += 1;
                         break;
                     case 1:
                         warnArrayList.add(1, Warn_Zip[i]);
                         warn2.setText(warnArrayList.get(1) + "주의");
+                        warn2.setPadding(20, 5, 20, 5);
                         Log.d("주의키워드2", Warn_Zip[i]);
                         count_tag += 1;
                         break;
                     case 2:
                         warnArrayList.add(2, Warn_Zip[i]);
                         warn3.setText(warnArrayList.get(2) + "주의");
+                        warn3.setPadding(20, 5, 20, 5);
                         Log.d("주의키워드3", Warn_Zip[i]);
                         count_tag += 1;
                         break;
                     case 3:
                         warnArrayList.add(3, Warn_Zip[i]);
                         warn4.setText(warnArrayList.get(3) + "주의");
+                        warn4.setPadding(20, 5, 20, 5);
                         Log.d("주의키워드4", Warn_Zip[i]);
                         count_tag += 1;
                         break;
