@@ -23,10 +23,10 @@ public class ViewHolder_filter extends RecyclerView.ViewHolder {
                 String strText = checkBox.getText().toString();
                 Toast.makeText(checkBox.getContext(), strText, Toast.LENGTH_SHORT).show();
                 Log.d("checkbox", "test");
-                int position = getAbsoluteAdapterPosition();
-                if(listener != null){
-                    listener.onItemClick(ViewHolder_filter.this, compoundButton, position);
-                }
+//                int position = getAbsoluteAdapterPosition();
+//                if(listener != null){
+//                    listener.onItemClick(ViewHolder_filter.this, compoundButton, position);
+//                }
             }
         });
         checkBox.setOnClickListener(new View.OnClickListener(){
@@ -34,20 +34,20 @@ public class ViewHolder_filter extends RecyclerView.ViewHolder {
             public void onClick(View view) {
 
                 String strText = checkBox.getText().toString();
-                int position = getAbsoluteAdapterPosition();
-                if(listener != null){
-                    listener.onItemClick(ViewHolder_filter.this, view, position);
-                }
+//                int position = getAbsoluteAdapterPosition();
+//                if(listener != null){
+//                    listener.onItemClick(ViewHolder_filter.this, view, position);
+//                }
                 Toast.makeText(view.getContext(), strText, Toast.LENGTH_SHORT).show();
             }
         });
         itemView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                int position = getAbsoluteAdapterPosition();
-                if(listener != null){
-                    listener.onItemClick(ViewHolder_filter.this, view, position);
-                }
+//                int position = getAbsoluteAdapterPosition();
+//                if(listener != null){
+//                    listener.onItemClick(ViewHolder_filter.this, view, position);
+//                }
             }
         });
     }

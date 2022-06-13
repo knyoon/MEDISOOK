@@ -35,6 +35,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MenuFragmentSearch extends Fragment implements View.OnClickListener {
     private Button red_filter_btn;
@@ -42,7 +43,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
     private Button yellow_filter_btn;
     private TextView txt;
 
-    public static String IP_ADDRESS = "192.168.18.36:80";
+    public static String IP_ADDRESS = "1.235.201.139:3838";
     //private static String ID = "medisook";
     private static String TAG = "메롱";
     private EditText mEditTextName;
@@ -68,7 +69,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
     int btn_pos;
     String nk;
     String pw;
-
+    ArrayList<String> record_total_list;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -267,6 +268,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
 
         @Override
         protected String doInBackground(String... params) {
+
             Log.d("과연", "insert test");
             String serverURL = params[0];
             if (params[1] == "0") {//회원가입
@@ -276,17 +278,16 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
             }
 
             else if (params[1] == "1") {//기록하기
-                insertpar[0]= "Id=" + total_list.get(0);
-                insertpar[1] = "&DRUG_NAME=" + total_list.get(1);
-                insertpar[2] = "&OTC=" + total_list.get(1);
-                insertpar[3] = "&IMAGE=" + total_list.get(1);
-                insertpar[4] = "&TAG1=" + total_list.get(1);
-                insertpar[5] = "&TAG2=" + total_list.get(1);
-                insertpar[6] = "&TAG3=" + total_list.get(1);
-                insertpar[7] = "&GOODBAD=" + total_list.get(1);
-                insertpar[8] = "&DATE1=" + total_list.get(1);
-                insertpar[9] = "&DATE2=" + total_list.get(1);
-
+                insertpar[0]= "Id=" + nk;
+                insertpar[3] = "&IMAGE=" + record_total_list.get(0);
+                insertpar[1] = "&DRUG_NAME=" + record_total_list.get(1);
+                insertpar[2] = "&OTC=" +record_total_list.get(2);
+                insertpar[7] = "&GOODBAD=" + record_total_list.get(3);
+                insertpar[8] = "&DATE1=" +record_total_list.get(4);
+                insertpar[9] = "&DATE2=" +record_total_list.get(5);
+                insertpar[4] = "&TAG1=" + record_total_list.get(6);
+                insertpar[5] = "&TAG2=" + record_total_list.get(7);
+                insertpar[6] = "&TAG3=" + record_total_list.get(8);
             }
 
 
@@ -384,7 +385,6 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 showResult();
             }
         }
-
 
         @Override
         protected String doInBackground(String... params) {
@@ -558,6 +558,18 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
         nk = nickname;
         pw = password;
         Log.d("닉네임", "get nickname test : "+nk+pw);
+    }
+    public void getRecord_Zip(String drugimage, String otc, String drugname, String favor, String start, String end, String txt1, String txt2, String txt3){
+        record_total_list = new ArrayList<>();
+        record_total_list.add(drugimage);
+        record_total_list.add(otc);
+        record_total_list.add(drugname);
+        record_total_list.add(favor);
+        record_total_list.add(start);
+        record_total_list.add(end);
+        record_total_list.add(txt1);
+        record_total_list.add(txt2);
+        record_total_list.add(txt3);
     }
 
 }

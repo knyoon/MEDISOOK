@@ -1,5 +1,7 @@
 package com.medisook.app;
 
+import static com.medisook.app.MenuFragmentSearch.IP_ADDRESS;
+
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
@@ -52,14 +54,15 @@ public class DruginfoActivity extends Fragment implements View.OnClickListener{
     Button wish_btn;
     private Context context;
     ArrayList<DrugItem> drugItem;
+    String drugImage;
+    String otc;
+    MenuFragmentSearch mfs;
     int position;
     private TextView txt;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.drug_info);
-
-
     }
 
     public void setContentView(int drug_info) {
@@ -76,6 +79,18 @@ public class DruginfoActivity extends Fragment implements View.OnClickListener{
                     @Override
                     public void onOkClicked(String text) {
                         txt.setText(text);
+                        ArrayList<String> Record_Zip = new ArrayList<>();
+                        Record_Zip.add(drugImage);
+                        Record_Zip.add(otc);
+                        String[] record_text = text.split(",");
+                        for(int i = 0; i<record_text.length;i++){
+                            Record_Zip.add(record_text[i]);
+                            Log.d("기록", "스플릿 테스트 : "+Record_Zip.get(i));
+                        }
+                        mfs = new MenuFragmentSearch();
+                        mfs.getRecord_Zip(Record_Zip.get(0), Record_Zip.get(1), Record_Zip.get(2), Record_Zip.get(3), Record_Zip.get(4), Record_Zip.get(5), Record_Zip.get(6), Record_Zip.get(7), Record_Zip.get(8));
+                        MenuFragmentSearch.InsertData insert = mfs.new InsertData();
+                        insert.execute("http://" + IP_ADDRESS + "/insertrecord.php", "1");
                     }
                 });
                 record_dialog.show();
@@ -116,12 +131,12 @@ public class DruginfoActivity extends Fragment implements View.OnClickListener{
         position = bundle.getInt("position");
         drugItem = (ArrayList<DrugItem>) bundle.getSerializable(("DrugItem"));
         String drugName = drugItem.get(position).getDrugName();
-        String drugImage  = drugItem.get(position).getDrugImg();
+        drugImage  = drugItem.get(position).getDrugImg();
         String entp = drugItem.get(position).getDrugentp();
         //String drugcode =drugItem.get(position).getDrugcode();
         String classname =drugItem.get(position).getClassname();
         String qnt = drugItem.get(position).getQnt();
-        String otc = drugItem.get(position).getOtc();
+        otc = drugItem.get(position).getOtc();
         String chart = drugItem.get(position).getChart();
         String efcy =drugItem.get(position).getEfcy();
         String usemethod =drugItem.get(position).getUsemethod();

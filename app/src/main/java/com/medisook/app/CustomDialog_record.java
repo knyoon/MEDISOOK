@@ -141,7 +141,6 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
                 Log.v("키보드", "이벤트" + et_record.getText());
                     if (event.getAction() != KeyEvent.ACTION_DOWN) {
                         Log.v("세영", et_record.getText().toString());
-//                        textView1.setText(et_record.getText());
                         hashtagArrayList.add(count_tag, String.valueOf(et_record.getText().toString()));
                         Log.v("태그", String.valueOf(hashtagArrayList));
                         switch (count_tag){
@@ -160,9 +159,6 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
                         }
                         count_tag +=1;
 
-
-
-
                         Log.v("태그1", String.valueOf(hashtagArrayList.get(0)));
                         Log.v("태그2", String.valueOf(hashtagArrayList.get(1)));
                         Log.v("태그3", String.valueOf(hashtagArrayList.get(2)));
@@ -172,16 +168,7 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
                         imm.hideSoftInputFromWindow(et_record.getWindowToken(), 0);
                         //Toast.makeText(mContext.getApplicationContext(), et_record.getText(), Toast.LENGTH_LONG).show();
                         return true;
-
                     }
-//                    switch (keyCode) {
-//                        case KeyEvent.KEYCODE_1:
-//                            break;
-//                        case KeyEvent.KEYCODE_2:
-//                            break;
-//                        case KeyEvent.KEYCODE_3:
-//                            break;
-//                    }
                 return false;
             }
 
@@ -194,10 +181,6 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
         et_Date.setOnClickListener(this);
         et_Date1.setOnClickListener(this);
     }
-//
-//    private Bundle setArguments() {
-//        return drugName_view;
-//    }
 
     String GoodBad = "입력되지않음";
     @Override
@@ -256,8 +239,9 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
                 String end = final_date.getText().toString();
                 String favor = GoodBad;
                 //Log.d("보내자2", "약이름: " + name + "좋아요/싫어요" + favor + "복용시작: " + start + "복용끝 :" + end + "리뷰: " + txt1 + txt2 + txt3 );
-                customDialogListener.onOkClicked("약이름: " + name + "좋아요/싫어요" + favor + "복용시작: " + start + "복용끝 :" + end +
-                        "리뷰: " + txt1 + txt2 + txt3);
+//                customDialogListener.onOkClicked("약이름: " + name + "좋아요/싫어요" + favor + "복용시작: " + start + "복용끝 :" + end +
+//                        "리뷰: " + txt1 + txt2 + txt3);
+                customDialogListener.onOkClicked(name+","+favor+","+start+","+end+","+txt1+","+txt2+","+txt3);
                 dismiss();
                 break;
         }

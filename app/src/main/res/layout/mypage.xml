@@ -81,6 +81,7 @@
             android:textSize="11dp"
             app:backgroundTint="@null" />
         <Button
+            android:id="@+id/calendar"
             android:layout_width="85dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="13dp"
