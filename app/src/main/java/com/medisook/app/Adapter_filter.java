@@ -17,6 +17,7 @@ public class Adapter_filter extends RecyclerView.Adapter<ViewHolder_filter> impl
     private ArrayList<String> listItemArrayList;
     private Adapter_list adapter_list;
     OnItemClickListener listener;
+    int count_check = 0;
     public Adapter_filter(ArrayList<FilterItem> filterItemArrayList, ArrayList<String> listItemArrayList, Adapter_list adapter_list, CustomDialog customDialog) {
         this.filterItemArrayList = filterItemArrayList;
         this.listItemArrayList = listItemArrayList;
@@ -41,12 +42,14 @@ public class Adapter_filter extends RecyclerView.Adapter<ViewHolder_filter> impl
         holder.checkBox.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                count_check += 1;
+                Log.d("checkbox", "count_check : "+ count_check);
                 CheckBox cb = (CheckBox) v;
                 FilterItem filter = (FilterItem) cb.getTag();
                 filter.setSelected(cb.isChecked());
                 filterItemArrayList.get(pos).setSelected(cb.isChecked());
                 listItemArrayList.add(String.valueOf(cb.getText()));
-                Log.d("리스트", String.valueOf(listItemArrayList.size()));
+//                Log.d("리스트", String.valueOf(listItemArrayList.size()));
             }
         });
     }

@@ -1,7 +1,4 @@
 package com.medisook.app;
-
-import static android.content.Context.INPUT_METHOD_SERVICE;
-
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
@@ -10,8 +7,11 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -21,6 +21,15 @@ import android.widget.TextView;
 
 import androidx.fragment.app.FragmentManager;
 
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.squareup.picasso.Picasso;
+
+import org.w3c.dom.Text;
+
+import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -84,6 +93,19 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
     }
     Calendar myCalendar = Calendar.getInstance();
 
+    class BtnOnClickListener implements View.OnClickListener{
+        @Override
+        public void onClick(View view){
+            String GoodBad = "null";
+            switch (view.getId()){
+                case R.id.good_btn:
+                    GoodBad = "good";
+                    Log.v("기록", "좋아요 누름");
+                    break;
+            }
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -102,7 +124,21 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
         drugName.setText(drugItemArrayList.get(position).getDrugName());
 
         good_btn = (ImageButton) findViewById(R.id.good_btn);
+        good_btn.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String GoodBad = "good";
+                Log.v("기록", "좋아요 누름");
+            }
+        });
         bad_btn = (ImageButton) findViewById(R.id.bad_btn);
+        bad_btn.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String GoodBad = "bad";
+                Log.v("기록", "싫어요 누름");
+            }
+        });
         okButton = (Button) findViewById(R.id.popup_ok_btn);
         et_Date = (TextView) findViewById(R.id.to_date);
         et_Date1 = (TextView) findViewById(R.id.from_date);
@@ -158,7 +194,6 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
 //                    }
                 return false;
             }
-
         });
 
         okButton = (Button) findViewById(R.id.popup_ok_btn);
@@ -168,10 +203,6 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
         et_Date.setOnClickListener(this);
         et_Date1.setOnClickListener(this);
     }
-//
-//    private Bundle setArguments() {
-//        return drugName_view;
-//    }
 
     String GoodBad = "입력되지않음";
     @Override
@@ -187,7 +218,6 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
                 break;
             case R.id.to_date:
                 Log.v("태그", "to-date 클릭");
-
                 DatePickerDialog.OnDateSetListener myDatePicker = new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {

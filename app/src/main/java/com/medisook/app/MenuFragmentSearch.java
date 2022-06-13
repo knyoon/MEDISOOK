@@ -42,7 +42,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
     private Button yellow_filter_btn;
     private TextView txt;
 
-    private static String IP_ADDRESS = "192.168.18.36:80";
+    public static String IP_ADDRESS = "192.168.18.36:80";
     //private static String ID = "medisook";
     private static String TAG = "메롱";
     private EditText mEditTextName;
@@ -66,7 +66,8 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
     Adapter adapter;
     Adapter_list adapter_list;
     int btn_pos;
-    boolean is_empty;
+    String nk;
+    String pw;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -168,40 +169,6 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 dialog.getWindow().clearFlags(
                         WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
                 break;
-//            case R.id.green_filter_btn:
-//                btn_pos = 2;
-//                CustomDialog dialog2 = new CustomDialog(getActivity(), 2);
-//                CustomDialog.Builder dialog2_bulider = new CustomDialog.Builder(getActivity());
-//                dialog2.setDialogListener(new CustomDialog.CustomDialogListener() {
-//                    @Override
-//                    public void onOkClicked(ArrayList<String> list_ingr) {
-//                        for (int i = 0;i<list_ingr.size();i++){
-//                            adapter_list.setArrayData(list_ingr.get(i), 2);
-//                            Log.d("리스트_2", "ingr : " + list_ingr.size());
-//                        } adapter_list.notifyDataSetChanged();
-//                    }
-//                });
-//                dialog2.show();
-//                dialog2.getWindow().clearFlags(
-//                        WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
-//                break;
-//            case R.id.yellow_filter_btn:
-//                btn_pos = 3;
-//                CustomDialog dialog3 = new CustomDialog(getActivity(), 3);
-//                CustomDialog.Builder dialog3_bulider = new CustomDialog.Builder(getActivity());
-//                dialog3.setDialogListener(new CustomDialog.CustomDialogListener() {
-//                    @Override
-//                    public void onOkClicked(ArrayList<String> list_qesitm) {
-//                        for (int i = 0;i<list_qesitm.size();i++){
-//                            adapter_list.setArrayData(list_qesitm.get(i), 2);
-//                            Log.d("리스트_2", "ingr : " + list_qesitm.size());
-//                        } adapter_list.notifyDataSetChanged();
-//                    }
-//                });
-//                dialog3.show();
-//                dialog3.getWindow().clearFlags(
-//                        WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
-//                break;
         }
     }
     @Override
@@ -276,33 +243,25 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
         });
         return rootView;
     }
-    private class InsertData extends AsyncTask<String, Void, String> {
+    public class InsertData extends AsyncTask<String, Void, String> {
 
-        ProgressDialog progressDialog;
-        String errorString = null;
-
+//        ProgressDialog progressDialog = ProgressDialog.show(getActivity(),
+//                "Please Wait", null, true, true);
+//        //String errorString = null;
+//        String nk;
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+//            Log.d("과연", "insert test");
 
-            progressDialog = ProgressDialog.show(getActivity(),
-                    "Please Wait", null, true, true);
         }
 
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
-            progressDialog.dismiss();
+            //progressDialog.dismiss();
+            //mTextViewResult.setText(result);
 
-            if (result == null){
-                mTextViewResult.setText(errorString);
-            }
-            else {
-
-                mJsonString = result;
-                Log.d("과연", result);
-
-            }
         }
 
 
@@ -311,9 +270,9 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
             Log.d("과연", "insert test");
             String serverURL = params[0];
             if (params[1] == "0") {//회원가입
-                DrugItem j =new DrugItem();
-                join[0]="ID="+j.getNickname();
-                join[1]="&PASSWORD="+j.getPassword();
+                Log.d("닉네임", "서치에서 닉네임 : "+nk+pw);
+                join[0]="ID="+nk;
+                join[1]="&PASSWORD="+pw;
             }
 
             else if (params[1] == "1") {//기록하기
@@ -391,7 +350,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
             } catch (Exception e) {
 
                 Log.d(TAG, "InsertData : Error ", e);
-                errorString = e.toString();
+                //errorString = e.toString();
 
                 return null;
             }
@@ -593,6 +552,12 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
             Log.d(TAG, "showResult : ", e);
         }
 
+    }
+
+    public void getNickname(String nickname, String password){
+        nk = nickname;
+        pw = password;
+        Log.d("닉네임", "get nickname test : "+nk+pw);
     }
 
 }
