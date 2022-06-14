@@ -16,15 +16,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-
 public class MenuFragmentMypage extends Fragment implements View.OnClickListener {
     private TextView tv_hashtag;
     ArrayList<RecordItem> recordItemArrayList;
     LinearLayoutManager linearLayoutManager;
     RecyclerView recyclerView;
     Adapter_record adapter;
+    ArrayList<DrugItem> drugItem;
+    int position;
     private SpannableString content;
     private Button calender;
+    private Button star_btn;
+    private TextView nickname_view;
     TextView textview;
 
     public MenuFragmentMypage() {
@@ -49,8 +52,12 @@ public class MenuFragmentMypage extends Fragment implements View.OnClickListener
         calender.setOnClickListener(this);
         tv_hashtag = (TextView)rootView.findViewById(R.id.tv_hashtag);
         recyclerView = (RecyclerView) rootView. findViewById(R.id.recycler_view_record);
+        star_btn = (Button) rootView.findViewById(R.id.star);
+        star_btn.setOnClickListener(this);
         recordItemArrayList = new ArrayList<>();
-
+//        nickname_view = (TextView)rootView.findViewById(R.id.name);
+//        String name = drugItem.get(position).getNickname();
+//        nickname_view.setText(name);
         adapter = new Adapter_record(recordItemArrayList, this);
         linearLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
@@ -73,13 +80,18 @@ public class MenuFragmentMypage extends Fragment implements View.OnClickListener
             case R.id.calender:
                 CustomDialog_calender dialog = new CustomDialog_calender(getActivity());
                 CustomDialog_record.Builder dialog_bulider = new CustomDialog_record.Builder(getActivity());
-                dialog.setDialogListener(new CustomDialog.CustomDialogListener() {
-                    @Override
-                    public void onOkClicked(ArrayList<String> text) {
-                        //txt.setText(text);
-                    }
-                });
+//                dialog.setDialogListener(new CustomDialog.CustomDialogListener() {
+//                    @Override
+//                    public void onOkClicked(ArrayList<String> text) {
+//                        //txt.setText(text);
+//                    }
+//                });
                 dialog.show();
+                break;
+            case R.id.star:
+                CustomDialog_star dialog_star = new CustomDialog_star(getActivity());
+                CustomDialog_star.Builder dialog_star_bulider = new CustomDialog_record.Builder(getActivity());
+                dialog_star.show();
                 break;
         }
     }
