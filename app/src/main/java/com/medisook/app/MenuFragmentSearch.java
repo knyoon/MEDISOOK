@@ -56,6 +56,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
     private String mJsonString;
     private String searchText;
     String postParameters;
+    String user;
     ArrayList<DrugItem> drugItemArrayList, filtered_drugList;
     ArrayList<String> listItemArrayList, total_list;
     String[] join={"id","password"};
@@ -66,6 +67,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
     RecyclerView recyclerView, recyclerView_list;
     Adapter adapter;
     Adapter_list adapter_list;
+    Adapter_record adapter_record;
     int btn_pos;
     String nk;
     String pw;
@@ -125,10 +127,11 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                                                 count_list += 1;
                                                 total_list.add("슬라임");
                                             }
+                                            Log.d("리스트", "list size : " + drugItemArrayList.size());
                                             ReadData insert = new ReadData();
                                             insert.execute("http://" + IP_ADDRESS + "/filterserch.php", "1");
                                             adapter_list.notifyDataSetChanged();
-                                            Log.d("리스트", "list size : " + drugItemArrayList.size());
+
                                         }
                                     });
                                     dialog3.show();
@@ -268,23 +271,21 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
             String serverURL = params[0];
             if (params[1] == "0") {//회원가입
                 Log.d("닉네임", "서치에서 닉네임 : "+nk+pw);
-                join[0]="ID="+nk;
+                join[0]="ID="+"영반";
                 join[1]="&PASSWORD="+pw;
             }
-
             else if (params[1] == "1") {//기록하기
-                insertpar[0]= "Id=" + nk;
+                insertpar[0]= "Id=" + "영반";
                 insertpar[3] = "&IMAGE=" + record_total_list.get(0);
-                insertpar[1] = "&DRUG_NAME=" + record_total_list.get(1);
-                insertpar[2] = "&OTC=" +record_total_list.get(3);
-                insertpar[7] = "&GOODBAD=" + record_total_list.get(2);
+                insertpar[1] = "&DRUG_NAME=" + record_total_list.get(2);
+                insertpar[2] = "&OTC=" +record_total_list.get(1);
+                insertpar[7] = "&GOODBAD=" + record_total_list.get(3);
                 insertpar[8] = "&DATE1=" +record_total_list.get(4);
                 insertpar[9] = "&DATE2=" +record_total_list.get(5);
                 insertpar[4] = "&TAG1=" + record_total_list.get(6);
                 insertpar[5] = "&TAG2=" + record_total_list.get(7);
                 insertpar[6] = "&TAG3=" + record_total_list.get(8);
             }
-
 
             try {
                 //String searchDrug="Data="+searchET.getText().toString();
@@ -335,7 +336,9 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 String line;
 
                 while((line = bufferedReader.readLine()) != null){
+                    Log.d(TAG, "안녕:");
                     sb.append(line);
+//                    Log.d(TAG, "안녕:"+line);
                 }
 
                 bufferedReader.close();
@@ -352,8 +355,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
             }
         }
     }
-    private class ReadData extends AsyncTask<String, Void, String> {
-
+    public class ReadData extends AsyncTask<String, Void, String> {
         ProgressDialog progressDialog;
         String errorString = null;
 
@@ -363,6 +365,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
 
             progressDialog = ProgressDialog.show(getActivity(),
                     "Please Wait", null, true, true);
+            Log.d("과연", "어디까지 오는지");
         }
 
         @Override
@@ -398,12 +401,15 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 parameter[7] = "&Who2=" + total_list.get(7);
                 parameter[8] = "&Who3=" + total_list.get(8);
             }
+            else if(params[1]=="2"){//마이페이지
+                user="ID="+nk;
+            }
             try {
                 //String searchDrug="Data="+searchET.getText().toString();
 //                Log.d("과연", postParameters);
                 URL url = new URL(serverURL);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                httpURLConnection.setReadTimeout(20000);
+                httpURLConnection.setReadTimeout(100000);
                 httpURLConnection.setConnectTimeout(20000);
                 httpURLConnection.setRequestMethod("POST");
                 httpURLConnection.setDoInput(true);
@@ -418,6 +424,10 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                         outputStream.write(parameter[i].getBytes("UTF-8"));
                         Log.d("과연", parameter[i]);
                     }
+                }
+                else if(params[1]=="2"){//마이페이지
+                    outputStream.write(user.getBytes("UTF-8"));
+                    Log.d("과연", user);
                 }
                 outputStream.flush();
                 outputStream.close();
@@ -509,10 +519,10 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 String noincount = item.getString(TAG_NOINCOUNT);
                 String kidcount = item.getString(TAG_KIDCOUNT);
                 String warning = item.getString(TAG_WARNING);
-                //String [] warning_s=warning.split(",");
 
 
                 DrugItem drugData = new DrugItem();
+                RecordItem record = new RecordItem();
 
                 drugData.setDrugName(name);
                 drugData.setDrugImg(image);
@@ -537,9 +547,75 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
 
 
                 adapter.setArrayData(drugData);
+
                 Log.d(TAG, drugData.getDrugImg().toString());
             }
             adapter.notifyDataSetChanged();
+
+        }catch(NullPointerException n){
+            showResult2();
+
+        } catch (JSONException e) {
+
+            Log.d(TAG, "showResult : ", e);
+        }
+
+    }
+
+    private void showResult2() {
+
+        String TAG_JSON = "mypage";
+        String TAG_NAME = "DRUG_NAME";
+        String TAG_IMAGE = "IMAGE";
+        String TAG_OTC = "OTC";
+        String TAG_TAG1="TAG1";
+        String TAG_TAG2="TAG2";
+        String TAG_TAG3="TAG3";
+        String TAG_GOODBAD="GOODBAD";
+        String TAG_DATE1="DATE1";
+        String TAG_DATE2="DATE2";
+        String TAG_ID="USER_ID";
+
+
+        try {
+            JSONObject jsonObject = new JSONObject(mJsonString);
+            JSONArray jsonArray = jsonObject.getJSONArray(TAG_JSON);
+            for (int i = 0; i < jsonArray.length(); i++) {
+
+                JSONObject item = jsonArray.getJSONObject(i);
+
+                String name = item.getString(TAG_NAME);
+
+                String image = item.getString(TAG_IMAGE);
+
+                String otc = item.getString(TAG_OTC);
+                String tag1 = item.getString(TAG_TAG1);
+                String tag2 = item.getString(TAG_TAG2);
+                String tag3 = item.getString(TAG_TAG3);
+                String goodbad = item.getString(TAG_GOODBAD);
+                String date1 = item.getString(TAG_DATE1);
+                String date2 = item.getString(TAG_DATE2);
+                String id = "영반";
+
+
+                RecordItem record=new RecordItem();
+
+
+                record.setDrugName(name);
+                record.setDrugImg(image);
+                record.setMember_name(otc);//otc
+                record.setMember_id(id);//아이디
+                record.setTag1(tag1);
+                record.setTag2(tag2);
+                record.setTag3(tag3);
+                record.setGoodbad(goodbad);
+                record.setDate1(date1);
+                record.setDate2(date2);
+
+                adapter_record.setArraydata(record);
+            }
+            adapter.notifyDataSetChanged();
+            adapter_record.notifyDataSetChanged();
 
 
         } catch (JSONException e) {
@@ -550,7 +626,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
     }
 
     public void getNickname(String nickname, String password){
-        nk = nickname;
+        nk = "영반";
         pw = password;
         Log.d("닉네임", "get nickname test : "+nk+pw);
     }
@@ -566,5 +642,4 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
         record_total_list.add(txt2);
         record_total_list.add(txt3);
     }
-
 }

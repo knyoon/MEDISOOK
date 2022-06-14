@@ -1,32 +1,25 @@
 package com.medisook.app;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.ContentView;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.text.Editable;
 import android.text.SpannableString;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
 
 public class MenuFragmentMypage extends Fragment implements View.OnClickListener {
+    private static final String IP_ADDRESS =  "1.235.201.139:3838";
     private TextView tv_hashtag;
     ArrayList<RecordItem> recordItemArrayList;
     LinearLayoutManager linearLayoutManager;
@@ -35,11 +28,11 @@ public class MenuFragmentMypage extends Fragment implements View.OnClickListener
     private SpannableString content;
     private Button calendar;
     TextView textview;
-
+    Context context;
     public MenuFragmentMypage() {
         // Required empty public constructor
     }
-
+    MenuFragmentSearch mfs;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,6 +49,8 @@ public class MenuFragmentMypage extends Fragment implements View.OnClickListener
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        context = getActivity();
+
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.mypage, container, false);
         calendar = (Button)rootView.findViewById(R.id.calendar);
         calendar.setOnClickListener(this);
@@ -66,14 +61,18 @@ public class MenuFragmentMypage extends Fragment implements View.OnClickListener
 
         adapter = new Adapter_record(recordItemArrayList, this);
         linearLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
+        Log.d("테스트", "어디까지 오는지");
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
         recyclerView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-
-        for (int i = 0; i < 100; i++) {
-            adapter.setArrayData(new RecordItem(i + "번째약"));
-            Log.d("태그", "마이페이지 테스트");
-        }
+//        adapter.notifyDataSetChanged();
+        mfs = new MenuFragmentSearch();
+        MenuFragmentSearch.ReadData read = mfs.new ReadData();
+        read.execute("http://" + IP_ADDRESS + "/readrecord.php", "2");
+//        adapter.notifyDataSetChanged();
+//        for (int i = 0; i < 100; i++) {
+//            adapter.setArrayData(new RecordItem(i + "번째약"));
+//            Log.d("태그", "마이페이지 테스트");
+//        }
         recyclerView.setAdapter(adapter);
         return rootView;
     }
