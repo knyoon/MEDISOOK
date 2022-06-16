@@ -2,24 +2,21 @@ package com.medisook.app;
 
 import android.content.Context;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.text.SpannableString;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
 
-
 public class MenuFragmentMypage extends Fragment implements View.OnClickListener {
-    private static final String IP_ADDRESS =  "1.235.201.139:3838";
+    private static final String IP_ADDRESS =  "192.168.18.51:80";
     private TextView tv_hashtag;
     ArrayList<RecordItem> recordItemArrayList;
     LinearLayoutManager linearLayoutManager;
@@ -29,8 +26,8 @@ public class MenuFragmentMypage extends Fragment implements View.OnClickListener
     private Button calendar;
     TextView textview;
     Context context;
+    RecordItem recordItem;
     public MenuFragmentMypage() {
-        // Required empty public constructor
     }
     MenuFragmentSearch mfs;
 
@@ -39,7 +36,6 @@ public class MenuFragmentMypage extends Fragment implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mypage);
     }
-
     public void onResume() {
         super.onResume();
     }
@@ -49,26 +45,28 @@ public class MenuFragmentMypage extends Fragment implements View.OnClickListener
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        context = getActivity();
-
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.mypage, container, false);
         calendar = (Button)rootView.findViewById(R.id.calendar);
         calendar.setOnClickListener(this);
         tv_hashtag = (TextView) rootView.findViewById(R.id.tv_hashtag);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view_record);
-
         recordItemArrayList = new ArrayList<>();
-
-        adapter = new Adapter_record(recordItemArrayList, this);
         linearLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
-        Log.d("테스트", "어디까지 오는지");
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
         recyclerView.setAdapter(adapter);
+
 //        adapter.notifyDataSetChanged();
         mfs = new MenuFragmentSearch();
         MenuFragmentSearch.ReadData read = mfs.new ReadData();
         read.execute("http://" + IP_ADDRESS + "/readrecord.php", "2");
-//        adapter.notifyDataSetChanged();
+
+  //      Bundle bundle = getArguments();
+//        recordItem = new RecordItem();
+  //      Log.d("테스트", "어디까지 오는지");
+  //      recordItem = (RecordItem) bundle.getSerializable(("RecordItem"));
+  //      adapter = new Adapter_record(recordItem, this);
+   //     adapter.setArraydata(recordItem);
+   //     adapter.notifyDataSetChanged();
 //        for (int i = 0; i < 100; i++) {
 //            adapter.setArrayData(new RecordItem(i + "번째약"));
 //            Log.d("태그", "마이페이지 테스트");

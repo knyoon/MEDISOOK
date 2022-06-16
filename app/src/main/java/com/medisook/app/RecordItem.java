@@ -1,17 +1,21 @@
 package com.medisook.app;
 
-public class RecordItem {
+import java.io.Serializable;
+
+public class RecordItem implements Serializable {
     String drugName;
     String drugImg;
-    private String member_name;
-    private String member_entp;
-    private String member_image;
-    private String tag1;
-    private String tag2;
-    private String tag3;
-    private String goodbad;
-    private String date1;
-    private String date2;
+    String member_name;
+    String member_entp;
+    String member_image;
+    String tag1;
+    String tag2;
+    String tag3;
+    String goodbad;
+    String date1;
+    String date2;
+    String loginresult;
+
     public String getMember_id() {
         return member_name;
     }
@@ -56,4 +60,7 @@ public class RecordItem {
     public String getDate1(){return date1;}
     public void setDate2(String date2){this.date2=date2;}
     public String getDate2(){return date2;}
+    public void setResult(String loginresult){this.loginresult=loginresult;}
+    public String getResult(){return loginresult;}
+
 }

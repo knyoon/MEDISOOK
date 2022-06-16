@@ -1,6 +1,5 @@
 package com.medisook.app;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -38,7 +37,6 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 
 public class MenuFragmentSearch extends Fragment implements View.OnClickListener {
     private Button red_filter_btn;
@@ -58,13 +56,15 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
     private EditText mEditTextSearchKeyword;
     private String mJsonString;
     private String searchText;
-    String postParameters;
+    String loginresult;
     String user;
+    String postParameters;
     ArrayList<DrugItem> drugItemArrayList, filtered_drugList;
     ArrayList<RecordItem> recordItemArrayList;
     ArrayList<String> listItemArrayList, total_list;
     RecordItem record;
     String[] join={"id","password"};
+    String[] wishlist={"id","drug_name"};
     String[] parameter = {"efcy1", "efcy2", "efcy3", "exc1", "exc2", "exc3", "who1", "who2", "who3"};
     String[] insertpar = {"id", "tag1", "tag2", "tag3", "drugname", "image", "otc", "goodbad", "date1", "date2"};
     LinearLayoutManager linearLayoutManager;
@@ -299,6 +299,12 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 insertpar[6] = "&TAG3=" + record_total_list.get(8);
             }
 
+            else if (params[1] == "3") {//찜하기
+                wishlist[0]= "ID=" + "영반";
+                wishlist[1] = "&DRUG_NAME=" + record_total_list.get(0);
+
+            }
+
             try {
                 //String searchDrug="Data="+searchET.getText().toString();
                 //Log.d("과연", postParameters);
@@ -324,6 +330,12 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                     for (int i = 0; i < 10; i++) {
                         outputStream.write(insertpar[i].getBytes("UTF-8"));
                         Log.d("과연", insertpar[i]);
+                    }
+                }
+                else if (params[1] == "3") {
+                    for (int i = 0; i < 2; i++) {
+                        outputStream.write(wishlist[i].getBytes("UTF-8"));
+                        Log.d("과연", wishlist[i]);
                     }
                 }
                 outputStream.flush();
@@ -391,9 +403,22 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
             } else {
 
                 mJsonString = result;
-                Log.d("과연 : 이건가", result);
-                showResult();
-//                showResult2();
+                Log.d("onpost", result);
+                Log.d("onpost", String.valueOf(mJsonString.charAt(2)));
+                if(mJsonString.charAt(2)=='d'){
+                    showResult();
+                }
+
+                else if (mJsonString.charAt(2)=='m'){
+                    showResult2();
+                }
+
+                else if(mJsonString.contains("TRUE")||mJsonString.contains("FALSE")){
+                    //Log.d("로그인", "여기는 오나?");
+                    login(mJsonString);
+                }
+
+
             }
         }
 
@@ -414,8 +439,12 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 parameter[7] = "&Who2=" + total_list.get(7);
                 parameter[8] = "&Who3=" + total_list.get(8);
             }
-            else if(params[1]=="2"){//마이페이지
+            else if(params[1]=="2"){//마이페이지//찜하기
                 user="ID="+"영반";
+            }
+            else if(params[1]=="3"){//로그인//중복확인
+                join[0]="ID="+nk;
+                join[1]="&PASSWORD="+pw;
             }
             try {
                 //String searchDrug="Data="+searchET.getText().toString();
@@ -441,6 +470,13 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 else if(params[1]=="2"){//마이페이지
                     outputStream.write(user.getBytes("UTF-8"));
                     Log.d("과연", user);
+                }
+                else if (params[1] == "3") {//중복확인
+                    for (int i = 0; i < 2; i++) {
+                        outputStream.write(join[i].getBytes("UTF-8"));
+                        Log.d("과연", join[i]);
+                    }
+
                 }
                 outputStream.flush();
                 outputStream.close();
@@ -563,11 +599,13 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
 
             }catch(NullPointerException n){
 
-                showResult2();
+                Log.d(TAG, "showResult : ",n);
+
 
             } catch (JSONException e) {
 
                 Log.d(TAG, "showResult : ", e);
+
             }
 
         }
@@ -641,11 +679,34 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
 
         }
 
+
+
+    }
+
+    public void login(String result){
+        RecordItem ri=new RecordItem();
+        if(result.contains("TRUE")){
+            Log.d("로그인결과:", "성공");
+            loginresult="TRUE";
+
+        }
+        if(result.contains("FALSE")){
+            Log.d("로그인결과:", "실패");
+            loginresult="FALSE";
+        }
+
+
+    }
+
+    public String getresult(){
+        return loginresult;
     }
 
 
+
+
     public void getNickname(String nickname, String password){
-        nk = "영반";
+        nk = nickname;
         pw = password;
         Log.d("닉네임", "get nickname test : "+nk+pw);
     }

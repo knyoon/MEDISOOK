@@ -5,6 +5,7 @@ import static com.medisook.app.MenuFragmentSearch.IP_ADDRESS;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -32,6 +33,7 @@ public class JoinActivity extends AppCompatActivity implements View.OnClickListe
     String nk_final;
     String pw;
     String pw_final;
+    String result;
 
 
     @Override
@@ -115,7 +117,7 @@ public class JoinActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()){
             case R.id.join_btn:
                 Log.v("회원가입", "테스트- " + nk_result + pw_result);
-                if(nk_result == true && pw_result == true){
+                if(nk_result == true && pw_result == true){//중복확인 여부 확인 후 회원가입 성공시키기.
                     nk_final = nk;
                     pw_final = pw;
                     mf = new MenuFragmentSearch();
@@ -137,7 +139,29 @@ public class JoinActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
             case R.id.check_nk:
+                MenuFragmentSearch.ReadData read = mf.new ReadData();
+                read.execute("http://" + IP_ADDRESS + "/login.php", "3");
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.d("로그인",mf.getresult());
+                        if(mf.getresult().contains("TRUE")){
+                            Log.d("로그인", "중복닉네임입니다");
+                            et_nickname.setText(null);
+                        }
+                        else if(mf.getresult().contains("FALSE")){
+                            Log.d("로그인", "사용가능한 닉네임입니다.");
+                            nk_final = nk;
+                        }
+
+                    }
+                }, 2000);
+
+
                 //닉네임 중복확인 부분
         }
+
     }
+
+
 }
