@@ -478,169 +478,171 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 return null;
             }
         }
-    }
 
-    private void showResult() {
+        private void showResult() {
 
-        String TAG_JSON = "drug";
-        String TAG_NAME = "DRUG_NAME";
-        String TAG_ENTP = "ENTP_NAME";
-        String TAG_IMAGE = "IMAGE";
-        String TAG_DCODE = "DRUG_CODE";
-        String TAG_CLASSN = "CLASS_NAME";
-        String TAG_QNT = "QNT";
-        String TAG_OTC = "OTC";
-        String TAG_CHART = "CHART";
-        String TAG_EFCY = "EFCY";
-        String TAG_USE = "USEMETHOD";
-        String TAG_QESITM = "QESITM";
-        String TAG_DEPOSIT = "DEPOSIT";
-        String TAG_TERM = "VALID_TERM";
-        String TAG_CONTENT = "TOTAL_CONTENT";
-        String TAG_MAINGR = "MAIN_INGR";
-        String TAG_TINGR = "INGR_NAME";
-        String TAG_IMBUCOUNT="IMBU_COUNT";
-        String TAG_KIDCOUNT="KID_COUNT";
-        String TAG_NOINCOUNT="NOIN_COUNT";
-        String TAG_WARNING="WARNING";
+            String TAG_JSON = "drug";
+            String TAG_NAME = "DRUG_NAME";
+            String TAG_ENTP = "ENTP_NAME";
+            String TAG_IMAGE = "IMAGE";
+            String TAG_DCODE = "DRUG_CODE";
+            String TAG_CLASSN = "CLASS_NAME";
+            String TAG_QNT = "QNT";
+            String TAG_OTC = "OTC";
+            String TAG_CHART = "CHART";
+            String TAG_EFCY = "EFCY";
+            String TAG_USE = "USEMETHOD";
+            String TAG_QESITM = "QESITM";
+            String TAG_DEPOSIT = "DEPOSIT";
+            String TAG_TERM = "VALID_TERM";
+            String TAG_CONTENT = "TOTAL_CONTENT";
+            String TAG_MAINGR = "MAIN_INGR";
+            String TAG_TINGR = "INGR_NAME";
+            String TAG_IMBUCOUNT="IMBU_COUNT";
+            String TAG_KIDCOUNT="KID_COUNT";
+            String TAG_NOINCOUNT="NOIN_COUNT";
+            String TAG_WARNING="WARNING";
 
 
-        try {
-            JSONObject jsonObject = new JSONObject(mJsonString);
-            JSONArray jsonArray = jsonObject.getJSONArray(TAG_JSON);
-            for (int i = 0; i < jsonArray.length(); i++) {
+            try {
+                JSONObject jsonObject = new JSONObject(mJsonString);
+                JSONArray jsonArray = jsonObject.getJSONArray(TAG_JSON);
+                for (int i = 0; i < jsonArray.length(); i++) {
 
-                JSONObject item = jsonArray.getJSONObject(i);
+                    JSONObject item = jsonArray.getJSONObject(i);
 
-                String name = item.getString(TAG_NAME);
-                String entp = item.getString(TAG_ENTP);
-                String image = item.getString(TAG_IMAGE);
-                String drugcode = item.getString(TAG_DCODE);
-                String classname = item.getString(TAG_CLASSN);
-                String qnt = item.getString(TAG_QNT);
-                String otc = item.getString(TAG_OTC);
-                String chart = item.getString(TAG_CHART);
-                String efcy = item.getString(TAG_EFCY);
-                String usemethod = item.getString(TAG_USE);
-                String qesitm = item.getString(TAG_QESITM);
-                String deposit = item.getString(TAG_DEPOSIT);
-                String term = item.getString(TAG_TERM);
-                String totalcontent = item.getString(TAG_CONTENT);
-                String mainingr = item.getString(TAG_MAINGR);
-                String ingrname = item.getString(TAG_TINGR);
-                String imbucount = item.getString(TAG_IMBUCOUNT);
-                String noincount = item.getString(TAG_NOINCOUNT);
-                String kidcount = item.getString(TAG_KIDCOUNT);
-                String warning = item.getString(TAG_WARNING);
+                    String name = item.getString(TAG_NAME);
+                    String entp = item.getString(TAG_ENTP);
+                    String image = item.getString(TAG_IMAGE);
+                    String drugcode = item.getString(TAG_DCODE);
+                    String classname = item.getString(TAG_CLASSN);
+                    String qnt = item.getString(TAG_QNT);
+                    String otc = item.getString(TAG_OTC);
+                    String chart = item.getString(TAG_CHART);
+                    String efcy = item.getString(TAG_EFCY);
+                    String usemethod = item.getString(TAG_USE);
+                    String qesitm = item.getString(TAG_QESITM);
+                    String deposit = item.getString(TAG_DEPOSIT);
+                    String term = item.getString(TAG_TERM);
+                    String totalcontent = item.getString(TAG_CONTENT);
+                    String mainingr = item.getString(TAG_MAINGR);
+                    String ingrname = item.getString(TAG_TINGR);
+                    String imbucount = item.getString(TAG_IMBUCOUNT);
+                    String noincount = item.getString(TAG_NOINCOUNT);
+                    String kidcount = item.getString(TAG_KIDCOUNT);
+                    String warning = item.getString(TAG_WARNING);
 
-                DrugItem drugData = new DrugItem();
+                    DrugItem drugData = new DrugItem();
 
-                drugData.setDrugName(name);
-                drugData.setDrugImg(image);
-                drugData.setDrugentp(entp);
-                drugData.setDrugcode(drugcode);
-                drugData.setClassname(classname);
-                drugData.setQnt(qnt);
-                drugData.setOtc(otc);
-                drugData.setChart(chart);
-                drugData.setEfcy(efcy);
-                drugData.setUsemethod(usemethod);
-                drugData.setQesitm(qesitm);
-                drugData.setTerm(term);
-                drugData.setDeposit(deposit);
-                drugData.setTotalcontent(totalcontent);
-                drugData.setMainingr(mainingr);
-                drugData.setIngrname(ingrname);
-                drugData.setImbucount(imbucount);
-                drugData.setNoincount(noincount);
-                drugData.setKidcount(kidcount);
-                drugData.setWarning(warning);
+                    drugData.setDrugName(name);
+                    drugData.setDrugImg(image);
+                    drugData.setDrugentp(entp);
+                    drugData.setDrugcode(drugcode);
+                    drugData.setClassname(classname);
+                    drugData.setQnt(qnt);
+                    drugData.setOtc(otc);
+                    drugData.setChart(chart);
+                    drugData.setEfcy(efcy);
+                    drugData.setUsemethod(usemethod);
+                    drugData.setQesitm(qesitm);
+                    drugData.setTerm(term);
+                    drugData.setDeposit(deposit);
+                    drugData.setTotalcontent(totalcontent);
+                    drugData.setMainingr(mainingr);
+                    drugData.setIngrname(ingrname);
+                    drugData.setImbucount(imbucount);
+                    drugData.setNoincount(noincount);
+                    drugData.setKidcount(kidcount);
+                    drugData.setWarning(warning);
 
-                adapter.setArrayData(drugData);
+                    adapter.setArrayData(drugData);
 
-                Log.d(TAG, drugData.getDrugImg().toString());
+                    Log.d(TAG, drugData.getDrugImg().toString());
+                }
+                adapter.notifyDataSetChanged();
+
+            }catch(NullPointerException n){
+
+                showResult2();
+
+            } catch (JSONException e) {
+
+                Log.d(TAG, "showResult : ", e);
             }
-            adapter.notifyDataSetChanged();
 
-        }catch(NullPointerException n){
-
-            showResult2();
-
-        } catch (JSONException e) {
-
-            Log.d(TAG, "showResult : ", e);
         }
 
-    }
+        private void showResult2() {
+            Log.d("과연 여기","들어오나");
+            String TAG_JSON = "mypage";
+            String TAG_NAME = "DRUG_NAME";
+            String TAG_IMAGE = "IMAGE";
+            String TAG_OTC = "OTC";
+            String TAG_TAG1="TAG1";
+            String TAG_TAG2="TAG2";
+            String TAG_TAG3="TAG3";
+            String TAG_GOODBAD="GOODBAD";
+            String TAG_DATE1="DATE1";
+            String TAG_DATE2="DATE2";
+            String TAG_ID="USER_ID";
 
-    private void showResult2() {
-        Log.d("과연 여기","들어오나");
-        String TAG_JSON = "mypage";
-        String TAG_NAME = "DRUG_NAME";
-        String TAG_IMAGE = "IMAGE";
-        String TAG_OTC = "OTC";
-        String TAG_TAG1="TAG1";
-        String TAG_TAG2="TAG2";
-        String TAG_TAG3="TAG3";
-        String TAG_GOODBAD="GOODBAD";
-        String TAG_DATE1="DATE1";
-        String TAG_DATE2="DATE2";
-        String TAG_ID="USER_ID";
+            try {
+                JSONObject jsonObject = new JSONObject(mJsonString);
+                JSONArray jsonArray = jsonObject.getJSONArray(TAG_JSON);
+                for (int i = 0; i < jsonArray.length(); i++) {
 
-        try {
-            JSONObject jsonObject = new JSONObject(mJsonString);
-            JSONArray jsonArray = jsonObject.getJSONArray(TAG_JSON);
-            for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject item = jsonArray.getJSONObject(i);
 
-                JSONObject item = jsonArray.getJSONObject(i);
+                    String name = item.getString(TAG_NAME);
+                    Log.d("테스트 : ", "약이름"+name);
+                    String image = item.getString(TAG_IMAGE);
 
-                String name = item.getString(TAG_NAME);
-                Log.d("테스트 : ", "약이름"+name);
-                String image = item.getString(TAG_IMAGE);
+                    String otc = item.getString(TAG_OTC);
+                    String tag1 = item.getString(TAG_TAG1);
+                    String tag2 = item.getString(TAG_TAG2);
+                    String tag3 = item.getString(TAG_TAG3);
+                    String goodbad = item.getString(TAG_GOODBAD);
+                    String date1 = item.getString(TAG_DATE1);
+                    String date2 = item.getString(TAG_DATE2);
+                    String id = "영반";
 
-                String otc = item.getString(TAG_OTC);
-                String tag1 = item.getString(TAG_TAG1);
-                String tag2 = item.getString(TAG_TAG2);
-                String tag3 = item.getString(TAG_TAG3);
-                String goodbad = item.getString(TAG_GOODBAD);
-                String date1 = item.getString(TAG_DATE1);
-                String date2 = item.getString(TAG_DATE2);
-                String id = "영반";
+                    RecordItem record=new RecordItem();
 
-                RecordItem record=new RecordItem();
-
-                record.setDrugName(name);
-                record.setDrugImg(image);
-                record.setMember_name(otc);//otc
-                record.setMember_id(id);//아이디
-                record.setTag1(tag1);
-                record.setTag2(tag2);
-                record.setTag3(tag3);
-                record.setGoodbad(goodbad);
-                record.setDate1(date1);
-                record.setDate2(date2);
+                    record.setDrugName(name);
+                    record.setDrugImg(image);
+                    record.setMember_name(otc);//otc
+                    record.setMember_id(id);//아이디
+                    record.setTag1(tag1);
+                    record.setTag2(tag2);
+                    record.setTag3(tag3);
+                    record.setGoodbad(goodbad);
+                    record.setDate1(date1);
+                    record.setDate2(date2);
 //                recordItemArrayList.add(record);
-                Log.d("기록", "record  : "+record.getDate1());
+                    Log.d("기록", "record  : "+record.getDate1());
 //                adapter_record.setArraydata(record);
-            }
+                }
 
 //            adapter.notifyDataSetChanged();
 //            adapter_record.notifyDataSetChanged();
-            FragmentManager fm = ((FragmentActivity) getContext()).getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction;
-            MenuFragmentMypage fragmentMypage = new MenuFragmentMypage();
+                FragmentManager fm = ((FragmentActivity) getContext()).getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction;
+                MenuFragmentMypage fragmentMypage = new MenuFragmentMypage();
 //            DrugItem drugItem = new DrugItem();
 
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("RecordItem", record);
-            fragmentMypage.setArguments(bundle);
-            fragmentTransaction = fm.beginTransaction().add(R.id.menu_frame_layout, fragmentMypage);
-            fragmentTransaction.addToBackStack(null).commit();
-        } catch (JSONException e) {
-            Log.d(TAG, "showResult : ", e);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("RecordItem", record);
+                fragmentMypage.setArguments(bundle);
+                fragmentTransaction = fm.beginTransaction().add(R.id.menu_frame_layout, fragmentMypage);
+                fragmentTransaction.addToBackStack(null).commit();
+            } catch (JSONException e) {
+                Log.d(TAG, "showResult : ", e);
+            }
+
         }
 
     }
+
 
     public void getNickname(String nickname, String password){
         nk = "영반";
