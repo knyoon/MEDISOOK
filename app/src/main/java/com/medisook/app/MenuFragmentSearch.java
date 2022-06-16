@@ -337,6 +337,8 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
 
                 while((line = bufferedReader.readLine()) != null){
                     sb.append(line);
+                    Log.d(TAG, line);
+
                 }
 
                 bufferedReader.close();
@@ -488,15 +490,6 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
         String TAG_KIDCOUNT="KID_COUNT";
         String TAG_NOINCOUNT="NOIN_COUNT";
         String TAG_WARNING="WARNING";
-        String TAG_TAG1="TAG1";
-        String TAG_TAG2="TAG2";
-        String TAG_TAG3="TAG3";
-        String TAG_GOODBAD="GOODBAD";
-        String TAG_DATE1="DATE1";
-        String TAG_DATE2="DATE2";
-        String TAG_ID="USER_ID";
-
-
 
 
 
@@ -527,18 +520,10 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 String noincount = item.getString(TAG_NOINCOUNT);
                 String kidcount = item.getString(TAG_KIDCOUNT);
                 String warning = item.getString(TAG_WARNING);
-                String tag1 = item.getString(TAG_TAG1);
-                String tag2 = item.getString(TAG_TAG2);
-                String tag3 = item.getString(TAG_TAG3);
-                String goodbad = item.getString(TAG_GOODBAD);
-                String date1 = item.getString(TAG_DATE1);
-                String date2 = item.getString(TAG_DATE2);
-                String id = item.getString(TAG_ID);
-
 
 
                 DrugItem drugData = new DrugItem();
-                RecordItem record=new RecordItem();
+                RecordItem record = new RecordItem();
 
                 drugData.setDrugName(name);
                 drugData.setDrugImg(image);
@@ -560,6 +545,63 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 drugData.setNoincount(noincount);
                 drugData.setKidcount(kidcount);
                 drugData.setWarning(warning);
+
+
+                adapter.setArrayData(drugData);
+
+                Log.d(TAG, drugData.getDrugImg().toString());
+            }
+            adapter.notifyDataSetChanged();
+
+        }catch(NullPointerException n){
+            showResult2();
+
+        } catch (JSONException e) {
+
+            Log.d(TAG, "showResult : ", e);
+        }
+
+    }
+
+    private void showResult2() {
+
+        String TAG_JSON = "mypage";
+        String TAG_NAME = "DRUG_NAME";
+        String TAG_IMAGE = "IMAGE";
+        String TAG_OTC = "OTC";
+        String TAG_TAG1="TAG1";
+        String TAG_TAG2="TAG2";
+        String TAG_TAG3="TAG3";
+        String TAG_GOODBAD="GOODBAD";
+        String TAG_DATE1="DATE1";
+        String TAG_DATE2="DATE2";
+        String TAG_ID="USER_ID";
+
+
+        try {
+            JSONObject jsonObject = new JSONObject(mJsonString);
+            JSONArray jsonArray = jsonObject.getJSONArray(TAG_JSON);
+            for (int i = 0; i < jsonArray.length(); i++) {
+
+                JSONObject item = jsonArray.getJSONObject(i);
+
+                String name = item.getString(TAG_NAME);
+
+                String image = item.getString(TAG_IMAGE);
+
+                String otc = item.getString(TAG_OTC);
+                String tag1 = item.getString(TAG_TAG1);
+                String tag2 = item.getString(TAG_TAG2);
+                String tag3 = item.getString(TAG_TAG3);
+                String goodbad = item.getString(TAG_GOODBAD);
+                String date1 = item.getString(TAG_DATE1);
+                String date2 = item.getString(TAG_DATE2);
+                String id = item.getString(TAG_ID);
+
+
+                RecordItem record=new RecordItem();
+
+
                 record.setDrugName(name);
                 record.setDrugImg(image);
                 record.setMember_name(otc);//otc
@@ -571,10 +613,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 record.setDate1(date1);
                 record.setDate2(date2);
 
-
-                adapter.setArrayData(drugData);
                 adapter_record.setArraydata(record);
-                Log.d(TAG, drugData.getDrugImg().toString());
             }
             adapter.notifyDataSetChanged();
 
