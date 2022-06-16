@@ -17,6 +17,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -43,7 +46,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
     private Button yellow_filter_btn;
     private TextView txt;
 
-    public static String IP_ADDRESS = "1.235.201.139:3838";
+    public static String IP_ADDRESS = "192.168.18.51:80";
     //private static String ID = "medisook";
     private static String TAG = "메롱";
     private EditText mEditTextName;
@@ -58,13 +61,15 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
     String postParameters;
     String user;
     ArrayList<DrugItem> drugItemArrayList, filtered_drugList;
+    ArrayList<RecordItem> recordItemArrayList;
     ArrayList<String> listItemArrayList, total_list;
+    RecordItem record;
     String[] join={"id","password"};
     String[] parameter = {"efcy1", "efcy2", "efcy3", "exc1", "exc2", "exc3", "who1", "who2", "who3"};
     String[] insertpar = {"id", "tag1", "tag2", "tag3", "drugname", "image", "otc", "goodbad", "date1", "date2"};
     LinearLayoutManager linearLayoutManager;
 
-    RecyclerView recyclerView, recyclerView_list;
+    RecyclerView recyclerView, recyclerView_list, recyclerView_record;
     Adapter adapter;
     Adapter_list adapter_list;
     Adapter_record adapter_record;
@@ -181,13 +186,17 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
         EditText searchET = (EditText) rootView.findViewById(R.id.search_bar);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
         recyclerView_list = (RecyclerView) rootView.findViewById(R.id.recycler_view_list);
+//        recyclerView_record = (RecyclerView) rootView.findViewById(R.id.recycler_view_record);
 
         filtered_drugList = new ArrayList<>();
         drugItemArrayList = new ArrayList<>();
+
         //recyclerview 선언부
         listItemArrayList = new ArrayList<>();
+        recordItemArrayList = new ArrayList<>();
         adapter = new Adapter(drugItemArrayList, this);
         adapter_list = new Adapter_list(listItemArrayList, this);
+//        adapter_record = new Adapter_record(recordItemArrayList, this);
         //linearLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(getActivity());
         layoutManager.setFlexWrap(FlexWrap.WRAP);
@@ -199,9 +208,13 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
         recyclerView.setAdapter(adapter);
 
+//        recyclerView_record.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
+//        recyclerView_record.setAdapter(adapter_record);
+
         drugItemArrayList.clear();
         adapter.notifyDataSetChanged();
         adapter_list.notifyDataSetChanged();
+//        adapter_record.notifyDataSetChanged();
 //        for(int i = 0; i<100; i++){
 //            adapter.setArrayData(new DrugItem(i+"번째 약"));
 //        }
@@ -252,14 +265,13 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
         protected void onPreExecute() {
             super.onPreExecute();
 //            Log.d("과연", "insert test");
-
         }
 
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
-            //progressDialog.dismiss();
-            //mTextViewResult.setText(result);
+//            progressDialog.dismiss();
+            mTextViewResult.setText(result);
 
         }
 
@@ -356,31 +368,32 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
         }
     }
     public class ReadData extends AsyncTask<String, Void, String> {
-        ProgressDialog progressDialog;
+//        ProgressDialog progressDialog;
         String errorString = null;
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
 
-            progressDialog = ProgressDialog.show(getActivity(),
-                    "Please Wait", null, true, true);
-            Log.d("과연", "어디까지 오는지");
+//            progressDialog = ProgressDialog.show(getActivity(),
+//                    "Please Wait", null, true, true);
+
         }
 
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
-            progressDialog.dismiss();
+//            progressDialog.dismiss();
 
             if (result == null) {
                 mTextViewResult.setText(errorString);
             } else {
 
                 mJsonString = result;
-                Log.d("과연", result);
+                Log.d("과연 : 이건가", result);
                 showResult();
+//                showResult2();
             }
         }
 
@@ -402,7 +415,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 parameter[8] = "&Who3=" + total_list.get(8);
             }
             else if(params[1]=="2"){//마이페이지
-                user="ID="+nk;
+                user="ID="+"영반";
             }
             try {
                 //String searchDrug="Data="+searchET.getText().toString();
@@ -520,9 +533,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 String kidcount = item.getString(TAG_KIDCOUNT);
                 String warning = item.getString(TAG_WARNING);
 
-
                 DrugItem drugData = new DrugItem();
-                RecordItem record = new RecordItem();
 
                 drugData.setDrugName(name);
                 drugData.setDrugImg(image);
@@ -545,7 +556,6 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 drugData.setKidcount(kidcount);
                 drugData.setWarning(warning);
 
-
                 adapter.setArrayData(drugData);
 
                 Log.d(TAG, drugData.getDrugImg().toString());
@@ -553,6 +563,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
             adapter.notifyDataSetChanged();
 
         }catch(NullPointerException n){
+
             showResult2();
 
         } catch (JSONException e) {
@@ -563,7 +574,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
     }
 
     private void showResult2() {
-
+        Log.d("과연 여기","들어오나");
         String TAG_JSON = "mypage";
         String TAG_NAME = "DRUG_NAME";
         String TAG_IMAGE = "IMAGE";
@@ -576,7 +587,6 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
         String TAG_DATE2="DATE2";
         String TAG_ID="USER_ID";
 
-
         try {
             JSONObject jsonObject = new JSONObject(mJsonString);
             JSONArray jsonArray = jsonObject.getJSONArray(TAG_JSON);
@@ -585,7 +595,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 JSONObject item = jsonArray.getJSONObject(i);
 
                 String name = item.getString(TAG_NAME);
-
+                Log.d("테스트 : ", "약이름"+name);
                 String image = item.getString(TAG_IMAGE);
 
                 String otc = item.getString(TAG_OTC);
@@ -597,9 +607,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 String date2 = item.getString(TAG_DATE2);
                 String id = "영반";
 
-
                 RecordItem record=new RecordItem();
-
 
                 record.setDrugName(name);
                 record.setDrugImg(image);
@@ -611,15 +619,24 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 record.setGoodbad(goodbad);
                 record.setDate1(date1);
                 record.setDate2(date2);
-
-                adapter_record.setArraydata(record);
+//                recordItemArrayList.add(record);
+                Log.d("기록", "record  : "+record.getDate1());
+//                adapter_record.setArraydata(record);
             }
-            adapter.notifyDataSetChanged();
-            adapter_record.notifyDataSetChanged();
 
+//            adapter.notifyDataSetChanged();
+//            adapter_record.notifyDataSetChanged();
+            FragmentManager fm = ((FragmentActivity) getContext()).getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction;
+            MenuFragmentMypage fragmentMypage = new MenuFragmentMypage();
+//            DrugItem drugItem = new DrugItem();
 
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("RecordItem", record);
+            fragmentMypage.setArguments(bundle);
+            fragmentTransaction = fm.beginTransaction().add(R.id.menu_frame_layout, fragmentMypage);
+            fragmentTransaction.addToBackStack(null).commit();
         } catch (JSONException e) {
-
             Log.d(TAG, "showResult : ", e);
         }
 
