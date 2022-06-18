@@ -70,6 +70,7 @@
             android:fontFamily="@font/noto_medium"
             android:gravity="center"
             android:hint="암호를 입력해주세요."
+            android:inputType="textPassword"
             android:singleLine="true"
             android:textColor="#445E86"
             android:textSize="12sp"
