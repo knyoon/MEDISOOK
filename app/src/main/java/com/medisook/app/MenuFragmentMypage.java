@@ -3,7 +3,6 @@ package com.medisook.app;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.SpannableString;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,12 +26,14 @@ public class MenuFragmentMypage extends Fragment implements View.OnClickListener
     private SpannableString content;
     private Button calender;
     private Button star_btn;
+    Context context;
     private TextView nickname_view;
     TextView textview;
 
     public MenuFragmentMypage() {
         // Required empty public constructor
     }
+    MenuFragmentSearch mfs;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -52,9 +53,12 @@ public class MenuFragmentMypage extends Fragment implements View.OnClickListener
         calender.setOnClickListener(this);
         tv_hashtag = (TextView)rootView.findViewById(R.id.tv_hashtag);
         recyclerView = (RecyclerView) rootView. findViewById(R.id.recycler_view_record);
+
         star_btn = (Button) rootView.findViewById(R.id.star);
         star_btn.setOnClickListener(this);
+
         recordItemArrayList = new ArrayList<>();
+
 //        nickname_view = (TextView)rootView.findViewById(R.id.name);
 //        String name = drugItem.get(position).getNickname();
 //        nickname_view.setText(name);
@@ -62,12 +66,13 @@ public class MenuFragmentMypage extends Fragment implements View.OnClickListener
         linearLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
         recyclerView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+        //adapter.notifyDataSetChanged();
+//        mld.execute("http://" + IP_ADDRESS + "/readrecord.php", "2");
 
-        for(int i = 0; i<100; i++){
-            adapter.setArrayData(new RecordItem(i+"번째약"));
-            Log.d("태그", "마이페이지 테스트");
-        }
+//        for(int i = 0; i<100; i++){
+//            adapter.setArrayData(new RecordItem(i+"번째약"));
+//            Log.d("태그", "마이페이지 테스트");
+//        }
         recyclerView.setAdapter(adapter);
         return rootView;
         // Inflate the layout for this fragment

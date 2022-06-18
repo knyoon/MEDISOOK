@@ -8,9 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -28,7 +25,7 @@ public class Adapter_record extends RecyclerView.Adapter<ViewHolder_record> {
     public com.medisook.app.ViewHolder_record onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.record_list,parent, false);
+        View view = inflater.inflate(R.layout.record_list_green,parent, false);
         com.medisook.app.ViewHolder_record viewholder_record = new com.medisook.app.ViewHolder_record(context, view);
         return viewholder_record;
     }

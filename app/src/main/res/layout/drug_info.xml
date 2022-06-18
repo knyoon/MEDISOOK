@@ -383,7 +383,7 @@
                 android:id="@+id/tv_Class"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="▶약 종류 ?"
+                android:text="▶약 종류"
                 android:fontFamily="@font/noto_medium"
                 android:textColor="#445E86"
                 android:textSize="12sp"
