@@ -14,12 +14,18 @@ import java.util.ArrayList;
 
 public class Adapter_record extends RecyclerView.Adapter<ViewHolder_record> {
     ArrayList<RecordItem> recordItemArrayList;
+    ArrayList<RecordItem> recordItem;
     Activity activity;
 
     public Adapter_record(ArrayList<RecordItem> recordItemArrayList, MenuFragmentMypage activity) {
-        this.recordItemArrayList = recordItemArrayList;
+//        this.recordItemArrayList = recordItemArrayList;
+        this.recordItem = recordItemArrayList;
         this.activity = activity.getActivity();
     }
+
+//    public Adapter_record(RecordItem recordItemArrayList, MenuFragmentMypage menuFragmentSearch) {
+//        this.recordItemArrayList = recordItemArrayList;
+//    }
 
     @NonNull
     public com.medisook.app.ViewHolder_record onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -42,7 +48,10 @@ public class Adapter_record extends RecyclerView.Adapter<ViewHolder_record> {
     public int getItemCount() {
         return recordItemArrayList.size();
     }
-    public void setArrayData(RecordItem strData){recordItemArrayList.add(strData);
+//    public void setArrayData(RecordItem strData){recordItemArrayList.add(strData);
+//    }
+
+    public void setArraydata(RecordItem record) {
+        recordItemArrayList.add(record);
     }
 }
-
