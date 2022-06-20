@@ -44,7 +44,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
     private Button yellow_filter_btn;
     private TextView txt;
 
-    public static String IP_ADDRESS = "1.235.201.139:3838";
+    public static String IP_ADDRESS = "192.168.18.51:80";
     //private static String ID = "medisook";
     private static String TAG = "메롱";
     private EditText mEditTextName;
@@ -283,11 +283,11 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
             String serverURL = params[0];
             if (params[1] == "0") {//회원가입
                 Log.d("닉네임", "서치에서 닉네임 : "+nk+pw);
-                join[0]="ID="+"영반";
+                join[0]="ID="+ nk;
                 join[1]="&PASSWORD="+pw;
             }
             else if (params[1] == "1") {//기록하기
-                insertpar[0]= "Id=" + "영반";
+                insertpar[0]= "Id=" + nk;
                 insertpar[3] = "&IMAGE=" + record_total_list.get(0);
                 insertpar[1] = "&DRUG_NAME=" + record_total_list.get(2);
                 insertpar[2] = "&OTC=" +record_total_list.get(1);
@@ -300,7 +300,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
             }
 
             else if (params[1] == "3") {//찜하기
-                wishlist[0]= "ID=" + "영반";
+                wishlist[0]= "ID=" + nk ;
                 wishlist[1] = "&DRUG_NAME=" + record_total_list.get(0);
 
             }
@@ -400,11 +400,13 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
 
             if (result == null) {
                 mTextViewResult.setText(errorString);
+                Log.d("검색", "오류 여긴가?");
             } else {
 
                 mJsonString = result;
                 Log.d("onpost", result);
                 Log.d("onpost", String.valueOf(mJsonString.charAt(2)));
+                Log.d("검색1", "오류 여긴가?");
                 if(mJsonString.charAt(2)=='d'){
                     showResult();
                 }
@@ -440,7 +442,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 parameter[8] = "&Who3=" + total_list.get(8);
             }
             else if(params[1]=="2"){//마이페이지//찜하기
-                user="ID="+"영반";
+                user="ID="+ nk ;
             }
             else if(params[1]=="3"){//로그인//중복확인
                 join[0]="ID="+nk;
@@ -642,7 +644,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                     String goodbad = item.getString(TAG_GOODBAD);
                     String date1 = item.getString(TAG_DATE1);
                     String date2 = item.getString(TAG_DATE2);
-                    String id = "영반";
+                    String id = item.getString(TAG_ID);
 
                     RecordItem record=new RecordItem();
 

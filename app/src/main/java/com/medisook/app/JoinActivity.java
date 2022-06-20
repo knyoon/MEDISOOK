@@ -143,12 +143,16 @@ public class JoinActivity extends AppCompatActivity implements View.OnClickListe
 //                }
                 break;
             case R.id.check_nk:
+                nk_final = nk;
+                mf = new MenuFragmentSearch();
+                mf.getNickname(nk_final, null);
                 MenuFragmentSearch.ReadData read = mf.new ReadData();
                 read.execute("http://" + IP_ADDRESS + "/login.php", "3");
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         Log.d("로그인",mf.getresult());
+
                         if(mf.getresult().contains("TRUE")){
                             nk_check = false;
                             Toast.makeText(JoinActivity.this, "중복닉네임입니다.", Toast.LENGTH_SHORT).show();
@@ -161,7 +165,7 @@ public class JoinActivity extends AppCompatActivity implements View.OnClickListe
                             Log.d("로그인", "사용가능한 닉네임입니다.");
                             nk_final = nk;
                         }
-                        Log.d("회원가입", "중복확인 " + nk_check);
+                        Log.d("회원가입", "중복확인 " + nk_check + nk_final);
                     }
 
                 }, 2000);
