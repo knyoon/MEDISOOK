@@ -16,9 +16,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -283,11 +280,11 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
             String serverURL = params[0];
             if (params[1] == "0") {//회원가입
                 Log.d("닉네임", "서치에서 닉네임 : "+nk+pw);
-                join[0]="ID="+"영반";
+                join[0]="ID="+nk;
                 join[1]="&PASSWORD="+pw;
             }
             else if (params[1] == "1") {//기록하기
-                insertpar[0]= "Id=" + "영반";
+                insertpar[0]= "Id=" +nk;
                 insertpar[3] = "&IMAGE=" + record_total_list.get(0);
                 insertpar[1] = "&DRUG_NAME=" + record_total_list.get(2);
                 insertpar[2] = "&OTC=" +record_total_list.get(1);
@@ -300,7 +297,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
             }
 
             else if (params[1] == "3") {//찜하기
-                wishlist[0]= "ID=" + "영반";
+                wishlist[0]= "ID=" + nk;
                 wishlist[1] = "&DRUG_NAME=" + record_total_list.get(0);
 
             }
@@ -410,7 +407,11 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 }
 
                 else if (mJsonString.charAt(2)=='m'){
-                    showResult2();
+                    try {
+                        showResult2();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
 
                 else if(mJsonString.contains("TRUE")||mJsonString.contains("FALSE")){
@@ -440,7 +441,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 parameter[8] = "&Who3=" + total_list.get(8);
             }
             else if(params[1]=="2"){//마이페이지//찜하기
-                user="ID="+"영반";
+                user="ID="+nk;
             }
             else if(params[1]=="3"){//로그인//중복확인
                 join[0]="ID="+nk;
@@ -451,8 +452,8 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
 //                Log.d("과연", postParameters);
                 URL url = new URL(serverURL);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                httpURLConnection.setReadTimeout(100000);
-                httpURLConnection.setConnectTimeout(20000);
+                httpURLConnection.setReadTimeout(200000);
+                httpURLConnection.setConnectTimeout(100000);
                 httpURLConnection.setRequestMethod("POST");
                 httpURLConnection.setDoInput(true);
                 httpURLConnection.setDoOutput(true);
@@ -461,6 +462,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 if (params[1] == "0") {
                     outputStream.write(postParameters.getBytes("UTF-8"));
+                    Log.d("과연", postParameters);
                 } else if (params[1] == "1") {
                     for (int i = 0; i < 9; i++) {
                         outputStream.write(parameter[i].getBytes("UTF-8"));
@@ -610,7 +612,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
 
         }
 
-        private void showResult2() {
+        private void showResult2() throws JSONException {
             Log.d("과연 여기","들어오나");
             String TAG_JSON = "mypage";
             String TAG_NAME = "DRUG_NAME";
@@ -623,65 +625,52 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
             String TAG_DATE1="DATE1";
             String TAG_DATE2="DATE2";
             String TAG_ID="USER_ID";
+            JSONObject jsonObject = new JSONObject(mJsonString);
+            JSONArray jsonArray = jsonObject.getJSONArray(TAG_JSON);
 
-            try {
-                JSONObject jsonObject = new JSONObject(mJsonString);
-                JSONArray jsonArray = jsonObject.getJSONArray(TAG_JSON);
-                for (int i = 0; i < jsonArray.length(); i++) {
+            MenuFragmentMypage fragmentMypage = new MenuFragmentMypage();
+            recordItemArrayList = new ArrayList<>();
+            fragmentMypage.adapter = new Adapter_record(recordItemArrayList, fragmentMypage);
 
-                    JSONObject item = jsonArray.getJSONObject(i);
+            for (int i = 0; i < jsonArray.length(); i++) {
 
-                    String name = item.getString(TAG_NAME);
-                    Log.d("테스트 : ", "약이름"+name);
-                    String image = item.getString(TAG_IMAGE);
+                JSONObject item = jsonArray.getJSONObject(i);
 
-                    String otc = item.getString(TAG_OTC);
-                    String tag1 = item.getString(TAG_TAG1);
-                    String tag2 = item.getString(TAG_TAG2);
-                    String tag3 = item.getString(TAG_TAG3);
-                    String goodbad = item.getString(TAG_GOODBAD);
-                    String date1 = item.getString(TAG_DATE1);
-                    String date2 = item.getString(TAG_DATE2);
-                    String id = "영반";
-
-                    RecordItem record=new RecordItem();
-
-                    record.setDrugName(name);
-                    record.setDrugImg(image);
-                    record.setMember_name(otc);//otc
-                    record.setMember_id(id);//아이디
-                    record.setTag1(tag1);
-                    record.setTag2(tag2);
-                    record.setTag3(tag3);
-                    record.setGoodbad(goodbad);
-                    record.setDate1(date1);
-                    record.setDate2(date2);
-//                recordItemArrayList.add(record);
-                    Log.d("기록", "record  : "+record.getDate1());
-//                adapter_record.setArraydata(record);
-                }
-
-//            adapter.notifyDataSetChanged();
-//            adapter_record.notifyDataSetChanged();
-                FragmentManager fm = ((FragmentActivity) getContext()).getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction;
-                MenuFragmentMypage fragmentMypage = new MenuFragmentMypage();
-//            DrugItem drugItem = new DrugItem();
-
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("RecordItem", record);
-                fragmentMypage.setArguments(bundle);
-                fragmentTransaction = fm.beginTransaction().add(R.id.menu_frame_layout, fragmentMypage);
-                fragmentTransaction.addToBackStack(null).commit();
-            } catch (JSONException e) {
-                Log.d(TAG, "showResult : ", e);
+                String name = item.getString(TAG_NAME);
+                Log.d("테스트 : ", "약이름" + name);
+                String image = item.getString(TAG_IMAGE);
+                String otc = item.getString(TAG_OTC);
+                String tag1 = item.getString(TAG_TAG1);
+                String tag2 = item.getString(TAG_TAG2);
+                String tag3 = item.getString(TAG_TAG3);
+                String goodbad = item.getString(TAG_GOODBAD);
+                String date1 = item.getString(TAG_DATE1);
+                String date2 = item.getString(TAG_DATE2);
+                String id = item.getString(TAG_ID);
+                RecordItem record = new RecordItem();
+                record.setDrugName(name);
+                record.setDrugImg(image);
+                record.setMember_name(otc);//otc
+                record.setMember_id(id);//아이디
+                record.setTag1(tag1);
+                record.setTag2(tag2);
+                record.setTag3(tag3);
+                record.setGoodbad(goodbad);
+                record.setDate1(date1);
+                record.setDate2(date2);
+//                    recordItemArrayList.add(record);
+                fragmentMypage.adapter.setArrayData(record);
+                Log.d("기록", "record  : " + recordItemArrayList.get(i).getDrugImg());
+                Log.d("기록", "record  : " + recordItemArrayList.size());
             }
 
+
         }
-
-
-
+        public ArrayList<RecordItem> getRecord(){
+            return recordItemArrayList;
+        }
     }
+
 
     public void login(String result){
         RecordItem ri=new RecordItem();

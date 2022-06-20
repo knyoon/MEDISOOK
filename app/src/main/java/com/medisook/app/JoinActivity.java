@@ -27,6 +27,7 @@ public class JoinActivity extends AppCompatActivity implements View.OnClickListe
     private Button check_nk;
     private Context mContext;
     boolean nk_result=false;
+    boolean nk_check=false;
     boolean pw_result = false;
     MenuFragmentSearch mf=new MenuFragmentSearch();
     String nk;
@@ -35,11 +36,11 @@ public class JoinActivity extends AppCompatActivity implements View.OnClickListe
     String pw_final;
     String result;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.join);
+        mContext = this;
 
         warn_nk = (EditText) findViewById(R.id.warn_nk);
         warn_pw = (EditText) findViewById(R.id.warn_pw);
@@ -116,8 +117,8 @@ public class JoinActivity extends AppCompatActivity implements View.OnClickListe
         //Log.v("회원가입", "테스트: " + pw_result);
         switch (v.getId()){
             case R.id.join_btn:
-                Log.v("회원가입", "테스트- " + nk_result + pw_result);
-                if(nk_result == true && pw_result == true){//중복확인 여부 확인 후 회원가입 성공시키기.
+                Log.v("회원가입", "테스트- " + "닉네임형식: " + nk_result + "비번형식: " + pw_result + "닉네임중복확인: "+ nk_check);
+                if(nk_result == true && pw_result == true && nk_check==true){//중복확인 여부 확인 후 회원가입 성공시키기.
                     nk_final = nk;
                     pw_final = pw;
                     mf = new MenuFragmentSearch();
@@ -132,29 +133,41 @@ public class JoinActivity extends AppCompatActivity implements View.OnClickListe
 
                     Log.d("닉네임", "어디까지 실행되나");
                 }
-                else{
-                    Toast.makeText(this.getApplicationContext(),"회원가입을 실패했습니다.\n다시 시도하십시오.", Toast.LENGTH_SHORT).show();
-                    et_password.setText(null);
-                    et_nickname.setText(null);
+                else if(nk_check==false){
+                    Toast.makeText(this.getApplicationContext(),"닉네임 중복확인을 해주세요.", Toast.LENGTH_SHORT).show();
                 }
+//                else{
+//                    Toast.makeText(this.getApplicationContext(),"회원가입을 실패했습니다.\n다시 시도하십시오.", Toast.LENGTH_SHORT).show();
+//                    et_password.setText(null);
+//                    et_nickname.setText(null);
+//                }
                 break;
             case R.id.check_nk:
+                nk_final = nk;
+                mf = new MenuFragmentSearch();
+                mf.getNickname(nk_final, null);
                 MenuFragmentSearch.ReadData read = mf.new ReadData();
                 read.execute("http://" + IP_ADDRESS + "/login.php", "3");
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         Log.d("로그인",mf.getresult());
+
                         if(mf.getresult().contains("TRUE")){
+                            nk_check = false;
+                            Toast.makeText(JoinActivity.this, "중복닉네임입니다.", Toast.LENGTH_SHORT).show();
                             Log.d("로그인", "중복닉네임입니다");
                             et_nickname.setText(null);
                         }
                         else if(mf.getresult().contains("FALSE")){
+                            nk_check = true;
+                            Toast.makeText(JoinActivity.this, "사용가능한 닉네임입니다.", Toast.LENGTH_SHORT).show();
                             Log.d("로그인", "사용가능한 닉네임입니다.");
                             nk_final = nk;
                         }
-
+                        Log.d("회원가입", "중복확인 " + nk_check + nk_final);
                     }
+
                 }, 2000);
 
 
