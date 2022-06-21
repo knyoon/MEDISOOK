@@ -93,7 +93,17 @@ public class DruginfoActivity extends Fragment implements View.OnClickListener{
                         }
                         Log.d("기록", "스플릿 테스트 : "+username);
                         mfs = new MenuFragmentSearch();
-                        mfs.getRecord_Zip(Record_Zip.get(0), Record_Zip.get(1), Record_Zip.get(2), Record_Zip.get(3), Record_Zip.get(4), Record_Zip.get(5), Record_Zip.get(6), Record_Zip.get(7), Record_Zip.get(8));
+
+                        if(record_text.length==7){
+                            mfs.getRecord_Zip(Record_Zip.get(0), Record_Zip.get(1), Record_Zip.get(2), Record_Zip.get(3), Record_Zip.get(4), Record_Zip.get(5), Record_Zip.get(6), Record_Zip.get(7), Record_Zip.get(8));
+                        }
+                        else if (record_text.length==6){
+                            mfs.getRecord_Zip(Record_Zip.get(0), Record_Zip.get(1), Record_Zip.get(2), Record_Zip.get(3), Record_Zip.get(4), Record_Zip.get(5), Record_Zip.get(6), Record_Zip.get(7),null);
+                        }
+                        else if(record_text.length==5){
+                            mfs.getRecord_Zip(Record_Zip.get(0), Record_Zip.get(1), Record_Zip.get(2), Record_Zip.get(3), Record_Zip.get(4), Record_Zip.get(5), Record_Zip.get(6),null,null);
+                        }
+
                         MenuFragmentSearch.InsertData insert = mfs.new InsertData();
                         insert.execute("http://" + IP_ADDRESS + "/insertrecord.php", "1");
                     }
