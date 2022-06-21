@@ -72,7 +72,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
     RecyclerView recyclerView, recyclerView_list, recyclerView_record;
     Adapter adapter;
     Adapter_list adapter_list;
-
+    Adapter_record adapter_record;
     int btn_pos;
     String nk;
     String pw;
@@ -282,7 +282,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
             super.onPostExecute(result);
 
 //            progressDialog.dismiss();
-            mTextViewResult.setText(result);
+//            mTextViewResult.setText(result);
 
         }
 
@@ -704,7 +704,11 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
 
         }
         public ArrayList<RecordItem> getRecord(){
+            for (int i = 0; i < recordItemArrayList.size(); i++) {
+                Log.d("테스트", "서치에서 리스트 넘어오는지 : "+(recordItemArrayList.get(i).getDrugImg()));
+            }
             return recordItemArrayList;
+
         }
     }
 

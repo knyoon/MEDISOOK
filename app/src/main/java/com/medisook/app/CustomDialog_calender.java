@@ -2,57 +2,75 @@ package com.medisook.app;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.WindowManager;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-//import com.prolificinteractive.materialcalendarview.CalendarDay;
-//import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
-//import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
-import com.applandeo.materialcalendarview.CalendarUtils;
-import com.applandeo.materialcalendarview.CalendarView;
-import com.applandeo.materialcalendarview.exceptions.OutOfDateRangeException;
-
+import com.prolificinteractive.materialcalendarview.CalendarDay;
+import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
+import com.prolificinteractive.materialcalendarview.OnDateLongClickListener;
+import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
+import com.prolificinteractive.materialcalendarview.DayViewDecorator;
+import com.prolificinteractive.materialcalendarview.DayViewFacade;
+//import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import org.threeten.bp.LocalDate;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.Executors;
 
 public class CustomDialog_calender extends AlertDialog {
     private Context context;
-//    MaterialCalendarView materialCalendarView;
-    private CalendarView calendarView;
+    MaterialCalendarView materialCalendarView;
+    int pink = 0;
+    TextView show_drug;
     public CustomDialog_calender(Context context) {
         super(context);
         this.context = context;
     }
-
+    final List<String> DateList = Arrays.asList("22/06/15", "22/06/17", "22/06/18");
+    final String DATE_FORMAT = "yy/MM/dd";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.calender_pop);
-
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+        getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         //materialCalendarView = findViewById(R.id.calendarView);
-//        materialCalendarView = (MaterialCalendarView) findViewById(R.id.calendarView);
-        calendarView = (CalendarView) findViewById(R.id.calendarView);
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(2022, 6, 13);
-        try {
-            calendarView.setDate(calendar);
-        } catch (OutOfDateRangeException e) {
-            e.printStackTrace();
-        }
-        String[] result = {"2022,06,18", "2022,06,19", "2022,06,09", "2022,06,01"};
-//        List<Calendar> calendars = new ArrayList<>();
-        calendar.add(Calendar.DAY_OF_MONTH, 8 );
+        materialCalendarView = (MaterialCalendarView) findViewById(R.id.calendarView);
+        show_drug = (TextView) findViewById(R.id.show_drug);
+        final LocalDate min = getLocalDate("2022-01-01");
+        final LocalDate max = getLocalDate("2022-12-31");
+        materialCalendarView.state().edit().setMinimumDate(min).setMaximumDate(max);
+        setEvent(DateList);
+        materialCalendarView.setOnDateLongClickListener(new OnDateLongClickListener() {
+            @Override
+            public void onDateLongClick(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date) {
+                String select = widget.getSelectedDates().toString();
+                Log.d("달력", "리스너 테스트  : " + select+date);
+                show_drug.setText(date.getDate().toString());
+            }
+        });
+//        String[] result = {"2022,06,18", "2022,06,19", "2022,06,09", "2022,06,01"};
 
-//        calendarView.setSelectedDates(calendars);
-
-//
 //        new ApiSimulator(result).executeOnExecutor(Executors.newSingleThreadExecutor());
-//
+
 //        materialCalendarView.setOnDateChangedListener(new OnDateSelectedListener() {
 //            @Override
 //            public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
@@ -71,12 +89,12 @@ public class CustomDialog_calender extends AlertDialog {
 //                //Toast.makeText(setApplicationContext(), shot_Day , Toast.LENGTH_SHORT).show();
 //            }
 //        });
-    }
 
-    public void setDialogListener(CustomDialog.CustomDialogListener customDialogListener) {
-    }
-//
-//    //특정 날짜에 효과 표시 기능
+//    }
+
+
+
+            //특정 날짜에 효과 표시 기능
 //    private class ApiSimulator extends AsyncTask<Void, Void, List<CalendarDay>> {
 //
 //        String[] Time_Result;
@@ -118,7 +136,7 @@ public class CustomDialog_calender extends AlertDialog {
 //            return dates;
 //            //Log.d("캘린더3", dates);
 //        }
-
+//
 
 //        protected void onPostExecute(@NonNull List<CalendarDay> calendarDays) {
 //            super.onPostExecute(calendarDays);
@@ -126,4 +144,78 @@ public class CustomDialog_calender extends AlertDialog {
 //            //materialCalendarView.addDecorator(new EventDecorator(Color.GREEN, calendarDays,MainActivity.this));
 //            materialCalendarView.addDecorator(new EventDecorator(Color.GREEN, calendarDays, CustomDialog_calender.this));
 //        }
+
+            //    }
+
+//        });
     }
+    void setEvent(List<String> dateList) {
+        List<LocalDate> localDateList = new ArrayList<>();
+        for (String string : dateList) {
+            Log.d("달력", "test"+string);
+            LocalDate calendar = getLocalDate(string);
+            if (calendar != null) {
+                localDateList.add(calendar);
+            }
+        }
+        List<CalendarDay> datesLeft = new ArrayList<>();
+        List<CalendarDay> datesCenter = new ArrayList<>();
+        List<CalendarDay> datesRight = new ArrayList<>();
+        List<CalendarDay> datesIndependent = new ArrayList<>();
+
+        for (LocalDate localDate : localDateList) {
+
+            boolean right = false;
+            boolean left = false;
+
+            for (LocalDate day1 : localDateList) {
+
+
+                if (localDate.isEqual(day1.plusDays(1))) {
+                    left = true;
+                }
+                if (day1.isEqual(localDate.plusDays(1))) {
+                    right = true;
+                }
+            }
+
+            if (left && right) {
+                datesCenter.add(CalendarDay.from(localDate));
+            } else if (left) {
+                datesLeft.add(CalendarDay.from(localDate));
+            } else if (right) {
+                datesRight.add(CalendarDay.from(localDate));
+            } else {
+                datesIndependent.add(CalendarDay.from(localDate));
+            }
+        }
+        setDecor(datesCenter, R.drawable.radius_navy);
+        setDecor(datesLeft, R.drawable.radius_navy);
+        setDecor(datesRight, R.drawable.radius_navy);
+        setDecor(datesIndependent, R.drawable.radius_navy);
+    }
+
+    void setDecor(List<CalendarDay> calendarDayList, int drawable) {
+        materialCalendarView.addDecorators(new EventDecorator(this.context, drawable, calendarDayList));
+    }
+
+    public void setDialogListener(CustomDialog.CustomDialogListener customDialogListener) {
+    }
+    LocalDate getLocalDate(String date) {
+        SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT, Locale.ENGLISH);
+        try {
+            Date input = sdf.parse(date);
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(input);
+            return LocalDate.of(cal.get(Calendar.YEAR),
+                    cal.get(Calendar.MONTH) + 1,
+                    cal.get(Calendar.DAY_OF_MONTH));
+
+
+        } catch (NullPointerException e) {
+            return null;
+        } catch (ParseException e) {
+            return null;
+        }
+    }
+}

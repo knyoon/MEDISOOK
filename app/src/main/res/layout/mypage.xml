@@ -64,6 +64,7 @@
             android:layout_height="0dp"
             android:layout_weight="1" />
         <Button
+            android:id="@+id/wish"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:background="@drawable/radius"
@@ -72,9 +73,8 @@
             android:includeFontPadding="false"
             android:minWidth="0dp"
             android:minHeight="0dp"
-            android:paddingLeft="8dp"
+            android:paddingLeft="9dp"
             android:paddingTop="1dp"
-            android:paddingRight="15dp"
             android:paddingBottom="1dp"
             android:text="찜하기"
             android:textColor="#445E86"
@@ -139,25 +139,26 @@
     </LinearLayout>
 
     <ScrollView
-        android:layout_width="302dp"
-        android:layout_height="400dp"
         android:layout_marginLeft="36dp"
         android:layout_marginTop="24dp"
         android:layout_marginRight="36dp"
         android:layout_marginBottom="70dp"
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constrainedHeight="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/filterbutton">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="NotSibling"
-            android:layout_marginVertical="5dp">
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintHorizontal_bias="0.5"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            tools:ignore="NotSibling"-->
+<!--            android:layout_marginVertical="5dp">-->
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_record"
@@ -165,7 +166,7 @@
                 android:layout_height="match_parent"
                 tools:layout_editor_absoluteX="31dp"
                 tools:layout_editor_absoluteY="-39dp" />
-        </RelativeLayout>
+<!--        </RelativeLayout>-->
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
