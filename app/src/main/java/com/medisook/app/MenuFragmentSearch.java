@@ -42,7 +42,6 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
     private TextView txt;
 
     public static String IP_ADDRESS = "192.168.18.51:80";
-    //private static String ID = "medisook";
     private static String TAG = "메롱";
     private EditText mEditTextName;
     private EditText mEditTextCountry;
@@ -56,6 +55,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
     String loginresult;
     String user;
     String postParameters;
+    public static String username;
     ArrayList<DrugItem> drugItemArrayList, filtered_drugList;
     ArrayList<RecordItem> recordItemArrayList;
     ArrayList<String> listItemArrayList, total_list;
@@ -268,7 +268,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
             super.onPostExecute(result);
 
 //            progressDialog.dismiss();
-            mTextViewResult.setText(result);
+           // mTextViewResult.setText(result);
 
         }
 
@@ -284,7 +284,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 join[1]="&PASSWORD="+pw;
             }
             else if (params[1] == "1") {//기록하기
-                insertpar[0]= "Id=" +nk;
+                insertpar[0]= "Id=" +username;
                 insertpar[3] = "&IMAGE=" + record_total_list.get(0);
                 insertpar[1] = "&DRUG_NAME=" + record_total_list.get(2);
                 insertpar[2] = "&OTC=" +record_total_list.get(1);
@@ -296,9 +296,9 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 insertpar[6] = "&TAG3=" + record_total_list.get(8);
             }
 
-            else if (params[1] == "3") {//찜하기
-                wishlist[0]= "ID=" + nk;
-                wishlist[1] = "&DRUG_NAME=" + record_total_list.get(0);
+            else if (params[1] == "2") {//찜하기
+                wishlist[0]= "ID=" + username;
+                wishlist[1] = "&DRUG_NAME=" + params[2];//여기 고쳐야겠는데?
 
             }
 
@@ -329,10 +329,10 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                         Log.d("과연", insertpar[i]);
                     }
                 }
-                else if (params[1] == "3") {
+                else if (params[1] == "2") {
                     for (int i = 0; i < 2; i++) {
                         outputStream.write(wishlist[i].getBytes("UTF-8"));
-                        Log.d("과연", wishlist[i]);
+                        Log.d("찜하기", wishlist[i]);
                     }
                 }
                 outputStream.flush();
@@ -441,7 +441,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 parameter[8] = "&Who3=" + total_list.get(8);
             }
             else if(params[1]=="2"){//마이페이지//찜하기
-                user="ID="+nk;
+                user="ID="+username;
             }
             else if(params[1]=="3"){//로그인//중복확인
                 join[0]="ID="+nk;
@@ -697,6 +697,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
     public void getNickname(String nickname, String password){
         nk = nickname;
         pw = password;
+        username=nk;
         Log.d("닉네임", "get nickname test : "+nk+pw);
     }
     public void getRecord_Zip(String drugimage, String otc, String drugname, String favor, String start, String end, String txt1, String txt2, String txt3){
