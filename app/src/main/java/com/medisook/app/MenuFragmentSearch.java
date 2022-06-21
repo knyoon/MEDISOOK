@@ -1,6 +1,5 @@
 package com.medisook.app;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -17,9 +16,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -38,7 +34,6 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 
 public class MenuFragmentSearch extends Fragment implements View.OnClickListener {
     private Button red_filter_btn;
@@ -47,7 +42,6 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
     private TextView txt;
 
     public static String IP_ADDRESS = "192.168.18.51:80";
-    //private static String ID = "medisook";
     private static String TAG = "메롱";
     private EditText mEditTextName;
     private EditText mEditTextCountry;
@@ -58,13 +52,16 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
     private EditText mEditTextSearchKeyword;
     private String mJsonString;
     private String searchText;
-    String postParameters;
+    String loginresult;
     String user;
+    String postParameters;
+    public static String username;
     ArrayList<DrugItem> drugItemArrayList, filtered_drugList;
     ArrayList<RecordItem> recordItemArrayList;
-    ArrayList<String> listItemArrayList, total_list;
-    RecordItem record;
+    ArrayList<String> listItemArrayList, total_list, wishlist_drug;
     String[] join={"id","password"};
+
+    String[] wishlist={"id","drug_name"};
     String[] parameter = {"efcy1", "efcy2", "efcy3", "exc1", "exc2", "exc3", "who1", "who2", "who3"};
     String[] insertpar = {"id", "tag1", "tag2", "tag3", "drugname", "image", "otc", "goodbad", "date1", "date2"};
     LinearLayoutManager linearLayoutManager;
@@ -72,17 +69,10 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
     RecyclerView recyclerView, recyclerView_list, recyclerView_record;
     Adapter adapter;
     Adapter_list adapter_list;
-    Adapter_record adapter_record;
     int btn_pos;
     String nk;
     String pw;
     ArrayList<String> record_total_list;
-
-    ViewGroup rootView2;
-    FragmentManager fm;
-    FragmentTransaction fragmentTransaction;
-    MenuFragmentMypage fragmentMypage;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -189,26 +179,23 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.search, container, false);
-        ViewGroup rootView2 = (ViewGroup) inflater.inflate(R.layout.mypage, container, false);
         EditText searchET = (EditText) rootView.findViewById(R.id.search_bar);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
         recyclerView_list = (RecyclerView) rootView.findViewById(R.id.recycler_view_list);
+//        recyclerView_record = (RecyclerView) rootView.findViewById(R.id.recycler_view_record);
+
         filtered_drugList = new ArrayList<>();
         drugItemArrayList = new ArrayList<>();
+
+        //recyclerview 선언부
         listItemArrayList = new ArrayList<>();
-        adapter_list = new Adapter_list(listItemArrayList, this);
+        recordItemArrayList = new ArrayList<>();
+        wishlist_drug = new ArrayList<>();
+
         adapter = new Adapter(drugItemArrayList, this);
-
-//        fm = ((FragmentActivity) getContext()).getSupportFragmentManager();
-//        fragmentMypage = new MenuFragmentMypage();
-//        fragmentMypage.recordItem = new ArrayList<>();
-//        fragmentMypage.adapter = new Adapter_record(recordItemArrayList, fragmentMypage);
-//        fragmentMypage.recyclerView = (RecyclerView) rootView2.findViewById(R.id.recycler_view_record);
-//        fragmentMypage.recyclerView.setAdapter(fragmentMypage.adapter);
-//
-        linearLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
-
-
+        adapter_list = new Adapter_list(listItemArrayList, this);
+//        adapter_record = new Adapter_record(recordItemArrayList, this);
+        //linearLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(getActivity());
         layoutManager.setFlexWrap(FlexWrap.WRAP);
         layoutManager.setJustifyContent(JustifyContent.CENTER);
@@ -219,27 +206,11 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
         recyclerView.setAdapter(adapter);
 
-//        recyclerView_record.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
-//        recyclerView_record.setAdapter(adapter_record);
 
         drugItemArrayList.clear();
         adapter.notifyDataSetChanged();
         adapter_list.notifyDataSetChanged();
-//        adapter_record.notifyDataSetChanged();
-//        for(int i = 0; i<100; i++){
-//            adapter.setArrayData(new DrugItem(i+"번째 약"));
-//        }
-//        searchET.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//            }
-//            @Override
-//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//            }
-//            @Override
-//            public void afterTextChanged(Editable editable) {
-//            }
-//        });
+
         recyclerView.setAdapter(adapter);
         red_filter_btn = (Button) rootView.findViewById(R.id.red_filter_btn);
         green_filter_btn = (Button) rootView.findViewById(R.id.green_filter_btn);
@@ -282,7 +253,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
             super.onPostExecute(result);
 
 //            progressDialog.dismiss();
-//            mTextViewResult.setText(result);
+            // mTextViewResult.setText(result);
 
         }
 
@@ -294,11 +265,11 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
             String serverURL = params[0];
             if (params[1] == "0") {//회원가입
                 Log.d("닉네임", "서치에서 닉네임 : "+nk+pw);
-                join[0]="ID="+"영반";
+                join[0]="ID="+nk;
                 join[1]="&PASSWORD="+pw;
             }
             else if (params[1] == "1") {//기록하기
-                insertpar[0]= "Id=" + "영반";
+                insertpar[0]= "Id=" +username;
                 insertpar[3] = "&IMAGE=" + record_total_list.get(0);
                 insertpar[1] = "&DRUG_NAME=" + record_total_list.get(2);
                 insertpar[2] = "&OTC=" +record_total_list.get(1);
@@ -308,6 +279,12 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 insertpar[4] = "&TAG1=" + record_total_list.get(6);
                 insertpar[5] = "&TAG2=" + record_total_list.get(7);
                 insertpar[6] = "&TAG3=" + record_total_list.get(8);
+            }
+
+            else if (params[1] == "2") {//찜하기
+                wishlist[0]= "ID=" + username;
+                wishlist[1] = "&DRUG_NAME=" + params[2];//여기 고쳐야겠는데?
+
             }
 
             try {
@@ -335,6 +312,12 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                     for (int i = 0; i < 10; i++) {
                         outputStream.write(insertpar[i].getBytes("UTF-8"));
                         Log.d("과연", insertpar[i]);
+                    }
+                }
+                else if (params[1] == "2") {
+                    for (int i = 0; i < 2; i++) {
+                        outputStream.write(wishlist[i].getBytes("UTF-8"));
+                        Log.d("찜하기", wishlist[i]);
                     }
                 }
                 outputStream.flush();
@@ -379,9 +362,10 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
         }
     }
     public class ReadData extends AsyncTask<String, Void, String> {
-//        ProgressDialog progressDialog;
+        //        ProgressDialog progressDialog;
         String errorString = null;
-        public ArrayList<RecordItem> recordItemArrayList = new ArrayList<>();
+        private ArrayList<String> wishlist_drug;
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -416,6 +400,19 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                     }
                 }
 
+                else if(mJsonString.contains("TRUE")||mJsonString.contains("FALSE")){
+                    //Log.d("로그인", "여기는 오나?");
+                    login(mJsonString);
+                }
+
+                else if (mJsonString.charAt(2)=='w'){
+                    try {
+                        showResult3();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
 
             }
         }
@@ -437,16 +434,20 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 parameter[7] = "&Who2=" + total_list.get(7);
                 parameter[8] = "&Who3=" + total_list.get(8);
             }
-            else if(params[1]=="2"){//마이페이지
-                user="ID="+"영반";
+            else if(params[1]=="2"){//마이페이지//찜하기
+                user="ID="+username;
+            }
+            else if(params[1]=="3"){//로그인//중복확인
+                join[0]="ID="+nk;
+                join[1]="&PASSWORD="+pw;
             }
             try {
                 //String searchDrug="Data="+searchET.getText().toString();
 //                Log.d("과연", postParameters);
                 URL url = new URL(serverURL);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                httpURLConnection.setReadTimeout(100000);
-                httpURLConnection.setConnectTimeout(20000);
+                httpURLConnection.setReadTimeout(200000);
+                httpURLConnection.setConnectTimeout(100000);
                 httpURLConnection.setRequestMethod("POST");
                 httpURLConnection.setDoInput(true);
                 httpURLConnection.setDoOutput(true);
@@ -455,15 +456,23 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 if (params[1] == "0") {
                     outputStream.write(postParameters.getBytes("UTF-8"));
+                    Log.d("과연", postParameters);
                 } else if (params[1] == "1") {
                     for (int i = 0; i < 9; i++) {
                         outputStream.write(parameter[i].getBytes("UTF-8"));
                         Log.d("과연", parameter[i]);
                     }
                 }
-                else if(params[1]=="2"){//마이페이지
+                else if(params[1]=="2"){//마이페이지,찜하기
                     outputStream.write(user.getBytes("UTF-8"));
                     Log.d("과연", user);
+                }
+                else if (params[1] == "3") {//중복확인
+                    for (int i = 0; i < 2; i++) {
+                        outputStream.write(join[i].getBytes("UTF-8"));
+                        Log.d("과연", join[i]);
+                    }
+
                 }
                 outputStream.flush();
                 outputStream.close();
@@ -503,6 +512,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
         }
 
         private void showResult() {
+
             String TAG_JSON = "drug";
             String TAG_NAME = "DRUG_NAME";
             String TAG_ENTP = "ENTP_NAME";
@@ -630,7 +640,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 String goodbad = item.getString(TAG_GOODBAD);
                 String date1 = item.getString(TAG_DATE1);
                 String date2 = item.getString(TAG_DATE2);
-                String id = "영반";
+                String id = item.getString(TAG_ID);
                 RecordItem record = new RecordItem();
                 record.setDrugName(name);
                 record.setDrugImg(image);
@@ -647,74 +657,71 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 Log.d("기록", "record  : " + recordItemArrayList.get(i).getDrugImg());
                 Log.d("기록", "record  : " + recordItemArrayList.size());
             }
-//            try {
-//                JSONObject jsonObject = new JSONObject(mJsonString);
-//                JSONArray jsonArray = jsonObject.getJSONArray(TAG_JSON);
-//
-//                MenuFragmentMypage fragmentMypage = new MenuFragmentMypage();
-//                ArrayList<RecordItem> recordItemArrayList = new ArrayList<>();
-//                fragmentMypage.adapter = new Adapter_record(recordItemArrayList, fragmentMypage);
-//
-//                for (int i = 0; i < jsonArray.length(); i++) {
-//
-//                    JSONObject item = jsonArray.getJSONObject(i);
-//
-//                    String name = item.getString(TAG_NAME);
-//                    Log.d("테스트 : ", "약이름"+name);
-//                    String image = item.getString(TAG_IMAGE);
-//
-//                    String otc = item.getString(TAG_OTC);
-//                    String tag1 = item.getString(TAG_TAG1);
-//                    String tag2 = item.getString(TAG_TAG2);
-//                    String tag3 = item.getString(TAG_TAG3);
-//                    String goodbad = item.getString(TAG_GOODBAD);
-//                    String date1 = item.getString(TAG_DATE1);
-//                    String date2 = item.getString(TAG_DATE2);
-//                    String id = "영반";
-//                    RecordItem record=new RecordItem();
-//                    record.setDrugName(name);
-//                    record.setDrugImg(image);
-//                    record.setMember_name(otc);//otc
-//                    record.setMember_id(id);//아이디
-//                    record.setTag1(tag1);
-//                    record.setTag2(tag2);
-//                    record.setTag3(tag3);
-//                    record.setGoodbad(goodbad);
-//                    record.setDate1(date1);
-//                    record.setDate2(date2);
-////                    recordItemArrayList.add(record);
-//                    fragmentMypage.adapter.setArrayData(record);
-//                    Log.d("기록", "record  : "+recordItemArrayList.size());
-//                }
-//            adapter.notifyDataSetChanged();
-              fragmentMypage.adapter.notifyDataSetChanged();
-//            DrugItem drugItem = new DrugItem();
-//                FragmentManager fm = ((FragmentActivity)
-//                FragmentTransaction fragmentTransaction;
-//                Bundle bundle = new Bundle();
-//
-//                bundle.putSerializable("RecordItem", recordItemArrayList);
-//                Log.d("기록: 보내기 직전", "record  : "+recordItemArrayList.size());
-//                fragmentMypage.setArguments(bundle);
-//                fragmentTransaction = fm.beginTransaction().add(R.id.menu_frame_layout, fragmentMypage);
-//                fragmentTransaction.addToBackStack(null).commit();
-//            } catch (JSONException e) {
-//                Log.d(TAG, "showResult : ", e);
-//            }
+
 
         }
-        public ArrayList<RecordItem> getRecord(){
-            for (int i = 0; i < recordItemArrayList.size(); i++) {
-                Log.d("테스트", "서치에서 리스트 넘어오는지 : "+(recordItemArrayList.get(i).getDrugImg()));
-            }
-            return recordItemArrayList;
+        private void showResult3() throws JSONException {
+            Log.d("wishlist","들어오나");
+            String TAG_JSON = "wish";
+            String TAG_NAME = "DRUG_NAME";
+            JSONObject jsonObject = new JSONObject(mJsonString);
+            JSONArray jsonArray = jsonObject.getJSONArray(TAG_JSON);
 
+            MenuFragmentMypage fragmentMypage = new MenuFragmentMypage();
+//            CustomDialog_wishlist dialogWishlist = new CustomDialog_wishlist(fragmentMypage.getActivity());
+            wishlist_drug = new ArrayList<>();
+//            dialogWishlist.adapter_wishlist = new Adapter_wishlist(wishlist_drug, dialogWishlist);
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+
+                JSONObject item = jsonArray.getJSONObject(i);
+
+                String name = item.getString(TAG_NAME);
+                Log.d("테스트 : ", "약이름" + name);
+
+                wishlist_drug.add(name);
+//                dialogWishlist.adapter_wishlist.setArrayData(wishlist_drug.get(i));
+            }
+            setWishlist(wishlist_drug);
+        }
+        public void setWishlist(ArrayList<String> wishlist_drug){
+            this.wishlist_drug = wishlist_drug;
+        }
+        public ArrayList<String> getWishlist(){
+            return wishlist_drug;
+        }
+        public ArrayList<RecordItem> getRecord(){
+            return recordItemArrayList;
         }
     }
 
+
+    public void login(String result){
+        RecordItem ri=new RecordItem();
+        if(result.contains("TRUE")){
+            Log.d("로그인결과:", "성공");
+            loginresult="TRUE";
+
+        }
+        if(result.contains("FALSE")){
+            Log.d("로그인결과:", "실패");
+            loginresult="FALSE";
+        }
+
+
+    }
+
+    public String getresult(){
+        return loginresult;
+    }
+
+
+
+
     public void getNickname(String nickname, String password){
-        nk = "영반";
+        nk = nickname;
         pw = password;
+        username=nk;
         Log.d("닉네임", "get nickname test : "+nk+pw);
     }
     public void getRecord_Zip(String drugimage, String otc, String drugname, String favor, String start, String end, String txt1, String txt2, String txt3){

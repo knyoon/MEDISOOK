@@ -1,9 +1,12 @@
 package com.medisook.app;
 
+import static com.medisook.app.MenuFragmentSearch.IP_ADDRESS;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -29,9 +32,10 @@ public class CustomDialog_wishlist extends AlertDialog implements View.OnClickLi
     private Button okButton;
     private Context context;
     private CustomDialogListener customDialogListener;
-    public CustomDialog_wishlist(Context context) {
+    public CustomDialog_wishlist(Context context, ArrayList<String> wishlistItemArrayList) {
         super(context);
         this.context = context;
+        this.wishlistItemArrayList = wishlistItemArrayList;
     }
     interface CustomDialogListener{
         void onOkClicked(ArrayList<String> text);
@@ -52,10 +56,25 @@ public class CustomDialog_wishlist extends AlertDialog implements View.OnClickLi
         recyclerView_wishlist.setLayoutManager(new LinearLayoutManager(this.context, RecyclerView.VERTICAL, false));
         recyclerView_wishlist.setAdapter(adapter_wishlist);
 
-        adapter_wishlist.setArrayData("안녕");
-        adapter_wishlist.setArrayData("안녕");
-        adapter_wishlist.setArrayData("안녕");
-        adapter_wishlist.setArrayData("안녕");
+
+        MenuFragmentSearch mfs = new MenuFragmentSearch();
+        MenuFragmentSearch.ReadData read = mfs.new ReadData();
+        read.execute("http://" + IP_ADDRESS + "/readwish2.php", "2");
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                wishlistItemArrayList = read.getWishlist();
+                for (int i = 0; i < wishlistItemArrayList.size(); i++) {
+                    adapter_wishlist.setArrayData(wishlistItemArrayList.get(i));
+                    Log.d("테스트", "리스트 넘어오는지 : "+(wishlistItemArrayList.get(i)));
+                }
+                adapter_wishlist.notifyDataSetChanged();
+            }
+        }, 1000);
+//        adapter_wishlist.setArrayData("안녕");
+//        adapter_wishlist.setArrayData("안녕");
+//        adapter_wishlist.setArrayData("안녕");
+//        adapter_wishlist.setArrayData("안녕");
 
         adapter_wishlist.notifyDataSetChanged();
 

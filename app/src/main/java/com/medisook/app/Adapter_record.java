@@ -52,12 +52,22 @@ public class Adapter_record extends RecyclerView.Adapter<ViewHolder_record> {
             holder.drugImage.setImageDrawable(drawable);
         }
         holder.drugName.setText(recordItemArrayList.get(position).getDrugName());
-        holder.hashtag1.setText(recordItemArrayList.get(position).getTag1());
-        holder.hashtag1.setPadding(40, 0, 40, 0);
-        holder.hashtag2.setText(recordItemArrayList.get(position).getTag2());
-        holder.hashtag2.setPadding(40, 0, 40, 0);
-        holder.hashtag3.setText(recordItemArrayList.get(position).getTag3());
-        holder.hashtag3.setPadding(40, 0, 40, 0);
+        if(recordItemArrayList.get(position).getTag1().toString().contains("null")==false){
+            holder.hashtag1.setText(recordItemArrayList.get(position).getTag1());
+            holder.hashtag1.setPadding(40, 0, 40, 0);
+        }
+        if(recordItemArrayList.get(position).getTag2().toString().contains("null")==false){
+            holder.hashtag2.setText(recordItemArrayList.get(position).getTag2());
+            holder.hashtag2.setPadding(40, 0, 40, 0);
+        }
+        if(recordItemArrayList.get(position).getTag3().toString().contains("null")==false){
+            holder.hashtag3.setText(recordItemArrayList.get(position).getTag3());
+            holder.hashtag3.setPadding(40, 0, 40, 0);
+        }
+//        holder.hashtag2.setText(recordItemArrayList.get(position).getTag2());
+//        holder.hashtag2.setPadding(40, 0, 40, 0);
+//        holder.hashtag3.setText(recordItemArrayList.get(position).getTag3());
+//        holder.hashtag3.setPadding(40, 0, 40, 0);
 
         String goodbad = recordItemArrayList.get(position).getGoodbad();
         Log.d("기록하기",goodbad);
