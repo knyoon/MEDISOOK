@@ -166,11 +166,9 @@ public class DruginfoActivity extends Fragment implements View.OnClickListener{
         for (int i = 0; i < Warn_Zip.length; i++) {
             if (Warn_Zip[i].contains("임부") || Warn_Zip[i].contains("노인") || Warn_Zip[i].contains("소아")) {
                 continue;
-            }
-            else if (warn.contains("null")){
+            } else if (warn.contains("null")){
                 continue;
-            }
-            else {
+            }else {
                 switch (count_tag) {
                     case 0:
                         warnArrayList.add(0, Warn_Zip[i]);

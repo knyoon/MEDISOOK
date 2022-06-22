@@ -1,21 +1,31 @@
 package com.medisook.app;
 // https://3001ssw.tistory.com/201
+import static com.medisook.app.MenuFragmentSearch.IP_ADDRESS;
+
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
 public class Adapter_wishlist extends RecyclerView.Adapter<ViewHolder_wishlist> implements OnItemClickListener{
     private ArrayList<String> wishlistItemArrayList;
-    View view;
     OnItemClickListener listener;
+    MenuFragmentSearch mf = new MenuFragmentSearch();
+    CustomDialog_wishlist dialog;
     public Adapter_wishlist(ArrayList<String> wishlistItemArrayList, CustomDialog_wishlist dialog) {
+        this.dialog = dialog;
         this.wishlistItemArrayList = wishlistItemArrayList;
     }
 
@@ -45,6 +55,16 @@ public class Adapter_wishlist extends RecyclerView.Adapter<ViewHolder_wishlist> 
         holder.txt.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+            }
+        });
+        holder.txt.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                MenuFragmentSearch.InsertData insert = mf.new InsertData();
+                insert.execute("http://" + IP_ADDRESS + "/delete_wish.php", "2", holder.txt.getText().toString());
+                dialog.dismiss();
+                notifyDataSetChanged();
+                return false;
             }
         });
     }
