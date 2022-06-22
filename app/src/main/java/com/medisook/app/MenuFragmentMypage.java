@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,7 +17,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Calendar;
+
 import static com.medisook.app.MenuFragmentSearch.IP_ADDRESS;
 import static com.medisook.app.MenuFragmentSearch.username;
 
@@ -30,6 +34,7 @@ public class MenuFragmentMypage extends Fragment implements View.OnClickListener
     private Button calendar;
     private Button wish;
     private TextView name;
+
     public MenuFragmentMypage() {
     }
     MenuFragmentSearch mfs;
@@ -103,7 +108,7 @@ public class MenuFragmentMypage extends Fragment implements View.OnClickListener
                 }
                 wishlistItemArrayList = read.getWishlist();
             }
-        }, 1000);
+        }, 300);
         read2.execute("http://" + IP_ADDRESS + "/readwish2.php", "2");
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -131,7 +136,7 @@ public class MenuFragmentMypage extends Fragment implements View.OnClickListener
                 break;
             case R.id.calendar:
                 Log.d("기록하기", "캘린더");
-                CustomDialog_calender dialog = new CustomDialog_calender(getActivity());
+                CustomDialog_calender dialog = new CustomDialog_calender(getActivity(), recordItemArrayList);
                 CustomDialog_record.Builder dialog_bulider = new CustomDialog_record.Builder(getActivity());
                 dialog.setDialogListener(new CustomDialog.CustomDialogListener() {
                     @Override

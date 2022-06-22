@@ -70,7 +70,7 @@ public class CustomDialog_wishlist extends AlertDialog implements View.OnClickLi
                 }
                 adapter_wishlist.notifyDataSetChanged();
             }
-        }, 1000);
+        }, 300);
 //        adapter_wishlist.setArrayData("안녕");
 //        adapter_wishlist.setArrayData("안녕");
 //        adapter_wishlist.setArrayData("안녕");
