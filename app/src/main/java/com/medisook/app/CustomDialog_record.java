@@ -1,4 +1,5 @@
 package com.medisook.app;
+
 import static android.content.Context.INPUT_METHOD_SERVICE;
 
 import android.app.AlertDialog;
@@ -17,6 +18,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.FragmentManager;
 
@@ -147,15 +149,15 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
                         switch (count_tag){
                             case 0:
                                 textView1.setText(String.valueOf(hashtagArrayList.get(0)));
-                                textView1.setPadding(25, 7, 25, 7);
+                                textView1.setPadding(25, 0, 25, 0);
                                 break;
                             case 1:
                                 textView2.setText(String.valueOf(hashtagArrayList.get(1)));
-                                textView2.setPadding(25, 7, 25, 7);
+                                textView2.setPadding(25, 0, 25, 0);
                                 break;
                             case 2:
                                 textView3.setText(String.valueOf(hashtagArrayList.get(2)));
-                                textView3.setPadding(25, 7, 25, 7);
+                                textView3.setPadding(25, 0, 25, 0);
                                 break;
                         }
                         count_tag +=1;
@@ -200,10 +202,14 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
         switch (v.getId()) {
             case R.id.good_btn:
                 GoodBad = "good";
+                good_btn.setBackgroundResource(R.drawable.resize_goodlined);
+                bad_btn.setBackgroundResource(R.drawable.resize_bad);
                 Log.v("세영", GoodBad);
                 break;
             case R.id.bad_btn:
                 GoodBad = "bad";
+                bad_btn.setBackgroundResource(R.drawable.resize_badlined);
+                good_btn.setBackgroundResource(R.drawable.resize_good);
                 Log.v("세영", GoodBad);
                 break;
             case R.id.to_date:
@@ -249,6 +255,7 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
                 String start = inital_date.getText().toString();
                 String end = final_date.getText().toString();
                 String favor = GoodBad;
+                Toast.makeText(this.mContext, "기록하기 성공!", Toast.LENGTH_SHORT).show();
                 //Log.d("보내자2", "약이름: " + name + "좋아요/싫어요" + favor + "복용시작: " + start + "복용끝 :" + end + "리뷰: " + txt1 + txt2 + txt3 );
                 customDialogListener.onOkClicked("약이름: " + name + "좋아요/싫어요" + favor + "복용시작: " + start + "복용끝 :" + end +
                         "리뷰: " + txt1 + txt2 + txt3);

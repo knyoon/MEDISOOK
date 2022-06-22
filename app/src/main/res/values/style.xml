@@ -1,0 +1,6 @@
+<resources>
+    <style name="button"  parent="Theme.AppCompat.Light">
+        <item name="colorPrimary">#AFAFAF</item>
+        <item name="colorControlHighlight">#0000ff</item>
+    </style>
+</resources>

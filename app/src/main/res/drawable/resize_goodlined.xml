@@ -1,0 +1,6 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:width="51.11dp"
+        android:height="51.11dp"
+        android:drawable="@drawable/good_lined"/>
+</layer-list>

@@ -4,6 +4,7 @@ import static com.medisook.app.MenuFragmentSearch.IP_ADDRESS;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -53,14 +54,18 @@ public class JoinActivity extends AppCompatActivity implements View.OnClickListe
         check_nk = (Button) findViewById(R.id.check_nk);
         check_nk.setOnClickListener(this);
 
+
+
         et_nickname.setOnKeyListener(new View.OnKeyListener(){
             @Override
             public boolean onKey(View view, int i, KeyEvent keyEvent) {
                 nk =  et_nickname.getText().toString();
-
+                check_nk.setBackgroundColor(Color.parseColor("#445E86"));
                 switch (i){
                     case KeyEvent.KEYCODE_ENTER:
                         if (keyEvent.getAction() == keyEvent.ACTION_UP) {
+                            check_nk.setBackground(check_nk.getBackground());
+
                             if(nk.length() >= 11 || nk.length()==0) {
                                 et_nickname.setText(null);
                                 warn_nk.setText("!잘못된 형식입니다.");
@@ -151,7 +156,7 @@ public class JoinActivity extends AppCompatActivity implements View.OnClickListe
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        Log.d("로그인",mf.getresult());
+                        Log.d("로그인", mf.getresult());
 
                         if(mf.getresult().contains("TRUE")){
                             nk_check = false;
@@ -161,6 +166,13 @@ public class JoinActivity extends AppCompatActivity implements View.OnClickListe
                         }
                         else if(mf.getresult().contains("FALSE")){
                             nk_check = true;
+                            check_nk.setBackgroundColor(Color.parseColor("#D3D3D3"));
+//                            check_nk.setOnClickListener(new View.OnClickListener(){
+//                                @Override
+//                                public void onClick(View v){
+//                                    check_nk.setBackgroundColor(Color.parseColor("#D3D3D3"));
+//                                }
+//                            });
                             Toast.makeText(JoinActivity.this, "사용가능한 닉네임입니다.", Toast.LENGTH_SHORT).show();
                             Log.d("로그인", "사용가능한 닉네임입니다.");
                             nk_final = nk;
@@ -168,13 +180,11 @@ public class JoinActivity extends AppCompatActivity implements View.OnClickListe
                         Log.d("회원가입", "중복확인 " + nk_check + nk_final);
                     }
 
-                }, 2000);
+                }, 300);
 
 
                 //닉네임 중복확인 부분
         }
 
     }
-
-
 }

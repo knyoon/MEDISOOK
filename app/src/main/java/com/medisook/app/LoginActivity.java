@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -55,10 +56,12 @@ public class LoginActivity extends AppCompatActivity {
                         Log.d("로그인", mf.getresult() + "로그");
                         if(mf.getresult().contains("TRUE")){//세영, aaaa11111
                             Log.d("로그인", "닉네임 비밀번호 일치");
+                            Toast.makeText(LoginActivity.this, "로그인 성공!", Toast.LENGTH_SHORT).show();
                             startActivity(intentMainActivity);//로그인에 성공해야 검색화면으로 넘어감
                         }
                         else if(mf.getresult().contains("FALSE")){
                             Log.d("로그인", "닉네임 비밀번호 불일치");
+                            Toast.makeText(LoginActivity.this, "닉네임과 비밀번호를 확인하세요.", Toast.LENGTH_SHORT).show();
                         }
 
                     }

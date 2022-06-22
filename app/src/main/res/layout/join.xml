@@ -72,13 +72,13 @@
             android:textColor="@color/navy"
             android:textSize="12sp" />
         <Button
+            android:background="@drawable/ripple"
             android:id="@+id/check_nk"
             android:layout_marginStart="10dp"
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:textSize="12sp"
             android:text="중복확인"
-            android:background="#AFAFAF"
             app:backgroundTint="@null"
             />
     </LinearLayout>
