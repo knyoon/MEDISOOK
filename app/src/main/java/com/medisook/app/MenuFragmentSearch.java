@@ -56,7 +56,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
     String user;
     String postParameters;
     public static String username;
-    ArrayList<DrugItem> drugItemArrayList, filtered_drugList;
+    ArrayList<DrugItem> drugItemArrayList, filtered_drugList,wishlist_inf;
     ArrayList<RecordItem> recordItemArrayList;
     ArrayList<String> listItemArrayList, total_list, wishlist_drug;
     String[] join={"id","password"};
@@ -281,7 +281,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 insertpar[6] = "&TAG3=" + record_total_list.get(8);
             }
 
-            else if (params[1] == "2") {//찜하기
+            else if (params[1] == "2") {//찜하기//기록 찜하기 삭제
                 wishlist[0]= "ID=" + username;
                 wishlist[1] = "&DRUG_NAME=" + params[2];//여기 고쳐야겠는데?
 
@@ -389,7 +389,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                 Log.d("onpost", result);
                 Log.d("onpost", String.valueOf(mJsonString.charAt(2)));
                 if(mJsonString.charAt(2)=='d'){
-                    showResult();
+                    showResult(1);
                 }
 
                 else if (mJsonString.charAt(2)=='m'){
@@ -411,6 +411,9 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+                }
+                else if(mJsonString.charAt(2)=='i'){
+                    showResult(2);
                 }
 
 
@@ -511,7 +514,7 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
             }
         }
 
-        private void showResult() {
+        private void showResult(int num) {
 
             String TAG_JSON = "drug";
             String TAG_NAME = "DRUG_NAME";
@@ -587,11 +590,19 @@ public class MenuFragmentSearch extends Fragment implements View.OnClickListener
                     drugData.setKidcount(kidcount);
                     drugData.setWarning(warning);
 
-                    adapter.setArrayData(drugData);
+                    if (num==1){
+                        adapter.setArrayData(drugData);
+                        adapter.notifyDataSetChanged();
+                    }
+                    else if(num==2){
+                        wishlist_inf.add(drugData);
+                        Log.d("찜하기", wishlist_inf.toString());
 
-                    Log.d(TAG, drugData.getDrugImg().toString());
+                    }
+
+
                 }
-                adapter.notifyDataSetChanged();
+
 
             }catch(NullPointerException n){
 

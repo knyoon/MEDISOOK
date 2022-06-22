@@ -9,20 +9,17 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Toast;
 import android.widget.Button;
 import android.widget.EditText;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.InputStreamReader;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 
 public class CustomDialog extends AlertDialog implements View.OnClickListener{
     ArrayList<FilterItem> filterItemArrayList, filtered_filterList;
@@ -94,8 +91,8 @@ public class CustomDialog extends AlertDialog implements View.OnClickListener{
         }catch (Exception e) {
             e.printStackTrace();
         }
-        String[] sym_list = {"콧물", "재채기", "제산작용","칸디다", "성선기능저하증", "피부사상균", "관절염", "피곤함", "벌레물린데", "습진","두드러기", "생리통"};
-        String[] ingr_list = {"덱시부프로펜", "알마게이트", "산화마그네슘", "클로닉신리시네이트", "L-아스파르트산-L-오르니틴","니모디핀", "돔페리돈","아시클로버","메드록시프로게스테론아세테이트","네틸마이신황산염", "베쿠로늄브롬화물"};
+        String[] sym_list = {"감기","발열","오한","구내염","요통","콧물", "재채기", "속쓰림","소화불량", "근육통", "알레르기","두통","염좌통","삠", "관절염", "피곤함", "벌레물린데", "습진","두드러기", "생리통","여드름","상처","화상"};
+        String[] ingr_list = {"덱시부프로펜", "알마게이트", "아세트아미노펜","카페인무수물", "아세트아미노펜", "이부프로펜","니모디핀", "돔페리돈","이소트레티노인","구아이페네신","네틸마이신황산염", "베쿠로늄브롬화물","나프록센나트륨"};
         String[] qesitm_list = {"임부 주의", "노인 주의", "어린이 주의", "졸음 주의", "음주 주의", "흡연 주의", "공복 주의"};
         switch (btn_pos){
             case 1:

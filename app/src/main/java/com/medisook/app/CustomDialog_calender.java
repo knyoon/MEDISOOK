@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.WindowManager;
@@ -15,25 +14,19 @@ import androidx.annotation.NonNull;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateLongClickListener;
-import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
-import com.prolificinteractive.materialcalendarview.DayViewDecorator;
-import com.prolificinteractive.materialcalendarview.DayViewFacade;
-//import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+
 import org.threeten.bp.LocalDate;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.Executors;
+
+//import java.time.LocalDate;
 
 public class CustomDialog_calender extends AlertDialog {
     private Context context;
@@ -44,7 +37,9 @@ public class CustomDialog_calender extends AlertDialog {
         super(context);
         this.context = context;
     }
-    final List<String> DateList = Arrays.asList("22/06/15", "22/06/17", "22/06/18");
+    List<String> DateList;
+    String date1="20220602";
+    String date2="20220615";
     final String DATE_FORMAT = "yy/MM/dd";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +52,7 @@ public class CustomDialog_calender extends AlertDialog {
         show_drug = (TextView) findViewById(R.id.show_drug);
         final LocalDate min = getLocalDate("2022-01-01");
         final LocalDate max = getLocalDate("2022-12-31");
+
         materialCalendarView.state().edit().setMinimumDate(min).setMaximumDate(max);
         setEvent(DateList);
         materialCalendarView.setOnDateLongClickListener(new OnDateLongClickListener() {
@@ -149,6 +145,25 @@ public class CustomDialog_calender extends AlertDialog {
 
 //        });
     }
+
+    void range(String date1,String date2) throws ParseException{
+        DateFormat df=new SimpleDateFormat(DATE_FORMAT);
+        Date d1=df.parse(date1);
+        Date d2=df.parse(date2);
+
+        Calendar c1=Calendar.getInstance();
+        Calendar c2=Calendar.getInstance();
+
+        c1.setTime(d1);
+        c2.setTime(d2);
+
+        while (c1.compareTo(c2)!=1){
+            Log.d("레인지", String.valueOf(c1.getTime()));
+        }
+
+
+    }
+
     void setEvent(List<String> dateList) {
         List<LocalDate> localDateList = new ArrayList<>();
         for (String string : dateList) {

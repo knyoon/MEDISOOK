@@ -168,7 +168,7 @@ public class JoinActivity extends AppCompatActivity implements View.OnClickListe
                         Log.d("회원가입", "중복확인 " + nk_check + nk_final);
                     }
 
-                }, 2000);
+                }, 300);
 
 
                 //닉네임 중복확인 부분
