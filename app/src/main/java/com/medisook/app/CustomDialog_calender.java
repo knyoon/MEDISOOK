@@ -33,7 +33,7 @@ public class CustomDialog_calender extends AlertDialog {
     MaterialCalendarView materialCalendarView;
     int pink = 0;
     TextView show_drug;
-    public CustomDialog_calender(Context context) {
+    public CustomDialog_calender(Context context, ArrayList<RecordItem> recordItemArrayList) {
         super(context);
         this.context = context;
     }
