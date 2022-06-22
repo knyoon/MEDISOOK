@@ -44,7 +44,6 @@ public class MainMenuActivity extends AppCompatActivity {
                         transaction.replace(R.id.menu_frame_layout, fragmentSearch).commitAllowingStateLoss();
                         break;
                     case R.id.menu_mypage:
-                        Log.d("버튼", "마이페이지");
                         transaction.replace(R.id.menu_frame_layout, fragmentMypage).commitAllowingStateLoss();
                         break;
                     case R.id.druginfo_page:

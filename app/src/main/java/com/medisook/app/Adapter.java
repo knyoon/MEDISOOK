@@ -59,7 +59,7 @@ public class Adapter extends RecyclerView.Adapter<ViewHolder> {
                 FragmentManager fm = ((FragmentActivity) view.getContext()).getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction;
                 DruginfoActivity fragmentDruginfo = new DruginfoActivity();
-                DrugItem drugItem = new DrugItem();
+//                DrugItem drugItem = new DrugItem();
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("DrugItem", drugItemArrayList);
                 bundle.putInt("position", position);

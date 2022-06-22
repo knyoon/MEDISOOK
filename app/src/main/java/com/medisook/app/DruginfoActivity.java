@@ -1,7 +1,6 @@
 package com.medisook.app;
 
 import static com.medisook.app.MenuFragmentSearch.IP_ADDRESS;
-import static com.medisook.app.MenuFragmentSearch.username;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -55,12 +54,12 @@ public class DruginfoActivity extends Fragment implements View.OnClickListener{
     private TextView warn4;
     private Context context;
     ArrayList<DrugItem> drugItem;
-    MenuFragmentSearch mf=new MenuFragmentSearch();
-    MenuFragmentSearch mfs;
     int position;
     private TextView txt;
     String drugImage;
     String otc;
+    MenuFragmentSearch mfs;
+    MenuFragmentSearch mf=new MenuFragmentSearch();
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +67,7 @@ public class DruginfoActivity extends Fragment implements View.OnClickListener{
     }
 
     public void setContentView(int drug_info) {
+
     }
 
     @Override
@@ -82,18 +82,19 @@ public class DruginfoActivity extends Fragment implements View.OnClickListener{
                     public void onOkClicked(String text) {
                         txt.setText(text);
                         ArrayList<String> Record_Zip = new ArrayList<>();
-                        drugImage=drugItem.get(position).getDrugImg();
-                        otc=drugItem.get(position).getOtc();
+                        drugImage = drugItem.get(position).getDrugImg();
+                        otc = drugItem.get(position).getOtc();
                         Record_Zip.add(drugImage);
                         Record_Zip.add(otc);
                         String[] record_text = text.split(",");
                         for(int i = 0; i<record_text.length;i++){
+//                            if(record_text[i].isEmpty()==true){
+//                                record_text[i] = "안녕";
+//                            }
                             Record_Zip.add(record_text[i]);
                             Log.d("기록", "스플릿 테스트 : "+Record_Zip.get(i));
                         }
-                        Log.d("기록", "스플릿 테스트 : "+username);
                         mfs = new MenuFragmentSearch();
-
                         if(record_text.length==7){
                             mfs.getRecord_Zip(Record_Zip.get(0), Record_Zip.get(1), Record_Zip.get(2), Record_Zip.get(3), Record_Zip.get(4), Record_Zip.get(5), Record_Zip.get(6), Record_Zip.get(7), Record_Zip.get(8));
                         }
@@ -103,7 +104,6 @@ public class DruginfoActivity extends Fragment implements View.OnClickListener{
                         else if(record_text.length==5){
                             mfs.getRecord_Zip(Record_Zip.get(0), Record_Zip.get(1), Record_Zip.get(2), Record_Zip.get(3), Record_Zip.get(4), Record_Zip.get(5), Record_Zip.get(6),null,null);
                         }
-
                         MenuFragmentSearch.InsertData insert = mfs.new InsertData();
                         insert.execute("http://" + IP_ADDRESS + "/insertrecord.php", "1");
                     }
@@ -117,7 +117,6 @@ public class DruginfoActivity extends Fragment implements View.OnClickListener{
                 insert.execute("http://" + IP_ADDRESS + "/wishlist.php", "2", String.valueOf(drugName_view.getText()));
                 Toast.makeText(context, "찜하기 누름", Toast.LENGTH_SHORT).show();
                 break;
-
         }
     }
 

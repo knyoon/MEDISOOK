@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="264dp"
+    android:layout_height="410dp"
+    android:layout_gravity="center"
+    android:background="@drawable/popup_radius"
+    android:orientation="vertical">
+        <!--        <EditText-->
+        <!--            android:id="@+id/search_bar"-->
+        <!--            android:gravity="center"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="40dp"-->
+        <!--            android:background="@drawable/search_bar_popup"-->
+        <!--            android:fontFamily="@font/noto_medium"-->
+        <!--            android:hint="증상을 입력해 주세요."-->
+        <!--            android:textColor="#445E86"-->
+        <!--            android:textSize="12dp"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintHorizontal_bias="0.5"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--             app:layout_constraintTop_toTopOf="parent"-->
+        <!--            android:layout_marginTop="25dp"/>-->
+        <!--                <TextView-->
+        <!--                    android:id="@+id/txt"-->
+        <!--                    app:layout_constraintHorizontal_bias="0.2"-->
+        <!--                    android:layout_width="wrap_content"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:fontFamily="@font/noto_medium"-->
+        <!--                    android:text="검색"-->
+        <!--                    android:textColor="@color/navy"-->
+        <!--                    android:textSize="12dp"-->
+        <!--                    app:layout_constraintTop_toTopOf="@+id/search_bar"-->
+        <!--                    app:layout_constraintBottom_toBottomOf="@+id/search_bar"-->
+        <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+        <!--                    app:layout_constraintStart_toStartOf="parent"-->
+        <!--                    />-->
+        <ScrollView
+            android:id="@+id/filter_list"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            app:layout_constraintBottom_toTopOf="@id/popup_ok_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:ignore="NotSibling">
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recycler_view_wishlist"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                </RelativeLayout>
+        </ScrollView>
+
+        <Button
+            android:id="@+id/popup_ok_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="@drawable/popup_ok_btn"
+            android:fontFamily="@font/noto_medium"
+            android:includeFontPadding="false"
+            android:minHeight="0dp"
+            android:text="확인"
+            android:textColor="@color/white"
+            android:textSize="12dp"
+            app:backgroundTint="@null"
+            android:layout_marginBottom="33dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/recycler_view_wishlist"
+            tools:ignore="NotSibling" />
+        <!--        <androidx.constraintlayout.widget.ConstraintLayout-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:orientation="vertical"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintHorizontal_bias="0.5"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/search_bar">-->
+        <!--                <CheckBox-->
+        <!--                    android:id="@+id/content1"-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:layout_marginHorizontal="35dp"-->
+        <!--                    android:background="@null"-->
+        <!--                    android:button="@null"-->
+        <!--                    android:drawableRight="@drawable/selector"-->
+        <!--                    android:fontFamily="@font/noto_medium"-->
+        <!--                    android:text="발열"-->
+        <!--                    android:textSize="12dp"-->
+        <!--                    tools:ignore="NotSibling" />-->
+        <!--                <CheckBox-->
+        <!--                    android:id="@+id/content2"-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:layout_marginHorizontal="35dp"-->
+        <!--                    android:background="@null"-->
+        <!--                    android:button="@null"-->
+        <!--                    android:drawableRight="@drawable/selector"-->
+        <!--                    android:fontFamily="@font/noto_medium"-->
+        <!--                    android:text="두통"-->
+        <!--                    android:textSize="12dp"-->
+        <!--                    app:layout_constraintTop_toBottomOf="@+id/content1" />-->
+        <!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

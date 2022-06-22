@@ -68,9 +68,9 @@
         <entry key="..\:/Users/KONG/Desktop/medisook/app/src/main/res/layout/activity_gallery.xml" value="0.109375" />
         <entry key="..\:/Users/KONG/Desktop/medisook/app/src/main/res/layout/activity_main.xml" value="0.14166666666666666" />
         <entry key="..\:/Users/KONG/Desktop/medisook/app/src/main/res/layout/activity_main_menu.xml" value="0.33" />
-        <entry key="..\:/Users/KONG/Desktop/medisook/app/src/main/res/layout/calender_pop.xml" value="0.10236220472440945" />
+        <entry key="..\:/Users/KONG/Desktop/medisook/app/src/main/res/layout/calender_pop.xml" value="0.5" />
         <entry key="..\:/Users/KONG/Desktop/medisook/app/src/main/res/layout/date_picker.xml" value="0.1859375" />
-        <entry key="..\:/Users/KONG/Desktop/medisook/app/src/main/res/layout/drug_info.xml" value="0.4057672502574665" />
+        <entry key="..\:/Users/KONG/Desktop/medisook/app/src/main/res/layout/drug_info.xml" value="0.67" />
         <entry key="..\:/Users/KONG/Desktop/medisook/app/src/main/res/layout/drug_list.xml" value="0.15" />
         <entry key="..\:/Users/KONG/Desktop/medisook/app/src/main/res/layout/filter_list.xml" value="0.1" />
         <entry key="..\:/Users/KONG/Desktop/medisook/app/src/main/res/layout/fragment_menu_mypage.xml" value="0.1859375" />
@@ -85,11 +85,13 @@
         <entry key="..\:/Users/KONG/Desktop/medisook/app/src/main/res/layout/login.xml" value="0.33" />
         <entry key="..\:/Users/KONG/Desktop/medisook/app/src/main/res/layout/main_page.xml" value="0.22" />
         <entry key="..\:/Users/KONG/Desktop/medisook/app/src/main/res/layout/my_page.xml" value="0.1" />
-        <entry key="..\:/Users/KONG/Desktop/medisook/app/src/main/res/layout/mypage.xml" value="0.18229166666666666" />
-        <entry key="..\:/Users/KONG/Desktop/medisook/app/src/main/res/layout/record_list.xml" value="0.22" />
-        <entry key="..\:/Users/KONG/Desktop/medisook/app/src/main/res/layout/record_pop.xml" value="0.75" />
+        <entry key="..\:/Users/KONG/Desktop/medisook/app/src/main/res/layout/mypage.xml" value="0.75" />
+        <entry key="..\:/Users/KONG/Desktop/medisook/app/src/main/res/layout/record_list.xml" value="0.45739910313901344" />
+        <entry key="..\:/Users/KONG/Desktop/medisook/app/src/main/res/layout/record_pop.xml" value="0.22" />
         <entry key="..\:/Users/KONG/Desktop/medisook/app/src/main/res/layout/redpop.xml" value="0.25" />
-        <entry key="..\:/Users/KONG/Desktop/medisook/app/src/main/res/layout/search.xml" value="0.33" />
+        <entry key="..\:/Users/KONG/Desktop/medisook/app/src/main/res/layout/search.xml" value="0.25" />
+        <entry key="..\:/Users/KONG/Desktop/medisook/app/src/main/res/layout/wish_list.xml" value="0.25" />
+        <entry key="..\:/Users/KONG/Desktop/medisook/app/src/main/res/layout/wishlist_pop.xml" value="0.28229166666666666" />
       </map>
     </option>
   </component>

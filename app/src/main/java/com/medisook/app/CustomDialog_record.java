@@ -22,6 +22,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +48,7 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
     TextView TextView_get, textValue;
     private EditText to_date;
     TextView drugName_view;
+    String drugImage;
     private TextView inital_date;
     private TextView final_date;
     private EditText from_date;
@@ -126,7 +128,7 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
         textView3 = (TextView) findViewById(R.id.hashtag3);
         drugName = (TextView) findViewById(R.id.drugName);
         drugName.setText(drugItemArrayList.get(position).getDrugName());
-
+        drugImage = drugItemArrayList.get(position).getDrugImg();
         good_btn = (ImageButton) findViewById(R.id.good_btn);
         bad_btn = (ImageButton) findViewById(R.id.bad_btn);
         okButton = (Button) findViewById(R.id.popup_ok_btn);
@@ -232,6 +234,7 @@ public class CustomDialog_record extends AlertDialog implements View.OnClickList
                 Log.v("보내자1", textView1.getText().toString());
                 Log.v("세영", drugName.getText().toString());
                 String name = drugName.getText().toString();
+                String img = drugImage;
                 String txt1 = textView1.getText().toString();
                 String txt2 = textView2.getText().toString();
                 String txt3 = textView3.getText().toString();

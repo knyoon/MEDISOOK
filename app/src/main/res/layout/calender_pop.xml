@@ -10,19 +10,32 @@
     android:orientation="vertical"
     tools:context=".CustomDialog_calender">
 
-<!--    <com.prolificinteractive.materialcalendarview.MaterialCalendarView-->
-<!--        xmlns:app="http://schemas.android.com/apk/res-auto"-->
-<!--        android:id="@+id/calendarView"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:mcv_selectionColor="#a9dbf0cb"-->
-<!--        app:mcv_showOtherDates="defaults"-->
-<!--        tools:ignore="MissingClass,MissingConstraints" />-->
-    <com.applandeo.materialcalendarview.CalendarView
+    <com.prolificinteractive.materialcalendarview.MaterialCalendarView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/calendarView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:type="range_picker"
-        app:headerColor="@color/navy" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:mcv_selectionColor="@color/yellow"
+        app:mcv_showOtherDates="defaults"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+    <!--    <com.applandeo.materialcalendarview.CalendarView-->
+    <!--        android:id="@+id/calendarView"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        app:type="range_picker"-->
+    <!--        app:headerColor="@color/navy" />-->
+    <TextView
+        android:id="@+id/show_drug"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/noto_medium"
+        android:gravity="center"
+        android:textSize="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/calendarView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,6 +5,7 @@
     android:layout_width="300dp"
     android:layout_height="70dp"
     android:layout_marginTop="5dp"
+    android:id="@+id/record_box"
     android:background="@drawable/resize_greenbox">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/drugImage"
+            android:id="@+id/record_drugImage"
             android:layout_width="73dp"
             android:layout_height="42dp"
             android:layout_marginVertical="12dp"
@@ -36,7 +37,7 @@
             android:gravity="center_vertical"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/drugImage"
+            app:layout_constraintStart_toEndOf="@id/record_drugImage"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
@@ -47,20 +48,44 @@
                 android:text="덱스부프로펜"
                 android:textColor="@color/navy"
                 android:textSize="12dp"
-                app:layout_constraintBottom_toTopOf="@id/tv_hashtag"
+                app:layout_constraintBottom_toTopOf="@id/tv_hashtag1"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
-                android:id="@+id/tv_hashtag"
+                android:id="@+id/tv_hashtag1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/radius_navy"
                 android:fontFamily="@font/noto_medium"
-                android:text="#해쉬태그"
+                android:text=""
                 android:textColor="@color/white"
                 android:textSize="10dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/record_drugname" />
+                app:layout_constraintTop_toBottomOf="@id/record_drugname"
+                android:layout_marginRight="10dp"/>
+            <TextView
+                android:id="@+id/tv_hashtag2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/radius_navy"
+                android:fontFamily="@font/noto_medium"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="10dp"
+                app:layout_constraintStart_toEndOf="@id/tv_hashtag1"
+                app:layout_constraintTop_toBottomOf="@id/record_drugname"
+                android:layout_marginRight="10dp"/>
+            <TextView
+                android:id="@+id/tv_hashtag3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/radius_navy"
+                android:fontFamily="@font/noto_medium"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="10dp"
+                app:layout_constraintStart_toEndOf="@id/tv_hashtag2"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

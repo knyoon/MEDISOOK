@@ -4,6 +4,7 @@ package com.medisook.app;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +40,7 @@ public class Adapter_record extends RecyclerView.Adapter<ViewHolder_record> {
     public void onBindViewHolder(@NonNull com.medisook.app.ViewHolder_record holder, int position) {
         String imageurl=recordItemArrayList.get(position).getDrugImg();
         if(imageurl.isEmpty()==false){
+            Log.d("기록하기",recordItemArrayList.get(position).getDrugImg());
             Picasso.get()
                     .load(imageurl)
                     .error(R.drawable.drung_sampleimage)
@@ -50,15 +52,27 @@ public class Adapter_record extends RecyclerView.Adapter<ViewHolder_record> {
             holder.drugImage.setImageDrawable(drawable);
         }
         holder.drugName.setText(recordItemArrayList.get(position).getDrugName());
-        holder.hashtag1.setText(recordItemArrayList.get(position).getTag1());
-        holder.hashtag1.setPadding(40, 0, 40, 0);
-        holder.hashtag2.setText(recordItemArrayList.get(position).getTag2());
-        holder.hashtag2.setPadding(40, 0, 40, 0);
-        holder.hashtag3.setText(recordItemArrayList.get(position).getTag3());
-        holder.hashtag3.setPadding(40, 0, 40, 0);
+        if(recordItemArrayList.get(position).getTag1().toString().contains("null")==false){
+            holder.hashtag1.setText(recordItemArrayList.get(position).getTag1());
+            holder.hashtag1.setPadding(40, 0, 40, 0);
+        }
+        if(recordItemArrayList.get(position).getTag2().toString().contains("null")==false){
+            holder.hashtag2.setText(recordItemArrayList.get(position).getTag2());
+            holder.hashtag2.setPadding(40, 0, 40, 0);
+        }
+        if(recordItemArrayList.get(position).getTag3().toString().contains("null")==false){
+            holder.hashtag3.setText(recordItemArrayList.get(position).getTag3());
+            holder.hashtag3.setPadding(40, 0, 40, 0);
+        }
+//        holder.hashtag2.setText(recordItemArrayList.get(position).getTag2());
+//        holder.hashtag2.setPadding(40, 0, 40, 0);
+//        holder.hashtag3.setText(recordItemArrayList.get(position).getTag3());
+//        holder.hashtag3.setPadding(40, 0, 40, 0);
 
-        if(recordItemArrayList.get(position).getGoodbad()=="bad"){
-            holder.recordbox.setBackground(activity.getResources().getDrawable(R.drawable.red_box));
+        String goodbad = recordItemArrayList.get(position).getGoodbad();
+        Log.d("기록하기",goodbad);
+        if(goodbad.contains("bad")){
+            holder.recordbox.setBackground(activity.getResources().getDrawable(R.drawable.resize_redbox));
         }
 
         holder.drugName.setOnClickListener(new View.OnClickListener(){
@@ -77,3 +91,4 @@ public class Adapter_record extends RecyclerView.Adapter<ViewHolder_record> {
 //        recordItemArrayList.add(record);
 //    }
 }
+
